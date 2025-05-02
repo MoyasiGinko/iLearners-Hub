@@ -1,5 +1,5 @@
-// components/TestimonialsSection.tsx
-import React from "react";
+"use client";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
 // Star rating component
@@ -60,7 +60,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   image,
 }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-8 relative">
+    <div className="bg-white rounded-lg shadow-md p-8 relative h-full">
       {/* Dashed border with image */}
       <div className="absolute -top-12 right-8">
         <div className="relative">
@@ -100,10 +100,11 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
 
 // Main Testimonials Section Component
 const ClientReview: React.FC = () => {
+  // Extended testimonial data for carousel
   const testimonials = [
     {
       id: 1,
-      name: "Jame sickres",
+      name: "James Ickres",
       position: "Market Manager",
       content:
         "Lorem ipsum is simply free text dolor sit amet, consectetur adipisicing elit, sed do incididunt ut labore et dolore magna aliqua.",
@@ -112,14 +113,72 @@ const ClientReview: React.FC = () => {
     },
     {
       id: 2,
-      name: "Aleesha brown",
+      name: "Aleesha Brown",
       position: "Market Manager",
       content:
         "Lorem ipsum is simply free text dolor sit amet, consectetur adipisicing elit, sed do incididunt ut labore et dolore magna aliqua.",
       rating: 5,
       image: "/images/testimonial-2.jpg",
     },
+    {
+      id: 3,
+      name: "Michael Johnson",
+      position: "Product Designer",
+      content:
+        "Lorem ipsum is simply free text dolor sit amet, consectetur adipisicing elit, sed do incididunt ut labore et dolore magna aliqua.",
+      rating: 4,
+      image: "/images/testimonial-1.jpg",
+    },
+    {
+      id: 4,
+      name: "Sarah Williams",
+      position: "UI/UX Designer",
+      content:
+        "Lorem ipsum is simply free text dolor sit amet, consectetur adipisicing elit, sed do incididunt ut labore et dolore magna aliqua.",
+      rating: 5,
+      image: "/images/testimonial-2.jpg",
+    },
   ];
+
+  // Duplicate the testimonials to create an infinite effect
+  const duplicatedTestimonials = [...testimonials, ...testimonials];
+
+  const [position, setPosition] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [direction, setDirection] = useState(1); // Move this outside useEffect
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const slideWidth = 100 / (duplicatedTestimonials.length / 2); // Width percentage of each slide
+
+    let animationId: number;
+    const moveCarousel = () => {
+      if (!isPaused) {
+        setPosition((prevPosition) => {
+          let newPosition = prevPosition + 0.05 * direction; // Movement based on direction
+
+          // Change direction when reaching end or beginning
+          if (newPosition >= slideWidth * testimonials.length) {
+            setDirection(-1); // Start moving backward
+            return prevPosition;
+          } else if (newPosition <= 0) {
+            setDirection(1); // Start moving forward
+            return prevPosition;
+          }
+
+          return newPosition;
+        });
+      }
+
+      animationId = requestAnimationFrame(moveCarousel);
+    };
+
+    animationId = requestAnimationFrame(moveCarousel);
+
+    return () => {
+      cancelAnimationFrame(animationId);
+    };
+  }, [isPaused, testimonials.length, duplicatedTestimonials.length, direction]);
 
   return (
     <div className="bg-gray-50 py-20 relative overflow-hidden">
@@ -131,28 +190,44 @@ const ClientReview: React.FC = () => {
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="flex flex-col lg:flex-row gap-10 items-start">
           {/* Left side with heading */}
-          <div className="w-full lg:w-1/3">
+          <div className="w-full lg:w-1/2">
             <h3 className="text-teal-500 font-medium mb-4">OUR TESTIMONIALS</h3>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
               What they're saying about our courses
             </h2>
-            <p className="text-gray-600">
+            <p className="text-gray-600 mb-8">
               Quisque commodo, magna nec accu man euismod tellus mi ornare enim.
             </p>
           </div>
 
-          {/* Right side with testimonials */}
-          <div className="w-full lg:w-2/3 grid md:grid-cols-2 gap-8">
-            {testimonials.map((testimonial) => (
-              <TestimonialCard
-                key={testimonial.id}
-                name={testimonial.name}
-                position={testimonial.position}
-                content={testimonial.content}
-                rating={testimonial.rating}
-                image={testimonial.image}
-              />
-            ))}
+          {/* Right side with testimonials carousel */}
+          <div
+            className="w-full lg:w-2/3 overflow-hidden"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            ref={carouselRef}
+          >
+            <div
+              className="flex transition-transform duration-300 ease-linear"
+              style={{ transform: `translateX(-${position}%)` }}
+            >
+              {duplicatedTestimonials.map((testimonial, index) => (
+                <div
+                  key={`${testimonial.id}-${index}`}
+                  className="min-w-full md:min-w-[420px] px-4"
+                >
+                  <div className="h-full">
+                    <TestimonialCard
+                      name={testimonial.name}
+                      position={testimonial.position}
+                      content={testimonial.content}
+                      rating={testimonial.rating}
+                      image={testimonial.image}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
