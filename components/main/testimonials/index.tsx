@@ -9,9 +9,9 @@ const Testimonials: React.FC = () => {
     <div className="bg-white py-20">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
-          {/* Left side with images */}
-          <div className="w-full lg:w-1/2 relative">
-            <div className="relative max-w-full mx-auto">
+          {/* Left side with images - exact original structure */}
+          <div className="w-full lg:pl-16 lg:w-1/2 relative">
+            <div className="relative items-center justify-center max-w-full mx-auto">
               {/* Blue background rectangle */}
               <div className="absolute left-0 top-[5%] w-12 bg-blue-600 rounded-l-lg h-[90%] z-0"></div>
 
@@ -28,7 +28,7 @@ const Testimonials: React.FC = () => {
                   />
                 </div>
                 {/* Trusted by badge */}
-                <div className="absolute right-0 bottom-4 bg-white rounded-lg shadow-lg p-3 sm:p-4 flex items-center max-w-[180px] sm:max-w-none  lg:bottom-6">
+                <div className="absolute right-0 bottom-4 bg-white rounded-lg shadow-lg p-3 sm:p-4 flex items-center max-w-[180px] sm:max-w-none lg:bottom-6">
                   <div className="mr-2 sm:mr-3 flex-shrink-0">
                     <Image
                       src="/images/trust-icon.png"
