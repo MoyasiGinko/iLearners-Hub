@@ -35,7 +35,7 @@ const ContactSection: React.FC = () => {
   return (
     <div className="max-w-6xl  mx-auto relative z-10">
       <div className="bg-gradient-to-r  from-gray-900 to-teal-600 rounded-xl overflow-hidden shadow-xl">
-        <div className="flex flex-col md:flex-row">
+        <div className="flex flex-col px-2 md:px-20 md:flex-row">
           {/* Left Section */}
           <div className="p-8 max-h-full h-[440px] md:w-1/2 relative flex items-center">
             <div className="mb-6">
