@@ -342,23 +342,6 @@ const PrimarySection = () => {
                 }
               `}</style>
             </div>
-
-            {/* Experience badge */}
-            {/* <div className="absolute -bottom-2 left-1/3 z-30">
-              <div
-                className="bg-indigo-600 text-white p-4 rounded-lg shadow-lg"
-                style={{
-                  clipPath: "polygon(0 0, 100% 0, 100% 80%, 95% 100%, 0 100%)",
-                }}
-              >
-                <div className="font-bold text-5xl">16</div>
-                <div className="text-sm font-medium leading-tight">
-                  Years of
-                  <br />
-                  Experience
-                </div>
-              </div>
-            </div> */}
           </div>
 
           {/* Right side with text and features */}
