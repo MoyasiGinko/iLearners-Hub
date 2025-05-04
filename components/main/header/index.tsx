@@ -101,7 +101,7 @@ const Header = () => {
           <div className="flex items-center">
             <span
               className={`text-2xl font-bold transition-colors duration-300 ${
-                isScrolled ? "text-gray-900" : "text-red-500"
+                isScrolled ? "text-gray-900" : "text-slate-950"
               }`}
             >
               iLearnersHub
