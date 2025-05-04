@@ -16,7 +16,6 @@ const Header = () => {
     { title: "NEWS & OFFERS", href: "/news-offers" },
     { title: "GALLERY", href: "/gallery" },
     { title: "ABOUT", href: "/about" },
-    // { title: "REGISTER", href: "/register" },
   ];
 
   // Handle scroll event to change header style
@@ -89,7 +88,7 @@ const Header = () => {
     <header
       className={`fixed w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white shadow-lg py-4  border-slate-800/50 backdrop-blur-sm"
+          ? "bg-white shadow-lg py-4 border-slate-800/50 backdrop-blur-sm"
           : "bg-transparent py-5"
       }`}
     >
@@ -110,22 +109,28 @@ const Header = () => {
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {navItems.map((item) => (
-            <Link
-              key={item.title}
-              href={item.href}
-              className={`font-medium transition-colors duration-200 hover:scale-105 transform relative group ${
-                isScrolled
-                  ? "text-gray-950 hover:text-slate-950"
-                  : "text-gray-900 hover:text-gray-950"
-              }`}
-            >
-              {item.title}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-slate-600 transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-          ))}
+        {/* Desktop Navigation - Centered */}
+        <nav className="hidden md:flex items-center justify-center flex-1">
+          <div className="flex items-center space-x-8">
+            {navItems.map((item) => (
+              <Link
+                key={item.title}
+                href={item.href}
+                className={`font-medium transition-colors duration-200 hover:scale-105 transform relative group ${
+                  isScrolled
+                    ? "text-gray-950 hover:text-slate-950"
+                    : "text-gray-900 hover:text-gray-950"
+                }`}
+              >
+                {item.title}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-slate-600 transition-all duration-300 group-hover:w-full"></span>
+              </Link>
+            ))}
+          </div>
+        </nav>
+
+        {/* Register Button - Right */}
+        <div className="hidden md:block">
           <Link
             href="/register"
             className={`px-5 py-2 rounded-full font-medium transition all duration-300 transform hover:scale-105 hover:shadow-lg border ${
@@ -136,7 +141,7 @@ const Header = () => {
           >
             REGISTER
           </Link>
-        </nav>
+        </div>
 
         {/* Mobile Menu Button */}
         <button
@@ -146,13 +151,10 @@ const Header = () => {
           aria-expanded={mobileMenuOpen}
         >
           {mobileMenuOpen ? (
-            <IoMdClose
-              className={isScrolled ? "text-gray-100" : "text-white"}
-              aria-hidden="true"
-            />
+            <IoMdClose className="text-white" aria-hidden="true" />
           ) : (
             <HiMenuAlt4
-              className={isScrolled ? "text-gray-100" : "text-white"}
+              className={isScrolled ? "text-gray-900" : "text-gray-900"}
               aria-hidden="true"
             />
           )}
@@ -167,7 +169,7 @@ const Header = () => {
               animate="open"
               exit="closed"
               variants={menuVariants}
-              className="fixed inset-0 bg-gradient-to-b from-zinc-900 to-slate-900 flex flex-col z-10 pt-24 px-6"
+              className="fixed inset-0 bg-gradient-to-b from-slate-900 to-slate-800 flex flex-col z-10 pt-24 px-6"
             >
               <nav className="flex flex-col space-y-6 items-center">
                 {navItems.map((item) => (
@@ -183,11 +185,11 @@ const Header = () => {
                 ))}
                 <motion.div variants={menuItemVariants}>
                   <Link
-                    href="/get-started"
+                    href="/register"
                     className="mt-4 px-8 py-3 bg-slate-800 text-gray-100 rounded-full text-xl font-medium hover:bg-slate-700 transition-all hover:shadow-lg flex items-center justify-center border border-slate-700"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Get Started
+                    REGISTER
                   </Link>
                 </motion.div>
               </nav>
