@@ -40,7 +40,7 @@ const Hero: React.FC = () => {
       {/* Decorative elements */}
       <div className="absolute right-10 bottom-10 w-40 h-40 md:w-64 md:h-64 z-0 hidden md:block">
         <Image
-          src="/images/learning-blocks.gif"
+          src="/images/blocks.gif"
           alt="Learning Blocks"
           width={240}
           height={240}
@@ -49,13 +49,13 @@ const Hero: React.FC = () => {
       </div>
 
       {/* Animated decorative elements */}
-      <motion.div
+      {/* <motion.div
         className="absolute top-10 right-20 w-16 h-16"
         animate={{ rotate: 360 }}
         transition={{ repeat: Infinity, duration: 8, ease: "linear" }}
       >
         <Image src="/images/pencil.gif" alt="Pencil" width={64} height={64} />
-      </motion.div>
+      </motion.div> */}
 
       <motion.div
         className="absolute top-20 left-10 w-12 h-12 rounded-full bg-yellow-300 opacity-70"
@@ -64,20 +64,20 @@ const Hero: React.FC = () => {
       />
 
       <motion.div
-        className="absolute bottom-20 left-40 w-14 h-14"
+        className="absolute bottom-30 left-40 w-14 h-14"
         animate={{ y: [0, -15, 0] }}
         transition={{ repeat: Infinity, duration: 4 }}
       >
         <Image src="/images/book.gif" alt="Book" width={56} height={56} />
       </motion.div>
 
-      <motion.div
+      {/* <motion.div
         className="absolute bottom-40 right-40 w-10 h-10"
         animate={{ scale: [1, 1.2, 1] }}
         transition={{ repeat: Infinity, duration: 2 }}
       >
         <Image src="/images/crayon.gif" alt="Crayon" width={40} height={40} />
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 };
