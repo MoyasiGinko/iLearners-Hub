@@ -96,7 +96,7 @@ const CourseDetailsPage = () => {
           {/* Course Header */}
           <div className="relative h-64 md:h-80 bg-gray-200">
             <img
-              src={`/images/courses/${course.id}.jpg`}
+              src={course.Image}
               alt={course.title}
               className="object-cover w-full h-full"
             />
@@ -230,7 +230,7 @@ const CourseDetailsPage = () => {
 
                 <div className="pt-4">
                   <Link
-                    href={`/courses/${course.id}/register`}
+                    href="/register"
                     className="block w-full bg-sky-500 hover:bg-sky-600 text-white text-center font-medium py-3 px-6 rounded-lg transition-colors"
                   >
                     {course.action}
@@ -261,7 +261,7 @@ const CourseDetailsPage = () => {
                 >
                   <div className="relative h-40 bg-gray-200">
                     <img
-                      src={`/images/courses/${similarCourse.id}.jpg`}
+                      src={similarCourse.Image}
                       alt={similarCourse.title}
                       className="object-cover w-full h-full"
                     />
