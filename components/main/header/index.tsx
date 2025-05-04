@@ -89,8 +89,8 @@ const Header = () => {
     <header
       className={`fixed w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-zinc-900/95 shadow-md py-4  border-slate-800/50 backdrop-blur-sm"
-          : "bg-black py-5"
+          ? "bg-white shadow-lg py-4  border-slate-800/50 backdrop-blur-sm"
+          : "bg-transparent py-5"
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
@@ -102,7 +102,7 @@ const Header = () => {
           <div className="flex items-center">
             <span
               className={`text-2xl font-bold transition-colors duration-300 ${
-                isScrolled ? "text-gray-100" : "text-white"
+                isScrolled ? "text-gray-900" : "text-red-500"
               }`}
             >
               iLearnersHub
@@ -118,8 +118,8 @@ const Header = () => {
               href={item.href}
               className={`font-medium transition-colors duration-200 hover:scale-105 transform relative group ${
                 isScrolled
-                  ? "text-gray-300 hover:text-gray-100"
-                  : "text-white/90 hover:text-white"
+                  ? "text-gray-950 hover:text-slate-950"
+                  : "text-gray-900 hover:text-gray-950"
               }`}
             >
               {item.title}
