@@ -277,7 +277,7 @@ const RegistrationForm = () => {
                 whileTap={{ scale: 0.95 }}
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-4 px-4 border border-transparent rounded-md shadow-sm text-xl font-bold text-white bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+                className="w-full py-4 px-4 border border-transparent rounded-md shadow-sm text-xl font-bold text-white bg-gradient-to-r from-blue-500 to-blue-500 hover:from-blue-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
               >
                 {isSubmitting ? (
                   <span className="flex items-center justify-center">
