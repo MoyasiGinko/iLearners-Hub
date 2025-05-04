@@ -63,13 +63,13 @@ const Hero: React.FC = () => {
         transition={{ repeat: Infinity, duration: 3 }}
       />
 
-      <motion.div
+      {/* <motion.div
         className="absolute bottom-30 left-40 w-14 h-14"
         animate={{ y: [0, -15, 0] }}
         transition={{ repeat: Infinity, duration: 4 }}
       >
         <Image src="/images/book.gif" alt="Book" width={56} height={56} />
-      </motion.div>
+      </motion.div> */}
 
       {/* <motion.div
         className="absolute bottom-40 right-40 w-10 h-10"
