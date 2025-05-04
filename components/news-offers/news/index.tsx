@@ -3,73 +3,17 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-
-// Types for our news/events items
-interface NewsItem {
-  id: string;
-  title: string;
-  date: string;
-  description: string;
-  imageUrl: string;
-  category: "news" | "event" | "offer";
-}
+import { newsItems } from "./newsData";
 
 const NewsAndEvents: React.FC = () => {
-  // Sample data - in a real app, this would come from an API or CMS
-  const items: NewsItem[] = [
-    {
-      id: "1",
-      title: "Summer Reading Challenge",
-      date: "June 15, 2023",
-      description:
-        "Join our exciting summer reading adventure! Read 10 books over summer and win awesome prizes.",
-      imageUrl: "/images/summer-reading.jpg",
-      category: "event",
-    },
-    {
-      id: "2",
-      title: "New Science Lab Opening",
-      date: "July 5, 2023",
-      description:
-        "We're excited to announce our brand new science lab with fun experiments for all ages!",
-      imageUrl: "/images/science-lab.jpg",
-      category: "news",
-    },
-    {
-      id: "3",
-      title: "Early Bird Registration Discount",
-      date: "Valid until August 1, 2023",
-      description:
-        "Register for fall classes before August 1st and receive a 15% discount on all courses!",
-      imageUrl: "/images/early-bird.jpg",
-      category: "offer",
-    },
-    {
-      id: "4",
-      title: "Art Contest Winners",
-      date: "May 28, 2023",
-      description:
-        "Congratulations to all participants in our annual art contest! View the winning masterpieces here.",
-      imageUrl: "/images/art-contest.jpg",
-      category: "news",
-    },
-    {
-      id: "5",
-      title: "Robotics Workshop",
-      date: "July 20-22, 2023",
-      description:
-        "Build your own robot in this 3-day workshop for kids ages 8-12. Limited spots available!",
-      imageUrl: "/images/robotics.jpg",
-      category: "event",
-    },
-  ];
-
   const [filter, setFilter] = React.useState<
     "all" | "news" | "event" | "offer"
   >("all");
 
   const filteredItems =
-    filter === "all" ? items : items.filter((item) => item.category === filter);
+    filter === "all"
+      ? newsItems
+      : newsItems.filter((item) => item.category === filter);
 
   return (
     <div className="bg-blue-50 min-h-screen p-6">
@@ -144,7 +88,7 @@ const NewsAndEvents: React.FC = () => {
                   {item.title}
                 </h3>
                 <p className="text-gray-600 mb-4">{item.description}</p>
-                <Link href={`/news/${item.id}`}>
+                <Link href={`/news-offers/${item.id}`}>
                   <span className="inline-block bg-purple-100 hover:bg-purple-200 text-purple-700 font-medium px-4 py-2 rounded-full transition-colors duration-200">
                     Read More →
                   </span>
