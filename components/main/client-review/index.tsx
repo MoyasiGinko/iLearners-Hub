@@ -197,13 +197,22 @@ const ClientReview: React.FC = () => {
         <div className="flex flex-col lg:flex-row gap-10 items-start">
           {/* Left side with heading */}
           <div className="w-full lg:w-1/2">
-            <h3 className="text-pink-500 font-bold mb-4 text-xl">
+            <h3
+              className="text-pink-500 font-bold mb-4 text-xl"
+              style={{ textShadow: "0 1px 2px rgba(0,0,0,0.1)" }}
+            >
               WHAT KIDS ARE SAYING
             </h3>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-blue-600 leading-tight mb-6">
+            <h2
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-blue-600 leading-tight mb-6"
+              style={{ textShadow: "2px 2px 4px rgba(0,105,255,0.2)" }}
+            >
               Our Friends Love Learning With Us!
             </h2>
-            <p className="text-purple-700 mb-8 text-lg">
+            <p
+              className="text-purple-700 mb-8 text-lg"
+              style={{ textShadow: "0 1px 1px rgba(128,0,128,0.1)" }}
+            >
               Hear from our happy students about their exciting adventures in
               learning!
             </p>
