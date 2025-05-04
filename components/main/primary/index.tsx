@@ -261,58 +261,89 @@ const PrimarySection = () => {
           </div>
 
           {/* Right side with text and features */}
-          <div className="w-full lg:w-1/2 lg:pl-16">
-            <div className="text-purple-500 font-bold mb-2 text-xl">
-              LET'S LEARN TOGETHER!
+          <div className="w-full lg:w-1/2 lg:pl-12">
+            <div className="text-purple-600 font-bold mb-1 text-xl relative">
+              <span className="relative inline-block after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-2 after:bg-purple-300 after:-z-10 after:rotate-1">
+                LET'S LEARN TOGETHER!
+              </span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#FF6B6B] leading-tight mb-6 rounded-lg">
-              Discover, Learn & Grow With Us!
+            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4 relative">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] to-[#FF9999] drop-shadow-[3px_3px_0px_rgba(255,107,107,0.3)]">
+                Discover, Learn & Grow With Us!
+              </span>
             </h2>
 
-            <p className="text-gray-600 mb-10 text-lg">
+            <p className="text-gray-600 mb-6 text-lg relative transform hover:translate-x-1 transition-transform duration-300">
               Join our fun learning adventures! We make learning exciting with
               friendly teachers, cool activities, and awesome lessons that you
               can enjoy from anywhere!
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               {/* Feature 1 */}
-              <div className="flex items-center bg-yellow-100 p-4 rounded-2xl hover:scale-105 transition-transform">
-                <div className="flex-shrink-0 mr-3 bg-yellow-400 rounded-full p-3">
-                  <Check className="h-5 w-5 text-white" />
+              <div className="flex items-center p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(255,213,79,0.5)] relative overflow-hidden bg-gradient-to-r from-yellow-100 to-yellow-50 border border-yellow-200 group">
+                <div className="absolute inset-0 bg-yellow-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
+                  <Check className="h-5 w-5 text-white drop-shadow-md" />
                 </div>
-                <span className="font-medium text-lg">Friendly teachers</span>
+                <span className="font-medium text-lg text-yellow-800 group-hover:translate-x-1 transition-transform">
+                  Friendly teachers
+                </span>
               </div>
 
               {/* Feature 2 */}
-              <div className="flex items-center bg-blue-100 p-4 rounded-2xl hover:scale-105 transition-transform">
-                <div className="flex-shrink-0 mr-3 bg-blue-400 rounded-full p-3">
-                  <Check className="h-5 w-5 text-white" />
+              <div className="flex items-center p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(96,165,250,0.5)] relative overflow-hidden bg-gradient-to-r from-blue-100 to-blue-50 border border-blue-200 group">
+                <div className="absolute inset-0 bg-blue-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
+                  <Check className="h-5 w-5 text-white drop-shadow-md" />
                 </div>
-                <span className="font-medium text-lg">Fun online lessons</span>
+                <span className="font-medium text-lg text-blue-800 group-hover:translate-x-1 transition-transform">
+                  Fun online lessons
+                </span>
               </div>
 
               {/* Feature 3 */}
-              <div className="flex items-center bg-green-100 p-4 rounded-2xl hover:scale-105 transition-transform">
-                <div className="flex-shrink-0 mr-3 bg-green-400 rounded-full p-3">
-                  <Check className="h-5 w-5 text-white" />
+              <div className="flex items-center p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(74,222,128,0.5)] relative overflow-hidden bg-gradient-to-r from-green-100 to-green-50 border border-green-200 group">
+                <div className="absolute inset-0 bg-green-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-green-400 to-green-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
+                  <Check className="h-5 w-5 text-white drop-shadow-md" />
                 </div>
-                <span className="font-medium text-lg">Cool activities</span>
+                <span className="font-medium text-lg text-green-800 group-hover:translate-x-1 transition-transform">
+                  Cool activities
+                </span>
               </div>
 
               {/* Feature 4 */}
-              <div className="flex items-center bg-pink-100 p-4 rounded-2xl hover:scale-105 transition-transform">
-                <div className="flex-shrink-0 mr-3 bg-pink-400 rounded-full p-3">
-                  <Check className="h-5 w-5 text-white" />
+              <div className="flex items-center p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(244,114,182,0.5)] relative overflow-hidden bg-gradient-to-r from-pink-100 to-pink-50 border border-pink-200 group">
+                <div className="absolute inset-0 bg-pink-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-pink-400 to-pink-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
+                  <Check className="h-5 w-5 text-white drop-shadow-md" />
                 </div>
-                <span className="font-medium text-lg">Amazing rewards</span>
+                <span className="font-medium text-lg text-pink-800 group-hover:translate-x-1 transition-transform">
+                  Amazing rewards
+                </span>
               </div>
             </div>
 
             <Link href="/about">
-              <span className="inline-block bg-purple-500 hover:bg-purple-400 text-white font-bold px-8 py-4 rounded-full transition-colors duration-300 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                START YOUR ADVENTURE!
-              </span>
+              <div className="perspective-500 my-3">
+                <span
+                  className="inline-block relative bg-gradient-to-br from-purple-600 to-purple-500 text-white font-bold px-7 py-3 rounded-full text-lg
+                  border-b-[6px] border-purple-800
+                  shadow-[0_10px_15px_-3px_rgba(147,51,234,0.3)]
+                  hover:shadow-[0_5px_15px_-2px_rgba(147,51,234,0.5)]
+                  transform hover:translate-y-1
+                  active:translate-y-2 active:border-b-[2px]
+                  transition-all duration-200
+                  overflow-hidden
+                  before:content-[''] before:absolute before:inset-0 before:bg-white/10 before:rounded-full
+                  after:content-[''] after:absolute after:h-20 after:w-20 after:bg-white/20 after:top-0 after:-left-10 after:transform after:-skew-x-[45deg] after:transition-all after:duration-700 hover:after:left-[110%]"
+                >
+                  <span className="relative z-10 inline-block transform-gpu drop-shadow-[0_1px_1px_rgba(0,0,0,0.3)]">
+                    START YOUR ADVENTURE!
+                  </span>
+                </span>
+              </div>
             </Link>
           </div>
         </div>
