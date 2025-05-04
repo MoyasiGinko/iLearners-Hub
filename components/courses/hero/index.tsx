@@ -22,14 +22,14 @@ const Hero: React.FC = () => {
             grow with interactive lessons.
           </p>
           <div className="flex gap-4 flex-wrap">
-            <Link href="/courses/all">
+            <Link href="/courses">
               <span className="bg-yellow-400 text-blue-900 px-6 py-3 rounded-full font-medium hover:bg-yellow-300 transition-all inline-block">
                 Explore Courses
               </span>
             </Link>
-            <Link href="/free-trial">
+            <Link href="/gallery">
               <span className="bg-white text-purple-700 px-6 py-3 rounded-full font-medium hover:bg-opacity-90 transition-all inline-block">
-                Try for Free
+                View Gallery
               </span>
             </Link>
           </div>
