@@ -3,39 +3,58 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Check } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Testimonials: React.FC = () => {
   return (
     <div className="bg-transparent py-20 rounded-3xl">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
-          {/* Left side with images - exact original structure */}
-          <div className="w-full lg:pl-16 lg:w-1/2 relative">
+          {/* Left side with images - more lively version */}
+          <div className="w-full lg:pl-16 lg:w-1/2 relative group">
             <div className="relative items-center justify-center max-w-full mx-auto">
-              {/* Colorful background rectangle */}
-              <div className="absolute left-0 top-[5%] w-12 bg-yellow-400 rounded-l-lg h-[90%] z-0"></div>
+              {/* Animated colorful background elements */}
+              <motion.div
+                className="absolute left-0 top-[5%] w-12 bg-blue-700 rounded-l-lg h-[90%] z-0 shadow-lg"
+                animate={{
+                  x: [0, 5, 0],
+                }}
+                transition={{
+                  duration: 4,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                }}
+              ></motion.div>
 
-              {/* Main image container */}
-              <div className="ml-2 sm:ml-6 relative max-w-[540px] h-auto rounded-2xl overflow-hidden">
+              {/* Main image container with hover effects */}
+              <div
+                className="ml-2 sm:ml-6 relative max-w-[540px] h-auto rounded-2xl overflow-hidden
+                     transition-all duration-500 transform hover:scale-[1.02]"
+              >
                 <div className="relative aspect-square max-w-[500px] w-[90%]">
                   <Image
                     src="/images/students-learning.png"
                     alt="Students learning together"
                     fill
                     sizes="(max-width: 768px) 100vw, 500px"
-                    className="object-cover rounded-lg"
+                    className="object-cover rounded-lg transition-transform duration-700 "
                     priority
                   />
                 </div>
-                {/* Trusted by badge */}
-                <div className="absolute right-0 bottom-4 bg-white rounded-full shadow-lg p-3 sm:p-4 flex items-center max-w-[180px] sm:max-w-none lg:bottom-6 border-2 border-green-300">
+                {/* Trusted by badge with animation */}
+                <div
+                  className="absolute right-0 bottom-4 bg-white rounded-2xl shadow-lg p-3 sm:p-4
+                       flex items-center max-w-[180px] sm:max-w-none lg:bottom-6
+                       transition-all duration-300 scale-95 hover:border-purple-400
+                       animate-fadeIn cursor-pointer"
+                >
                   <div className="mr-2 sm:mr-3 flex-shrink-0">
                     <Image
                       src="/images/trust-icon.png"
                       alt="Trust icon"
                       width={50}
                       height={50}
-                      className="w-8 h-8 sm:w-12 sm:h-12"
+                      className="w-8 h-8 sm:w-12 sm:h-12 animate-pulse"
                     />
                   </div>
                   <div>
@@ -52,11 +71,11 @@ const Testimonials: React.FC = () => {
           </div>
 
           {/* Right side with text and features */}
-          <div className="w-full lg:w-1/2">
-            <div className="text-purple-600 font-medium mb-2">
+          <div className="w-full lg:w-1/2 transform perspective-1000 rotate-y-1 hover:rotate-y-0 transition-transform duration-700">
+            {/* <div className="font-medium mb-2 transform translate-z-10 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-indigo-600 to-purple-700">
               About iLearners Hub
-            </div>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-indigo-700 leading-tight mb-6">
+            </div> */}
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6 bg-clip-text text-transparent bg-gradient-to-br from-indigo-600 via-blue-700 to-indigo-800 drop-shadow-[2px_2px_2px_rgba(79,70,229,0.3)]">
               Join Our Fun Learning Adventure!
             </h2>
 
@@ -68,38 +87,44 @@ const Testimonials: React.FC = () => {
 
             <div className="space-y-4 mb-8">
               {/* Feature 1 */}
-              <div className="flex items-start">
-                <div className="flex-shrink-0 mt-1 mr-3 bg-yellow-200 rounded-full p-1">
-                  <Check className="h-5 w-5 text-orange-500" />
+              <div className="flex items-start transform hover:translate-x-2 transition-transform duration-300">
+                <div className="flex-shrink-0 mt-1 mr-3 bg-yellow-300 rounded-full p-1 shadow-md">
+                  <Check className="h-5 w-5 text-indigo-700" />
                 </div>
-                <span className="text-gray-700 font-medium">
+                <span className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-indigo-700 to-blue-800">
                   Explore fun activities with thousands of cool lessons
                 </span>
               </div>
 
               {/* Feature 2 */}
-              <div className="flex items-start">
-                <div className="flex-shrink-0 mt-1 mr-3 bg-green-200 rounded-full p-1">
-                  <Check className="h-5 w-5 text-green-500" />
+              <div className="flex items-start transform hover:translate-x-2 transition-transform duration-300">
+                <div className="flex-shrink-0 mt-1 mr-3 bg-yellow-300 rounded-full p-1 shadow-md">
+                  <Check className="h-5 w-5 text-indigo-700" />
                 </div>
-                <span className="text-gray-700 font-medium">
+                <span className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-indigo-700 to-blue-800">
                   Discover exciting new topics in your favorite subjects
                 </span>
               </div>
 
               {/* Feature 3 */}
-              <div className="flex items-start">
-                <div className="flex-shrink-0 mt-1 mr-3 bg-pink-200 rounded-full p-1">
-                  <Check className="h-5 w-5 text-pink-500" />
+              <div className="flex items-start transform hover:translate-x-2 transition-transform duration-300">
+                <div className="flex-shrink-0 mt-1 mr-3 bg-yellow-300 rounded-full p-1 shadow-md">
+                  <Check className="h-5 w-5 text-indigo-700" />
                 </div>
-                <span className="text-gray-700 font-medium">
+                <span className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-indigo-700 to-blue-800">
                   Learn with friendly teachers who make learning fun
                 </span>
               </div>
             </div>
 
             <Link href="/courses">
-              <span className="inline-block bg-purple-500 hover:bg-purple-600 text-white font-bold px-8 py-3 rounded-full uppercase tracking-wide transition-colors duration-300 shadow-md">
+              <span
+                className="inline-block bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold px-8 py-3 rounded-full uppercase tracking-wide
+                shadow-[0_6px_0_rgb(79,70,229)]
+                hover:shadow-[0_4px_0px_rgb(79,70,229)] hover:translate-y-[2px]
+                active:shadow-none active:translate-y-[6px] active:bg-indigo-800
+                transition-all duration-150 ease-in-out"
+              >
                 Start Your Adventure!
               </span>
             </Link>
