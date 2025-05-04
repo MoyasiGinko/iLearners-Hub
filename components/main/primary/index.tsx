@@ -30,179 +30,127 @@ const PrimarySection = () => {
   }, []);
 
   return (
-    <div className="relative bg-white overflow-hidden py-16">
-      {/* Dotted world map background */}
+    <div className="relative bg-transparent overflow-hidden py-16 rounded-3xl">
+      {/* Fun pattern background */}
       <div className="absolute inset-0 z-0 opacity-10">
         <div className="w-full h-full bg-[url('/images/dotted-world-map.png')] bg-no-repeat bg-contain bg-center"></div>
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        {/* Paper airplane decoration */}
+        {/* Flying balloon decoration */}
         <div className="absolute top-10 left-10 z-0">
           <svg
             width="100"
-            height="100"
-            viewBox="0 0 100 100"
+            height="120"
+            viewBox="0 0 100 120"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            className="balloon"
           >
             <path
-              d="M20 50L80 20L60 80L20 50Z"
-              stroke="#FF6B6B"
-              strokeWidth="2"
-              fill="none"
-              className="paper-plane-outline"
+              d="M50 10C65.464 10 78 22.536 78 38C78 53.464 65.464 66 50 66C34.536 66 22 53.464 22 38C22 22.536 34.536 10 50 10Z"
+              fill="#FF6B6B"
             />
             <path
-              d="M20 50L60 80"
-              stroke="#FF6B6B"
+              d="M50 66C50 66 53 80 50 95C47 110 50 110 50 110"
+              stroke="#333"
               strokeWidth="2"
-              strokeDasharray="5 5"
-              className="paper-plane-fold"
+              strokeLinecap="round"
+              strokeDasharray="4 4"
             />
           </svg>
           <style jsx>{`
-            .paper-plane-outline {
-              stroke-dasharray: 220;
-              stroke-dashoffset: 220;
-              animation: drawPlane 3s ease-in-out forwards infinite;
-            }
-
-            .paper-plane-fold {
-              stroke-dasharray: 50;
-              stroke-dashoffset: 50;
-              animation: drawFold 3s ease-in-out 0.5s forwards infinite;
-            }
-
-            @keyframes drawPlane {
-              0% {
-                stroke-dashoffset: 220;
-              }
-              40% {
-                stroke-dashoffset: 0;
-              }
-              60% {
-                stroke-dashoffset: 0;
-              }
-              100% {
-                stroke-dashoffset: 0;
-              }
-            }
-
-            @keyframes drawFold {
-              0% {
-                stroke-dashoffset: 50;
-              }
-              40% {
-                stroke-dashoffset: 0;
-              }
-              60% {
-                stroke-dashoffset: 0;
-              }
-              100% {
-                stroke-dashoffset: 0;
-              }
+            .balloon {
+              animation: float 6s ease-in-out infinite;
             }
 
             @keyframes float {
               0%,
               100% {
-                transform: translate(0, 0) rotate(0deg);
-              }
-              25% {
-                transform: translate(5px, -5px) rotate(2deg);
+                transform: translateY(0);
               }
               50% {
-                transform: translate(0, -8px) rotate(-1deg);
+                transform: translateY(-15px);
               }
-              75% {
-                transform: translate(-5px, -3px) rotate(1deg);
-              }
-            }
-
-            svg {
-              animation: float 6s ease-in-out infinite;
             }
           `}</style>
         </div>
 
-        {/* Circular path decoration */}
-        <div className="absolute bottom-10 left-10 z-0">
+        {/* Rainbow arc decoration */}
+        <div className="absolute -bottom-20 right-10 -z-1">
           <svg
             width="200"
-            height="200"
-            viewBox="0 0 200 200"
+            height="120"
+            viewBox="0 0 200 120"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M100 0C155.228 0 200 44.7715 200 100C200 155.228 155.228 200 100 200C44.7715 200 0 155.228 0 100C0 44.7715 44.7715 0 100 0Z"
-              stroke="#FF6B6B"
-              strokeWidth="2"
-              strokeDasharray="6 6"
+              d="M10 100C10 55.82 45.82 20 90 20C134.18 20 170 55.82 170 100"
+              stroke="#FF9999"
+              strokeWidth="8"
+              strokeLinecap="round"
               fill="none"
-              className="animate-circle"
+              className="rainbow-path"
             />
-
-            {/* Small star object that moves along the path */}
-            <g className="moving-object">
-              <path
-                d="M10 4L7.85 9.79L2 10.13L6.32 14.21L5.09 20L10 16.79L14.91 20L13.68 14.21L18 10.13L12.15 9.79L10 4Z"
-                fill="#FFD700"
-              />
-            </g>
+            <path
+              d="M30 100C30 66.86 56.86 40 90 40C123.14 40 150 66.86 150 100"
+              stroke="#FFDD99"
+              strokeWidth="8"
+              strokeLinecap="round"
+              fill="none"
+              className="rainbow-path"
+            />
+            <path
+              d="M50 100C50 77.91 67.91 60 90 60C112.09 60 130 77.91 130 100"
+              stroke="#99FF99"
+              strokeWidth="8"
+              strokeLinecap="round"
+              fill="none"
+              className="rainbow-path"
+            />
           </svg>
-
           <style jsx>{`
-            .animate-circle {
-              stroke-dashoffset: 628;
-              animation: drawCircle 20s linear infinite;
+            .rainbow-path {
+              stroke-dasharray: 250;
+              stroke-dashoffset: 250;
+              animation: drawRainbow 3s ease-in-out forwards;
             }
 
-            @keyframes drawCircle {
+            @keyframes drawRainbow {
               to {
                 stroke-dashoffset: 0;
-              }
-            }
-
-            .moving-object {
-              transform-origin: 100px 100px;
-              animation: moveAlong 10s linear infinite;
-            }
-
-            @keyframes moveAlong {
-              0% {
-                transform: rotate(0deg) translateX(100px) rotate(0deg)
-                  scale(0.6);
-              }
-              100% {
-                transform: rotate(360deg) translateX(100px) rotate(-360deg)
-                  scale(0.6);
               }
             }
           `}</style>
         </div>
 
         <div className="flex flex-col lg:flex-row items-center justify-between">
-          {/* Left side with images - Updated for side-by-side positioning and animation */}
+          {/* Left side with images */}
           <div className="w-full lg:w-1/2 mb-12 lg:mb-0 relative">
             <div
-              className="h-[420px] relative mx-auto"
-              style={{ width: "420px" }}
+              className="relative mx-auto"
+              style={{
+                maxWidth: "420px",
+                height: "auto",
+                aspectRatio: "1/1",
+              }}
             >
               {/* First image */}
               <div
-                className="absolute rounded-3xl overflow-hidden shadow-lg transition-all duration-1000 ease-in-out"
+                className="absolute rounded-[30px] overflow-hidden shadow-lg transition-all duration-1000 ease-in-out border-4 border-yellow-300"
                 style={{
-                  width: "380px",
-                  height: "380px",
+                  width: "90%",
+                  height: "90%",
+                  maxWidth: "380px",
+                  maxHeight: "380px",
                   zIndex: activeIndex === 0 ? 20 : 10,
                   transform:
                     activeIndex === 0
                       ? "translateX(0) rotate(0deg)"
-                      : "translateX(100px) rotate(-5deg)",
+                      : "translateX(15%) rotate(-5deg)",
                   opacity: 1,
-                  left: activeIndex === 0 ? "0" : "40px",
+                  left: activeIndex === 0 ? "0" : "10%",
                 }}
               >
                 <Image
@@ -211,22 +159,25 @@ const PrimarySection = () => {
                   width={380}
                   height={380}
                   className="object-cover w-full h-full"
+                  sizes="(max-width: 768px) 90vw, 380px"
                 />
               </div>
 
               {/* Second image */}
               <div
-                className="absolute rounded-3xl overflow-hidden shadow-lg transition-all duration-1000 ease-in-out"
+                className="absolute rounded-[30px] overflow-hidden shadow-lg transition-all duration-1000 ease-in-out border-4 border-blue-300"
                 style={{
-                  width: "380px",
-                  height: "380px",
+                  width: "90%",
+                  height: "90%",
+                  maxWidth: "380px",
+                  maxHeight: "380px",
                   zIndex: activeIndex === 1 ? 20 : 10,
                   transform:
                     activeIndex === 1
                       ? "translateX(0) rotate(0deg)"
-                      : "translateX(-100px) rotate(5deg)",
+                      : "translateX(-15%) rotate(5deg)",
                   opacity: 1,
-                  left: activeIndex === 1 ? "0" : "60px",
+                  left: activeIndex === 1 ? "0" : "15%",
                 }}
               >
                 <Image
@@ -235,11 +186,12 @@ const PrimarySection = () => {
                   width={380}
                   height={380}
                   className="object-cover w-full h-full"
+                  sizes="(max-width: 768px) 90vw, 380px"
                 />
               </div>
             </div>
 
-            {/* Curved dotted line */}
+            {/* Jumping stars animation */}
             <div className="absolute top-0 right-0 z-0">
               <svg
                 width="150"
@@ -247,98 +199,62 @@ const PrimarySection = () => {
                 viewBox="0 0 150 150"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
+                className="max-w-full"
               >
                 <path
-                  id="dotPath"
+                  id="jumpPath"
                   d="M10 75C10 40 50 10 120 30"
-                  stroke="#00000000"
-                  strokeWidth="2"
+                  stroke="none"
                   fill="none"
                 />
 
-                {/* Dots along the path */}
-                <circle className="dot" cx="10" cy="75" r="3" fill="#4CAF50" />
-                <circle className="dot" cx="30" cy="55" r="3" fill="#4CAF50" />
-                <circle className="dot" cx="50" cy="40" r="3" fill="#4CAF50" />
-                <circle className="dot" cx="70" cy="30" r="3" fill="#4CAF50" />
-                <circle className="dot" cx="90" cy="25" r="3" fill="#4CAF50" />
-                <circle className="dot" cx="120" cy="30" r="3" fill="#4CAF50" />
-
-                {/* Pepe character */}
-                <g className="pepe-character">
-                  <circle cx="0" cy="0" r="8" fill="#97DB4F" />
-                  <circle cx="-3" cy="-2" r="2" fill="white" />
-                  <circle cx="3" cy="-2" r="2" fill="white" />
-                  <circle cx="-3" cy="-2" r="1" fill="black" />
-                  <circle cx="3" cy="-2" r="1" fill="black" />
+                {/* Star 1 */}
+                <g className="star" style={{ animationDelay: "0s" }}>
                   <path
-                    d="M-3 3 Q0 5 3 3"
-                    stroke="black"
-                    strokeWidth="1.5"
-                    fill="none"
+                    d="M10 4L7.5 9.5L2 10L6 14L5 20L10 17L15 20L14 14L18 10L12.5 9.5L10 4Z"
+                    fill="#FFD700"
+                  />
+                </g>
+
+                {/* Star 2 */}
+                <g className="star" style={{ animationDelay: "0.5s" }}>
+                  <path
+                    d="M10 4L7.5 9.5L2 10L6 14L5 20L10 17L15 20L14 14L18 10L12.5 9.5L10 4Z"
+                    fill="#FF9E80"
+                  />
+                </g>
+
+                {/* Star 3 */}
+                <g className="star" style={{ animationDelay: "1s" }}>
+                  <path
+                    d="M10 4L7.5 9.5L2 10L6 14L5 20L10 17L15 20L14 14L18 10L12.5 9.5L10 4Z"
+                    fill="#80D8FF"
                   />
                 </g>
               </svg>
 
               <style jsx>{`
-                .dot {
-                  opacity: 0;
-                  animation: fadeInOut 3s infinite;
+                .star {
+                  transform-origin: center;
+                  animation: jump 2s infinite;
                 }
 
-                .dot:nth-child(2) {
-                  animation-delay: 0.2s;
-                }
-                .dot:nth-child(3) {
-                  animation-delay: 0.4s;
-                }
-                .dot:nth-child(4) {
-                  animation-delay: 0.6s;
-                }
-                .dot:nth-child(5) {
-                  animation-delay: 0.8s;
-                }
-                .dot:nth-child(6) {
-                  animation-delay: 1s;
-                }
-                .dot:nth-child(7) {
-                  animation-delay: 1.2s;
-                }
-
-                @keyframes fadeInOut {
+                @keyframes jump {
                   0%,
                   100% {
-                    opacity: 0;
+                    transform: translate(20px, 80px) scale(0.5);
                   }
                   50% {
-                    opacity: 1;
+                    transform: translate(20px, 60px) scale(0.8) rotate(15deg);
                   }
                 }
 
-                .pepe-character {
-                  animation: moveAlong 3s linear infinite;
-                  transform-origin: center;
+                .star:nth-child(2) {
+                  animation-delay: 0.5s;
                 }
 
-                @keyframes moveAlong {
-                  0% {
-                    transform: translate(10px, 75px) rotate(0deg);
-                  }
-                  20% {
-                    transform: translate(30px, 55px) rotate(-20deg);
-                  }
-                  40% {
-                    transform: translate(50px, 40px) rotate(-30deg);
-                  }
-                  60% {
-                    transform: translate(70px, 30px) rotate(-20deg);
-                  }
-                  80% {
-                    transform: translate(90px, 25px) rotate(-10deg);
-                  }
-                  100% {
-                    transform: translate(120px, 30px) rotate(0deg);
-                  }
+                .star:nth-child(3) {
+                  animation-delay: 1s;
                 }
               `}</style>
             </div>
@@ -346,53 +262,56 @@ const PrimarySection = () => {
 
           {/* Right side with text and features */}
           <div className="w-full lg:w-1/2 lg:pl-16">
-            <div className="text-teal-500 font-medium mb-2">GET TO KNOW US</div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6">
-              Grow your skills learn with us from anywhere
+            <div className="text-purple-500 font-bold mb-2 text-xl">
+              LET'S LEARN TOGETHER!
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-[#FF6B6B] leading-tight mb-6 rounded-lg">
+              Discover, Learn & Grow With Us!
             </h2>
 
-            <p className="text-gray-600 mb-10">
-              Lorem ipsum dolor sit amet consectetur adipiscing elit sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            <p className="text-gray-600 mb-10 text-lg">
+              Join our fun learning adventures! We make learning exciting with
+              friendly teachers, cool activities, and awesome lessons that you
+              can enjoy from anywhere!
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
               {/* Feature 1 */}
-              <div className="flex items-center">
-                <div className="flex-shrink-0 mr-3 bg-red-400 rounded-full p-2">
+              <div className="flex items-center bg-yellow-100 p-4 rounded-2xl hover:scale-105 transition-transform">
+                <div className="flex-shrink-0 mr-3 bg-yellow-400 rounded-full p-3">
                   <Check className="h-5 w-5 text-white" />
                 </div>
-                <span className="font-medium">Expert trainers</span>
+                <span className="font-medium text-lg">Friendly teachers</span>
               </div>
 
               {/* Feature 2 */}
-              <div className="flex items-center">
-                <div className="flex-shrink-0 mr-3 bg-purple-500 rounded-full p-2">
+              <div className="flex items-center bg-blue-100 p-4 rounded-2xl hover:scale-105 transition-transform">
+                <div className="flex-shrink-0 mr-3 bg-blue-400 rounded-full p-3">
                   <Check className="h-5 w-5 text-white" />
                 </div>
-                <span className="font-medium">Online learning</span>
+                <span className="font-medium text-lg">Fun online lessons</span>
               </div>
 
               {/* Feature 3 */}
-              <div className="flex items-center">
-                <div className="flex-shrink-0 mr-3 bg-orange-400 rounded-full p-2">
+              <div className="flex items-center bg-green-100 p-4 rounded-2xl hover:scale-105 transition-transform">
+                <div className="flex-shrink-0 mr-3 bg-green-400 rounded-full p-3">
                   <Check className="h-5 w-5 text-white" />
                 </div>
-                <span className="font-medium">Lifetime access</span>
+                <span className="font-medium text-lg">Cool activities</span>
               </div>
 
               {/* Feature 4 */}
-              <div className="flex items-center">
-                <div className="flex-shrink-0 mr-3 bg-teal-400 rounded-full p-2">
+              <div className="flex items-center bg-pink-100 p-4 rounded-2xl hover:scale-105 transition-transform">
+                <div className="flex-shrink-0 mr-3 bg-pink-400 rounded-full p-3">
                   <Check className="h-5 w-5 text-white" />
                 </div>
-                <span className="font-medium">Great results</span>
+                <span className="font-medium text-lg">Amazing rewards</span>
               </div>
             </div>
 
             <Link href="/about">
-              <span className="inline-block bg-gray-900 hover:bg-gray-800 text-white font-medium px-8 py-3 rounded-full transition-colors duration-300">
-                DISCOVER MORE
+              <span className="inline-block bg-purple-500 hover:bg-purple-400 text-white font-bold px-8 py-4 rounded-full transition-colors duration-300 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                START YOUR ADVENTURE!
               </span>
             </Link>
           </div>

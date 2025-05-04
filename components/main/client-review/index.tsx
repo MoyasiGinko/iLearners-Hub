@@ -2,34 +2,39 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
-// Star rating component
+// Star rating component - updated to use stars with rounded edges
 const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
   return (
     <div className="flex">
       {[...Array(5)].map((_, i) => (
         <svg
           key={i}
-          className={`w-5 h-5 ${
-            i < rating ? "text-orange-400" : "text-gray-300"
+          className={`w-6 h-6 ${
+            i < rating ? "text-yellow-400" : "text-gray-200"
           }`}
           fill="currentColor"
-          viewBox="0 0 20 20"
+          viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          <path
+            d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+          />
         </svg>
       ))}
     </div>
   );
 };
 
-// Quote icon for testimonial
+// Quote icon updated to be more playful
 const QuoteIcon: React.FC = () => {
   return (
-    <div className="w-12 h-12 flex items-center justify-center bg-purple-600 rounded-full">
+    <div className="w-14 h-14 flex items-center justify-center bg-blue-500 rounded-full border-4 border-yellow-300 shadow-md">
       <svg
-        width="18"
-        height="16"
+        width="22"
+        height="20"
         viewBox="0 0 18 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +48,7 @@ const QuoteIcon: React.FC = () => {
   );
 };
 
-// Testimonial Card Component
+// Testimonial Card Component - updated with kid-friendly styling
 interface TestimonialCardProps {
   name: string;
   position: string;
@@ -60,38 +65,40 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   image,
 }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-8 relative h-full">
-      {/* Dashed border with image */}
-      <div className="absolute -top-12 right-8">
-        <div className="relative">
-          <div className="w-24 h-24 rounded-full border-2 border-dashed border-teal-400 p-1 flex items-center justify-center">
+    <div className="bg-white rounded-3xl  p-8 relative h-full border-4 border-blue-400">
+      {/* Circular image with playful border */}
+      {/* <div className="absolute -top-14 right-8 z-20">
+        <div className="relative animate-float">
+          <div className="w-28 h-28 rounded-full border-4 border-yellow-400 p-2 flex items-center justify-center bg-white shadow-lg">
             <div className="w-full h-full rounded-full overflow-hidden">
               <Image
                 src={image}
                 alt={name}
-                width={80}
-                height={80}
+                width={90}
+                height={90}
                 className="w-full h-full object-cover"
               />
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* Star Rating */}
-      <div className="mb-4 mt-4">
+      {/* <div className="mb-4 mt-6">
         <StarRating rating={rating} />
-      </div>
+      </div> */}
 
       {/* Testimonial Content */}
-      <p className="text-gray-600 mb-6">{content}</p>
+      <p className="text-gray-700 mb-6 text-lg font-medium rounded-xl bg-blue-50 p-4 border-2 border-blue-100">
+        {content}
+      </p>
 
       {/* Author Info */}
       <div className="flex items-center">
         <QuoteIcon />
         <div className="ml-4">
-          <h4 className="font-bold text-lg">{name}</h4>
-          <p className="text-gray-500 uppercase text-sm">{position}</p>
+          <h4 className="font-bold text-xl text-blue-600">{name}</h4>
+          <p className="text-purple-500 text-md">{position}</p>
         </div>
       </div>
     </div>
@@ -105,36 +112,36 @@ const ClientReview: React.FC = () => {
     {
       id: 1,
       name: "James Ickres",
-      position: "Market Manager",
+      position: "Happy Student",
       content:
-        "Lorem ipsum is simply free text dolor sit amet, consectetur adipisicing elit, sed do incididunt ut labore et dolore magna aliqua.",
+        "I love the fun activities in my classes! The teachers are super nice and I learned so many cool things!",
       rating: 5,
       image: "/images/testimonial-1.jpg",
     },
     {
       id: 2,
       name: "Aleesha Brown",
-      position: "Market Manager",
+      position: "Awesome Learner",
       content:
-        "Lorem ipsum is simply free text dolor sit amet, consectetur adipisicing elit, sed do incididunt ut labore et dolore magna aliqua.",
+        "The games we play while learning are my favorite part. I made new friends and can't wait for class every day!",
       rating: 5,
       image: "/images/testimonial-2.jpg",
     },
     {
       id: 3,
       name: "Michael Johnson",
-      position: "Product Designer",
+      position: "Creative Kid",
       content:
-        "Lorem ipsum is simply free text dolor sit amet, consectetur adipisicing elit, sed do incididunt ut labore et dolore magna aliqua.",
+        "I used to think school was boring, but these classes are super fun! I get to create cool projects and play while learning!",
       rating: 4,
       image: "/images/testimonial-1.jpg",
     },
     {
       id: 4,
       name: "Sarah Williams",
-      position: "UI/UX Designer",
+      position: "Young Explorer",
       content:
-        "Lorem ipsum is simply free text dolor sit amet, consectetur adipisicing elit, sed do incididunt ut labore et dolore magna aliqua.",
+        "My mom says I'm always talking about what I learned in class. I love all the colorful books and fun games we play!",
       rating: 5,
       image: "/images/testimonial-2.jpg",
     },
@@ -145,24 +152,23 @@ const ClientReview: React.FC = () => {
 
   const [position, setPosition] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [direction, setDirection] = useState(1); // Move this outside useEffect
+  const [direction, setDirection] = useState(1);
   const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const slideWidth = 100 / (duplicatedTestimonials.length / 2); // Width percentage of each slide
+    const slideWidth = 100 / (duplicatedTestimonials.length / 2);
 
     let animationId: number;
     const moveCarousel = () => {
       if (!isPaused) {
         setPosition((prevPosition) => {
-          let newPosition = prevPosition + 0.05 * direction; // Movement based on direction
+          let newPosition = prevPosition + 0.05 * direction;
 
-          // Change direction when reaching end or beginning
           if (newPosition >= slideWidth * testimonials.length) {
-            setDirection(-1); // Start moving backward
+            setDirection(-1);
             return prevPosition;
           } else if (newPosition <= 0) {
-            setDirection(1); // Start moving forward
+            setDirection(1);
             return prevPosition;
           }
 
@@ -181,22 +187,25 @@ const ClientReview: React.FC = () => {
   }, [isPaused, testimonials.length, duplicatedTestimonials.length, direction]);
 
   return (
-    <div className="bg-gray-50 py-20 relative overflow-hidden">
-      {/* Dotted background pattern */}
+    <div className="bg-transparent py-8 relative overflow-hidden">
+      {/* Playful background pattern */}
       <div className="absolute inset-0 z-0">
-        <div className="w-full h-full bg-[url('/images/dotted-pattern.png')] bg-no-repeat bg-cover opacity-10"></div>
+        <div className="w-full h-full bg-[url('/images/dotted-pattern.png')] bg-repeat opacity-20"></div>
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="flex flex-col lg:flex-row gap-10 items-start">
           {/* Left side with heading */}
           <div className="w-full lg:w-1/2">
-            <h3 className="text-teal-500 font-medium mb-4">OUR TESTIMONIALS</h3>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
-              What they're saying about our courses
+            <h3 className="text-pink-500 font-bold mb-4 text-xl">
+              WHAT KIDS ARE SAYING
+            </h3>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-blue-600 leading-tight mb-6">
+              Our Friends Love Learning With Us!
             </h2>
-            <p className="text-gray-600 mb-8">
-              Quisque commodo, magna nec accu man euismod tellus mi ornare enim.
+            <p className="text-purple-700 mb-8 text-lg">
+              Hear from our happy students about their exciting adventures in
+              learning!
             </p>
           </div>
 
@@ -207,26 +216,34 @@ const ClientReview: React.FC = () => {
             onMouseLeave={() => setIsPaused(false)}
             ref={carouselRef}
           >
-            <div
-              className="flex transition-transform duration-300 ease-linear"
-              style={{ transform: `translateX(-${position}%)` }}
-            >
-              {duplicatedTestimonials.map((testimonial, index) => (
-                <div
-                  key={`${testimonial.id}-${index}`}
-                  className="min-w-full md:min-w-[420px] px-4"
-                >
-                  <div className="h-full">
-                    <TestimonialCard
-                      name={testimonial.name}
-                      position={testimonial.position}
-                      content={testimonial.content}
-                      rating={testimonial.rating}
-                      image={testimonial.image}
-                    />
+            <div className="relative overflow-hidden">
+              {/* Left fade effect */}
+              <div className="absolute left-0 top-0 w-16 h-full bg-gradient-to-r from-blue-50 to-transparent z-10"></div>
+
+              <div
+                className="flex transition-transform duration-300 ease-linear"
+                style={{ transform: `translateX(-${position}%)` }}
+              >
+                {duplicatedTestimonials.map((testimonial, index) => (
+                  <div
+                    key={`${testimonial.id}-${index}`}
+                    className="min-w-full md:min-w-[420px] px-4"
+                  >
+                    <div className="h-full">
+                      <TestimonialCard
+                        name={testimonial.name}
+                        position={testimonial.position}
+                        content={testimonial.content}
+                        rating={testimonial.rating}
+                        image={testimonial.image}
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              {/* Right fade effect */}
+              <div className="absolute right-0 top-0 w-16 h-full bg-gradient-to-l from-blue-50 to-transparent z-10"></div>
             </div>
           </div>
         </div>

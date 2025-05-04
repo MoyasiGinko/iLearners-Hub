@@ -33,56 +33,76 @@ const ContactSection: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-6xl  mx-auto relative z-10">
-      <div className="bg-gradient-to-r  from-gray-900 to-teal-600 rounded-xl overflow-hidden shadow-xl">
-        <div className="flex flex-col px-2 md:px-20 md:flex-row">
+    <div className="w-full max-w-6xl bg-transparent mx-auto px-3 sm:px-4 md:px-6 relative z-10">
+      <div className="bg-gradient-to-r from-gray-900 to-teal-600 rounded-xl overflow-hidden px-3 sm:px-6 lg:px-10 shadow-xl">
+        <div className="flex flex-col md:flex-row">
           {/* Left Section */}
-          <div className="p-8 max-h-full h-[440px] md:w-1/2 relative flex items-center">
-            <div className="mb-6">
-              <h2 className="text-5xl font-bold text-white mb-4">
+          <div className="pt-6 px-4 sm:pt-6 sm:px-6 md:p-8 min-h-[250px] sm:min-h-[300px] md:min-h-[440px] md:w-1/2 flex items-center justify-center">
+            <div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-4">
                 Sign up for a free trial lesson by zoom
               </h2>
-              <p className="text-gray-300 mb-6">
+              <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6">
                 Quisque commodo, magna nec accu mani euismod tellus mi ornare
                 enim, quis congue elit.
               </p>
+              <div className="flex space-x-2">
+                {["🎨", "🔍", "🌟", "🧩", "🎯"].map((emoji, i) => (
+                  <span
+                    key={i}
+                    className="text-xl sm:text-2xl animate-bounce"
+                    style={{ animationDelay: `${i * 0.1}s` }}
+                  >
+                    {emoji}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
 
           {/* Right Section - Form */}
-          <div className="p-8 md:w-1/2 flex items-center">
-            <div className="w-full">
-              <div className="mb-4">
+          <div className="pb-6 px-4 sm:pb-6 sm:px-6 md:p-8 md:w-1/2 flex items-center justify-center">
+            <div className="w-full bg-white bg-opacity-90 p-3 sm:p-4 md:p-6 rounded-3xl border-4 border-dashed border-yellow-400 shadow-lg">
+              <div className="mb-3 sm:mb-4">
+                <label className="block text-teal-600 text-sm sm:text-base font-medium mb-1">
+                  Your Name
+                </label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="Your name"
-                  className="w-full p-3 rounded-md"
+                  placeholder="What should we call you?"
+                  className="w-full p-2 sm:p-3 text-sm sm:text-base rounded-xl bg-blue-50 border-2 border-blue-300 focus:border-purple-400 focus:outline-none"
                 />
               </div>
 
-              <div className="mb-4">
+              <div className="mb-3 sm:mb-4">
+                <label className="block text-teal-600 text-sm sm:text-base font-medium mb-1">
+                  Email Address
+                </label>
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="Email address"
-                  className="w-full p-3 rounded-md"
+                  placeholder="Where can we reach you?"
+                  className="w-full p-2 sm:p-3 text-sm sm:text-base rounded-xl bg-blue-50 border-2 border-blue-300 focus:border-purple-400 focus:outline-none"
                 />
               </div>
 
-              <div className="mb-6">
+              <div className="mb-4 sm:mb-5">
+                <label className="block text-teal-600 text-sm sm:text-base font-medium mb-1">
+                  Pick Your Favorite Subject
+                </label>
                 <select
                   name="course"
                   value={formData.course}
                   onChange={handleChange}
-                  className="w-full p-3 rounded-md appearance-none"
+                  className="w-full p-2 sm:p-3 text-sm sm:text-base rounded-xl bg-blue-50 border-2 border-blue-300 focus:border-purple-400 focus:outline-none appearance-none"
                 >
                   <option value="" disabled>
-                    Select course
+                    Choose something fun to learn!
                   </option>
                   {categories.map((category, index) => (
                     <option
@@ -97,9 +117,9 @@ const ContactSection: React.FC = () => {
 
               <button
                 onClick={handleSubmit}
-                className="bg-gray-900 text-white uppercase tracking-wider font-medium py-3 px-8 rounded-md hover:bg-gray-800 transition duration-300"
+                className="bg-gradient-to-r from-pink-500 to-orange-400 text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-full hover:from-pink-600 hover:to-orange-500 transition duration-300 shadow-md text-xs sm:text-sm md:text-base flex items-center justify-center w-full"
               >
-                SEND REQUEST
+                Let's Start Learning! 🎉✨
               </button>
             </div>
           </div>

@@ -85,6 +85,9 @@ export default function CourseCategories() {
     course: "",
   });
 
+  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+  const [isHovering, setIsHovering] = useState<number | null>(null);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -101,60 +104,119 @@ export default function CourseCategories() {
   };
 
   const categories = [
-    { name: "Business Management", icon: <GraduateIcon /> },
-    { name: "Arts and Design", icon: <DesignIcon /> },
-    { name: "Computer Science", icon: <ComputerIcon /> },
-    { name: "Personal Development", icon: <DevelopmentIcon /> },
-    { name: "Business and Finance", icon: <FinanceIcon /> },
-    { name: "Video and Photography", icon: <VideoIcon /> },
+    { name: "Business Management", icon: <GraduateIcon />, courses: 42 },
+    { name: "Arts and Design", icon: <DesignIcon />, courses: 65 },
+    { name: "Computer Science", icon: <ComputerIcon />, courses: 78 },
+    { name: "Personal Development", icon: <DevelopmentIcon />, courses: 54 },
+    { name: "Business and Finance", icon: <FinanceIcon />, courses: 36 },
+    { name: "Video and Photography", icon: <VideoIcon />, courses: 47 },
   ];
 
-  return (
-    <div className="w-full bg-gray-50 py-16 px-4 relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute inset-0 z-0 opacity-10">
-        <div className="absolute top-20 left-20 w-16 h-16 border-4 border-gray-300 rounded"></div>
-        <div className="absolute bottom-20 right-20 w-12 h-12 bg-yellow-300 rounded-full"></div>
-        <div className="absolute top-1/4 right-1/3 w-8 h-8 bg-pink-300"></div>
-      </div>
+  const getCategoryColor = (index: number) => {
+    const colors = [
+      "teal-400",
+      "pink-400",
+      "yellow-400",
+      "green-400",
+      "purple-400",
+      "blue-400",
+    ];
+    return colors[index % colors.length];
+  };
 
+  return (
+    <div className="w-full bg-transparent py-16 px-4 relative overflow-hidden">
       <div className="max-w-6xl mx-auto relative z-10">
-        {/* Header */}
+        {/* Header with animated text */}
         <div className="text-center mb-16">
-          <p className="text-teal-500 uppercase tracking-wider font-medium mb-2">
-            CHECKOUT OUR CATEGORIES
+          <p className="text-teal-500 uppercase tracking-wider font-medium mb-2 transform hover:scale-105 transition-transform cursor-pointer">
+            FIND YOUR PERFECT COURSE
           </p>
-          <h2 className="text-4xl font-bold text-gray-800">
-            Top categories for popular courses to show
+          <h2 className="text-4xl font-bold text-gray-800 relative inline-block">
+            <span className="bg-gradient-to-r from-teal-500 to-blue-500 bg-clip-text text-transparent">
+              Explore Our Course Categories
+            </span>
+            <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-teal-400 to-blue-400 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
           </h2>
+          <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+            Join thousands of happy learners discovering new skills every day!
+          </p>
         </div>
 
-        {/* Categories */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 mb-24">
+        {/* Categories with interactive elements */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mb-0">
           {categories.map((category, index) => (
-            <div key={index} className="flex flex-col items-center">
+            <div
+              key={index}
+              className="flex flex-col items-center group"
+              onClick={() => setSelectedCategory(index)}
+              onMouseEnter={() => setIsHovering(index)}
+              onMouseLeave={() => setIsHovering(null)}
+            >
               <div
-                className={`w-20 h-20 rounded-full flex items-center justify-center border-2 border-dashed ${
-                  index === 0
-                    ? "border-teal-400"
-                    : index === 1
-                    ? "border-pink-400"
-                    : index === 2
-                    ? "border-yellow-400"
-                    : index === 3
-                    ? "border-green-400"
-                    : index === 4
-                    ? "border-purple-400"
-                    : "border-blue-400"
-                }`}
+                className={`w-24 h-24 rounded-full flex items-center justify-center border-2 border-dashed
+                  border-${getCategoryColor(index)}
+                  transform transition-all duration-300
+                  ${isHovering === index ? "scale-110 shadow-lg" : ""}
+                  ${
+                    selectedCategory === index
+                      ? "bg-gradient-to-br from-white to-gray-100 shadow-md"
+                      : ""
+                  }
+                  hover:shadow-xl cursor-pointer`}
               >
-                {category.icon}
+                <div
+                  className={`transform transition-transform duration-300 ${
+                    isHovering === index ? "scale-125" : ""
+                  }`}
+                >
+                  {category.icon}
+                </div>
               </div>
               <div className="mt-4 text-center">
-                <h3 className="font-medium text-gray-800">{category.name}</h3>
+                <h3
+                  className={`font-medium text-gray-800 transition-all duration-300
+                  ${
+                    isHovering === index
+                      ? "text-" + getCategoryColor(index).replace("400", "600")
+                      : ""
+                  }
+                  ${selectedCategory === index ? "font-bold" : ""}`}
+                >
+                  {category.name}
+                </h3>
+                <p
+                  className={`text-sm text-gray-500 mt-1 opacity-0 transform -translate-y-2 transition-all duration-300
+                  ${
+                    isHovering === index || selectedCategory === index
+                      ? "opacity-100 translate-y-0"
+                      : ""
+                  }`}
+                >
+                  {category.courses} courses
+                </p>
+              </div>
+              <div
+                className={`mt-2 px-4 py-1 rounded-full text-xs font-medium
+                bg-${getCategoryColor(index)} text-white
+                opacity-0 scale-0 transition-all duration-300
+                ${selectedCategory === index ? "opacity-100 scale-100" : ""}`}
+              >
+                Selected
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Call to action */}
+        <div className="text-center">
+          <a
+            href="/courses"
+            className="px-8 inline-block py-3 rounded-full bg-gradient-to-r from-teal-400 to-blue-500 text-white font-medium
+            shadow-lg hover:shadow-xl transform transition-all duration-300 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-teal-300"
+          >
+            Browse All Courses
+          </a>
         </div>
       </div>
     </div>

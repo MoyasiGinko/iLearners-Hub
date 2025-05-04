@@ -5,14 +5,14 @@ import { motion } from "framer-motion";
 
 const CTA: React.FC = () => {
   return (
-    <section className="py-20 bg-gray-50 relative overflow-hidden">
+    <section className="py-20 bg-transparent relative overflow-hidden">
       <div className="container mx-auto px-6 text-center relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-4xl md:text-5xl font-bold mb-8 text-gray-800"
+          className="text-4xl md:text-5xl font-bold mb-8 text-blue-800"
         >
           Start Your Learning Journey Today
         </motion.h2>
