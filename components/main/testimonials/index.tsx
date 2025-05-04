@@ -79,11 +79,37 @@ const Testimonials: React.FC = () => {
               Join Our Fun Learning Adventure!
             </h2>
 
-            <p className="text-gray-600 mb-8 text-lg rounded-lg bg-white p-4 border-2 border-dashed border-pink-300">
-              Come explore our colorful world of learning where every day brings
-              new discoveries! Learn, play, and grow with friends in a safe and
-              exciting environment.
-            </p>
+            <motion.p
+              className="text-gray-600 mb-8 text-lg rounded-lg bg-white p-4 border-2 border-dashed border-pink-300"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <motion.span
+                initial={{ display: "block" }}
+                animate={{ display: "block" }}
+              >
+                {[
+                  "Come explore our colorful world of learning where every day brings",
+                  "new discoveries! Learn, play, and grow with friends in a safe and",
+                  "exciting environment.",
+                ].map((line, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                      delay: 0.5 + i * 0.8,
+                      duration: 0.8,
+                      ease: "easeInOut",
+                    }}
+                    className="block"
+                  >
+                    {line}
+                  </motion.span>
+                ))}
+              </motion.span>
+            </motion.p>
 
             <div className="space-y-4 mb-8">
               {/* Feature 1 */}
