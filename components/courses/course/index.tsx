@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { courses, courseCategories } from "./courseData";
+import Link from "next/link";
 
 const CoursePage = () => {
   const [selectedCategory, setSelectedCategory] =
@@ -83,12 +84,16 @@ const CoursePage = () => {
                     </h3>
                     <p className="text-slate-600 mt-2">{course.rate}</p>
                     <div className="mt-4 flex justify-between items-center">
-                      <button className="text-sky-500 hover:underline">
-                        Learn More
-                      </button>
-                      <button className="bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-600">
-                        {course.action}
-                      </button>
+                      <Link href={`/courses/${course.id}`}>
+                        <span className="inline-block hover:bg-blue-200 text-blue-700 font-medium px-4 py-2 rounded-full transition-colors duration-200">
+                          Learn More
+                        </span>
+                      </Link>
+                      <Link href={`/register`}>
+                        <span className="inline-block bg-blue-100 hover:bg-blue-200 text-blue-700 font-medium px-4 py-2 rounded-full transition-colors duration-200">
+                          {course.action}
+                        </span>
+                      </Link>
                     </div>
                   </div>
                 </div>
