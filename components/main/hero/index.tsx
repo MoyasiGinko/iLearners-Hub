@@ -5,7 +5,7 @@ import { Search, ChevronDown } from "lucide-react";
 
 const Hero: React.FC = () => {
   return (
-    <div className="relative min-h-[670px] pt-20 md:pt-40 overflow-hidden bg-white">
+    <div className="relative min-h-[670px] pt-20 md:pt-30 overflow-hidden bg-white">
       {/* Decorative elements */}
       <div className="absolute top-10 left-10 text-orange-100">
         <svg
@@ -161,30 +161,37 @@ const Hero: React.FC = () => {
         </div>
 
         {/* Right side with text and search */}
-        <div className="w-full lg:w-1/2 lg:pl-12">
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Learn Everyday & Any <br />
-            New Skills Online with <br />
-            <span className="relative">
+        <div className="w-full lg:w-1/2 lg:pl-12 space-y-8">
+          <h1 className="text-3xl md:text-4xl xl:text-5xl font-bold text-gray-900 leading-tight">
+            Learn Everyday & Any
+            <br className="hidden md:block" />
+            New Skills Online with
+            <br className="hidden md:block" />
+            <span className="relative inline-block mt-2">
               Top Instructors.
-              <span className="absolute -bottom-1 left-0 w-full h-1 bg-orange-500"></span>
+              <span className="absolute -bottom-2 left-0 w-full h-2 bg-orange-500 rounded-sm"></span>
             </span>
           </h1>
 
-          <p className="text-gray-600 mb-8">
-            There are many variations of passages of Lorem Ipsum available, but
-            the majority have suffered alteration in some form.
+          <p className="text-lg text-gray-600 max-w-xl">
+            Discover thousands of courses taught by industry experts and elevate
+            your skills at your own pace, anywhere, anytime.
           </p>
 
-          <div className="relative mb-8">
-            <button className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-r-full transition-colors">
-              Search Now
+          <div className="flex flex-col sm:flex-row items-center gap-4">
+            <button className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-8 rounded-full transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+              Explore Courses
+            </button>
+            <button className="w-full sm:w-auto border border-gray-300 hover:border-gray-400 text-gray-700 font-medium py-3 px-8 rounded-full transition-all hover:bg-gray-50">
+              Get Started
             </button>
           </div>
 
-          <p className="text-orange-500 font-semibold">
-            #1 Worldwide Online Learning & Skills Development Platform
-          </p>
+          <div className="pt-4">
+            <p className="text-orange-500 font-semibold flex items-center gap-2 before:content-[''] before:w-10 before:h-[2px] before:bg-orange-500">
+              #1 Worldwide Online Learning & Skills Development Platform
+            </p>
+          </div>
         </div>
       </div>
     </div>
