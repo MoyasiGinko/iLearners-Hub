@@ -103,7 +103,7 @@ const Hero: React.FC = () => {
         <div className="relative w-full lg:w-1/2 mb-10 lg:mb-0 flex justify-center">
           <div className="relative z-10">
             {/* Main instructor with bigger image and better fit */}
-            <div className="bg-orange-500 rounded-full p-2 w-80 h-80 relative">
+            <div className="bg-orange-500 rounded-full p-2 w-80 h-80 relative animate-float">
               <div className="absolute inset-0 flex items-end justify-center pb-0">
                 <Image
                   src="/images/instructor.png"
@@ -116,7 +116,7 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Female student floating on the left side, positioned more up */}
-            <div className="absolute -left-20 bottom-20 bg-pink-400 rounded-full p-2 w-40 h-40 z-20">
+            <div className="absolute -left-20 bottom-20 bg-pink-400 rounded-full p-2 w-40 h-40 z-20 animate-orbit-left">
               <div className="absolute inset-0 flex items-center justify-center">
                 <Image
                   src="/images/female-student.png"
@@ -129,7 +129,7 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Male student floating on the bottom right overlapping the instructor */}
-            <div className="absolute -bottom-10 -right-10 bg-purple-300 rounded-full p-2 w-40 h-40 z-20">
+            <div className="absolute -bottom-10 -right-10 bg-purple-300 rounded-full p-2 w-40 h-40 z-20 animate-orbit-right">
               <div className="absolute inset-0 flex items-center justify-center">
                 <Image
                   src="/images/male-student.png"
@@ -140,9 +140,23 @@ const Hero: React.FC = () => {
                 />
               </div>
             </div>
+            <div className="absolute inset-0 animate-spin-slow -z-1">
+              {/* Blue ring around the main instructor */}
+              <div className="absolute inset-0 rounded-full border-2 border-blue-500 -m-8 -z-1"></div>
 
-            <div className="absolute top-1/2 right-0 w-4 h-4 bg-red-500 rounded-full"></div>
-            <div className="absolute bottom-0 left-0 w-4 h-4 bg-orange-400 rounded-full"></div>
+              {/* Decorative dots positioned precisely over the blue ring */}
+              {/* Top dots */}
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-10 w-4 h-4 bg-red-500 rounded-full -z-1"></div>
+
+              {/* Right dots */}
+              <div className="absolute top-1/2 right-0 transform translate-x-10 -translate-y-1/2 w-4 h-4 bg-purple-500 rounded-full -z-1"></div>
+
+              {/* Bottom dots */}
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-10 w-4 h-4 bg-red-500 rounded-full -z-1"></div>
+
+              {/* Left dots */}
+              <div className="absolute top-1/2 left-0 transform -translate-x-10 -translate-y-1/2 w-4 h-4 bg-purple-500 rounded-full -z-1"></div>
+            </div>
           </div>
         </div>
 
