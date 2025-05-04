@@ -76,7 +76,7 @@ const CoursePage = () => {
               {filteredCourses.map((course, index) => (
                 <motion.div
                   key={course.id}
-                  className="flex flex-col rounded-3xl bg-white shadow-lg overflow-hidden h-full"
+                  className="rounded-2xl bg-white shadow-xl overflow-hidden transition-all border-4 border-indigo-100"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
@@ -86,46 +86,32 @@ const CoursePage = () => {
                       "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
                   }}
                 >
-                  <div className="relative h-52 w-full overflow-hidden rounded-t-2xl">
-                    <motion.img
+                  <div className="relative h-48 bg-gray-200">
+                    <img
                       src={course.Image}
                       alt={course.title}
                       className="object-cover w-full h-full"
-                      whileHover={{ scale: 1.01 }}
-                      transition={{ duration: 0.5 }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                    <div className="absolute top-0 right-0 bg-yellow-400 text-indigo-700 px-3 py-1 m-3 rounded-full text-sm font-bold">
+                      {course.category}
+                    </div>
                   </div>
-                  <div className="flex flex-col flex-grow p-5">
-                    <h3 className="text-xl font-bold text-indigo-700 line-clamp-2 h-14">
+                  <div className="p-5">
+                    <h3 className="text-xl font-bold text-indigo-700">
                       {course.title}
                     </h3>
-                    <p className="text-purple-600 mt-3 mb-4 flex-grow line-clamp-2">
-                      {course.rate}
-                    </p>
-                    <div className="mt-auto flex justify-between items-center gap-3">
-                      <motion.div
-                        whileHover={{ scale: 1.01 }}
-                        whileTap={{ scale: 0.99 }}
-                        className="flex-1"
-                      >
-                        <Link href={`/courses/${course.id}`}>
-                          <span className="inline-block w-full text-center bg-purple-100 hover:bg-purple-200 text-purple-700 font-medium px-4 py-3 rounded-full transition-all duration-300 shadow-sm hover:shadow-md">
-                            Learn More
-                          </span>
-                        </Link>
-                      </motion.div>
-                      <motion.div
-                        whileHover={{ scale: 1.01 }}
-                        whileTap={{ scale: 0.99 }}
-                        className="flex-1"
-                      >
-                        <Link href={`/register`}>
-                          <span className="inline-block w-full text-center bg-green-500 hover:bg-green-600 text-white font-bold px-4 py-3 rounded-full transition-all duration-300 shadow-sm hover:shadow-md">
-                            {course.action}
-                          </span>
-                        </Link>
-                      </motion.div>
+                    <p className="text-indigo-600 mt-2">{course.rate}</p>
+                    <div className="mt-6 flex justify-between items-center">
+                      <Link href={`/courses/${course.id}`}>
+                        <span className="inline-block hover:bg-blue-100 text-indigo-600 font-medium px-4 py-2 rounded-full transition-all">
+                          Learn More
+                        </span>
+                      </Link>
+                      <Link href={`/courses/${course.id}/register`}>
+                        <span className="inline-block bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-bold px-4 py-2 rounded-full transition-all">
+                          {course.action}
+                        </span>
+                      </Link>
                     </div>
                   </div>
                 </motion.div>

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
 import { courses, Course } from "./courseData";
+import { motion } from "framer-motion";
 
 const CourseDetailsPage = () => {
   const [course, setCourse] = useState<Course | undefined>(undefined);
@@ -264,10 +265,16 @@ const CourseDetailsPage = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {similarCourses.map((similarCourse) => (
-                <div
+              {similarCourses.map((similarCourse, index) => (
+                <motion.div
                   key={similarCourse.id}
-                  className="rounded-2xl bg-white shadow-xl overflow-hidden transition-all hover:scale-105 border-4 border-indigo-100"
+                  className="rounded-2xl bg-white shadow-xl overflow-hidden transition-all border-4 border-indigo-100"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{
+                    scale: 1.01,
+                  }}
                 >
                   <div className="relative h-48 bg-gray-200">
                     <img
@@ -297,7 +304,7 @@ const CourseDetailsPage = () => {
                       </Link>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
