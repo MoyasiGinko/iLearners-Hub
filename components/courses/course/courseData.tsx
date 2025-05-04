@@ -1,6 +1,8 @@
+import Image from "next/image";
 export type Course = {
   id: number;
   title: string;
+  Image?: string;
   category: string;
   subjects?: string[];
   rate: string;
@@ -26,6 +28,7 @@ export const courses: Course[] = [
   {
     id: 1,
     title: "Intensive Exam Preparation Course",
+    Image: "/images/courses/c1.jpg",
     category: "Intensive",
     subjects: ["English", "Maths", "Science"],
     rate: "£20/hour per subject",
@@ -38,6 +41,8 @@ export const courses: Course[] = [
   {
     id: 2,
     title: "Higher Physics Course",
+    Image: "/images/courses/c1.jpg",
+
     category: "Higher",
     rate: "£25/hour",
     fee: "£200.00",
@@ -46,6 +51,8 @@ export const courses: Course[] = [
   {
     id: 3,
     title: "Higher Mathematics Course",
+    Image: "/images/courses/c1.jpg",
+
     category: "Higher",
     rate: "£25/hour",
     fee: "£200.00",
@@ -54,6 +61,8 @@ export const courses: Course[] = [
   {
     id: 4,
     title: "National 5 Physics Revision",
+    Image: "/images/courses/c1.jpg",
+
     category: "Revision",
     rate: "£20/hour",
     duration: "12 weeks",
@@ -64,6 +73,8 @@ export const courses: Course[] = [
   {
     id: 5,
     title: "National 5 Maths Revision",
+    Image: "/images/courses/c1.jpg",
+
     category: "Revision",
     rate: "£20/hour",
     duration: "12 weeks",
@@ -74,6 +85,8 @@ export const courses: Course[] = [
   {
     id: 6,
     title: "S4 Physics",
+    Image: "/images/courses/c1.jpg",
+
     category: "Secondary",
     rate: "£189/month",
     duration: "16 weeks",
@@ -85,6 +98,8 @@ export const courses: Course[] = [
   {
     id: 7,
     title: "S4 Mathematics",
+    Image: "/images/courses/c1.jpg",
+
     category: "Secondary",
     rate: "£189/month",
     duration: "16 weeks",
@@ -96,6 +111,8 @@ export const courses: Course[] = [
   {
     id: 8,
     title: "S3 Physics",
+    Image: "/images/courses/c1.jpg",
+
     category: "Secondary",
     rate: "£99/month",
     duration: "36 weeks",
@@ -107,6 +124,8 @@ export const courses: Course[] = [
   {
     id: 9,
     title: "S3 Mathematics",
+    Image: "/images/courses/c1.jpg",
+
     category: "Secondary",
     rate: "£99/month",
     duration: "36 weeks",
@@ -118,6 +137,8 @@ export const courses: Course[] = [
   {
     id: 10,
     title: "S1 & S2",
+    Image: "/images/courses/c1.jpg",
+
     category: "Secondary",
     subjects: ["Mathematics", "English", "Science"],
     rate: "£10/hour",
@@ -129,6 +150,8 @@ export const courses: Course[] = [
   {
     id: 11,
     title: "Primary 4 to Primary 7",
+    Image: "/images/courses/c1.jpg",
+
     category: "Primary",
     subjects: ["Mathematics", "English", "Science"],
     rate: "£10/hour",

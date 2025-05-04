@@ -69,28 +69,30 @@ const CoursePage = () => {
               {filteredCourses.map((course) => (
                 <div
                   key={course.id}
-                  className="rounded-lg bg-white shadow-lg overflow-hidden transition-transform hover:scale-105"
+                  className="flex flex-col rounded-lg bg-white shadow-lg overflow-hidden transition-transform hover:scale-105 h-full"
                 >
-                  <div className="relative h-40 bg-gray-200">
+                  <div className="relative h-40 w-full overflow-hidden">
                     <img
-                      src={`/images/courses/${course.id}.jpg`} // Replace with actual image paths
+                      src={course.Image}
                       alt={course.title}
                       className="object-cover w-full h-full"
                     />
                   </div>
-                  <div className="p-4">
-                    <h3 className="text-lg font-bold text-slate-800">
+                  <div className="flex flex-col flex-grow p-4">
+                    <h3 className="text-lg font-bold text-slate-800 line-clamp-2 h-14">
                       {course.title}
                     </h3>
-                    <p className="text-slate-600 mt-2">{course.rate}</p>
-                    <div className="mt-4 flex justify-between items-center">
-                      <Link href={`/courses/${course.id}`}>
-                        <span className="inline-block hover:bg-blue-200 text-blue-700 font-medium px-4 py-2 rounded-full transition-colors duration-200">
+                    <p className="text-slate-600 mt-2 mb-4 flex-grow line-clamp-2">
+                      {course.rate}
+                    </p>
+                    <div className="mt-auto flex justify-between items-center gap-2">
+                      <Link href={`/courses/${course.id}`} className="flex-1">
+                        <span className="inline-block w-full text-center bg-blue-100 hover:bg-blue-200 text-blue-700 font-medium px-3 py-2 rounded-full transition-colors duration-200">
                           Learn More
                         </span>
                       </Link>
-                      <Link href={`/register`}>
-                        <span className="inline-block bg-blue-100 hover:bg-blue-200 text-blue-700 font-medium px-4 py-2 rounded-full transition-colors duration-200">
+                      <Link href={`/register`} className="flex-1">
+                        <span className="inline-block w-full text-center bg-blue-500 hover:bg-blue-600 text-gray-50 font-medium px-3 py-2 rounded-full transition-colors duration-200">
                           {course.action}
                         </span>
                       </Link>
