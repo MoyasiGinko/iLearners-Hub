@@ -100,46 +100,49 @@ const Hero: React.FC = () => {
 
       <div className="container mx-auto px-6 py-12 flex flex-col lg:flex-row items-center">
         {/* Left side with images */}
-        <div className="relative w-full lg:w-1/2 mb-10 lg:mb-0">
+        <div className="relative w-full lg:w-1/2 mb-10 lg:mb-0 flex justify-center">
           <div className="relative z-10">
-            <div className="bg-orange-500 rounded-full p-8 w-64 h-64 mx-auto relative">
-              <div className="absolute inset-0 flex items-center justify-center">
+            {/* Main instructor with bigger image and better fit */}
+            <div className="bg-orange-500 rounded-full p-2 w-80 h-80 relative">
+              <div className="absolute inset-0 flex items-end justify-center pb-0">
                 <Image
                   src="/images/instructor.png"
                   alt="Main instructor"
-                  width={250}
-                  height={250}
-                  className="object-cover"
+                  width={320}
+                  height={320}
+                  className="object-contain rounded-full"
                 />
               </div>
             </div>
 
-            <div className="absolute -bottom-10 -left-10 bg-pink-400 rounded-full p-4 w-32 h-32">
+            {/* Female student floating on the left side, positioned more up */}
+            <div className="absolute -left-20 bottom-20 bg-pink-400 rounded-full p-2 w-40 h-40 z-20">
               <div className="absolute inset-0 flex items-center justify-center">
                 <Image
-                  src="/images/student-female.png"
+                  src="/images/female-student.png"
                   alt="Female student"
-                  width={120}
-                  height={120}
-                  className="object-cover"
+                  width={160}
+                  height={160}
+                  className="object-contain rounded-full w-full h-full"
                 />
               </div>
             </div>
 
-            <div className="absolute -bottom-8 -right-8 bg-purple-300 rounded-full p-4 w-36 h-36">
+            {/* Male student floating on the bottom right overlapping the instructor */}
+            <div className="absolute -bottom-10 -right-10 bg-purple-300 rounded-full p-2 w-40 h-40 z-20">
               <div className="absolute inset-0 flex items-center justify-center">
                 <Image
-                  src="/images/student-male.png"
+                  src="/images/male-student.png"
                   alt="Male student"
-                  width={130}
-                  height={130}
-                  className="object-cover"
+                  width={160}
+                  height={160}
+                  className="object-contain rounded-full w-full h-full"
                 />
               </div>
             </div>
 
-            <div className="absolute top-1/2 right-1/4 w-4 h-4 bg-red-500 rounded-full"></div>
-            <div className="absolute bottom-0 left-1/4 w-4 h-4 bg-orange-400 rounded-full"></div>
+            <div className="absolute top-1/2 right-0 w-4 h-4 bg-red-500 rounded-full"></div>
+            <div className="absolute bottom-0 left-0 w-4 h-4 bg-orange-400 rounded-full"></div>
           </div>
         </div>
 
@@ -160,35 +163,9 @@ const Hero: React.FC = () => {
           </p>
 
           <div className="relative mb-8">
-            <div className="flex">
-              <div className="relative flex-grow">
-                <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-                  <Search size={20} className="text-gray-400" />
-                </div>
-                <input
-                  type="text"
-                  placeholder="Find Courses"
-                  className="w-full pl-10 pr-3 py-3 rounded-l-full border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                />
-              </div>
-
-              <div className="relative">
-                <select className="h-full appearance-none bg-white border-y border-r border-gray-200 py-3 pl-4 pr-10 rounded-none focus:outline-none focus:ring-2 focus:ring-orange-500">
-                  <option>Categories</option>
-                  <option>Programming</option>
-                  <option>Design</option>
-                  <option>Business</option>
-                  <option>Marketing</option>
-                </select>
-                <div className="absolute inset-y-0 right-2 flex items-center pointer-events-none">
-                  <ChevronDown size={20} className="text-gray-400" />
-                </div>
-              </div>
-
-              <button className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-r-full transition-colors">
-                Search Now
-              </button>
-            </div>
+            <button className="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-r-full transition-colors">
+              Search Now
+            </button>
           </div>
 
           <p className="text-orange-500 font-semibold">
