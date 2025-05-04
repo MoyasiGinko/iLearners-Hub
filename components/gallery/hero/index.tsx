@@ -38,9 +38,8 @@ const Hero: React.FC = () => {
             Our Learning Adventures!
           </h1>
           <p className="text-base sm:text-lg md:text-xl mb-6 md:mb-8 text-white drop-shadow-sm max-w-md md:max-w-lg lg:max-w-xl">
-            Discover moments of creativity, curiosity, and joy at our
-            educational center! See how our little learners grow through fun
-            activities and engaging projects.
+            Discover creativity at our learning center! See students thrive
+            through engaging activities and fun educational projects.
           </p>
           <div className="flex flex-wrap gap-3 md:gap-4">
             <Link href="/courses">
