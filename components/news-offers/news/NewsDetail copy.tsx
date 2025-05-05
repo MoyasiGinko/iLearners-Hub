@@ -62,7 +62,7 @@ const NewsDetail: React.FC = () => {
       <div className="max-w-4xl mx-auto">
         <nav className="flex justify-between items-center mb-6">
           <Link href="/news-offers">
-            <span className="inline-block bg-yellow-400 hover:bg-yellow-500 text-indigo-700 font-medium px-5 py-2 rounded-full transition-all transform hover:scale-105 shadow-md flex items-center">
+            <span className="flex bg-yellow-400 hover:bg-yellow-500 text-indigo-700 font-medium px-5 py-2 rounded-full transition-all transform hover:scale-105 shadow-md items-center">
               <span className="mr-2">←</span>
               Back to Adventure Stories
             </span>
