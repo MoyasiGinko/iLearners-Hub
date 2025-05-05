@@ -15,7 +15,7 @@ export const newsItems: NewsItem[] = [
     date: "June 15, 2023",
     description:
       "Join our exciting summer reading adventure! Read 10 books over summer and win awesome prizes.",
-    imageUrl: "/images/summer-reading.jpg",
+    imageUrl: "/images/news/n1.jpg",
     category: "event",
     content: `
         <h2>Summer Reading Adventure!</h2>
@@ -52,7 +52,7 @@ export const newsItems: NewsItem[] = [
     date: "July 5, 2023",
     description:
       "We're excited to announce our brand new science lab with fun experiments for all ages!",
-    imageUrl: "/images/science-lab.jpg",
+    imageUrl: "/images/news/n1.jpg",
     category: "news",
     content: `
         <h2>Introducing Our Amazing New Science Lab!</h2>
@@ -90,7 +90,7 @@ export const newsItems: NewsItem[] = [
     date: "Valid until August 1, 2023",
     description:
       "Register for fall classes before August 1st and receive a 15% discount on all courses!",
-    imageUrl: "/images/early-bird.jpg",
+    imageUrl: "/images/news/n1.jpg",
     category: "offer",
     content: `
         <h2>Early Bird Gets the Discount!</h2>
@@ -133,7 +133,7 @@ export const newsItems: NewsItem[] = [
     date: "May 28, 2023",
     description:
       "Congratulations to all participants in our annual art contest! View the winning masterpieces here.",
-    imageUrl: "/images/art-contest.jpg",
+    imageUrl: "/images/news/n1.jpg",
     category: "news",
     content: `
         <h2>Celebrating Young Artists: Art Contest Results!</h2>
@@ -180,7 +180,7 @@ export const newsItems: NewsItem[] = [
     date: "July 20-22, 2023",
     description:
       "Build your own robot in this 3-day workshop for kids ages 8-12. Limited spots available!",
-    imageUrl: "/images/robotics.jpg",
+    imageUrl: "/images/news/n1.jpg",
     category: "event",
     content: `
         <h2>Robotics Workshop: Build Your Own Robot!</h2>
