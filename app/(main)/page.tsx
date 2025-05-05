@@ -10,7 +10,7 @@ import ContactSection from "@/components/main/contact";
 
 export default function Home() {
   return (
-    <main className="bg-transparent">
+    <main className="bg-gradient-to-b from-blue-50/50 via-blue-50 to-pink-100/50">
       <Hero />
       <PrimarySection />
       <Testimonials />

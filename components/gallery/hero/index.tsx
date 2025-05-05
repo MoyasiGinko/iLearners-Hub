@@ -1,83 +1,102 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 
 const Hero: React.FC = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Handle responsive state based on window size
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    // Set initial value
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Clean up
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <section className="relative h-[50vh] flex items-center bg-gradient-to-r from-sky-400 via-purple-300 to-pink-300 text-white rounded-b-3xl overflow-hidden">
-      <div className="container mx-auto px-6 z-10">
+    <section className="relative flex items-center bg-gradient-to-r from-indigo-500 via-purple-400 to-pink-400 text-white rounded-b-3xl overflow-hidden py-12 md:py-20 lg:py-24 min-h-[60vh] md:min-h-[50vh]">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 z-10 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="max-w-2xl"
+          className="max-w-xl md:max-w-2xl lg:max-w-3xl"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-indigo-900 drop-shadow-md">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-white drop-shadow-md leading-tight">
             Our Learning Adventures!
           </h1>
-          <p className="text-lg mb-6 text-indigo-800 drop-shadow-sm">
-            Discover moments of creativity, curiosity, and joy at our
-            educational center! See how our little learners grow through fun
-            activities and engaging projects.
+          <p className="text-base sm:text-lg md:text-xl mb-6 md:mb-8 text-white drop-shadow-sm max-w-md md:max-w-lg lg:max-w-xl">
+            Discover creativity at our learning center! See students thrive
+            through engaging activities and fun educational projects.
           </p>
-          <div className="flex gap-4 flex-wrap">
+          <div className="flex flex-wrap gap-3 md:gap-4">
             <Link href="/courses">
-              <span className="bg-yellow-400 text-indigo-900 px-6 py-3 rounded-full font-medium hover:bg-yellow-300 transition-all inline-block">
-                Join The Fun
+              <span className="bg-yellow-400 text-blue-900 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-medium hover:bg-yellow-300 transition-all inline-block text-sm sm:text-base whitespace-nowrap">
+                Join the Fun
               </span>
             </Link>
             <Link href="/news-offers">
-              <span className="bg-teal-500 text-white px-6 py-3 rounded-full font-medium hover:bg-teal-400 transition-all inline-block">
-                See Our Events
+              <span className="bg-white text-purple-700 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-medium hover:bg-opacity-90 transition-all inline-block text-sm sm:text-base whitespace-nowrap">
+                See our Events
               </span>
             </Link>
           </div>
         </motion.div>
-      </div>
 
-      {/* Decorative elements */}
-      <div className="absolute right-10 bottom-10 w-40 h-40 md:w-64 md:h-64 z-0 hidden md:block">
-        <Image
-          src="/images/blocks.gif"
-          alt="Learning Blocks"
-          width={240}
-          height={240}
-          className="object-contain"
-        />
+        {/* Decorative elements with responsive sizing and positioning */}
+        <div
+          className={`absolute ${
+            isMobile
+              ? "inset-0 flex items-center justify-center w-full h-full z-0 opacity-30"
+              : "right-0 top-1/2 transform -translate-y-1/2 md:right-8 w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-64 lg:h-64 z-0"
+          }`}
+        >
+          {isMobile ? (
+            <div className="relative w-40 h-40">
+              <Image
+                src="/images/blocks.gif"
+                alt="blocks"
+                fill
+                className="object-contain"
+                sizes="160px"
+                priority
+              />
+            </div>
+          ) : (
+            <Image
+              src="/images/blocks.gif"
+              alt="blocks"
+              fill
+              className="object-contain"
+              sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, (max-width: 1024px) 160px, 256px"
+              priority
+            />
+          )}
+        </div>
       </div>
-
-      {/* Animated decorative elements */}
-      {/* <motion.div
-        className="absolute top-10 right-20 w-16 h-16"
-        animate={{ rotate: 360 }}
-        transition={{ repeat: Infinity, duration: 8, ease: "linear" }}
-      >
-        <Image src="/images/pencil.gif" alt="Pencil" width={64} height={64} />
-      </motion.div> */}
 
       <motion.div
-        className="absolute top-20 left-10 w-12 h-12 rounded-full bg-yellow-300 opacity-70"
+        className="absolute -top-8 -right-8 w-12 sm:w-16 md:w-20 h-12 sm:h-16 md:h-20 rounded-full bg-yellow-300 opacity-60"
+        animate={{ y: [0, 15, 0] }}
+        transition={{ repeat: Infinity, duration: 4 }}
+      />
+      <motion.div
+        className="absolute top-16 left-4 sm:left-6 md:left-10 w-6 sm:w-8 md:w-10 h-6 sm:h-8 md:h-10 rounded-full bg-pink-300 opacity-60"
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 3 }}
       />
-
-      {/* <motion.div
-        className="absolute bottom-30 left-40 w-14 h-14"
-        animate={{ y: [0, -15, 0] }}
-        transition={{ repeat: Infinity, duration: 4 }}
-      >
-        <Image src="/images/book.gif" alt="Book" width={56} height={56} />
-      </motion.div> */}
-
-      {/* <motion.div
-        className="absolute bottom-40 right-40 w-10 h-10"
-        animate={{ scale: [1, 1.2, 1] }}
-        transition={{ repeat: Infinity, duration: 2 }}
-      >
-        <Image src="/images/crayon.gif" alt="Crayon" width={40} height={40} />
-      </motion.div> */}
     </section>
   );
 };

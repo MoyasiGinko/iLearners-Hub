@@ -1,11 +1,29 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { Search, ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
 
-const Hero: React.FC = () => {
+const Hero = () => {
+  const [text, setText] = useState("");
+  const fullText =
+    "Join thousands of happy learners on exciting adventures! Learn at your own pace with fun activities that make learning feel like playtime.";
+
+  useEffect(() => {
+    let currentIndex = 0;
+    const typingInterval = setInterval(() => {
+      if (currentIndex < fullText.length) {
+        setText(fullText.substring(0, currentIndex + 1));
+        currentIndex++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, 50); // Speed of typing
+
+    return () => clearInterval(typingInterval);
+  }, []);
+
   return (
-    <div className="relative min-h-[670px] pt-20 md:pt-30 overflow-hidden bg-white">
+    <div className="relative min-h-[670px] pt-20 md:pt-30 overflow-hidden bg-transparent">
       {/* Decorative elements */}
       <div className="absolute top-10 left-10 text-orange-100">
         <svg
@@ -19,91 +37,12 @@ const Hero: React.FC = () => {
         </svg>
       </div>
 
-      <div className="absolute bottom-20 left-10">
-        <svg
-          width="80"
-          height="20"
-          viewBox="0 0 80 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M0 10C20 -5 60 25 80 10" stroke="#3B82F6" strokeWidth="2" />
-          <path d="M0 15C20 0 60 30 80 15" stroke="#3B82F6" strokeWidth="2" />
-          <path d="M0 20C20 5 60 35 80 20" stroke="#3B82F6" strokeWidth="2" />
-        </svg>
-      </div>
-
-      <div className="absolute top-20 right-40">
-        <svg
-          width="100"
-          height="100"
-          viewBox="0 0 100 100"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <circle cx="10" cy="10" r="2" fill="#8B5CF6" />
-          <circle cx="10" cy="22" r="2" fill="#8B5CF6" />
-          <circle cx="10" cy="34" r="2" fill="#8B5CF6" />
-          <circle cx="10" cy="46" r="2" fill="#8B5CF6" />
-          <circle cx="10" cy="58" r="2" fill="#8B5CF6" />
-          <circle cx="22" cy="10" r="2" fill="#8B5CF6" />
-          <circle cx="22" cy="22" r="2" fill="#8B5CF6" />
-          <circle cx="22" cy="34" r="2" fill="#8B5CF6" />
-          <circle cx="22" cy="46" r="2" fill="#8B5CF6" />
-          <circle cx="22" cy="58" r="2" fill="#8B5CF6" />
-          <circle cx="34" cy="10" r="2" fill="#8B5CF6" />
-          <circle cx="34" cy="22" r="2" fill="#8B5CF6" />
-          <circle cx="34" cy="34" r="2" fill="#8B5CF6" />
-          <circle cx="34" cy="46" r="2" fill="#8B5CF6" />
-          <circle cx="34" cy="58" r="2" fill="#8B5CF6" />
-          <circle cx="46" cy="10" r="2" fill="#8B5CF6" />
-          <circle cx="46" cy="22" r="2" fill="#8B5CF6" />
-          <circle cx="46" cy="34" r="2" fill="#8B5CF6" />
-          <circle cx="46" cy="46" r="2" fill="#8B5CF6" />
-          <circle cx="46" cy="58" r="2" fill="#8B5CF6" />
-          <circle cx="58" cy="10" r="2" fill="#8B5CF6" />
-          <circle cx="58" cy="22" r="2" fill="#8B5CF6" />
-          <circle cx="58" cy="34" r="2" fill="#8B5CF6" />
-          <circle cx="58" cy="46" r="2" fill="#8B5CF6" />
-          <circle cx="58" cy="58" r="2" fill="#8B5CF6" />
-        </svg>
-      </div>
-
-      <div className="absolute top-32 right-16">
-        <svg
-          width="100"
-          height="80"
-          viewBox="0 0 100 80"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M10 40C30 10 70 70 90 40"
-            stroke="#F97316"
-            strokeWidth="2"
-            strokeDasharray="5 5"
-          />
-        </svg>
-      </div>
-
-      <div className="absolute bottom-40 right-10">
-        <svg
-          width="60"
-          height="60"
-          viewBox="0 0 60 60"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M30 10L10 50H50L30 10Z" stroke="#F97316" strokeWidth="2" />
-        </svg>
-      </div>
-
       <div className="container mx-auto px-6 py-12 flex flex-col lg:flex-row items-center">
-        {/* Left side with images */}
+        {/* Left side with images - kept as is */}
         <div className="relative w-full lg:w-1/2 mb-10 lg:mb-0 flex justify-center">
           <div className="relative z-10">
-            {/* Main instructor with bigger image and better fit */}
-            <div className="bg-orange-500 rounded-full p-2 w-80 h-80 relative animate-float">
+            {/* Main instructor with responsive sizing */}
+            <div className="bg-orange-500 rounded-full p-1 sm:p-2 w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 relative animate-float">
               <div className="absolute inset-0 flex items-end justify-center pb-0">
                 <Image
                   src="/images/instructor.png"
@@ -115,8 +54,8 @@ const Hero: React.FC = () => {
               </div>
             </div>
 
-            {/* Female student floating on the left side, positioned more up */}
-            <div className="absolute -left-20 bottom-20 bg-pink-400 rounded-full p-2 w-40 h-40 z-20 animate-orbit-left">
+            {/* Female student floating on the left side */}
+            <div className="absolute -left-10 sm:-left-16 lg:-left-20 bottom-16 sm:bottom-20 bg-pink-400 rounded-full p-1 sm:p-2 w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 z-20 animate-orbit-left">
               <div className="absolute inset-0 flex items-center justify-center">
                 <Image
                   src="/images/female-student.png"
@@ -128,8 +67,8 @@ const Hero: React.FC = () => {
               </div>
             </div>
 
-            {/* Male student floating on the bottom right overlapping the instructor */}
-            <div className="absolute -bottom-10 -right-10 bg-purple-300 rounded-full p-2 w-40 h-40 z-20 animate-orbit-right">
+            {/* Male student floating on the bottom right */}
+            <div className="absolute -bottom-6 -right-6 sm:-bottom-8 sm:-right-8 lg:-bottom-10 lg:-right-10 bg-purple-300 rounded-full p-1 sm:p-2 w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 z-20 animate-orbit-right">
               <div className="absolute inset-0 flex items-center justify-center">
                 <Image
                   src="/images/male-student.png"
@@ -141,56 +80,87 @@ const Hero: React.FC = () => {
               </div>
             </div>
             <div className="absolute inset-0 animate-spin-slow -z-1">
-              {/* Blue ring around the main instructor */}
-              <div className="absolute inset-0 rounded-full border-2 border-blue-500 -m-8 -z-1"></div>
+              {/* Blue ring around the main instructor - scaled for responsiveness */}
+              <div className="absolute inset-0 rounded-full border-2 border-blue-500 -m-4 sm:-m-6 md:-m-7 lg:-m-8 -z-1"></div>
 
-              {/* Decorative dots positioned precisely over the blue ring */}
+              {/* Decorative dots positioned precisely over the blue ring - scaled for responsiveness */}
               {/* Top dots */}
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-10 w-4 h-4 bg-red-500 rounded-full -z-1"></div>
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 sm:-translate-y-8 lg:-translate-y-10 w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-full -z-1"></div>
 
               {/* Right dots */}
-              <div className="absolute top-1/2 right-0 transform translate-x-10 -translate-y-1/2 w-4 h-4 bg-purple-500 rounded-full -z-1"></div>
+              <div className="absolute top-1/2 right-0 transform translate-x-6 sm:translate-x-8 lg:translate-x-10 -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-purple-500 rounded-full -z-1"></div>
 
               {/* Bottom dots */}
-              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-10 w-4 h-4 bg-red-500 rounded-full -z-1"></div>
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-6 sm:translate-y-8 lg:translate-y-10 w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-full -z-1"></div>
 
               {/* Left dots */}
-              <div className="absolute top-1/2 left-0 transform -translate-x-10 -translate-y-1/2 w-4 h-4 bg-purple-500 rounded-full -z-1"></div>
+              <div className="absolute top-1/2 left-0 transform -translate-x-6 sm:-translate-x-8 lg:-translate-x-10 -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-purple-500 rounded-full -z-1"></div>
             </div>
           </div>
         </div>
 
-        {/* Right side with text and search */}
-        <div className="w-full lg:w-1/2 lg:pl-12 space-y-8">
-          <h1 className="text-3xl md:text-4xl xl:text-5xl font-bold text-gray-900 leading-tight">
-            Learn Everyday & Any
-            <br className="hidden md:block" />
-            New Skills Online with
-            <br className="hidden md:block" />
-            <span className="relative inline-block mt-2">
-              Top Instructors.
-              <span className="absolute -bottom-2 left-0 w-full h-2 bg-orange-500 rounded-sm"></span>
+        {/* Right side with text and buttons - modified for kid-friendly design */}
+        <div className="w-full lg:w-1/2 lg:pl-12 space-y-6">
+          <motion.h1
+            className="text-3xl md:text-4xl xl:text-5xl font-bold leading-tight relative"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-blue-600 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.3)]">
+              Learn, Play & Grow
             </span>
-          </h1>
+            <span className="inline-block bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.4)]">
+              Everyday
+            </span>{" "}
+            <span className="inline-block bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.3)]">
+              with
+            </span>
+            <span className="relative inline-block ml-2">
+              <span className="bg-clip-text text-transparent bg-gradient-to-br from-orange-400 to-orange-600 drop-shadow-[0_1.5px_1.5px_rgba(0,0,0,0.3)]">
+                Awesome Teachers!
+              </span>
+            </span>
+            <div className="absolute -top-8 -right-8 w-24 h-24 bg-gradient-radial from-blue-300 to-blue-200 rounded-full opacity-60 blur-xl -z-10"></div>
+            <div className="absolute top-12 -left-6 w-16 h-16 bg-gradient-radial from-orange-300 to-orange-200 rounded-full opacity-60 blur-xl -z-10"></div>
+          </motion.h1>
 
-          <p className="text-lg text-gray-600 max-w-xl">
-            Discover thousands of courses taught by industry experts and elevate
-            your skills at your own pace, anywhere, anytime.
-          </p>
+          <motion.p
+            className="text-lg text-gray-600 max-w-xl leading-relaxed rounded-xl bg-blue-50 p-4 border-2 border-dashed border-blue-200 min-h-[123px] overflow-y-auto"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+          >
+            {text}
+            <motion.span
+              className="inline-block w-1 h-5 bg-gray-500 ml-1"
+              animate={{ opacity: [0, 1] }}
+              transition={{ repeat: Infinity, duration: 0.7 }}
+            />
+          </motion.p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4">
-            <button className="w-full sm:w-auto bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-8 rounded-full transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-              Explore Courses
-            </button>
-            <button className="w-full sm:w-auto border border-gray-300 hover:border-gray-400 text-gray-700 font-medium py-3 px-8 rounded-full transition-all hover:bg-gray-50">
-              Get Started
-            </button>
+            <a
+              href="/courses"
+              className="w-full sm:w-auto relative bg-gradient-to-br from-orange-400 to-red-500 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-[0_8px_0_rgb(217,119,6)] hover:shadow-[0_4px_0px_rgb(217,119,6)] ease-in-out hover:translate-y-1 active:translate-y-2 active:shadow-none text-lg overflow-hidden"
+            >
+              <span className="relative z-10">Explore Courses</span>
+              <span className="absolute inset-0 bg-gradient-to-tr from-orange-500/40 to-transparent rounded-full"></span>
+            </a>
+            <a
+              href="/gallery"
+              className="w-full sm:w-auto relative bg-gradient-to-br from-blue-400 to-indigo-500 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-[0_8px_0_rgb(37,99,235)] hover:shadow-[0_4px_0px_rgb(37,99,235)] ease-in-out hover:translate-y-1 active:translate-y-2 active:shadow-none text-lg overflow-hidden"
+            >
+              <span className="relative z-10">View Gallery</span>
+              <span className="absolute inset-0 bg-gradient-to-tr from-blue-500/40 to-transparent rounded-full"></span>
+            </a>
           </div>
 
-          <div className="pt-4">
-            <p className="text-orange-500 font-semibold flex items-center gap-2 before:content-[''] before:w-10 before:h-[2px] before:bg-orange-500">
-              #1 Worldwide Online Learning & Skills Development Platform
+          <div className="pt-4 flex items-center">
+            <span className="text-yellow-500 text-2xl mr-2">⭐</span>
+            <p className="text-indigo-500 font-semibold text-lg">
+              Where Learning is Always an Adventure!
             </p>
+            <span className="text-yellow-500 text-2xl ml-2">⭐</span>
           </div>
         </div>
       </div>
