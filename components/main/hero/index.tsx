@@ -3,6 +3,270 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
+// Separate component for floating SVG elements
+const FloatingElements = () => {
+  return (
+    <div className="absolute container inset-0 mx-auto flex items-center justify-center">
+      {/* Improved Rocket animation with smoother motion */}
+      <motion.div
+        className="absolute inset-0 top-40 left-0 w-16 h-16 z-0 hidden md:block"
+        animate={{
+          x: [0, 500, 0], // Simplified path
+          y: [0, -50, 0], // Smooth arc
+          rotate: [0, 45, 180, 360], // Smooth rotation
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut", // Smooth transitions
+          times: [0, 0.5, 1], // Control timing
+        }}
+      >
+        <img src="/images/rocket.gif" alt="Rocket" className="w-full h-full" />
+      </motion.div>
+
+      {/* Animated Earth SVG */}
+      <motion.div
+        className="absolute top-12 right-12 w-16 h-16 md:w-20 md:h-20 z-0 hidden md:block"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+      >
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle
+            cx="50"
+            cy="50"
+            r="48"
+            fill="#60A5FA"
+            stroke="#2563EB"
+            strokeWidth="2"
+          />
+          <path
+            d="M30,25 Q50,10 70,25 T90,50 T70,75 T30,75 T10,50 T30,25"
+            fill="#34D399"
+            stroke="#047857"
+            strokeWidth="1"
+          />
+          <path
+            d="M50,10 Q65,35 50,60 T50,90"
+            fill="none"
+            stroke="#047857"
+            strokeWidth="2"
+          />
+          <path
+            d="M20,50 Q40,35 60,50 T100,50"
+            fill="none"
+            stroke="#047857"
+            strokeWidth="2"
+          />
+        </svg>
+      </motion.div>
+
+      {/* Improved Rocket animation with smoother motion */}
+      <motion.div
+        className="absolute top-40 left-0 w-16 h-16 z-0 hidden md:block"
+        animate={{
+          x: [0, 500, 0], // Simplified path
+          y: [0, -50, 0], // Smooth arc
+          rotate: [0, 45, 180, 360], // Smooth rotation
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut", // Smooth transitions
+          times: [0, 0.5, 1], // Control timing
+        }}
+      >
+        <img src="/images/rocket.gif" alt="Rocket" className="w-full h-full" />
+      </motion.div>
+
+      {/* Animated Chemistry Flask SVG */}
+      <motion.div
+        className="absolute bottom-20 right-6 w-12 h-12 z-0 hidden md:block"
+        animate={{
+          y: [0, -10, 0],
+          rotate: [-5, 5, -5],
+        }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M40,20 L40,50 L30,70 Q30,85 50,85 Q70,85 70,70 L60,50 L60,20 Z"
+            fill="#DDD6FE"
+            stroke="#8B5CF6"
+            strokeWidth="2"
+          />
+          <rect x="35" y="10" width="30" height="10" fill="#8B5CF6" rx="2" />
+          <path
+            d="M35,65 Q50,55 65,65"
+            fill="none"
+            stroke="#8B5CF6"
+            strokeWidth="2"
+          />
+          <circle cx="45" cy="72" r="3" fill="#A78BFA" />
+          <circle cx="55" cy="68" r="2" fill="#A78BFA" />
+          <circle cx="50" cy="75" r="2.5" fill="#A78BFA" />
+        </svg>
+      </motion.div>
+
+      {/* Animated Math Symbols SVG */}
+      <motion.div
+        className="absolute top-60 left-16 w-12 h-12 z-0 hidden lg:block"
+        animate={{
+          scale: [1, 1.1, 1],
+          rotate: [0, 10, 0],
+        }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <img
+          src="/images/math-elements/5070.svg"
+          alt="Math Symbols"
+          className="w-full h-full"
+        />
+      </motion.div>
+
+      {/* Animated Lightbulb SVG */}
+      <motion.div
+        className="absolute top-20 left-1/2 transform -translate-x-1/2 w-12 h-12 z-0 hidden lg:block"
+        animate={{
+          opacity: [0.7, 1, 0.7],
+          y: [-5, 5, -5],
+        }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M50,10 Q25,10 25,40 Q25,60 40,70 L40,85 L60,85 L60,70 Q75,60 75,40 Q75,10 50,10"
+            fill="#FDE68A"
+            stroke="#F59E0B"
+            strokeWidth="2"
+          />
+          <rect x="40" y="85" width="20" height="5" fill="#F59E0B" rx="1" />
+          <path
+            d="M35,40 L65,40 M35,50 L65,50 M35,60 L65,60"
+            stroke="#F59E0B"
+            strokeWidth="2"
+            strokeDasharray="2,2"
+          />
+          <path
+            d="M30,30 L70,30"
+            stroke="#FBBF24"
+            strokeWidth="8"
+            strokeLinecap="round"
+          />
+        </svg>
+      </motion.div>
+
+      {/* DNA Helix SVG Animation */}
+      <motion.div
+        className="absolute bottom-10 left-10 w-12 h-16 z-0 hidden md:block"
+        animate={{
+          rotateY: 360,
+        }}
+        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+      >
+        <svg viewBox="0 0 60 100" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M10,10 Q30,20 50,10 Q30,30 10,40 Q30,50 50,40 Q30,60 10,70 Q30,80 50,70 Q30,90 10,90"
+            fill="none"
+            stroke="#EC4899"
+            strokeWidth="2"
+          />
+          <path
+            d="M50,10 Q30,20 10,10 Q30,30 50,40 Q30,50 10,40 Q30,60 50,70 Q30,80 10,70 Q30,90 50,90"
+            fill="none"
+            stroke="#8B5CF6"
+            strokeWidth="2"
+          />
+          <circle cx="10" cy="10" r="3" fill="#EC4899" />
+          <circle cx="50" cy="10" r="3" fill="#8B5CF6" />
+          <circle cx="10" cy="40" r="3" fill="#EC4899" />
+          <circle cx="50" cy="40" r="3" fill="#8B5CF6" />
+          <circle cx="10" cy="70" r="3" fill="#EC4899" />
+          <circle cx="50" cy="70" r="3" fill="#8B5CF6" />
+          <circle cx="10" cy="90" r="3" fill="#EC4899" />
+          <circle cx="50" cy="90" r="3" fill="#8B5CF6" />
+        </svg>
+      </motion.div>
+
+      {/* Atom SVG Animation */}
+      <motion.div
+        className="absolute bottom-16 right-16 w-16 h-16 z-0 hidden lg:block"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+      >
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <ellipse
+            cx="50"
+            cy="50"
+            rx="45"
+            ry="20"
+            fill="none"
+            stroke="#38BDF8"
+            strokeWidth="2"
+          />
+          <ellipse
+            cx="50"
+            cy="50"
+            rx="45"
+            ry="20"
+            fill="none"
+            stroke="#38BDF8"
+            strokeWidth="2"
+            transform="rotate(60 50 50)"
+          />
+          <ellipse
+            cx="50"
+            cy="50"
+            rx="45"
+            ry="20"
+            fill="none"
+            stroke="#38BDF8"
+            strokeWidth="2"
+            transform="rotate(120 50 50)"
+          />
+          <circle cx="50" cy="50" r="8" fill="#0EA5E9" />
+
+          <motion.circle
+            cx="95"
+            cy="50"
+            r="4"
+            fill="#7DD3FC"
+            animate={{
+              cx: [95, 5, 95],
+              cy: [50, 50, 50],
+            }}
+            transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+          />
+
+          <motion.circle
+            cx="72"
+            cy="85"
+            r="4"
+            fill="#7DD3FC"
+            animate={{
+              cx: [72, 28, 72],
+              cy: [85, 15, 85],
+            }}
+            transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+          />
+
+          <motion.circle
+            cx="28"
+            cy="85"
+            r="4"
+            fill="#7DD3FC"
+            animate={{
+              cx: [28, 72, 28],
+              cy: [85, 15, 85],
+            }}
+            transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+          />
+        </svg>
+      </motion.div>
+    </div>
+  );
+};
+
 const Hero = () => {
   const [text, setText] = useState("");
   const fullText =
@@ -38,6 +302,8 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-6 py-12 flex flex-col lg:flex-row items-center">
+        <FloatingElements />
+
         {/* Left side with images - kept as is */}
         <div className="relative w-full lg:w-1/2 mb-10 lg:mb-0 flex justify-center">
           <div className="relative z-10">
