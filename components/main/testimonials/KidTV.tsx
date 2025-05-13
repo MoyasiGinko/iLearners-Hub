@@ -113,7 +113,7 @@ export default function KidFriendlyTV() {
         {/* Main TV Body */}
         <motion.div
           className="relative w-[500px] h-[400px] bg-gradient-to-b from-purple-500 to-purple-700 rounded-3xl p-8 border-8 border-yellow-400 shadow-2xl"
-          animate={{ scale: [1, 1.02, 1] }}
+          // animate={{ scale: [1, 1.02, 1] }}
           transition={{ repeat: Infinity, duration: 10, ease: "easeInOut" }}
         >
           {/* TV Screen Area */}
@@ -304,7 +304,7 @@ export default function KidFriendlyTV() {
 
           {/* TV Logo */}
           <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-yellow-400 px-6 py-2 rounded-t-xl font-bold text-purple-800 text-base tracking-wider border-2 border-yellow-300">
-            KID TV
+            OUR TV
           </div>
         </motion.div>
 
