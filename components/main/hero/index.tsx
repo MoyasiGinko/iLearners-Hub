@@ -115,6 +115,22 @@ const FloatingElements = () => {
         </svg>
       </motion.div>
 
+      {/* Animated Math SYmbol SVG */}
+      <motion.div
+        className="absolute bottom-20 left-[47%] transform -translate-x-1/2 w-16 h-16 z-0 hidden lg:block"
+        animate={{
+          y: [0, -5, 0],
+          rotate: [-3, 5, -6],
+        }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <img
+          src="/images/math-elements/geometry.svg"
+          alt="Math Symbols"
+          className="w-full h-full"
+        />
+      </motion.div>
+
       {/* DNA Helix SVG Animation */}
       <motion.div
         className="absolute bottom-10 left-10 w-26 h-32 z-0 hidden md:block"
