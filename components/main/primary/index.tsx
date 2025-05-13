@@ -30,7 +30,7 @@ const PrimarySection = () => {
   }, []);
 
   return (
-    <div className="relative bg-transparent overflow-hidden py-16 rounded-3xl">
+    <div className="relative bg-transparent overflow-hidden py-16 md:py-20 rounded-3xl">
       {/* Fun pattern background */}
       <div className="absolute inset-0 z-0 opacity-10">
         <div className="w-full h-full bg-[url('/images/dotted-world-map.png')] bg-no-repeat bg-contain bg-center"></div>

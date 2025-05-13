@@ -245,7 +245,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative min-h-[670px] pt-20 md:pt-30 overflow-hidden bg-transparent">
+    <div className="relative min-h-[670px] pt-20 md:pt-30 pb-4 md:pb-20 overflow-hidden bg-transparent">
       {/* Decorative elements */}
       <div className="absolute top-10 left-10 text-orange-100">
         <svg
