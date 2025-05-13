@@ -303,9 +303,9 @@ export default function KidFriendlyTV() {
           </div>
 
           {/* TV Logo */}
-          <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-yellow-400 px-6 py-2 rounded-t-xl font-bold text-purple-800 text-base tracking-wider border-2 border-yellow-300">
-            OUR TV
-          </div>
+          {/* <div className="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-yellow-400 px-6 py-2 rounded-t-xl font-bold text-purple-800 text-base tracking-wider border-2 border-yellow-300">
+            MY TV
+          </div> */}
         </motion.div>
 
         {/* TV Antennas */}
