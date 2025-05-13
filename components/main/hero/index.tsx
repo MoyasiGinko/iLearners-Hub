@@ -293,16 +293,40 @@ const Hero = () => {
 
               {/* Decorative dots positioned precisely over the blue ring - scaled for responsiveness */}
               {/* Top dots */}
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 sm:-translate-y-8 lg:-translate-y-10 w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-full -z-1"></div>
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 sm:-translate-y-8 lg:-translate-y-10 w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-full -z-1">
+                <img
+                  src="/images/planet/planet1.svg"
+                  alt="planet1"
+                  className="absolute inset-0 w-full h-full animate-spin-slow"
+                />
+              </div>
 
               {/* Right dots */}
-              <div className="absolute top-1/2 right-0 transform translate-x-6 sm:translate-x-8 lg:translate-x-10 -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-purple-500 rounded-full -z-1"></div>
+              <div className="absolute top-1/2 right-0 transform translate-x-6 sm:translate-x-8 lg:translate-x-10 -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-purple-500 rounded-full -z-1">
+                <img
+                  src="/images/planet/planet2.svg"
+                  alt="planet2"
+                  className="absolute inset-0 w-full h-full animate-spin-slow"
+                />
+              </div>
 
               {/* Bottom dots */}
-              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-6 sm:translate-y-8 lg:translate-y-10 w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-full -z-1"></div>
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-6 sm:translate-y-8 lg:translate-y-10 w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-full -z-1">
+                <img
+                  src="/images/planet/planet3.svg"
+                  alt="planet3"
+                  className="absolute inset-0 w-full h-full animate-spin-slow"
+                />
+              </div>
 
               {/* Left dots */}
-              <div className="absolute top-1/2 left-0 transform -translate-x-6 sm:-translate-x-8 lg:-translate-x-10 -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-purple-500 rounded-full -z-1"></div>
+              <div className="absolute top-1/2 left-0 transform -translate-x-6 sm:-translate-x-8 lg:-translate-x-10 -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-purple-500 rounded-full -z-1">
+                <img
+                  src="/images/planet/planet4.svg"
+                  alt="planet4"
+                  className="absolute inset-0 w-full h-full animate-spin-slow"
+                />
+              </div>
             </div>
           </div>
         </div>
