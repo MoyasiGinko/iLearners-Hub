@@ -137,8 +137,11 @@ export default function KidFriendlyTV() {
           <div className="relative w-full h-[260px] bg-gray-900 rounded-2xl overflow-hidden border-8 border-gray-800 flex justify-center items-center">
             {/* TV Static or Off State */}
             {!isOn && (
-              <div className="absolute inset-0 bg-gray-900 flex items-center justify-center">
+              <div className="absolute inset-0 bg-gray-900 flex flex-col items-center justify-center space-y-4">
                 <div className="w-2 h-2 bg-white rounded-full animate-ping"></div>
+                <p className="text-white text-sm px-2 font-bold">
+                  Press the power button to start the TV
+                </p>
               </div>
             )}
 
@@ -201,7 +204,7 @@ export default function KidFriendlyTV() {
           </div>
 
           {/* TV Controls Area */}
-          <div className="mt-2 flex justify-between items-center w-full sm:w-3/4 lg:w-2/3 mx-auto">
+          <div className="mt-2 flex justify-between items-center w-full sm:w-3/4 lg:w-5/6 mx-auto">
             {/* Volume Control */}
             <div className="flex flex-col items-center space-y-2">
               <span className="text-xs sm:text-sm font-bold text-yellow-300">
