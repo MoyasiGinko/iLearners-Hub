@@ -106,13 +106,13 @@ export default function KidFriendlyTV() {
 
   return (
     <div className="w-full flex flex-col justify-center items-center min-h-[800px] py-16 bg-transparent">
-      <div className="relative">
+      <div className="relative w-full">
         {/* TV Base/Stand */}
-        <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 w-96 h-16 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-400 rounded-b-3xl z-0 shadow-lg"></div>
+        <div className="absolute hidden xl:block -bottom-8 left-1/2 transform -translate-x-1/2 w-96 h-16 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-400 rounded-b-3xl z-0 shadow-lg"></div>
 
         {/* Main TV Body */}
         <motion.div
-          className="relative w-[500px] h-[400px] bg-gradient-to-b from-purple-500 to-purple-700 rounded-3xl p-8 border-8 border-yellow-400 shadow-2xl"
+          className="relative w-full sm:w-[500px] h-[400px] bg-gradient-to-b from-purple-500 to-purple-700 rounded-3xl p-4 border-8 border-yellow-400 shadow-2xl"
           // animate={{ scale: [1, 1.02, 1] }}
           transition={{ repeat: Infinity, duration: 10, ease: "easeInOut" }}
         >
@@ -287,14 +287,14 @@ export default function KidFriendlyTV() {
           <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-4 bg-yellow-400 rounded-b-lg"></div>
 
           {/* TV Speaker Grills */}
-          <div className="absolute top-1/2 -left-6 transform -translate-y-1/2 w-4 h-48 bg-yellow-400 rounded-l-lg flex flex-col justify-center items-center p-1">
+          <div className="absolute hidden  top-1/2 -left-6 transform -translate-y-1/2 w-4 h-48 bg-yellow-400 rounded-l-lg xl:flex flex-col justify-center items-center p-1">
             <div className="grid grid-rows-8 gap-1 h-full w-full">
               {[...Array(8)].map((_, i) => (
                 <div key={i} className="bg-purple-800 rounded-full"></div>
               ))}
             </div>
           </div>
-          <div className="absolute top-1/2 -right-6 transform -translate-y-1/2 w-4 h-48 bg-yellow-400 rounded-r-lg flex flex-col justify-center items-center p-1">
+          <div className="absolute hidden  top-1/2 -right-6 transform -translate-y-1/2 w-4 h-48 bg-yellow-400 rounded-r-lg xl:flex flex-col justify-center items-center p-1">
             <div className="grid grid-rows-8 gap-1 h-full w-full">
               {[...Array(8)].map((_, i) => (
                 <div key={i} className="bg-purple-800 rounded-full"></div>
@@ -327,7 +327,7 @@ export default function KidFriendlyTV() {
 
         {/* Volume Indicator */}
         {isOn && (
-          <div className="absolute -right-20 top-1/3 transform -translate-y-1/2 w-8 h-40 bg-gray-800 rounded-lg overflow-hidden border-2 border-yellow-400">
+          <div className="absolute hidden xl:block -right-20 top-1/3 transform -translate-y-1/2 w-8 h-40 bg-gray-800 rounded-lg overflow-hidden border-2 border-yellow-400">
             <div
               className="w-full bg-gradient-to-t from-green-500 to-yellow-400 rounded-b-md transition-all duration-300"
               style={{ height: `${volume}%`, position: "absolute", bottom: 0 }}
