@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import { Check } from "lucide-react";
 import { motion } from "framer-motion";
+import KidFriendlyTV from "./KidTV";
 
 const Testimonials: React.FC = () => {
   return (
@@ -78,36 +79,7 @@ const Testimonials: React.FC = () => {
 
           {/* Left side with old-style TV */}
           <div className="w-full lg:w-1/2 flex justify-center">
-            <div className="relative w-full max-w-[800px] h-auto bg-yellow-300 pb-8 rounded-3xl shadow-lg p-6">
-              {/* TV body */}
-              <div className="relative bg-gray-800 rounded-3xl p-4 border-4 border-gray-700 flex">
-                {/* TV screen */}
-                <div className="relative aspect-video bg-black rounded-lg overflow-hidden border-4 border-gray-600 flex-grow">
-                  <video
-                    src="/videos/sample2.webm"
-                    controls
-                    className="object-cover w-full h-full transition-transform duration-700"
-                  />
-                </div>
-
-                {/* Controls */}
-                <div className="flex flex-col justify-between items-center ml-4">
-                  <div className="flex flex-col items-center space-y-2">
-                    <div className="w-6 h-6 bg-gray-600 rounded-full border-2 border-gray-500"></div>
-                    <div className="w-6 h-6 bg-gray-600 rounded-full border-2 border-gray-500"></div>
-                  </div>
-                  <div className="w-16 h-8 bg-gray-700 rounded-lg mt-4"></div>
-                </div>
-              </div>
-
-              {/* TV antennas */}
-              <div className="absolute top-[-20px] left-[48%] w-1 h-8 bg-gray-700 transform rotate-[-30deg] origin-bottom"></div>
-              <div className="absolute top-[-20px] left-[52%] w-1 h-8 bg-gray-700 transform rotate-[30deg] origin-bottom"></div>
-
-              {/* TV stands */}
-              <div className="absolute bottom-[-10px] left-[20%] w-4 h-4 bg-gray-700 rounded-full"></div>
-              <div className="absolute bottom-[-10px] right-[20%] w-4 h-4 bg-gray-700 rounded-full"></div>
-            </div>
+            <KidFriendlyTV />
           </div>
         </div>
       </div>
