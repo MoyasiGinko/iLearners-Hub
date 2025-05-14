@@ -105,7 +105,7 @@ export default function KidFriendlyTV() {
   };
 
   return (
-    <div className="w-full flex flex-col justify-center items-center min-h-[800px] py-16 bg-transparent">
+    <div className="w-full flex flex-col justify-center items-center min-h-[800px] py-0 bg-transparent">
       <div className="relative flex items-center justify-center mx-auto w-full h-full">
         {/* Main TV Body */}
         <motion.div

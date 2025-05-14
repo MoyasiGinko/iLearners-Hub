@@ -265,7 +265,7 @@ const MiniCourseTablet = () => {
   };
 
   return (
-    <div className="w-full bg-transparent py-12 px-4 overflow-hidden">
+    <div className="w-full bg-transparent py-20 px-4 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         {/* Fun header with animated elements */}
         <div className="text-center mb-8 relative">
@@ -278,9 +278,15 @@ const MiniCourseTablet = () => {
 
           <div className="flex justify-center items-center space-x-2 text-gray-700 mb-6">
             <div className="flex items-center">
-              <span>Top-rated courses</span>
+              <span
+                className="text-gray-700 font-bold"
+                style={{
+                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
+                }}
+              >
+                Top-rated courses
+              </span>
             </div>
-            <span>•</span>
             <div className="flex items-center">
               <svg
                 className="w-5 h-5 text-blue-500 mr-1"
@@ -293,7 +299,14 @@ const MiniCourseTablet = () => {
                   clipRule="evenodd"
                 />
               </svg>
-              <span>100+ happy students</span>
+              <span
+                className="text-gray-700 font-bold"
+                style={{
+                  textShadow: "2px 2px 4px rgba(0, 0, 0, 0.3)",
+                }}
+              >
+                100+ happy students
+              </span>
             </div>
           </div>
 
