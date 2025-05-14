@@ -5,165 +5,88 @@ import Link from "next/link";
 import { courseCategories } from "@/components/courses/course/courseData";
 import { courses } from "@/components/courses/course/courseData";
 
-// Fun animal icons for each category
-const CategoryIcons = {
-  Intensive: () => (
-    <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M12 8L7 12H10V16H14V12H17L12 8Z"
-        fill="#FF6B6B"
-        stroke="#FF6B6B"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle
-        cx="12"
-        cy="12"
-        r="9"
-        stroke="#FF6B6B"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+// Kid-friendly background SVG elements
+const BackgroundElements = {
+  // Pencil SVG
+  Pencil: () => (
+    <img
+      className="w-16 h-16"
+      src="/images/math-elements/xygraph.svg"
+      alt="Paintbrush"
+      style={{ filter: "drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))" }}
+    />
   ),
-  Higher: () => (
-    <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M12 6V18M12 6L7 10M12 6L17 10"
-        stroke="#4ECDC4"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle
-        cx="12"
-        cy="12"
-        r="9"
-        stroke="#4ECDC4"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+
+  // Book SVG
+  Book: () => (
+    <img
+      className="w-16 h-16"
+      src="/images/math-elements/function.svg"
+      alt="Paintbrush"
+      style={{ filter: "drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))" }}
+    />
   ),
-  Revision: () => (
-    <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M15 4V8M15 8H11M15 8L7 16"
-        stroke="#FFD166"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle
-        cx="12"
-        cy="12"
-        r="9"
-        stroke="#FFD166"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+
+  // Atom SVG
+  Atom: () => (
+    <img
+      className="w-16 h-16"
+      src="/images/math-elements/triangle.svg"
+      alt="Paintbrush"
+      style={{ filter: "drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))" }}
+    />
   ),
-  Secondary: () => (
-    <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M8 13V8M8 8H13M8 8L16 16"
-        stroke="#06D6A0"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle
-        cx="12"
-        cy="12"
-        r="9"
-        stroke="#06D6A0"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+
+  // Math Symbols SVG
+  MathSymbols: () => (
+    <img
+      className="w-16 h-16"
+      src="/images/math-elements/plus.svg"
+      alt="Paintbrush"
+      style={{ filter: "drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))" }}
+    />
   ),
-  Primary: () => (
-    <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M12 7V9M12 13V15M9 12H7M17 12H15"
-        stroke="#118AB2"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle
-        cx="12"
-        cy="12"
-        r="9"
-        stroke="#118AB2"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
+
+  // Paintbrush SVG
+  Paintbrush: () => (
+    <img
+      className="w-16 h-16"
+      src="/images/math-elements/e.svg"
+      alt="Paintbrush"
+      style={{ filter: "drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))" }}
+    />
+  ),
+
+  // Globe SVG
+  Globe: () => (
+    <img
+      className="w-16 h-16"
+      src="/images/study-materials/basketball.svg"
+      alt="Paintbrush"
+      style={{ filter: "drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))" }}
+    />
+  ),
+
+  // Stars SVG
+  Star: () => (
+    <img
+      className="w-16 h-16"
+      src="/images/study-materials/book.svg"
+      alt="Paintbrush"
+      style={{ filter: "drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))" }}
+    />
+  ),
+
+  // Calculator SVG
+  Calculator: () => (
+    <img
+      className="w-14 h-14"
+      src="/images/math-elements/root.svg"
+      alt="Paintbrush"
+      style={{ filter: "drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3))" }}
+    />
   ),
 };
-
-// Subject icons
-const SubjectIcons = {
-  Mathematics: (
-    <svg
-      className="w-4 h-4 mr-1"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
-      <path d="M7 20l10-10M17 20L7 10"></path>
-    </svg>
-  ),
-  English: (
-    <svg
-      className="w-4 h-4 mr-1"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
-      <path d="M4 7h16M4 12h10M4 17h6"></path>
-    </svg>
-  ),
-  Science: (
-    <svg
-      className="w-4 h-4 mr-1"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
-      <path d="M10 2v4m4 0V2M8 16l4 4 4-4M12 12v8m6-12a6 6 0 00-12 0c0 3.09 2.34 5.6 5.35 5.95"></path>
-    </svg>
-  ),
-  Physics: (
-    <svg
-      className="w-4 h-4 mr-1"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
-      <circle cx="12" cy="12" r="3"></circle>
-      <path d="M12 5v2m0 10v2M5 12h2m10 0h2M6.34 6.34l1.42 1.42m8.48 8.48l1.42 1.42m0-11.32l-1.42 1.42m-8.48 8.48l-1.42 1.42"></path>
-    </svg>
-  ),
-};
-
-// Custom hook for animation
-interface UseAnimatedCounterProps {
-  value: number;
-  duration?: number;
-}
 
 const useAnimatedCounter = (value: number, duration: number = 2000): number => {
   const [count, setCount] = useState<number>(0);
@@ -257,16 +180,167 @@ const MiniCourseTablet = () => {
     }
   }, [selectedCategory]);
 
-  const totalStudents = useAnimatedCounter(5000);
-
   const handleCategoryChange = (category: string): void => {
     setSelectedCategory(category);
     setActiveTab(courseCategories.indexOf(category) + 1);
   };
 
   return (
-    <div className="w-full bg-transparent py-20 px-4 overflow-hidden">
-      <div className="max-w-6xl mx-auto">
+    <div className="w-full bg-transparent py-20 px-4 overflow-hidden relative">
+      {/* Background Educational Elements - Top Left */}
+      <motion.div
+        className="absolute top-10 left-10 opacity-20 z-0"
+        animate={{
+          rotate: [0, 10, -10, 0],
+          y: [0, -8, 0],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "easeInOut",
+        }}
+      >
+        <BackgroundElements.Book />
+      </motion.div>
+
+      {/* Background Educational Elements - Top Right */}
+      <motion.div
+        className="absolute top-16 right-16 opacity-20 z-0"
+        animate={{
+          rotate: [0, -15, 15, 0],
+          y: [0, 8, 0],
+        }}
+        transition={{
+          duration: 9,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "easeInOut",
+        }}
+      >
+        <BackgroundElements.Atom />
+      </motion.div>
+
+      {/* Background Educational Elements - Bottom Left */}
+      <motion.div
+        className="absolute bottom-20 left-24 opacity-20 z-0"
+        animate={{
+          rotate: [0, 20, -5, 0],
+          x: [0, 10, 0],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "easeInOut",
+        }}
+      >
+        <BackgroundElements.Pencil />
+      </motion.div>
+
+      {/* Background Educational Elements - Bottom Right */}
+      <motion.div
+        className="absolute bottom-24 right-10 opacity-20 z-0"
+        animate={{
+          rotate: [0, -10, 10, 0],
+          x: [0, -5, 0],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "easeInOut",
+        }}
+      >
+        <BackgroundElements.MathSymbols />
+      </motion.div>
+
+      {/* Background Educational Elements - Middle Left */}
+      <motion.div
+        className="absolute top-1/2 left-5 opacity-20 z-0"
+        animate={{
+          rotate: [0, 15, -5, 0],
+          y: [0, -10, 0],
+        }}
+        transition={{
+          duration: 9,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "easeInOut",
+        }}
+      >
+        <BackgroundElements.Paintbrush />
+      </motion.div>
+
+      {/* Background Educational Elements - Middle Right */}
+      <motion.div
+        className="absolute top-1/4 right-12 opacity-20 z-0"
+        animate={{
+          rotate: [0, -20, 0],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{
+          duration: 11,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "easeInOut",
+        }}
+      >
+        <BackgroundElements.Globe />
+      </motion.div>
+
+      {/* Background Educational Elements - Stars scattered */}
+      <motion.div
+        className="absolute top-1/3 left-1/4 opacity-20 z-0"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.2, 0.3, 0.2],
+        }}
+        transition={{
+          duration: 5,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "easeInOut",
+        }}
+      >
+        <BackgroundElements.Star />
+      </motion.div>
+
+      <motion.div
+        className="absolute top-2/3 right-1/4 opacity-20 z-0"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.2, 0.3, 0.2],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "easeInOut",
+          delay: 1,
+        }}
+      >
+        <BackgroundElements.Star />
+      </motion.div>
+
+      {/* Background Educational Elements - Calculator */}
+      <motion.div
+        className="absolute bottom-1/3 right-1/3 opacity-20 z-0"
+        animate={{
+          rotate: [0, 5, -5, 0],
+          y: [0, 5, 0],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "easeInOut",
+        }}
+      >
+        <BackgroundElements.Calculator />
+      </motion.div>
+
+      <div className="max-w-6xl mx-auto relative z-10">
         {/* Fun header with animated elements */}
         <div className="text-center mb-8 relative">
           <h2
@@ -384,90 +458,9 @@ const MiniCourseTablet = () => {
                 {course.category}
               </div>
 
-              {/* Fun category icon */}
-              {/* <div className="absolute top-3 left-3">
-                {CategoryIcons[course.category as keyof typeof CategoryIcons] &&
-                  CategoryIcons[
-                    course.category as keyof typeof CategoryIcons
-                  ]()}
-              </div> */}
-
               {/* Card content */}
               <div className="p-6 pt-10 pb-0 flex-grow">
                 <h3 className="text-lg font-bold mb-2 pr-20">{course.title}</h3>
-
-                {/* Subject badges */}
-                {/* {course.subjects && (
-                  <div className="flex flex-wrap mb-3">
-                    {course.subjects.map((subject, i) => (
-                      <span
-                        key={i}
-                        className="flex items-center text-xs bg-white rounded-full px-2 py-1 mr-2 mb-1 text-gray-700 border border-gray-200"
-                      >
-                        {SubjectIcons[subject as keyof typeof SubjectIcons]}
-                        {subject}
-                      </span>
-                    ))}
-                  </div>
-                )} */}
-
-                {/* Course details */}
-                {/* <div className="space-y-2 mb-4">
-                  <div className="flex items-center text-gray-700">
-                    <svg
-                      className="w-4 h-4 mr-2 text-gray-500"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                    <span className="font-medium">{course.rate}</span>
-                  </div>
-
-                  {course.duration && (
-                    <div className="flex items-center text-gray-700">
-                      <svg
-                        className="w-4 h-4 mr-2 text-gray-500"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
-                      <span>{course.duration}</span>
-                    </div>
-                  )}
-
-                  {course.sessions && (
-                    <div className="flex items-center text-gray-700">
-                      <svg
-                        className="w-4 h-4 mr-2 text-gray-500"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                        />
-                      </svg>
-                      <span>{course.sessions}</span>
-                    </div>
-                  )}
-                </div> */}
               </div>
 
               {/* Price and action button */}
@@ -511,7 +504,6 @@ const MiniCourseTablet = () => {
           ))}
         </div>
 
-        {/* Browse all button with fun animation */}
         {/* Call to action */}
         <div className="text-center">
           <a
