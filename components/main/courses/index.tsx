@@ -524,62 +524,20 @@ const MiniCourseTablet = () => {
         {/* Fun bottom decorations */}
         <div className="flex justify-center mt-16 opacity-20">
           <motion.div
+            className="w-16 h-16"
             animate={{
-              rotate: [0, 360],
-              y: [0, -5, 0],
+              rotate: [0, 10, -10, 0],
+              y: [0, -8, 0],
             }}
             transition={{
-              rotate: {
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear",
-              },
-              y: {
-                duration: 2,
-                repeat: Infinity,
-                repeatType: "reverse",
-              },
+              duration: 8,
+              repeat: Infinity,
+              repeatType: "reverse",
+              ease: "easeInOut",
             }}
-            className="w-24 h-24 rounded-full border-4 border-dashed border-purple-500"
-          />
-          <motion.div
-            animate={{
-              rotate: [360, 0],
-              y: [0, 5, 0],
-            }}
-            transition={{
-              rotate: {
-                duration: 15,
-                repeat: Infinity,
-                ease: "linear",
-              },
-              y: {
-                duration: 2.5,
-                repeat: Infinity,
-                repeatType: "reverse",
-              },
-            }}
-            className="w-16 h-16 -ml-8 rounded-full border-4 border-dashed border-teal-500"
-          />
-          <motion.div
-            animate={{
-              rotate: [0, 360],
-              y: [0, -3, 0],
-            }}
-            transition={{
-              rotate: {
-                duration: 12,
-                repeat: Infinity,
-                ease: "linear",
-              },
-              y: {
-                duration: 1.5,
-                repeat: Infinity,
-                repeatType: "reverse",
-              },
-            }}
-            className="w-12 h-12 -ml-6 rounded-full border-4 border-dashed border-yellow-500"
-          />
+          >
+            <BackgroundElements.Calculator />
+          </motion.div>
         </div>
       </div>
     </div>
