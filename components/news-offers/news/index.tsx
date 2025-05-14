@@ -14,9 +14,9 @@ const NewsAndEvents: React.FC = () => {
           animate={{ y: 0, opacity: 1 }}
           className="text-center mb-10"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-blue-600 mb-4 font-comic">
-            News, Events & Offers
-          </h1>
+          <h2 className="mb-4 bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-3xl font-bold text-transparent md:text-5xl drop-shadow-lg">
+            Exciting News & Events!
+          </h2>
           <p className="text-lg text-gray-600 mb-8">
             Stay updated with all the exciting things happening at iLearners
             Hub!

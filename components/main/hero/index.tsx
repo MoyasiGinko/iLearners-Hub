@@ -27,7 +27,7 @@ const FloatingElements = () => {
 
       {/* Animated Earth SVG */}
       <motion.div
-        className="absolute top-16 right-14 w-20 h-20 md:w-24 md:h-24 z-0 hidden md:block"
+        className="absolute top-26 right-14 w-20 h-20 md:w-24 md:h-24 z-0 hidden md:block"
         animate={{ rotate: 360 }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       >
