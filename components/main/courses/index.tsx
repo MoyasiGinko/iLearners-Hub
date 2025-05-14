@@ -459,7 +459,7 @@ const MiniCourseTablet = () => {
               </div>
 
               {/* Price and action button */}
-              <div className="p-6 border-t border-gray-200">
+              <div className="p-6 ">
                 <div className="flex items-center justify-between">
                   <div className="flex flex-col">
                     <span className="text-sm text-gray-500">Course Fee</span>
