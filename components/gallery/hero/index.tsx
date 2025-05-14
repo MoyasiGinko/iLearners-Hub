@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import CustomButton from "@/components/common/CustomButton";
 
 const Hero: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -42,16 +43,16 @@ const Hero: React.FC = () => {
             through engaging activities and fun educational projects.
           </p>
           <div className="flex flex-wrap gap-3 md:gap-4">
-            <Link href="/courses">
-              <span className="bg-yellow-400 text-blue-900 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-medium hover:bg-yellow-300 transition-all inline-block text-sm sm:text-base whitespace-nowrap">
-                Join the Fun
-              </span>
-            </Link>
-            <Link href="/news-offers">
-              <span className="bg-white text-purple-700 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-medium hover:bg-opacity-90 transition-all inline-block text-sm sm:text-base whitespace-nowrap">
-                See our Events
-              </span>
-            </Link>
+            <CustomButton
+              text="Join the Fun"
+              href="/courses"
+              className="bg-gradient-to-r from-yellow-400 to-yellow-500 border-yellow-600 hover:bg-opacity-90"
+            />
+            <CustomButton
+              text="See our Events"
+              href="/news-offers"
+              className="bg-gradient-to-r from-purple-400 to-purple-500 border-purple-600 hover:bg-opacity-90"
+            />
           </div>
         </motion.div>
 

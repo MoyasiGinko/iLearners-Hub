@@ -9,6 +9,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import Image from "next/image";
+import CustomButton from "@/components/common/CustomButton";
 
 const Hero: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -139,24 +140,16 @@ const Hero: React.FC = () => {
             exciting offers designed especially for our young learners!
           </p>
           <div className="flex flex-wrap gap-3 md:gap-4">
-            <Link href="/courses">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-orange-400 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-medium hover:bg-orange-300 transition-all inline-block text-sm sm:text-base whitespace-nowrap"
-              >
-                Explore Courses
-              </motion.span>
-            </Link>
-            <Link href="/offers">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-purple-500 text-white px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-medium hover:bg-purple-400 transition-all inline-block text-sm sm:text-base whitespace-nowrap"
-              >
-                Special Offers
-              </motion.span>
-            </Link>
+            <CustomButton
+              text="Explore Courses"
+              href="/courses"
+              className="bg-gradient-to-r from-yellow-400 to-yellow-500 border-yellow-600 hover:bg-opacity-90"
+            />
+            <CustomButton
+              text="View Gallery"
+              href="/gallery"
+              className="bg-gradient-to-r from-purple-400 to-purple-500 border-purple-600 hover:bg-opacity-90"
+            />
           </div>
         </motion.div>
 
