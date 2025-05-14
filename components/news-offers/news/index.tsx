@@ -6,15 +6,6 @@ import Image from "next/image";
 import { newsItems } from "./newsData";
 
 const NewsAndEvents: React.FC = () => {
-  const [filter, setFilter] = React.useState<
-    "all" | "news" | "event" | "offer"
-  >("all");
-
-  const filteredItems =
-    filter === "all"
-      ? newsItems
-      : newsItems.filter((item) => item.category === filter);
-
   return (
     <div className="bg-blue-50 min-h-screen p-6">
       <div className="max-w-6xl mx-auto">
@@ -30,30 +21,11 @@ const NewsAndEvents: React.FC = () => {
             Stay updated with all the exciting things happening at iLearners
             Hub!
           </p>
-
-          {/* Category filters - styled as fun, kid-friendly buttons */}
-          <div className="flex flex-wrap justify-center gap-4 mt-6">
-            {["all", "news", "event", "offer"].map((category) => (
-              <motion.button
-                key={category}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setFilter(category as any)}
-                className={`px-6 py-3 rounded-full font-medium text-lg capitalize ${
-                  filter === category
-                    ? "bg-yellow-400 text-blue-700 border-2 border-blue-400 shadow-md"
-                    : "bg-white text-blue-600 border-2 border-blue-200 hover:bg-blue-100"
-                }`}
-              >
-                {category === "all" ? "All" : `${category}s`}
-              </motion.button>
-            ))}
-          </div>
         </motion.div>
 
         {/* Cards section with consistent sizing and kid-friendly styling */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredItems.map((item, index) => (
+          {newsItems.map((item, index) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, y: 20 }}
