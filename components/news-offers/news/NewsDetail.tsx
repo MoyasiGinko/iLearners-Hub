@@ -380,26 +380,18 @@ const NewsDetail: React.FC = () => {
           <div className="relative z-10">
             <motion.h3
               className="text-2xl font-bold mb-4"
-              animate={{ scale: [1, 1.05, 1] }}
               transition={{ repeat: Infinity, duration: 2 }}
             >
               Did You Know? 🤔
             </motion.h3>
             <p className="mb-6 text-lg">
-              The iLearners Hub has more than 50 fun activities every month!
+              The iLearners Hub has more than 30 courses!
             </p>
-            <Link href="/calendar">
-              <motion.span
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.2)",
-                }}
-                whileTap={{ scale: 0.98 }}
-                className="inline-block bg-yellow-400 hover:bg-yellow-300 text-purple-900 font-bold px-8 py-3 rounded-full transition-colors shadow-lg"
-              >
-                See Our Calendar
-              </motion.span>
-            </Link>
+            <CustomButton
+              text="See Our Courses"
+              href="/courses"
+              className="bg-gradient-to-r from-yellow-400 to-yellow-500 border-yellow-600 hover:bg-opacity-90"
+            />
           </div>
         </motion.div>
       </div>
