@@ -27,7 +27,16 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative flex items-center bg-gradient-to-r from-indigo-500 via-purple-400 to-pink-400 text-white rounded-b-3xl overflow-hidden py-12 md:py-20 lg:py-24 min-h-[60vh] md:min-h-[50vh]">
+    <section className="relative flex items-center bg-gradient-to-r md:from-indigo-500/50 from-indigo-500 md:via-purple-400/95 via-purple-400 to-pink-400 text-white rounded-b-3xl overflow-hidden py-12 md:py-20 lg:py-24 min-h-[60vh] md:min-h-[50vh]">
+      {/* Background image with gradient overlay */}
+      <div className="absolute inset-0 -z-1">
+        <img
+          src="/images/hero/h4.png"
+          alt="Background"
+          className="opacity-100 object-fit cover w-full h-full"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent" />
+      </div>
       <div className="container mx-auto px-4 sm:px-6 md:px-8 z-10 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -60,7 +69,7 @@ const Hero: React.FC = () => {
         <div
           className={`absolute ${
             isMobile
-              ? "inset-0 flex items-center justify-center w-full h-full z-0 opacity-30"
+              ? "inset-0 flex items-center justify-center w-full h-full -z-1 opacity-30"
               : "right-0 top-1/2 transform -translate-y-1/2 md:right-8 w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-64 lg:h-64 z-0"
           }`}
         >

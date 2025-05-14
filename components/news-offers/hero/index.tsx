@@ -124,7 +124,16 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative flex items-center bg-gradient-to-r from-blue-400 via-green-300 to-yellow-300 text-white rounded-b-3xl overflow-hidden py-12 md:py-20 lg:py-24 min-h-[60vh] md:min-h-[50vh]">
+    <section className="relative flex items-center bg-gradient-to-r md:from-blue-400/50 from-blue-400 md:via-green-300/95 via-green-300 to-yellow-300 text-white rounded-b-3xl overflow-hidden py-12 md:py-20 lg:py-24 min-h-[60vh] md:min-h-[50vh]">
+      {/* Background image with gradient overlay */}
+      <div className="absolute inset-0 -z-1">
+        <img
+          src="/images/hero/h1.png"
+          alt="Background"
+          className="opacity-100 object-fit cover w-full h-full"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent" />
+      </div>
       <div className="container mx-auto px-4 sm:px-6 md:px-8 z-10 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -132,10 +141,10 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8 }}
           className="max-w-xl md:max-w-2xl lg:max-w-3xl"
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-indigo-900 drop-shadow-md leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-white drop-shadow-md leading-tight">
             News, Events & Offers!
           </h1>
-          <p className="text-base sm:text-lg md:text-xl mb-6 md:mb-8 text-indigo-800 drop-shadow-sm max-w-md md:max-w-lg lg:max-w-xl">
+          <p className="text-base sm:text-lg md:text-xl mb-6 md:mb-8 text-white/90 drop-shadow-sm max-w-md md:max-w-lg lg:max-w-xl">
             Stay updated with our latest activities, special events, and
             exciting offers designed especially for our young learners!
           </p>
@@ -153,103 +162,35 @@ const Hero: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Enhanced 3D Calendar Animation */}
+        {/* Decorative elements with responsive sizing and positioning */}
         <div
-          ref={containerRef}
           className={`absolute ${
             isMobile
-              ? "inset-0 flex items-center justify-center w-full h-full z-0 opacity-80"
+              ? "inset-0 flex items-center justify-center w-full h-full -z-1 opacity-30"
               : "right-0 top-1/2 transform -translate-y-1/2 md:right-8 w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-64 lg:h-64 z-0"
           }`}
         >
-          <motion.div
-            style={isMobile ? {} : { rotateX, rotateY, z: 100 }}
-            initial="hidden"
-            animate="visible"
-            whileHover="hover"
-            variants={calendarVariants}
-            className="relative w-full h-full flex items-center justify-center perspective-1000"
-          >
-            {/* 3D shadow effect */}
-            <motion.div
-              className="absolute inset-0 bg-indigo-900 rounded-lg opacity-20 blur-md"
-              style={{
-                rotateX,
-                rotateY,
-                translateZ: "-20px",
-                translateX: "10px",
-                translateY: "10px",
-              }}
-            />
-
-            {/* Main Calendar Image with 3D transformation */}
-            <div className="relative w-full h-full transform-style-preserve-3d">
-              <motion.div
-                className="w-full h-full"
-                animate={{
-                  rotateZ: [0, 2, 0, -2, 0],
-                  transition: { repeat: Infinity, duration: 5 },
-                }}
-              >
-                <Image
-                  src="/images/calendar.gif"
-                  alt="Calendar"
-                  fill
-                  className="object-contain drop-shadow-xl"
-                  sizes={
-                    isMobile
-                      ? "160px"
-                      : "(max-width: 640px) 96px, (max-width: 768px) 128px, (max-width: 1024px) 160px, 256px"
-                  }
-                  priority
-                />
-              </motion.div>
+          {isMobile ? (
+            <div className="relative w-40 h-40">
+              <Image
+                src="/images/calendar.gif"
+                alt="Rocket"
+                fill
+                className="object-contain"
+                sizes="160px"
+                priority
+              />
             </div>
-
-            {/* Orbiting elements */}
-            <AnimatePresence>
-              {!isMobile && (
-                <>
-                  <motion.div
-                    className="absolute top-0 right-0 w-6 h-6 rounded-full bg-yellow-300"
-                    animate={{
-                      rotate: [0, 360],
-                      x: [0, 15, 0, -15, 0],
-                      y: [0, 15, 30, 15, 0],
-                    }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: 8,
-                      ease: "linear",
-                    }}
-                  />
-                  <motion.div
-                    className="absolute bottom-8 left-8 w-4 h-4 rounded-full bg-pink-400"
-                    animate={{
-                      rotate: [360, 0],
-                      x: [0, -20, 0, 20, 0],
-                      y: [0, -10, -20, -10, 0],
-                    }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: 6,
-                      ease: "linear",
-                    }}
-                  />
-                </>
-              )}
-            </AnimatePresence>
-
-            {/* Glowing pulses */}
-            <motion.div
-              className="absolute inset-0 bg-blue-400 rounded-full opacity-0"
-              animate={{
-                scale: [1, 1.4, 1],
-                opacity: [0, 0.2, 0],
-              }}
-              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
+          ) : (
+            <Image
+              src="/images/calendar.gif"
+              alt="Rocket"
+              fill
+              className="object-contain"
+              sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, (max-width: 1024px) 160px, 256px"
+              priority
             />
-          </motion.div>
+          )}
         </div>
       </div>
 
