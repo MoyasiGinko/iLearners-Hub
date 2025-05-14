@@ -6,6 +6,30 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { newsItems } from "./newsData";
 
+// Add this style to the head of your document
+const PrintStyles = () => (
+  <style jsx global>{`
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      .print-section,
+      .print-section * {
+        visibility: visible;
+      }
+      .print-section {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  `}</style>
+);
+
 const NewsDetail: React.FC = () => {
   const pathname = usePathname();
   // Extract the ID from the URL path and parse it to a number
@@ -14,9 +38,14 @@ const NewsDetail: React.FC = () => {
   // Find the news item by ID (now comparing number to number)
   const item = newsItems.find((item) => item.id === id);
 
+  const handlePrint = () => {
+    window.print();
+  };
+
   if (!item) {
     return (
       <div className="bg-blue-50 min-h-screen p-6">
+        <PrintStyles />
         <div className="max-w-4xl mx-auto bg-white rounded-2xl p-8 shadow-lg">
           <h1 className="text-3xl font-bold text-red-500">Oops!</h1>
           <p className="text-lg mb-6">
@@ -34,8 +63,9 @@ const NewsDetail: React.FC = () => {
 
   return (
     <div className="bg-blue-50 min-h-screen p-6">
+      <PrintStyles />
       <div className="max-w-4xl mx-auto">
-        <Link href="/news-offers">
+        <Link href="/news-offers" className="no-print">
           <span className="inline-block mb-6 bg-purple-100 hover:bg-purple-200 text-purple-700 font-medium px-4 py-2 rounded-full transition-colors duration-200">
             ← Back to News & Events
           </span>
@@ -44,7 +74,7 @@ const NewsDetail: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl overflow-hidden shadow-lg"
+          className="bg-white rounded-2xl overflow-hidden shadow-lg print-section"
         >
           {/* Header image */}
           <div className="relative h-64 md:h-80">
@@ -81,8 +111,8 @@ const NewsDetail: React.FC = () => {
               }}
             />
 
-            {/* Additional fun elements for kids */}
-            <div className="mt-12 bg-blue-50 p-6 rounded-xl border-2 border-dashed border-purple-300">
+            {/* Additional fun elements for kids - no-print class added */}
+            <div className="mt-12 bg-blue-50 p-6 rounded-xl border-2 border-dashed border-purple-300 no-print">
               <h3 className="text-xl font-bold text-purple-700 mb-3">
                 Tell a Friend!
               </h3>
@@ -112,9 +142,7 @@ const NewsDetail: React.FC = () => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-full"
-                  onClick={() => {
-                    window.print();
-                  }}
+                  onClick={handlePrint}
                 >
                   Print This Page
                 </motion.button>
@@ -123,8 +151,8 @@ const NewsDetail: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Related items section */}
-        <div className="mt-12">
+        {/* Related items section - no-print class added */}
+        <div className="mt-12 no-print">
           <h2 className="text-2xl font-bold text-purple-800 mb-6">
             You might also like...
           </h2>
@@ -177,11 +205,11 @@ const NewsDetail: React.FC = () => {
           </div>
         </div>
 
-        {/* Fun footer - kids section */}
+        {/* Fun footer - kids section - no-print class added */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-16 mb-8 bg-gradient-to-r from-green-400 to-blue-400 rounded-3xl p-8 text-white text-center"
+          className="mt-16 mb-8 bg-gradient-to-r from-green-400 to-blue-400 rounded-3xl p-8 text-white text-center no-print"
         >
           <h3 className="text-2xl font-bold mb-4">Did You Know?</h3>
           <p className="mb-6">
