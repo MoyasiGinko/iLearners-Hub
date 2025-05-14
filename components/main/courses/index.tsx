@@ -300,7 +300,6 @@ const MiniCourseTablet = () => {
           {/* Category tabs */}
           <div className="flex flex-wrap justify-center mb-8 border-b border-gray-200">
             <motion.button
-              whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
               className={`px-6 py-3 mr-3 mb-3 rounded-full font-bold transition transform ${
                 activeTab === 0
@@ -318,7 +317,7 @@ const MiniCourseTablet = () => {
             {courseCategories.map((category, index) => (
               <motion.button
                 key={index}
-                whileHover={{ scale: 1.1 }}
+                // whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 className={`px-6 py-3 mr-3 mb-3 rounded-full font-bold transition transform ${
                   activeTab === index + 1
