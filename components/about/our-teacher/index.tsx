@@ -258,10 +258,7 @@ const OurTeachers = () => {
   return (
     <div
       ref={sectionRef}
-      className="py-16 px-4 relative overflow-hidden"
-      style={{
-        background: "linear-gradient(to bottom, #fff8e1, #fffde7)",
-      }}
+      className="py-16 px-4 relative overflow-hidden bg-transparent"
     >
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">

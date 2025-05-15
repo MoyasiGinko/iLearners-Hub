@@ -14,46 +14,42 @@ interface TeamMember {
 const teamMembers: TeamMember[] = [
   {
     name: "Ma'aruf Razzak",
-    title: "The Law Expert",
-    description:
-      "Knows all about rules and helps make sure everything is fair for everyone!",
-    imageUrl: "/api/placeholder/200/200", // Replace with actual image
+    title: "LAWYER",
+    description: "15 YEARS EXPERIENCE IN LEGAL, PROPERTY & CHARITY SECTORS",
+    imageUrl: "/images/about/team1.png", // Replace with actual image
     color: "bg-blue-200",
     icon: "⚖️",
   },
   {
     name: "Dr. M Ahmmad",
-    title: "The Building Wizard",
-    description:
-      "Creates amazing structures and teaches how things work in the real world!",
-    imageUrl: "/api/placeholder/200/200", // Replace with actual image
+    title: "PROFESSIONAL ENGINEER",
+    description: "15 YEARS EXPERINCE IN ENGINEERING PRACTICE & TEACHING",
+    imageUrl: "/images/about/team2.png", // Replace with actual image
     color: "bg-green-200",
     icon: "🏗️",
   },
   {
     name: "Shabbir Rahman",
-    title: "The Numbers Hero",
+    title: "CHARTERED ACCOUNTANT",
     description:
-      "Super good with numbers and helps keep track of everything important!",
-    imageUrl: "/api/placeholder/200/200", // Replace with actual image
+      "Managing Director of A2Z Accounting Solutions Limited Former Accounting Supervisor at Subsea 7",
+    imageUrl: "/images/about/team3.png", // Replace with actual image
     color: "bg-yellow-200",
     icon: "🔢",
   },
   {
     name: "Dr. Sheikh Zahidul Islam",
-    title: "The Knowledge Master",
-    description:
-      "Has taught many students and knows how to make learning fun and exciting!",
-    imageUrl: "/api/placeholder/200/200", // Replace with actual image
+    title: "UNIVERSITY LECTURER",
+    description: "15+ YEARS EXPERIENCE IN TEACHING IN COLLEGE & UNIVERSITY",
+    imageUrl: "/images/about/team4.png", // Replace with actual image
     color: "bg-purple-200",
     icon: "🎓",
   },
   {
     name: "Shovon Mostofa",
-    title: "The Space Explorer",
-    description:
-      "Knows about rockets and airplanes and how things fly in the sky!",
-    imageUrl: "/api/placeholder/200/200", // Replace with actual image
+    title: "AEROSPACE ENGINEER",
+    description: "6+ YEARS EXPERIENCE IN TEACHING NATIONAL 5",
+    imageUrl: "/images/about/team5.png", // Replace with actual image
     color: "bg-pink-200",
     icon: "🚀",
   },
@@ -83,7 +79,7 @@ const TeamMemberCard: React.FC<{ member: TeamMember; index: number }> = ({
       variants={{
         hidden: {
           opacity: 0,
-          y: 50,
+          // y: 50,
           rotate: index % 2 === 0 ? -3 : 3,
         },
         visible: {
@@ -105,7 +101,7 @@ const TeamMemberCard: React.FC<{ member: TeamMember; index: number }> = ({
         // y: -10,
         transition: { duration: 0.3 },
       }}
-      className={`${member.color} rounded-2xl p-6 text-center shadow-lg border-4 border-white overflow-hidden relative`}
+      className={`${member.color} w-full md:max-w-[344px] lg:max-w-[304px] xl:max-w-[388px] 2xl:max-w-[474px] rounded-2xl p-6 text-center shadow-lg border-4 border-white overflow-hidden relative`}
     >
       <div className="z-10 relative">
         {/* Image container with fun border */}
@@ -220,7 +216,7 @@ const OurTeam: React.FC = () => {
         </div>
 
         {/* Team members grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative z-10">
+        <div className="flex flex-wrap justify-center gap-8 relative z-10">
           {teamMembers.map((member, index) => (
             <TeamMemberCard key={index} member={member} index={index} />
           ))}
