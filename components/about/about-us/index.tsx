@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const AboutSection = () => {
   return (
-    <div className="container mx-auto max-w-6xl py-12 px-4">
+    <div className="container mx-auto max-w-6xl pt-20 px-4">
       {/* Header Section */}
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold text-[#4a6bcc] mb-4 font-['Comic_Sans_MS',cursive,sans-serif]">
@@ -20,7 +20,7 @@ const AboutSection = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-12">
         <div className="relative h-[400px] rounded-2xl overflow-hidden">
           <Image
-            src="/images/aberdeen-education.jpg"
+            src="/images/kids-learning.png"
             alt="Aberdeen education"
             fill
             style={{ objectFit: "cover" }}
