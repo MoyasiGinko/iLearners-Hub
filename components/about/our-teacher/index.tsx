@@ -16,7 +16,7 @@ const teachers: Teacher[] = [
   {
     name: "Marcus Montgomery",
     experience: "10+ years of experience",
-    image: "teacher-1.jpg",
+    image: "/images/about/teacher1.png",
     subject: "Science",
     favoriteColor: "bg-blue-200",
     funFact: "Can name all the planets in reverse order!",
@@ -24,7 +24,7 @@ const teachers: Teacher[] = [
   {
     name: "Dr Ghazi Droubi",
     experience: "15+ years of experience",
-    image: "teacher-2.jpg",
+    image: "/images/about/teacher2.png",
     subject: "Math",
     favoriteColor: "bg-green-200",
     funFact: "Makes math problems about cookies and ice cream!",
@@ -32,7 +32,7 @@ const teachers: Teacher[] = [
   {
     name: "Zara",
     experience: "2+ years of experience",
-    image: "teacher-3.jpg",
+    image: "/images/about/teacher3.png",
     subject: "English",
     favoriteColor: "bg-purple-200",
     funFact: "Writes stories about talking animals!",
@@ -90,8 +90,8 @@ const TeacherCard: React.FC<{ teacher: Teacher; index: number }> = ({
       variants={{
         hidden: {
           opacity: 0,
-          y: 50,
-          rotate: index % 2 === 0 ? -2 : 2,
+          // y: 50,
+          // rotate: index % 2 === 0 ? -2 : 2,
         },
         visible: {
           opacity: 1,
@@ -120,76 +120,22 @@ const TeacherCard: React.FC<{ teacher: Teacher; index: number }> = ({
       {/* Teacher content */}
       <div className="relative z-10">
         {/* Image with animated frame */}
-        <div className="relative mx-auto mb-6">
+        <div className="relative mx-auto ">
           {/* Outer circle animation */}
-          <motion.div
+          {/* <motion.div
             className={`absolute inset-0 rounded-full border-4 border-dashed ${getThemeColor(
               teacher.favoriteColor
             )}`}
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          ></motion.div>
+          ></motion.div> */}
 
           {/* Inner circle with animated accessories */}
           <div className="relative w-40 h-40 mx-auto">
-            {/* Crown for teachers with 10+ years */}
-            {teacher.experience.includes("10+") && (
-              <motion.div
-                className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20 text-2xl"
-                animate={{
-                  y: [0, -5, 0],
-                  rotateZ: [0, 5, 0, -5, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                }}
-              >
-                👑
-              </motion.div>
-            )}
-
-            {/* Graduation cap for Dr title */}
-            {teacher.name.includes("Dr") && (
-              <motion.div
-                className="absolute -top-6 left-1/2 transform -translate-x-1/2 z-20 text-2xl"
-                animate={{
-                  y: [0, -5, 0],
-                  rotateZ: [0, 5, 0, -5, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                }}
-              >
-                🎓
-              </motion.div>
-            )}
-
-            {/* Subject icons */}
-            <motion.div
-              className="absolute -right-4 top-1/2 transform -translate-y-1/2 z-20 text-2xl"
-              animate={{
-                x: [0, 5, 0],
-                scale: [1, 1.2, 1],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                repeatType: "reverse",
-              }}
-            >
-              {teacher.subject === "Science" && "🔬"}
-              {teacher.subject === "Math" && "🧮"}
-              {teacher.subject === "English" && "📚"}
-            </motion.div>
-
             {/* Image container */}
             <div className="w-32 h-32 rounded-full overflow-hidden relative mx-auto border-4 border-white shadow-lg">
               <Image
-                src={`/api/placeholder/200/200`} // Placeholder for demo
+                src={teacher.image}
                 alt={teacher.name}
                 fill
                 style={{ objectFit: "cover" }}
@@ -207,14 +153,14 @@ const TeacherCard: React.FC<{ teacher: Teacher; index: number }> = ({
           {teacher.name}
         </h3>
 
-        <motion.div
+        {/* <motion.div
           initial={{ width: 0 }}
           animate={{ width: "70%" }}
           transition={{ delay: 0.5, duration: 0.8 }}
           className={`h-1 mx-auto mb-3 ${getThemeColor(
             teacher.favoriteColor
           ).replace("border", "bg")}`}
-        ></motion.div>
+        ></motion.div> */}
 
         <p className="text-sm text-gray-700 mb-3 font-comic">
           {teacher.experience}
@@ -368,67 +314,18 @@ const OurTeachers = () => {
 
       <div className="container mx-auto max-w-6xl relative z-10">
         {/* Header section */}
-        <motion.div
-          ref={titleRef}
-          initial="hidden"
-          animate={titleControls}
-          variants={{
-            hidden: { opacity: 0, y: -20 },
-            visible: {
-              opacity: 1,
-              y: 0,
-              transition: { duration: 0.8 },
-            },
-          }}
-          className="text-center mb-12"
-        >
-          {/* Title */}
-          <div className="relative inline-block">
-            <motion.div
-              className="absolute -inset-4 -z-10"
-              animate={{
-                scale: [1, 1.05, 1],
-                rotate: [0, 1, 0, -1, 0],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                repeatType: "reverse",
-              }}
-            >
-              <svg
-                width="100%"
-                height="100%"
-                viewBox="0 0 200 100"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill="#FFC107"
-                  d="M41.3,-48.7C53.4,-35.9,63.2,-24.4,67.4,-10.6C71.5,3.2,70,19.2,62.1,31.5C54.2,43.8,39.9,52.3,24.5,58.8C9.1,65.3,-7.4,69.8,-22.3,66.2C-37.1,62.5,-50.4,50.8,-60.4,36.2C-70.3,21.5,-77,3.9,-75.4,-13.9C-73.8,-31.7,-63.9,-49.8,-49.2,-62.1C-34.5,-74.4,-15.1,-80.9,-0.5,-80.2C14.1,-79.6,29.2,-61.6,41.3,-48.7Z"
-                  transform="translate(100 50)"
-                />
-              </svg>
-            </motion.div>
-            <h2 className="text-4xl font-bold text-amber-600 mb-4 font-comic">
-              Our Amazing Teachers
-            </h2>
-          </div>
-
-          {/* Introduction text */}
-          <motion.p
-            className="text-center text-lg text-green-600 mb-8 font-comic max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-          >
-            Our super teachers know all about Scottish schools because they went
-            to them too! They make learning fun and help you understand
-            everything you need to know!
-          </motion.p>
-        </motion.div>
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#4a6bcc] mb-4 font-['Comic_Sans_MS',cursive,sans-serif]">
+            Meet Our Amazing Teachers
+          </h2>
+          <p className="text-xl max-w-3xl  mx-auto text-gray-600 font-['Comic_Sans_MS',cursive,sans-serif]">
+            Our teachers, who have themselves navigated the Scottish curriculum,
+            bring a deep understanding of the local academic landscape.
+          </p>
+        </div>
 
         {/* Teacher cards grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 justify-center">
           {teachers.map((teacher, index) => (
             <TeacherCard key={index} teacher={teacher} index={index} />
           ))}
@@ -445,7 +342,7 @@ const OurTeachers = () => {
         >
           <div className="relative inline-block">
             <motion.div
-              className="absolute -inset-x-4 -inset-y-2 rounded-xl bg-gradient-to-r from-orange-200 to-amber-200 -z-10"
+              className="absolute -inset-x-4 -inset-y-2 rounded-xl bg-gradient-to-r from-blue-200 to-indigo-200 -z-10"
               animate={{
                 scale: [1, 1.1, 1],
               }}
@@ -455,7 +352,7 @@ const OurTeachers = () => {
                 repeatType: "reverse",
               }}
             />
-            <p className="text-xl text-orange-600 font-bold font-comic px-8 py-2">
+            <p className="text-xl  font-bold font-comic px-8 py-2   mx-auto text-indigo-600 font-['Comic_Sans_MS',cursive,sans-serif]">
               More Awesome Teachers Coming Soon...
             </p>
           </div>
