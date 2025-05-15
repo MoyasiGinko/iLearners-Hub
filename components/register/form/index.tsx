@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
 import {
@@ -8,30 +8,59 @@ import {
   FaBook,
   FaPhone,
   FaEnvelope,
-  FaComments,
+  FaSchool,
+  FaGraduationCap,
 } from "react-icons/fa";
 
 type FormData = {
   studentName: string;
-  studentAge: number;
+  institutionName: string;
   parentName: string;
   email: string;
   phone: string;
-  course: string;
+  level: string;
+  levelDetail: string;
+  subject: string;
   message: string;
-  preferredTime: string;
 };
 
 const RegistrationForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [selectedLevel, setSelectedLevel] = useState("");
+  const [availableSubjects, setAvailableSubjects] = useState<string[]>([]);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
+    setValue,
   } = useForm<FormData>();
+
+  // Watch the level field to update subjects
+  const watchLevel = watch("level");
+
+  // Update available subjects when level changes
+  useEffect(() => {
+    if (watchLevel === "Primary") {
+      setSelectedLevel("Primary");
+      setAvailableSubjects(["Mathematics", "English", "Science"]);
+    } else if (["S1", "S2", "S3"].includes(watchLevel)) {
+      setSelectedLevel("Secondary");
+      setAvailableSubjects(["Mathematics", "Science"]);
+    } else if (["National 5", "Highers"].includes(watchLevel)) {
+      setSelectedLevel("Advanced");
+      setAvailableSubjects(["Mathematics", "Physics", "Chemistry", "Biology"]);
+    } else {
+      setSelectedLevel("");
+      setAvailableSubjects([]);
+    }
+
+    // Reset subject when level changes
+    setValue("subject", "");
+  }, [watchLevel, setValue]);
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
@@ -57,13 +86,13 @@ const RegistrationForm = () => {
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="bg-white rounded-xl shadow-lg overflow-hidden"
+          className="bg-white rounded-3xl shadow-lg overflow-hidden"
         >
-          <div className="bg-blue-500 py-6 px-8">
-            <h1 className="text-3xl font-bold text-white text-center">
+          <div className="p-8 text-center">
+            <h2 className=" leading-tight bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-3xl font-bold text-transparent md:text-5xl drop-shadow-lg">
               Join Our Learning Adventure!
-            </h1>
-            <p className="text-white text-center mt-2">
+            </h2>
+            <p className="mx-auto max-w-3xl text-lg text-indigo-700">
               Fill out this form to register for a course or ask questions
             </p>
           </div>
@@ -100,14 +129,14 @@ const RegistrationForm = () => {
                 <div className="mt-4 space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      Student's Name
+                      Name of Student
                     </label>
                     <input
                       {...register("studentName", {
-                        required: "Please tell us your name",
+                        required: "Student name is required",
                       })}
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
-                      placeholder="Enter your name"
+                      placeholder="Enter student's name"
                     />
                     {errors.studentName && (
                       <p className="mt-1 text-sm text-red-500">
@@ -116,22 +145,19 @@ const RegistrationForm = () => {
                     )}
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Student's Age
+                    <label className=" text-sm font-medium text-gray-700 flex items-center">
+                      <FaSchool className="mr-2" /> Institution Name
                     </label>
                     <input
-                      type="number"
-                      {...register("studentAge", {
-                        required: "Age is required",
-                        min: { value: 3, message: "Minimum age is 3" },
-                        max: { value: 18, message: "Maximum age is 18" },
+                      {...register("institutionName", {
+                        required: "Institution name is required",
                       })}
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
-                      placeholder="How old are you?"
+                      placeholder="Enter school or institution name"
                     />
-                    {errors.studentAge && (
+                    {errors.institutionName && (
                       <p className="mt-1 text-sm text-red-500">
-                        {errors.studentAge.message}
+                        {errors.institutionName.message}
                       </p>
                     )}
                   </div>
@@ -164,7 +190,29 @@ const RegistrationForm = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="flex items-center text-sm font-medium text-gray-700">
-                        <FaEnvelope className="mr-1" /> Email
+                        <FaPhone className="mr-1" /> Contact no.
+                      </label>
+                      <input
+                        {...register("phone", {
+                          required: "Phone number is required",
+                          pattern: {
+                            value: /^[0-9\+\-\(\) ]+$/,
+                            message: "Please enter a valid phone number",
+                          },
+                        })}
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Your phone number"
+                      />
+                      {errors.phone && (
+                        <p className="mt-1 text-sm text-red-500">
+                          {errors.phone.message}
+                        </p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="flex items-center text-sm font-medium text-gray-700">
+                        <FaEnvelope className="mr-1" /> Email address
                       </label>
                       <input
                         type="email"
@@ -184,83 +232,95 @@ const RegistrationForm = () => {
                         </p>
                       )}
                     </div>
-
-                    <div>
-                      <label className="flex items-center text-sm font-medium text-gray-700">
-                        <FaPhone className="mr-1" /> Phone
-                      </label>
-                      <input
-                        {...register("phone", {
-                          required: "Phone number is required",
-                          pattern: {
-                            value: /^[0-9\+\-\(\) ]+$/,
-                            message: "Please enter a valid phone number",
-                          },
-                        })}
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Your phone number"
-                      />
-                      {errors.phone && (
-                        <p className="mt-1 text-sm text-red-500">
-                          {errors.phone.message}
-                        </p>
-                      )}
-                    </div>
                   </div>
                 </div>
               </div>
 
               <div className="bg-green-100 p-4 rounded-lg border-2 border-dashed border-green-300">
                 <h2 className="text-xl font-bold text-green-700 flex items-center">
-                  <FaBook className="mr-2" /> Course Information
+                  <FaGraduationCap className="mr-2" /> Educational Information
                 </h2>
                 <div className="mt-4 space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      Which course are you interested in?
+                      Level
                     </label>
                     <select
-                      {...register("course", {
-                        required: "Please select a course",
+                      {...register("level", {
+                        required: "Please select a level",
                       })}
                       className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
                     >
-                      <option value="">Select a course</option>
-                      <option value="math">Fun Math Adventures</option>
-                      <option value="science">Science Explorers</option>
-                      <option value="art">Creative Art & Crafts</option>
-                      <option value="coding">Coding for Kids</option>
-                      <option value="music">Music & Rhythm</option>
-                      <option value="languages">
-                        Languages for Little Ones
-                      </option>
+                      <option value="">Select a level</option>
+                      <option value="Primary">Primary</option>
+                      <option value="S1">S1</option>
+                      <option value="S2">S2</option>
+                      <option value="S3">S3</option>
+                      <option value="National 5">National 5</option>
+                      <option value="Highers">Highers</option>
                     </select>
-                    {errors.course && (
+                    {errors.level && (
                       <p className="mt-1 text-sm text-red-500">
-                        {errors.course.message}
+                        {errors.level.message}
                       </p>
                     )}
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                      Preferred class time
-                    </label>
-                    <select
-                      {...register("preferredTime")}
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
-                    >
-                      <option value="">Select a time (optional)</option>
-                      <option value="morning">Morning (9AM - 12PM)</option>
-                      <option value="afternoon">Afternoon (1PM - 4PM)</option>
-                      <option value="evening">Evening (5PM - 7PM)</option>
-                      <option value="weekend">Weekends Only</option>
-                    </select>
-                  </div>
+                  {selectedLevel === "Primary" && (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Primary Level Details
+                      </label>
+                      <select
+                        {...register("levelDetail", {
+                          required: "Please select a primary level",
+                        })}
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
+                      >
+                        <option value="">Select a primary level</option>
+                        <option value="P3">P3</option>
+                        <option value="P4">P4</option>
+                        <option value="P5">P5</option>
+                        <option value="P6">P6</option>
+                        <option value="P7">P7</option>
+                      </select>
+                      {errors.levelDetail && (
+                        <p className="mt-1 text-sm text-red-500">
+                          {errors.levelDetail.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
+
+                  {availableSubjects.length > 0 && (
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">
+                        Subject
+                      </label>
+                      <select
+                        {...register("subject", {
+                          required: "Please select a subject",
+                        })}
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
+                      >
+                        <option value="">Select a subject</option>
+                        {availableSubjects.map((subject) => (
+                          <option key={subject} value={subject}>
+                            {subject}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.subject && (
+                        <p className="mt-1 text-sm text-red-500">
+                          {errors.subject.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
 
                   <div>
                     <label className="text-sm font-medium text-gray-700 flex items-center">
-                      <FaComments className="mr-1" /> Questions or Comments
+                      <FaBook className="mr-1" /> Questions or Comments
                     </label>
                     <textarea
                       {...register("message")}
@@ -272,41 +332,44 @@ const RegistrationForm = () => {
                 </div>
               </div>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-4 px-4 border border-transparent rounded-md shadow-sm text-xl font-bold text-white bg-gradient-to-r from-blue-500 to-blue-500 hover:from-blue-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
-              >
-                {isSubmitting ? (
-                  <span className="flex items-center justify-center">
-                    <svg
-                      className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
-                    Sending...
-                  </span>
-                ) : (
-                  "Submit Registration"
-                )}
-              </motion.button>
+              <div className="flex justify-center">
+                <motion.button
+                  // whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="px-8 inline-block py-3 rounded-full text-white font-medium shadow-lg hover:shadow-xl border-b-4 active:border-b-0 active:border-t-0 active:shadow-inner active:translate-y-1 hover:-translate-y-1 transform transition-all duration-200
+                  bg-gradient-to-r from-blue-500 to-blue-500 border-blue-700 hover:from-blue-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+                >
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center">
+                      <svg
+                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      Sending...
+                    </span>
+                  ) : (
+                    "Submit Registration"
+                  )}
+                </motion.button>
+              </div>
 
               <div className="text-center mt-4 text-sm text-gray-500">
                 <p>We'll get back to you as soon as possible!</p>
