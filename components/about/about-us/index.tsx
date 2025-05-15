@@ -7,7 +7,7 @@ const AboutSection = () => {
     <div className="container mx-auto max-w-6xl pt-20 px-4">
       {/* Header Section */}
       <div className="text-center mb-12">
-        <h2 className="text-4xl md:text-5xl font-bold text-[#4a6bcc] mb-4 font-['Comic_Sans_MS',cursive,sans-serif]">
+        <h2 className="text-4xl  md:text-5xl font-bold text-[#4a6bcc] mb-4 font-['Comic_Sans_MS',cursive,sans-serif]">
           Excellence in Education, Rooted in Aberdeen
         </h2>
         <p className="text-xl max-w-3xl mx-auto text-gray-600 font-['Comic_Sans_MS',cursive,sans-serif]">

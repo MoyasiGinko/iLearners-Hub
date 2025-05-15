@@ -98,7 +98,7 @@ const GalleryPage: React.FC = () => {
     <div className="h-auto bg-transparent pt-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="mb-4 bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-3xl font-bold text-transparent md:text-5xl drop-shadow-lg">
+          <h2 className="mb-4 leading-tight bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-3xl font-bold text-transparent md:text-5xl drop-shadow-lg">
             Our Learning Center Gallery
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
