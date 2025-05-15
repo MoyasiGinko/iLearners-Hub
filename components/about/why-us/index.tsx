@@ -238,34 +238,6 @@ const WhyChooseUs = () => {
       className="bg-transparent pt-20 pb-12 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto px-4">
-        {/* Decorative elements */}
-        <motion.div
-          className="absolute top-10 left-10 w-8 h-8 rounded-full bg-yellow-300"
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-        />
-
-        <motion.div
-          className="absolute top-20 right-20 w-6 h-6 rounded-full bg-pink-300"
-          animate={{
-            scale: [1, 1.3, 1],
-            rotate: [0, -180, -360],
-          }}
-          transition={{
-            duration: 3.5,
-            repeat: Infinity,
-            repeatType: "reverse",
-            delay: 0.5,
-          }}
-        />
-
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-[#4a6bcc] mb-4 font-['Comic_Sans_MS',cursive,sans-serif]">
             Why Choose Us?
