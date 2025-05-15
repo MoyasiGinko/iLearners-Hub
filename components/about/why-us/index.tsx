@@ -233,7 +233,10 @@ const WhyChooseUs = () => {
   const colors = ["#FF5733", "#33FF57", "#3357FF", "#F033FF", "#FF33A1"];
 
   return (
-    <div ref={sectionRef} className="bg-transparent pt-20 overflow-hidden">
+    <div
+      ref={sectionRef}
+      className="bg-transparent pt-20 pb-12 overflow-hidden"
+    >
       <div className="max-w-6xl mx-auto px-4">
         {/* Decorative elements */}
         <motion.div
@@ -263,11 +266,11 @@ const WhyChooseUs = () => {
           }}
         />
 
-        <div className="mb-16 text-center">
-          <h2 className="mb-4 bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-3xl font-bold text-transparent md:text-5xl drop-shadow-lg">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#4a6bcc] mb-4 font-['Comic_Sans_MS',cursive,sans-serif]">
             Why Choose Us?
           </h2>
-          <p className="mx-auto max-w-3xl text-lg text-indigo-700">
+          <p className="text-xl max-w-3xl  mx-auto text-gray-600 font-['Comic_Sans_MS',cursive,sans-serif]">
             We make learning fun and exciting!
           </p>
         </div>
@@ -412,7 +415,7 @@ const WhyChooseUs = () => {
                   }}
                   animate={desktopControls}
                   whileHover={{ scale: 1.01, rotate: 0 }}
-                  className={`${card.color} shadow-lg rounded-3xl p-6 mx-auto border-4 border-white`}
+                  className={`${card.color}  rounded-3xl p-6 mx-auto border-4 border-white`}
                 >
                   <div className="flex flex-col items-center text-center">
                     {/* Float the icon above the image */}
