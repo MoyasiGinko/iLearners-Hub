@@ -13,8 +13,8 @@ interface CTANewsProps {
 
 const CtaNews: React.FC<CTANewsProps> = () => {
   return (
-    <div className="bg-gradient-to-b py-10 from-blue-50 to-blue-100 ">
-      <div className="max-w-6xl  mx-auto">
+    <div className="bg-gradient-to-b py-20  from-blue-50 to-blue-100 ">
+      <div className="max-w-6xl px-4 mx-auto">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}

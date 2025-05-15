@@ -7,8 +7,8 @@ import { newsItems } from "./newsData";
 
 const NewsAndEvents: React.FC = () => {
   return (
-    <div className="bg-blue-50 min-h-screen p-6">
-      <div className="max-w-6xl mx-auto">
+    <div className="bg-blue-50 min-h-screen pt-20">
+      <div className="max-w-6xl px-6 mx-auto">
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
