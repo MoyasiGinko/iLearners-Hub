@@ -38,11 +38,12 @@ const CoursePage = () => {
                   whileTap={{ scale: 0.99 }}
                 >
                   <button
-                    className={`w-full text-left px-4 py-3 rounded-full transition-all font-medium ${
-                      selectedCategory === "All Courses"
-                        ? "bg-indigo-500 text-white shadow-md"
-                        : "bg-indigo-100 text-indigo-700 hover:bg-indigo-200"
-                    }`}
+                    className={`px-8 w-full inline-block py-3 rounded-full font-medium shadow-sm hover:shadow-md border-b-4
+                      active:border-b-0 active:border-t-0   active:shadow-inner active:translate-y-1 transform transition-all duration-200 focus:outline-none ${
+                        selectedCategory === "All Courses"
+                          ? "bg-indigo-500 border-indigo-600 text-white shadow-sm"
+                          : "bg-indigo-100 border-indigo-300 text-indigo-700 "
+                      }`}
                     onClick={() => setSelectedCategory("All Courses")}
                   >
                     All Courses
@@ -55,10 +56,11 @@ const CoursePage = () => {
                     whileTap={{ scale: 0.99 }}
                   >
                     <button
-                      className={`w-full text-left px-4 py-3 rounded-full transition-all font-medium ${
+                      className={`px-8 w-full inline-block py-3 rounded-full font-medium shadow-sm hover:shadow-md border-b-4
+                      active:border-b-0 active:border-t-0   active:shadow-inner active:translate-y-1 transform transition-all duration-200 focus:outline-none ${
                         selectedCategory === category
-                          ? "bg-indigo-500 text-white shadow-md"
-                          : "bg-indigo-100 text-indigo-700 hover:bg-indigo-200"
+                          ? "bg-indigo-500 border-indigo-600 text-white shadow-sm"
+                          : "bg-indigo-100 border-indigo-300 text-indigo-700 "
                       }`}
                       onClick={() => setSelectedCategory(category)}
                     >
