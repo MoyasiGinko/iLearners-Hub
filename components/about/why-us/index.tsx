@@ -160,7 +160,7 @@ const WhyChooseUsCard: React.FC<WhyChooseUsCardProps> = ({
         </motion.div>
 
         <div
-          className={`w-32 h-32 md:w-40 md:h-40 rounded-full flex items-center justify-center mb-4 overflow-hidden border-4 border-white shadow-inner`}
+          className={`w-full h-full rounded-2xl flex items-center justify-center mb-4 overflow-hidden border-4 border-white shadow-inner`}
         >
           <img
             src={imageUrl || "/api/placeholder/200/200"}
@@ -180,7 +180,7 @@ const WhyChooseUsCard: React.FC<WhyChooseUsCardProps> = ({
 const WhyChooseUs = () => {
   const cards = [
     {
-      imageUrl: "/api/placeholder/200/200", // Replace with your actual image URL
+      imageUrl: "/images/about/choose1.png", // Replace with your actual image URL
       color: "bg-blue-200",
       title: { text: "Super Teachers", color: "text-blue-600" },
       description:
@@ -188,7 +188,7 @@ const WhyChooseUs = () => {
       icon: <StarIcon />,
     },
     {
-      imageUrl: "/api/placeholder/200/200", // Replace with your actual image URL
+      imageUrl: "/images/about/choose2.png", // Replace with your actual image URL
       color: "bg-pink-200",
       title: { text: "Learning Your Way", color: "text-pink-600" },
       description:
@@ -196,7 +196,7 @@ const WhyChooseUs = () => {
       icon: <BrainIcon />,
     },
     {
-      imageUrl: "/api/placeholder/200/200", // Replace with your actual image URL
+      imageUrl: "/images/about/choose3.png", // Replace with your actual image URL
       color: "bg-purple-200",
       title: { text: "Exam Success", color: "text-purple-600" },
       description:
@@ -233,7 +233,7 @@ const WhyChooseUs = () => {
   const colors = ["#FF5733", "#33FF57", "#3357FF", "#F033FF", "#FF33A1"];
 
   return (
-    <div ref={sectionRef} className="bg-transparent py-20 overflow-hidden">
+    <div ref={sectionRef} className="bg-transparent pt-20 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4">
         {/* Decorative elements */}
         <motion.div
@@ -434,7 +434,7 @@ const WhyChooseUs = () => {
                     </motion.div>
 
                     <div
-                      className={`w-32 h-32 md:w-40 md:h-40 rounded-full flex items-center justify-center mb-4 overflow-hidden border-4 border-white shadow-inner`}
+                      className={`w-full h-full rounded-2xl flex items-center justify-center mb-4 overflow-hidden border-4 border-white shadow-inner`}
                     >
                       <img
                         src={card.imageUrl}
