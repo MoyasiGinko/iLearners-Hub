@@ -127,11 +127,7 @@ const CourseDetailsPage = () => {
                   <h2 className="text-2xl font-bold text-indigo-700 mb-4 flex items-center">
                     <span className="mr-2">🚀</span> Adventure Overview
                   </h2>
-                  <p className="text-indigo-600 text-lg">
-                    {course.title} is designed to help young explorers excel in
-                    their learning journey through fun, engaging activities and
-                    personalized guidance.
-                  </p>
+                  <p className="text-indigo-600 text-lg">{course.overview}</p>
                 </div>
 
                 {course.subjects && (

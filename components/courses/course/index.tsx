@@ -109,7 +109,7 @@ const CoursePage = () => {
                           Learn More
                         </span>
                       </Link>
-                      <Link href={`/courses/${course.id}/register`}>
+                      <Link href={`/courses/${course.id}`}>
                         <span className="inline-block bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-bold px-4 py-2 rounded-full transition-all">
                           {course.action}
                         </span>
