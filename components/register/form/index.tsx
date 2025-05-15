@@ -86,7 +86,7 @@ const RegistrationForm = () => {
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="bg-gradient-t from-blue-300 via-indigo-300 to-purple-300 rounded-3xl shadow-lg overflow-hidden"
+          className="bg-white/70 rounded-3xl shadow-lg overflow-hidden"
         >
           <div className="p-8 text-center">
             <h2 className=" leading-tight bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-3xl font-bold text-transparent md:text-5xl drop-shadow-lg">
