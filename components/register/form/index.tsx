@@ -86,7 +86,7 @@ const RegistrationForm = () => {
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="bg-white rounded-3xl shadow-lg overflow-hidden"
+          className="bg-gradient-t from-blue-300 via-indigo-300 to-purple-300 rounded-3xl shadow-lg overflow-hidden"
         >
           <div className="p-8 text-center">
             <h2 className=" leading-tight bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-3xl font-bold text-transparent md:text-5xl drop-shadow-lg">
@@ -339,7 +339,7 @@ const RegistrationForm = () => {
                   type="submit"
                   disabled={isSubmitting}
                   className="px-8 inline-block py-3 rounded-full text-white font-medium shadow-lg hover:shadow-xl border-b-4 active:border-b-0 active:border-t-0 active:shadow-inner active:translate-y-1 hover:-translate-y-1 transform transition-all duration-200
-                  bg-gradient-to-r from-blue-500 to-blue-500 border-blue-700 hover:from-blue-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+                  bg-gradient-to-r from-indigo-500 to-purple-600 border-indigo-700 hover:from-indigo-600 hover:to-purple-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
                 >
                   {isSubmitting ? (
                     <span className="flex items-center justify-center">
