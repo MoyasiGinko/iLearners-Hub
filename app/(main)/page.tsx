@@ -14,8 +14,8 @@ export default function Home() {
   return (
     <main className="bg-gradient-to-b from-blue-50/50 via-blue-50 to-pink-100/50">
       <Hero />
-      <PrimarySection />
       <Testimonials />
+      <PrimarySection />
       <ClientReview />
       <CourseCategories />
       <ContactSection />
