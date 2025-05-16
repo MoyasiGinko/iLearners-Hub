@@ -147,6 +147,14 @@ const categoryColors = {
     button: "bg-blue-500 hover:bg-blue-600",
     accent: "from-blue-400 to-indigo-500",
   },
+  // Add a default color scheme for any category that might not be explicitly defined
+  default: {
+    bg: "bg-gray-100",
+    text: "text-gray-600",
+    border: "border-gray-300",
+    button: "bg-gray-500 hover:bg-gray-600",
+    accent: "from-gray-400 to-gray-500",
+  },
 };
 
 const MiniCourseTablet = () => {
@@ -183,6 +191,16 @@ const MiniCourseTablet = () => {
   const handleCategoryChange = (category: string): void => {
     setSelectedCategory(category);
     setActiveTab(courseCategories.indexOf(category) + 1);
+  };
+
+  // Helper function to safely get color scheme
+  const getColorScheme = (category: string) => {
+    // Check if the category exists in categoryColors
+    if (categoryColors[category as keyof typeof categoryColors]) {
+      return categoryColors[category as keyof typeof categoryColors];
+    }
+    // Return the default color scheme if category doesn't exist
+    return categoryColors.default;
   };
 
   return (
@@ -401,107 +419,96 @@ const MiniCourseTablet = () => {
               All Courses
             </motion.button>
 
-            {courseCategories.map((category, index) => (
-              <motion.button
-                key={index}
-                // whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                className={`px-6 py-3 mr-3 mb-3 rounded-full font-bold transition transform ${
-                  activeTab === index + 1
-                    ? `bg-gradient-to-b ${
-                        categoryColors[category as keyof typeof categoryColors]
-                          .accent
-                      } text-white shadow-lg translate-y-1`
-                    : `bg-${
-                        categoryColors[category as keyof typeof categoryColors]
-                          .bg
-                      } text-${
-                        categoryColors[category as keyof typeof categoryColors]
-                          .text
-                      } shadow-md hover:shadow-lg hover:translate-y-0.5`
-                }`}
-                onClick={() => handleCategoryChange(category)}
-              >
-                {category}
-              </motion.button>
-            ))}
+            {courseCategories.map((category, index) => {
+              // Safely get color scheme for each category
+              const colorScheme = getColorScheme(category);
+
+              return (
+                <motion.button
+                  key={index}
+                  whileTap={{ scale: 0.95 }}
+                  className={`px-6 py-3 mr-3 mb-3 rounded-full font-bold transition transform ${
+                    activeTab === index + 1
+                      ? `bg-gradient-to-b ${colorScheme.accent} text-white shadow-lg translate-y-1`
+                      : `${colorScheme.bg} ${colorScheme.text} shadow-md hover:shadow-lg hover:translate-y-0.5`
+                  }`}
+                  onClick={() => handleCategoryChange(category)}
+                >
+                  {category}
+                </motion.button>
+              );
+            })}
           </div>
         </div>
 
         {/* Course cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
-          {filteredCourses.map((course) => (
-            <motion.div
-              key={course.id}
-              className={`flex flex-col justify-between h-full rounded-xl overflow-hidden border-2 ${
-                categoryColors[course.category as keyof typeof categoryColors]
-                  .border
-              } ${
-                categoryColors[course.category as keyof typeof categoryColors]
-                  .bg
-              } relative`}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              whileHover={{
-                y: -5,
-                boxShadow:
-                  "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-              }}
-            >
-              {/* Category ribbon */}
-              <div
-                className={`absolute top-4 right-0 py-1 px-3 rounded-l-full font-bold text-white text-sm shadow-md bg-gradient-to-r ${
-                  categoryColors[course.category as keyof typeof categoryColors]
-                    .accent
-                }`}
+          {filteredCourses.map((course) => {
+            // Safely get color scheme for each course
+            const colorScheme = getColorScheme(course.category);
+
+            return (
+              <motion.div
+                key={course.id}
+                className={`flex flex-col justify-between h-full rounded-xl overflow-hidden border-2 ${colorScheme.border} ${colorScheme.bg} relative`}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                whileHover={{
+                  y: -5,
+                  boxShadow:
+                    "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                }}
               >
-                {course.category}
-              </div>
-
-              {/* Card content */}
-              <div className="p-6 pt-10 pb-0 flex-grow">
-                <h3 className="text-lg font-bold mb-2 pr-20">{course.title}</h3>
-              </div>
-
-              {/* Price and action button */}
-              <div className="p-6 ">
-                <div className="flex items-center justify-between">
-                  <div className="flex flex-col">
-                    <span className="text-sm text-gray-500">Course Fee</span>
-                    <span className="text-2xl font-bold">{course.fee}</span>
-                    {course.discount && (
-                      <span className="text-xs text-green-600 font-medium">
-                        {course.discount}
-                      </span>
-                    )}
-                  </div>
-
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`px-4 py-2 rounded-full text-white font-medium shadow-md ${
-                      categoryColors[
-                        course.category as keyof typeof categoryColors
-                      ].button
-                    }`}
-                  >
-                    {course.action}
-                  </motion.button>
-                </div>
-              </div>
-
-              {/* Fun decorative elements */}
-              <div className="absolute bottom-1/2 left-1/2 transform -translate-x-1/2 translate-y-1/2 opacity-5">
-                <svg
-                  className="w-16 h-16"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
+                {/* Category ribbon */}
+                <div
+                  className={`absolute top-4 right-0 py-1 px-3 rounded-l-full font-bold text-white text-sm shadow-md bg-gradient-to-r ${colorScheme.accent}`}
                 >
-                  <path d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18Z" />
-                </svg>
-              </div>
-            </motion.div>
-          ))}
+                  {course.category}
+                </div>
+
+                {/* Card content */}
+                <div className="p-6 pt-10 pb-0 flex-grow">
+                  <h3 className="text-lg font-bold mb-2 pr-20">
+                    {course.title}
+                  </h3>
+                </div>
+
+                {/* Price and action button */}
+                <div className="p-6 ">
+                  <div className="flex items-center justify-between">
+                    <div className="flex flex-col">
+                      <span className="text-sm text-gray-500">Course Fee</span>
+                      <span className="text-2xl font-bold">{course.fee}</span>
+                      {course.discount && (
+                        <span className="text-xs text-green-600 font-medium">
+                          {course.discount}
+                        </span>
+                      )}
+                    </div>
+
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className={`px-4 py-2 rounded-full text-white font-medium shadow-md ${colorScheme.button}`}
+                    >
+                      {course.action}
+                    </motion.button>
+                  </div>
+                </div>
+
+                {/* Fun decorative elements */}
+                <div className="absolute bottom-1/2 left-1/2 transform -translate-x-1/2 translate-y-1/2 opacity-5">
+                  <svg
+                    className="w-16 h-16"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18Z" />
+                  </svg>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Call to action */}

@@ -253,7 +253,7 @@ const Testimonials: React.FC = () => {
               transition={{ duration: 0.5 }}
             >
               {/* Book SVG */}
-              <motion.div
+              <motion.span
                 className="absolute -right-10 -top-10 z-10"
                 initial={{ rotate: 0 }}
                 animate={{ rotate: [0, 5, 0, -5, 0] }}
@@ -309,7 +309,7 @@ const Testimonials: React.FC = () => {
                     strokeWidth="2"
                   />
                 </svg>
-              </motion.div>
+              </motion.span>
 
               {[
                 "Come explore our colorful world of learning where every day brings",

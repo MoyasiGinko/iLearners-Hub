@@ -224,20 +224,22 @@ const Header = () => {
       >
         <div className="container mx-auto px-4 flex justify-between items-center">
           {/* Logo */}
-          <Link
+          <a
             href="/"
             className="relative focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 rounded"
           >
             <div className="flex items-center">
-              <span
-                className={`text-2xl font-bold transition-colors duration-300 ${
-                  isScrolled ? "text-gray-900" : "text-slate-950"
+              <Image
+                src="/images/logo.png"
+                alt="iLearnersHub Logo"
+                width={120}
+                height={40}
+                className={`transition-transform duration-300 ${
+                  isScrolled ? "scale-100" : "scale-105"
                 }`}
-              >
-                iLearnersHub
-              </span>
+              />
             </div>
-          </Link>
+          </a>
 
           {/* Desktop Navigation - Centered */}
           <nav className="hidden md:flex items-center justify-center flex-1">
