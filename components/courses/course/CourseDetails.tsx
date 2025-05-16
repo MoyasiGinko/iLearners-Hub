@@ -36,7 +36,7 @@ const CourseDetailsPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-purple-50 py-20">
+      <div className="min-h-screen bg-transparent py-20">
         <div className="container mx-auto px-4 text-center">
           <div className="animate-bounce">
             <span className="text-4xl">🎓</span>
@@ -51,7 +51,7 @@ const CourseDetailsPage = () => {
 
   if (!course) {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-purple-50 py-20">
+      <div className="min-h-screen bg-transparent py-20">
         <div className="container mx-auto px-4 text-center">
           <div className="text-7xl mb-4">😕</div>
           <h2 className="text-3xl font-bold text-indigo-600 mb-6">
@@ -72,7 +72,7 @@ const CourseDetailsPage = () => {
   }
 
   return (
-    <section className="bg-gradient-to-b from-blue-50 to-purple-50 py-10 min-h-screen">
+    <section className="bg-transparent py-10 min-h-screen">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="mb-8">
           <button
@@ -127,11 +127,7 @@ const CourseDetailsPage = () => {
                   <h2 className="text-2xl font-bold text-indigo-700 mb-4 flex items-center">
                     <span className="mr-2">🚀</span> Adventure Overview
                   </h2>
-                  <p className="text-indigo-600 text-lg">
-                    {course.title} is designed to help young explorers excel in
-                    their learning journey through fun, engaging activities and
-                    personalized guidance.
-                  </p>
+                  <p className="text-indigo-600 text-lg">{course.overview}</p>
                 </div>
 
                 {course.subjects && (
@@ -242,7 +238,8 @@ const CourseDetailsPage = () => {
                 <div className="pt-4">
                   <Link
                     href="/register"
-                    className="block w-full bg-indigo-600 hover:bg-indigo-700 text-white text-center font-bold py-4 px-6 rounded-full transition-all transform hover:scale-105 shadow-md text-lg"
+                    className="inline-block  hover:shadow-xl border-b-4 active:border-b-0 active:border-t-0 active:shadow-inner
+                    active:translate-y-1  duration-200 focus:outline-none w-full bg-indigo-500 hover:bg-indigo-600 border-indigo-700 text-white text-center font-bold py-4 px-6 rounded-full transition-all transform  shadow-md text-lg"
                   >
                     {course.action}
                   </Link>
@@ -255,11 +252,11 @@ const CourseDetailsPage = () => {
         {/* Similar Courses Section */}
         {similarCourses.length > 0 && (
           <div className="mt-16">
-            <div className="text-center mb-10">
-              <h2 className="text-3xl font-bold text-indigo-700">
+            <div className="mb-10 text-center">
+              <h2 className=" leading-tight bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-3xl font-bold text-transparent md:text-5xl drop-shadow-lg">
                 More Fun Adventures
               </h2>
-              <p className="text-indigo-500 mt-2 text-lg">
+              <p className="mx-auto max-w-3xl mt-2 text-lg text-indigo-700">
                 Explore other exciting {course.category} courses
               </p>
             </div>
@@ -268,12 +265,14 @@ const CourseDetailsPage = () => {
               {similarCourses.map((similarCourse, index) => (
                 <motion.div
                   key={similarCourse.id}
-                  className="rounded-2xl bg-white shadow-xl overflow-hidden transition-all border-4 border-indigo-100"
+                  className="rounded-2xl bg-white shadow-xl overflow-hidden transition-all border-4 border-indigo-100 flex flex-col"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{
                     scale: 1.01,
+                    boxShadow:
+                      "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
                   }}
                 >
                   <div className="relative h-48 bg-gray-200">
@@ -286,20 +285,18 @@ const CourseDetailsPage = () => {
                       {similarCourse.category}
                     </div>
                   </div>
-                  <div className="p-5">
-                    <h3 className="text-xl font-bold text-indigo-700">
+                  <div className="p-5 flex flex-col flex-grow">
+                    <p className="text-indigo-600">{similarCourse.rate}</p>
+                    <h3 className="text-xl mb-4 leading-tight tracking-tight font-bold text-indigo-700">
                       {similarCourse.title}
                     </h3>
-                    <p className="text-indigo-600 mt-2">{similarCourse.rate}</p>
-                    <div className="mt-6 flex justify-between items-center">
+                    <div className="mt-auto flex  justify-between items-center">
+                      <h3 className="inline-block text-left text-xl  text-indigo-600 font-bold rounded-full transition-all">
+                        {similarCourse.fee}
+                      </h3>
                       <Link href={`/courses/${similarCourse.id}`}>
-                        <span className="inline-block hover:bg-blue-100 text-indigo-600 font-medium px-4 py-2 rounded-full transition-all">
+                        <span className="inline-block text-lg bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-bold px-4 py-2 rounded-full transition-all">
                           Learn More
-                        </span>
-                      </Link>
-                      <Link href={`/courses/${similarCourse.id}/register`}>
-                        <span className="inline-block bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-bold px-4 py-2 rounded-full transition-all">
-                          {similarCourse.action}
                         </span>
                       </Link>
                     </div>

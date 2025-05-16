@@ -7,6 +7,8 @@ import ClientReview from "@/components/main/client-review";
 import Testimonials from "@/components/main/testimonials";
 import Image from "next/image";
 import ContactSection from "@/components/main/contact";
+import FAQSection from "@/components/main/faq/FAQ-Section";
+import faqItems from "../../components/main/faq/homefaqData";
 
 export default function Home() {
   return (
@@ -19,6 +21,7 @@ export default function Home() {
       <ContactSection />
       {/* <Featured /> */}
       <CTA />
+      <FAQSection faqItems={faqItems} />
     </main>
   );
 }

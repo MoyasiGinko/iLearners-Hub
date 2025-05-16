@@ -11,15 +11,14 @@ const Footer = () => {
     { label: "News & Offers", href: "/news-offers" },
     { label: "Gallery", href: "/gallery" },
     { label: "About", href: "/about" },
-    { label: "FAQ", href: "/faq" },
-    { label: "Terms of Service", href: "/terms" },
+    { label: "Register", href: "/register" },
   ];
 
   const resourceLinks = [
-    { label: "Blog", href: "/blog" },
-    { label: "Tutorials", href: "/tutorials" },
-    { label: "Student Resources", href: "/resources" },
-    { label: "Community", href: "/community" },
+    { label: "S3 Course", href: "/courses" },
+    { label: "S4 Course", href: "/courses" },
+    { label: "National 5 Course", href: "/courses" },
+    { label: "P4 to P7 Course", href: "/courses" },
   ];
 
   const currentYear = new Date().getFullYear();
@@ -36,13 +35,20 @@ const Footer = () => {
             transition={{ duration: 0.5 }}
             className="flex flex-col gap-4"
           >
-            <div className="text-blue-600 font-bold text-3xl mb-3">
-              iLearners Hub
+            <div className="mb-3">
+              <Image
+                src="/images/logo.png"
+                alt="iLearners Hub Logo"
+                width={150}
+                height={50}
+                className="object-contain"
+              />
             </div>
             <p className="text-gray-600 mb-4">
-              Empowering minds through innovative learning experiences. We
-              provide quality education to help you achieve your dreams and
-              reach your full potential.
+              Ready to excel in your National 5 exams? Contact us today to
+              discuss your tutoring needs and schedule a consultation with one
+              of our expert tutors. Let’s embark on a journey toward academic
+              success together!
             </p>
             <div className="flex gap-4 mt-2">
               {[...Array(5)].map((_, i) => (
@@ -138,16 +144,16 @@ const Footer = () => {
               <div className="flex items-start gap-3">
                 <FaMapMarkerAlt className="text-indigo-500 mt-1" />
                 <p className="text-gray-600">
-                  123 Learning Street, Education City, Knowledge Country, 12345
+                  1-3 Albyn Terrace, Aberdeen AB10 1YP, UK
                 </p>
               </div>
               <div className="flex items-center gap-3">
                 <FaPhone className="text-indigo-500" />
-                <p className="text-gray-600">+1 (234) 567-8910</p>
+                <p className="text-gray-600">+44 7448 231096</p>
               </div>
               <div className="flex items-center gap-3">
                 <FaEnvelope className="text-indigo-500" />
-                <p className="text-gray-600">info@ilearnershub.com</p>
+                <p className="text-gray-600">info@ilearnershub.co.uk</p>
               </div>
             </div>
           </motion.div>

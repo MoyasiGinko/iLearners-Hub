@@ -14,10 +14,10 @@ const CoursePage = () => {
       : courses.filter((course) => course.category === selectedCategory);
 
   return (
-    <section className="bg-gradient-to-b from-blue-50 to-purple-50 py-20 min-h-screen">
+    <section className="bg-transparent pt-20 min-h-screen">
       <div className="container mx-auto px-4 relative">
         <div className="mb-16 text-center">
-          <h2 className="mb-4 bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-3xl font-bold text-transparent md:text-5xl drop-shadow-lg">
+          <h2 className="mb-4 leading-tight bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-3xl font-bold text-transparent md:text-5xl drop-shadow-lg">
             Explore Our Fun Courses!
           </h2>
           <p className="mx-auto max-w-3xl text-lg text-indigo-700">
@@ -38,11 +38,12 @@ const CoursePage = () => {
                   whileTap={{ scale: 0.99 }}
                 >
                   <button
-                    className={`w-full text-left px-4 py-3 rounded-full transition-all font-medium ${
-                      selectedCategory === "All Courses"
-                        ? "bg-indigo-500 text-white shadow-md"
-                        : "bg-indigo-100 text-indigo-700 hover:bg-indigo-200"
-                    }`}
+                    className={`px-8 w-full inline-block py-3 rounded-full font-medium shadow-sm hover:shadow-md border-b-4
+                      active:border-b-0 active:border-t-0   active:shadow-inner active:translate-y-1 transform transition-all duration-200 focus:outline-none ${
+                        selectedCategory === "All Courses"
+                          ? "bg-indigo-500 border-indigo-600 text-white shadow-sm"
+                          : "bg-indigo-100 border-indigo-300 text-indigo-700 "
+                      }`}
                     onClick={() => setSelectedCategory("All Courses")}
                   >
                     All Courses
@@ -55,10 +56,11 @@ const CoursePage = () => {
                     whileTap={{ scale: 0.99 }}
                   >
                     <button
-                      className={`w-full text-left px-4 py-3 rounded-full transition-all font-medium ${
+                      className={`px-8 w-full inline-block py-3 rounded-full font-medium shadow-sm hover:shadow-md border-b-4
+                      active:border-b-0 active:border-t-0   active:shadow-inner active:translate-y-1 transform transition-all duration-200 focus:outline-none ${
                         selectedCategory === category
-                          ? "bg-indigo-500 text-white shadow-md"
-                          : "bg-indigo-100 text-indigo-700 hover:bg-indigo-200"
+                          ? "bg-indigo-500 border-indigo-600 text-white shadow-sm"
+                          : "bg-indigo-100 border-indigo-300 text-indigo-700 "
                       }`}
                       onClick={() => setSelectedCategory(category)}
                     >
@@ -76,7 +78,7 @@ const CoursePage = () => {
               {filteredCourses.map((course, index) => (
                 <motion.div
                   key={course.id}
-                  className="rounded-2xl bg-white shadow-xl overflow-hidden transition-all border-4 border-indigo-100"
+                  className="rounded-2xl bg-white shadow-xl overflow-hidden transition-all border-4 border-indigo-100 flex flex-col"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
@@ -96,20 +98,18 @@ const CoursePage = () => {
                       {course.category}
                     </div>
                   </div>
-                  <div className="p-5">
-                    <h3 className="text-xl font-bold text-indigo-700">
+                  <div className="p-5 flex flex-col flex-grow">
+                    <p className="text-indigo-600">{course.rate}</p>
+                    <h3 className="text-xl mb-4 leading-tight tracking-tight font-bold text-indigo-700">
                       {course.title}
                     </h3>
-                    <p className="text-indigo-600 mt-2">{course.rate}</p>
-                    <div className="mt-6 flex justify-between items-center">
+                    <div className="mt-auto flex  justify-between items-center">
+                      <h3 className="inline-block text-left text-xl  text-indigo-600 font-bold rounded-full transition-all">
+                        {course.fee}
+                      </h3>
                       <Link href={`/courses/${course.id}`}>
-                        <span className="inline-block hover:bg-blue-100 text-indigo-600 font-medium px-4 py-2 rounded-full transition-all">
+                        <span className="inline-block text-lg bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-bold px-4 py-2 rounded-full transition-all">
                           Learn More
-                        </span>
-                      </Link>
-                      <Link href={`/courses/${course.id}/register`}>
-                        <span className="inline-block bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-bold px-4 py-2 rounded-full transition-all">
-                          {course.action}
                         </span>
                       </Link>
                     </div>

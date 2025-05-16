@@ -95,12 +95,12 @@ const GalleryPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-purple-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="h-auto bg-transparent pt-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-extrabold text-indigo-600 mb-4 font-comic">
+          <h2 className="mb-4 leading-tight bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-3xl font-bold text-transparent md:text-5xl drop-shadow-lg">
             Our Learning Center Gallery
-          </h1>
+          </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Take a peek at our colorful classrooms, exciting activities, and
             happy learning moments!
@@ -224,11 +224,18 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`px-6 py-2.5 rounded-full font-medium text-sm transition-all duration-200 ${
-        active
-          ? "bg-indigo-600 text-white shadow-md"
-          : "bg-white text-indigo-600 hover:bg-indigo-100"
-      }`}
+      className={`px-8 inline-block py-3 rounded-full
+      font-medium
+       shadow-lg hover:shadow-xl
+       border-b-4
+       active:border-b-0 active:border-t-0 active:shadow-inner
+       active:translate-y-1 hover:-translate-y-1
+       transform transition-all duration-200
+       focus:outline-none text-indigo-600 border-blue-200 ${
+         active
+           ? "bg-indigo-600 border-indigo-700 text-white"
+           : "bg-blue-100 border-blue-300 text-indigo-600 "
+       }`}
     >
       {children}
     </button>

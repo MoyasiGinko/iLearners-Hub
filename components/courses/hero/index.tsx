@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import CustomButton from "@/components/common/CustomButton";
 
 const Hero: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -26,8 +27,17 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative flex items-center bg-gradient-to-r from-indigo-500 via-purple-400 to-pink-400 text-white rounded-b-3xl overflow-hidden py-12 md:py-20 lg:py-24 min-h-[60vh] md:min-h-[50vh]">
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 z-10 relative">
+    <section className="relative flex items-center bg-gradient-to-r from-indigo-500 md:from-indigo-500/50 md:via-puprle-400/95 via-purple-400 to-pink-400 text-white rounded-b-3xl overflow-hidden py-12 md:py-20 lg:py-24 min-h-[60vh] md:min-h-[50vh]">
+      {/* Background image with gradient overlay */}
+      <div className="absolute inset-0 -z-1">
+        <img
+          src="/images/hero/h2.png"
+          alt="Background"
+          className="opacity-100 object-fit cover w-full h-full"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent" />
+      </div>
+      <div className="container mt-10 mx-auto px-4 sm:px-6 md:px-8 z-10 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -42,16 +52,16 @@ const Hero: React.FC = () => {
             grow with interactive lessons.
           </p>
           <div className="flex flex-wrap gap-3 md:gap-4">
-            <Link href="/courses">
-              <span className="bg-yellow-400 text-blue-900 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-medium hover:bg-yellow-300 transition-all inline-block text-sm sm:text-base whitespace-nowrap">
-                Explore Courses
-              </span>
-            </Link>
-            <Link href="/gallery">
-              <span className="bg-white text-purple-700 px-5 sm:px-6 py-2.5 sm:py-3 rounded-full font-medium hover:bg-opacity-90 transition-all inline-block text-sm sm:text-base whitespace-nowrap">
-                View Gallery
-              </span>
-            </Link>
+            <CustomButton
+              text="View Gallery"
+              href="/gallery"
+              className="bg-gradient-to-r from-teal-400 to-blue-500 border-teal-600 hover:bg-opacity-90"
+            />
+            <CustomButton
+              text="Book a Lesson"
+              href="/register"
+              className="bg-gradient-to-r from-pink-400 to-pink-600 border-pink-600 hover:bg-opacity-90"
+            />
           </div>
         </motion.div>
 
@@ -59,7 +69,7 @@ const Hero: React.FC = () => {
         <div
           className={`absolute ${
             isMobile
-              ? "inset-0 flex items-center justify-center w-full h-full z-0 opacity-30"
+              ? "inset-0 flex items-center justify-center w-full h-full -z-1 opacity-30"
               : "right-0 top-1/2 transform -translate-y-1/2 md:right-8 w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-64 lg:h-64 z-0"
           }`}
         >

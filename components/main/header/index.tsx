@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
+import CustomButton from "@/components/common/CustomButton";
 
 // Define types for the MobileMenu props
 interface MobileMenuProps {
@@ -106,7 +107,7 @@ const MobileMenu = ({ isOpen, onClose, navItems }: MobileMenuProps) => {
                   className="mt-4 px-8 py-3 bg-yellow-300 text-blue-700 rounded-full text-xl font-medium hover:bg-yellow-200 transition-all hover:shadow-lg flex items-center justify-center border-2 border-yellow-100"
                   onClick={onClose}
                 >
-                  REGISTER
+                  Book a Lesson
                 </Link>
               </motion.div>
             </nav>
@@ -223,20 +224,22 @@ const Header = () => {
       >
         <div className="container mx-auto px-4 flex justify-between items-center">
           {/* Logo */}
-          <Link
+          <a
             href="/"
             className="relative focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 rounded"
           >
             <div className="flex items-center">
-              <span
-                className={`text-2xl font-bold transition-colors duration-300 ${
-                  isScrolled ? "text-gray-900" : "text-slate-950"
+              <Image
+                src="/images/logo.png"
+                alt="iLearnersHub Logo"
+                width={120}
+                height={40}
+                className={`transition-transform duration-300 ${
+                  isScrolled ? "scale-100" : "scale-105"
                 }`}
-              >
-                iLearnersHub
-              </span>
+              />
             </div>
-          </Link>
+          </a>
 
           {/* Desktop Navigation - Centered */}
           <nav className="hidden md:flex items-center justify-center flex-1">
@@ -259,17 +262,14 @@ const Header = () => {
           </nav>
 
           {/* Register Button - Right */}
-          <div className="hidden md:block">
-            <Link
+          <div className="hidden h-[56px] md:block">
+            <CustomButton
+              text="Book a Lesson"
               href="/register"
-              className={`px-5 py-2 rounded-full font-medium transition all duration-300 transform hover:scale-105 hover:shadow-lg border ${
-                isScrolled
-                  ? "bg-slate-800 text-gray-100 hover:bg-slate-700 border-slate-700"
-                  : "bg-slate-800/80 text-gray-100 hover:bg-slate-800 border-slate-700/50 backdrop-blur-sm"
+              className={`hover:translate-y-0 bg-gradient-to-r from-yellow-400 to-yellow-500 border-yellow-600 hover:bg-opacity-90 transition-colors duration-200 ${
+                isScrolled ? "text-gray-900" : "text-gray-900"
               }`}
-            >
-              REGISTER
-            </Link>
+            />
           </div>
 
           {/* Mobile Menu Toggle Button */}
