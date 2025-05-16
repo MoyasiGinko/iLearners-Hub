@@ -11,15 +11,14 @@ const Footer = () => {
     { label: "News & Offers", href: "/news-offers" },
     { label: "Gallery", href: "/gallery" },
     { label: "About", href: "/about" },
-    { label: "FAQ", href: "/faq" },
-    { label: "Terms of Service", href: "/terms" },
+    { label: "Register", href: "/register" },
   ];
 
   const resourceLinks = [
-    { label: "Blog", href: "/blog" },
-    { label: "Tutorials", href: "/tutorials" },
-    { label: "Student Resources", href: "/resources" },
-    { label: "Community", href: "/community" },
+    { label: "S3 Course", href: "/courses" },
+    { label: "S4 Course", href: "/courses" },
+    { label: "National 5 Course", href: "/courses" },
+    { label: "P4 to P7 Course", href: "/courses" },
   ];
 
   const currentYear = new Date().getFullYear();
