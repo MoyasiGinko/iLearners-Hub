@@ -260,11 +260,11 @@ const Header = () => {
           </nav>
 
           {/* Register Button - Right */}
-          <div className="hidden md:block">
+          <div className="hidden h-[56px] md:block">
             <CustomButton
               text="Book a Lesson"
               href="/register"
-              className={`bg-gradient-to-r from-yellow-400 to-yellow-500 border-yellow-600 hover:bg-opacity-90 transition-colors duration-200 ${
+              className={`hover:translate-y-0 bg-gradient-to-r from-yellow-400 to-yellow-500 border-yellow-600 hover:bg-opacity-90 transition-colors duration-200 ${
                 isScrolled ? "text-gray-900" : "text-gray-900"
               }`}
             />
