@@ -445,7 +445,7 @@ const MiniCourseTablet = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
           {filteredCourses.length > 0 ? (
             filteredCourses.map((course) => {
-              // Safely get color scheme for each course
+              // Safely get color scheme for each courses
               const colorScheme = getColorScheme(course.category);
 
               return (
