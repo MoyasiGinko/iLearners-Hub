@@ -134,7 +134,7 @@ const Hero: React.FC = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-transparent" />
       </div>
-      <div className="container mx-auto px-4 sm:px-6 md:px-8 z-10 relative">
+      <div className="container mt-10 mx-auto px-4 sm:px-6 md:px-8 z-10 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
