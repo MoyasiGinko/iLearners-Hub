@@ -259,14 +259,14 @@ const Hero = () => {
         </svg>
       </div>
 
-      <div className="container mx-auto px-6 py-12 flex flex-col lg:flex-row items-center">
+      <div className="container mt-10 mx-auto px-6 py-12 flex flex-col lg:flex-row items-center">
         <FloatingElements />
 
         {/* Left side with images - kept as is */}
         <div className="relative w-full lg:w-1/2 mb-10 lg:mb-0 flex justify-center">
           <div className="relative z-10">
             {/* Main instructor with responsive sizing */}
-            <div className="bg-orange-500 rounded-full p-1 sm:p-2 w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 relative animate-float">
+            <div className="bg-orange-500 rounded-full p-1 sm:p-2 w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 relative">
               <div className="absolute inset-0 flex items-end justify-center pb-0">
                 <Image
                   src="/images/instructor.png"
