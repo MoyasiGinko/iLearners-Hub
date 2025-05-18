@@ -6,16 +6,23 @@ import { motion, AnimatePresence } from "framer-motion";
 import { HiMenuAlt4 } from "react-icons/hi";
 import { IoMdClose } from "react-icons/io";
 import CustomButton from "@/components/common/CustomButton";
+import { usePathname } from "next/navigation"; // Import usePathname to get current path
 
 // Define types for the MobileMenu props
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
   navItems: Array<{ title: string; href: string }>;
+  currentPath: string; // Add currentPath to props
 }
 
 // Separate component for mobile menu to improve organization
-const MobileMenu = ({ isOpen, onClose, navItems }: MobileMenuProps) => {
+const MobileMenu = ({
+  isOpen,
+  onClose,
+  navItems,
+  currentPath,
+}: MobileMenuProps) => {
   const menuVariants = {
     closed: {
       opacity: 0,
@@ -56,6 +63,11 @@ const MobileMenu = ({ isOpen, onClose, navItems }: MobileMenuProps) => {
     };
   }, [isOpen]);
 
+  // Helper function to check if a nav item is active
+  const isActive = (href: string) => {
+    return currentPath === href;
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -94,7 +106,11 @@ const MobileMenu = ({ isOpen, onClose, navItems }: MobileMenuProps) => {
                 <motion.div key={item.title} variants={menuItemVariants}>
                   <Link
                     href={item.href}
-                    className="text-white text-xl font-medium hover:text-yellow-100 transition-colors flex items-center justify-center bg-blue-600/40 px-6 py-3 rounded-full text-center"
+                    className={`text-white text-xl font-medium transition-colors flex items-center justify-center px-6 py-3 rounded-full text-center ${
+                      isActive(item.href)
+                        ? "bg-blue-700 text-yellow-300 font-bold"
+                        : "bg-blue-600/40 hover:text-yellow-100"
+                    }`}
                     onClick={onClose}
                   >
                     {item.title}
@@ -104,7 +120,11 @@ const MobileMenu = ({ isOpen, onClose, navItems }: MobileMenuProps) => {
               <motion.div variants={menuItemVariants}>
                 <Link
                   href="/register"
-                  className="mt-4 px-8 py-3 bg-yellow-300 text-blue-700 rounded-full text-xl font-medium hover:bg-yellow-200 transition-all hover:shadow-lg flex items-center justify-center border-2 border-yellow-100"
+                  className={`mt-4 px-8 py-3 rounded-full text-xl font-medium transition-all hover:shadow-lg flex items-center justify-center border-2 ${
+                    currentPath === "/register"
+                      ? "bg-yellow-400 text-blue-800 border-yellow-200 font-bold"
+                      : "bg-yellow-300 text-blue-700 border-yellow-100 hover:bg-yellow-200"
+                  }`}
                   onClick={onClose}
                 >
                   Book a Lesson
@@ -178,6 +198,7 @@ const MobileMenu = ({ isOpen, onClose, navItems }: MobileMenuProps) => {
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname(); // Get the current pathname
 
   // Navigation items
   const navItems = [
@@ -213,6 +234,11 @@ const Header = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [mobileMenuOpen]);
 
+  // Helper function to check if a nav item is active
+  const isActive = (href: string) => {
+    return pathname === href;
+  };
+
   return (
     <>
       <header
@@ -245,24 +271,38 @@ const Header = () => {
                 <Link
                   key={item.title}
                   href={item.href}
-                  className={`font-semibold transition-all duration-300 transform relative px-3 py-1 rounded-2xl bg-gradient-to-r from-sky-400 to-blue-300 hover:bg-gradient-to-r hover:from-[#fbbf24] hover:to-[#f472b6] overflow-hidden group shadow-lg hover:shadow-2xl hover:scale-105 hover:-translate-y-1 hover:rotate-x-6 hover:rotate-y-3 ${
-                    isScrolled ? "text-gray-50 " : "text-gray-50"
+                  className={`font-semibold transition-all duration-300 transform relative px-3 py-1 rounded-2xl overflow-hidden group shadow-lg ${
+                    isActive(item.href)
+                      ? "bg-gradient-to-r from-[#fbbf24] to-[#f472b6] text-blue-50 scale-105"
+                      : "bg-gradient-to-r from-sky-400 to-blue-300 text-gray-50 hover:bg-gradient-to-r hover:from-[#fbbf24] hover:to-[#f472b6] hover:shadow-2xl hover:scale-105 hover:-translate-y-1 hover:rotate-x-6 hover:rotate-y-3"
                   }`}
                   style={{
                     perspective: "600px",
                   }}
                 >
-                  <span className="relative z-10 block transition-transform duration-300 group-hover:translate-y-[-120%] group-hover:opacity-0">
+                  <span
+                    className={`relative z-10 block transition-transform duration-300 ${
+                      isActive(item.href)
+                        ? "font-bold"
+                        : "group-hover:translate-y-[-120%] group-hover:opacity-0"
+                    }`}
+                  >
                     {item.title}
                   </span>
-                  <span className="absolute left-0 top-0 w-full h-full flex items-center justify-center z-0 transition-transform duration-300 translate-y-[120%] opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
-                    <span className="bg-gradient-to-r from-blue-50 via-purple-50 to-indigo-50 bg-clip-text text-transparent animate-gradient-x">
-                      {item.title}
+                  {!isActive(item.href) && (
+                    <span className="absolute left-0 top-0 w-full h-full flex items-center justify-center z-0 transition-transform duration-300 translate-y-[120%] opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                      <span className="bg-gradient-to-r from-blue-50 via-purple-50 to-indigo-50 bg-clip-text text-transparent animate-gradient-x">
+                        {item.title}
+                      </span>
                     </span>
-                  </span>
+                  )}
                   {/* 3D hover background effect */}
                   <span
-                    className="absolute inset-0 rounded-2xl z-0 transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:scale-110 group-hover:blur-sm"
+                    className={`absolute inset-0 rounded-2xl z-0 transition-all duration-300 ${
+                      isActive(item.href)
+                        ? "opacity-100 scale-105 blur-sm"
+                        : "opacity-0 group-hover:opacity-100 group-hover:scale-110 group-hover:blur-sm"
+                    }`}
                     style={{
                       boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
                       filter: "blur(4px)",
@@ -278,8 +318,10 @@ const Header = () => {
             <CustomButton
               text="Book a Lesson"
               href="/register"
-              className={`hover:translate-y-0 bg-gradient-to-r from-yellow-400 to-yellow-500 border-yellow-600 hover:bg-opacity-90 transition-colors duration-200 ${
-                isScrolled ? "text-gray-900" : "text-gray-900"
+              className={`hover:translate-y-0 border-yellow-600 transition-colors duration-200 ${
+                isActive("/register")
+                  ? "bg-gradient-to-r from-yellow-500 to-amber-500 text-gray-900 font-bold shadow-lg"
+                  : "bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 hover:bg-opacity-90"
               }`}
             />
           </div>
@@ -304,6 +346,7 @@ const Header = () => {
         isOpen={mobileMenuOpen}
         onClose={() => setMobileMenuOpen(false)}
         navItems={navItems}
+        currentPath={pathname} // Pass the current path to the mobile menu
       />
     </>
   );
