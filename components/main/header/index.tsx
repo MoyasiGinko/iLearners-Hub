@@ -245,7 +245,7 @@ const Header = () => {
                 <Link
                   key={item.title}
                   href={item.href}
-                  className={`font-medium transition-colors duration-200 hover:scale-105 transform relative group ${
+                  className={`font-semibold transition-colors duration-200 hover:scale-105 transform relative group ${
                     isScrolled
                       ? "text-gray-950 hover:text-slate-950"
                       : "text-gray-900 hover:text-gray-950"
