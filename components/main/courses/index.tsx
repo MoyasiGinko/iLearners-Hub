@@ -489,13 +489,14 @@ const MiniCourseTablet = () => {
                         )}
                       </div>
 
-                      <motion.button
+                      <motion.a
+                        href={`/courses/${course.id}`}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className={`px-4 py-2 rounded-full text-white font-medium shadow-md ${colorScheme.button}`}
                       >
-                        {course.action}
-                      </motion.button>
+                        Learn More
+                      </motion.a>
                     </div>
                   </div>
 
