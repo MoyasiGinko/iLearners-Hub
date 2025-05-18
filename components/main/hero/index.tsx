@@ -284,7 +284,7 @@ const Hero = () => {
                   alt="Left view"
                   width={192}
                   height={192}
-                  className="rounded-full w-full h-full object-cover"
+                  className="rounded-full w-full h-full object-cover p-1"
                 />
               </div>
             </div>
@@ -297,7 +297,7 @@ const Hero = () => {
                   alt="Male student"
                   width={192}
                   height={192}
-                  className="rounded-full w-full h-full object-cover"
+                  className="rounded-full w-full h-full object-cover p-1"
                 />
               </div>
             </div>
