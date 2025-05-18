@@ -266,27 +266,25 @@ const Hero = () => {
         <div className="relative w-full lg:w-1/2 mb-10 lg:mb-0 flex justify-center">
           <div className="relative z-10">
             {/* Main instructor with responsive sizing */}
-            <div className="bg-orange-500 rounded-full p-1 sm:p-2 w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 relative">
-              <div className="absolute inset-0 flex items-end justify-center pb-0">
-                <Image
-                  src="/images/instructor.png"
-                  alt="Main instructor"
-                  width={320}
-                  height={320}
-                  className="object-contain rounded-full"
-                />
-              </div>
+            <div className="bg-orange-500 rounded-full p-1 sm:p-2 w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 relative flex items-center justify-center overflow-hidden">
+              <Image
+                src="/images/middle.png"
+                alt="Main instructor"
+                width={320}
+                height={320}
+                className="object-cover rounded-full w-full h-full"
+              />
             </div>
 
             {/* Female student floating on the left side */}
             <div className="absolute -left-10 sm:-left-16 lg:-left-20 bottom-16 sm:bottom-20 bg-pink-400 rounded-full p-1 sm:p-2 w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 z-20 animate-orbit-left">
               <div className="absolute inset-0 flex items-center justify-center">
                 <Image
-                  src="/images/female-student.png"
-                  alt="Female student"
+                  src="/images/left.png"
+                  alt="Left view"
                   width={160}
                   height={160}
-                  className="object-contain rounded-full w-full h-full"
+                  className="rounded-full w-full h-full object-cover"
                 />
               </div>
             </div>
@@ -295,11 +293,11 @@ const Hero = () => {
             <div className="absolute -bottom-6 -right-6 sm:-bottom-8 sm:-right-8 lg:-bottom-10 lg:-right-10 bg-purple-300 rounded-full p-1 sm:p-2 w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 z-20 animate-orbit-right">
               <div className="absolute inset-0 flex items-center justify-center">
                 <Image
-                  src="/images/male-student.png"
+                  src="/images/right.png"
                   alt="Male student"
                   width={160}
                   height={160}
-                  className="object-contain rounded-full w-full h-full"
+                  className="rounded-full w-full h-full object-cover"
                 />
               </div>
             </div>
