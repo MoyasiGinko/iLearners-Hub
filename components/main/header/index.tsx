@@ -224,10 +224,7 @@ const Header = () => {
       >
         <div className="container mx-auto px-4 flex justify-between items-center">
           {/* Logo */}
-          <a
-            href="/"
-            className="relative focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 rounded"
-          >
+          <a href="/" className="relative focus:outline-none rounded">
             <div className="flex items-center">
               <Image
                 src="/images/logo.png"
