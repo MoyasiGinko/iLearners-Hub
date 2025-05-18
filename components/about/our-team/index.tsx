@@ -143,7 +143,7 @@ const TeamMemberCard: React.FC<{ member: TeamMember; index: number }> = ({
         {/* Title with cartoon-style bubble */}
         <div className="relative mb-4">
           <motion.div
-            className="relative py-2 px-4 rounded-full text-white font-semibold text-sm mb-3 inline-block font-comic"
+            className="relative py-2 px-4 rounded-full text-white font-semibold text-sm mb-3 inline-block font-['Comic_Sans_MS',cursive,sans-serif]"
             style={{ backgroundColor: getComplementaryColor(member.color) }}
             animate={{
               y: [0, -3, 0, -3, 0],
@@ -162,7 +162,9 @@ const TeamMemberCard: React.FC<{ member: TeamMember; index: number }> = ({
           </motion.div>
         </div>
 
-        <p className="text-gray-700 font-medium">{member.description}</p>
+        <p className="text-gray-700 font-medium font-['Comic_Sans_MS',cursive,sans-serif]">
+          {member.description}
+        </p>
       </div>
     </motion.div>
   );

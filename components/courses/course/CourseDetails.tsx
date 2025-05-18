@@ -64,7 +64,7 @@ const CourseDetailsPage = () => {
             onClick={() => router.push("/courses")}
             className="bg-yellow-400 hover:bg-yellow-500 text-indigo-700 font-medium py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-md"
           >
-            Explore Other Adventures
+            Explore Other Courses
           </button>
         </div>
       </div>
@@ -77,7 +77,7 @@ const CourseDetailsPage = () => {
         <div className="mb-8">
           <button
             onClick={() => router.push("/courses")}
-            className="flex items-center text-indigo-600 hover:text-indigo-800 transition-colors font-medium"
+            className="flex items-center cursor-pointer text-indigo-600 hover:text-indigo-800 transition-colors font-medium"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -93,7 +93,7 @@ const CourseDetailsPage = () => {
                 d="M10 19l-7-7m0 0l7-7m-7 7h18"
               />
             </svg>
-            Back to All Adventures
+            Back to All Courses
           </button>
         </div>
 
@@ -101,7 +101,7 @@ const CourseDetailsPage = () => {
           {/* Course Header */}
           <div className="relative h-64 md:h-80 bg-gray-200">
             <img
-              src={course.Image}
+              src="/images/courses/c1.jpg"
               alt={course.title}
               className="object-cover w-full h-full"
             />
@@ -125,7 +125,7 @@ const CourseDetailsPage = () => {
               <div className="md:col-span-2 space-y-8">
                 <div className="bg-blue-50 p-6 rounded-2xl border-2 border-blue-100">
                   <h2 className="text-2xl font-bold text-indigo-700 mb-4 flex items-center">
-                    <span className="mr-2">🚀</span> Adventure Overview
+                    <span className="mr-2">🚀</span> Course Overview
                   </h2>
                   <p className="text-indigo-600 text-lg">{course.overview}</p>
                 </div>
@@ -183,20 +183,27 @@ const CourseDetailsPage = () => {
                     )}
                   </div>
                 )}
+
+                <div className="bg-blue-50 p-6 rounded-2xl border-2 border-blue-100">
+                  <h2 className="text-2xl font-bold text-indigo-700 mb-4 flex items-center">
+                    <span className="mr-2">👩‍🏫</span> Perfect For
+                  </h2>
+                  <p className="text-indigo-600 text-lg">{course.perfectFor}</p>
+                </div>
               </div>
 
               {/* Pricing Card */}
               <div className="rounded-3xl bg-gradient-to-br from-indigo-50 to-pink-50 border-4 border-indigo-100 p-6 h-fit shadow-lg">
-                <h3 className="text-xl font-bold text-indigo-700 mb-6 text-center">
+                <h3 className="text-2xl font-bold text-indigo-700 mb-6 text-center">
                   Join This Adventure!
                 </h3>
                 <div className="space-y-4 mb-8">
-                  <div className="flex justify-between items-center bg-white p-3 rounded-xl">
+                  {/* <div className="flex justify-between items-center bg-white p-3 rounded-xl">
                     <span className="text-indigo-600 font-medium">Rate:</span>
                     <span className="font-bold text-indigo-700">
                       {course.rate}
                     </span>
-                  </div>
+                  </div> */}
 
                   {course.duration && (
                     <div className="flex justify-between items-center bg-white p-3 rounded-xl">
@@ -223,7 +230,7 @@ const CourseDetailsPage = () => {
                   <div className="flex justify-between items-center bg-indigo-100 p-4 rounded-xl">
                     <span className="text-indigo-700 font-medium">Fee:</span>
                     <span className="font-bold text-2xl text-indigo-700">
-                      {course.fee}
+                      {course.rate}
                     </span>
                   </div>
 
@@ -254,7 +261,7 @@ const CourseDetailsPage = () => {
           <div className="mt-16">
             <div className="mb-10 text-center">
               <h2 className=" leading-tight bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-3xl font-bold text-transparent md:text-5xl drop-shadow-lg">
-                More Fun Adventures
+                More Fun Courses
               </h2>
               <p className="mx-auto max-w-3xl mt-2 text-lg text-indigo-700">
                 Explore other exciting {course.category} courses
@@ -311,7 +318,7 @@ const CourseDetailsPage = () => {
         {similarCourses.length === 0 && (
           <div className="mt-16 text-center">
             <h2 className="text-3xl font-bold text-indigo-700 mb-4">
-              Discover Other Adventures
+              Discover Other Courses
             </h2>
             <p className="text-indigo-600 mb-8 text-lg">
               No other courses found in the {course.category} category right
@@ -319,7 +326,7 @@ const CourseDetailsPage = () => {
             </p>
             <Link href="/courses">
               <span className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-md">
-                See All Adventures
+                See All Courses
               </span>
             </Link>
           </div>

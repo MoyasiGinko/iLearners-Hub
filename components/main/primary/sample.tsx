@@ -33,7 +33,7 @@ const PrimarySection = () => {
     <div className="relative bg-white overflow-hidden py-16">
       {/* Dotted world map background */}
       <div className="absolute inset-0 z-0 opacity-10">
-        <div className="w-full h-full bg-[url('/images/dotted-world-map.png')] bg-no-repeat bg-contain bg-center"></div>
+        <div className="w-full h-full  bg-no-repeat bg-contain bg-center"></div>
       </div>
 
       {/* Paper airplane decoration */}

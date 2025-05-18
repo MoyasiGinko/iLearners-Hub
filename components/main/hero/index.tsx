@@ -263,53 +263,51 @@ const Hero = () => {
         <FloatingElements />
 
         {/* Left side with images - kept as is */}
-        <div className="relative w-full lg:w-1/2 mb-10 lg:mb-0 flex justify-center">
+        <div className="relative w-full lg:w-1/2 mb-10 lg:mb-0 flex justify-center scale-105 xl:scale-110">
           <div className="relative z-10">
             {/* Main instructor with responsive sizing */}
-            <div className="bg-orange-500 rounded-full p-1 sm:p-2 w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 relative">
-              <div className="absolute inset-0 flex items-end justify-center pb-0">
-                <Image
-                  src="/images/instructor.png"
-                  alt="Main instructor"
-                  width={320}
-                  height={320}
-                  className="object-contain rounded-full"
-                />
-              </div>
+            <div className="bg-orange-500 rounded-full p-1 sm:p-2 w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 relative flex items-center justify-center overflow-hidden">
+              <Image
+                src="/images/middle.png"
+                alt="Main instructor"
+                width={384}
+                height={384}
+                className="object-cover rounded-full w-full h-full"
+              />
             </div>
 
             {/* Female student floating on the left side */}
-            <div className="absolute -left-10 sm:-left-16 lg:-left-20 bottom-16 sm:bottom-20 bg-pink-400 rounded-full p-1 sm:p-2 w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 z-20 animate-orbit-left">
+            <div className="absolute -left-12 sm:-left-20 lg:-left-24 bottom-20 sm:bottom-24 bg-pink-400 rounded-full p-1 sm:p-2 w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 z-20 animate-orbit-left">
               <div className="absolute inset-0 flex items-center justify-center">
                 <Image
-                  src="/images/female-student.png"
-                  alt="Female student"
-                  width={160}
-                  height={160}
-                  className="object-contain rounded-full w-full h-full"
+                  src="/images/left.png"
+                  alt="Left view"
+                  width={192}
+                  height={192}
+                  className="rounded-full w-full h-full object-cover p-1"
                 />
               </div>
             </div>
 
             {/* Male student floating on the bottom right */}
-            <div className="absolute -bottom-6 -right-6 sm:-bottom-8 sm:-right-8 lg:-bottom-10 lg:-right-10 bg-purple-300 rounded-full p-1 sm:p-2 w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 z-20 animate-orbit-right">
+            <div className="absolute -bottom-8 -right-8 sm:-bottom-12 sm:-right-12 lg:-bottom-14 lg:-right-14 bg-purple-300 rounded-full p-1 sm:p-2 w-32 h-32 sm:w-36 sm:h-36 md:w-44 md:h-44 lg:w-48 lg:h-48 z-20 animate-orbit-right">
               <div className="absolute inset-0 flex items-center justify-center">
                 <Image
-                  src="/images/male-student.png"
+                  src="/images/right.png"
                   alt="Male student"
-                  width={160}
-                  height={160}
-                  className="object-contain rounded-full w-full h-full"
+                  width={192}
+                  height={192}
+                  className="rounded-full w-full h-full object-cover p-1"
                 />
               </div>
             </div>
             <div className="absolute inset-0 animate-spin-slow -z-1">
               {/* Blue ring around the main instructor - scaled for responsiveness */}
-              <div className="absolute inset-0 rounded-full border-2 border-blue-500 -m-4 sm:-m-6 md:-m-7 lg:-m-8 -z-1"></div>
+              <div className="absolute inset-0 rounded-full border-2 border-blue-500 -m-6 sm:-m-8 md:-m-10 lg:-m-12 -z-1"></div>
 
               {/* Decorative dots positioned precisely over the blue ring - scaled for responsiveness */}
               {/* Top dots */}
-              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-6 sm:-translate-y-8 lg:-translate-y-10 w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-full -z-1">
+              <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-8 sm:-translate-y-10 lg:-translate-y-14 w-4 h-4 sm:w-5 sm:h-5 bg-red-500 rounded-full -z-1">
                 <img
                   src="/images/planet/planet1.svg"
                   alt="planet1"
@@ -318,7 +316,7 @@ const Hero = () => {
               </div>
 
               {/* Right dots */}
-              <div className="absolute top-1/2 right-0 transform translate-x-6 sm:translate-x-8 lg:translate-x-10 -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-purple-500 rounded-full -z-1">
+              <div className="absolute top-1/2 right-0 transform translate-x-8 sm:translate-x-10 lg:translate-x-14 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 bg-purple-500 rounded-full -z-1">
                 <img
                   src="/images/planet/planet2.svg"
                   alt="planet2"
@@ -327,7 +325,7 @@ const Hero = () => {
               </div>
 
               {/* Bottom dots */}
-              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-6 sm:translate-y-8 lg:translate-y-10 w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-full -z-1">
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-8 sm:translate-y-10 lg:translate-y-14 w-4 h-4 sm:w-5 sm:h-5 bg-red-500 rounded-full -z-1">
                 <img
                   src="/images/planet/planet3.svg"
                   alt="planet3"
@@ -336,7 +334,7 @@ const Hero = () => {
               </div>
 
               {/* Left dots */}
-              <div className="absolute top-1/2 left-0 transform -translate-x-6 sm:-translate-x-8 lg:-translate-x-10 -translate-y-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-purple-500 rounded-full -z-1">
+              <div className="absolute top-1/2 left-0 transform -translate-x-8 sm:-translate-x-10 lg:-translate-x-14 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 bg-purple-500 rounded-full -z-1">
                 <img
                   src="/images/planet/planet4.svg"
                   alt="planet4"

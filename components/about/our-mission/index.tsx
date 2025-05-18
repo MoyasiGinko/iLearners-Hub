@@ -36,7 +36,7 @@ const OurMission = () => {
           <div className="md:w-1/2 mt-6 md:mt-0">
             <div className="rounded-lg overflow-hidden ">
               <img
-                src="/images/about/mission.png"
+                src="/images/logo.png"
                 alt="Happy children learning together"
                 className="w-full h-full object-fit cover"
               />

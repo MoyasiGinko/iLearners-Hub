@@ -8,13 +8,14 @@ export type Course = {
   rate?: string;
   duration?: string;
   sessions?: string;
-  fee: string;
+  fee?: string;
   discount?: string;
   includes?: string[];
   schedule?: string;
   flexibility?: string;
   action: string;
   overview?: string;
+  perfectFor?: string;
 };
 
 export const courseCategories: string[] = [
@@ -35,18 +36,19 @@ export const courses: Course[] = [
     Image: "/images/courses/c1.jpg",
     category: "Primary",
     subjects: ["Maths", "English", "Science"],
-    rate: "£10 per hour",
     sessions: "2 hours",
+    rate: "£10/hr",
     fee: "£10.00",
     action: "Enroll Now",
-    overview:
-      "Year-round support in Maths, English, and Science, designed to develop a strong academic foundation and genuine interest in learning.",
+    overview: `Our P3 to P7 tutoring programme offers year-round support in Maths, English, and Science, designed to develop a strong academic foundation and genuine interest in learning. Sessions are interactive and tailored to each child’s pace, helping them grow confident, creative, and curious learners. Each 2-hour session comprises activities that build core skills while encouraging independent thinking. Students are guided in a supportive, non-lecture-based environment with regular homework, creative tasks, and personalised feedback.`,
     includes: [
       "Interactive & curiosity-based learning",
       "Weekly homework and skill-building tasks",
       "Regular feedback to track progress",
       "Supportive, child-friendly tutors",
     ],
+    perfectFor:
+      "Students in P3 to P7 looking for a fun and engaging way to strengthen their core skills in Maths, English, and Science.",
   },
   {
     id: 2,
@@ -54,18 +56,24 @@ export const courses: Course[] = [
     Image: "/images/courses/c1.jpg",
     category: "Secondary",
     subjects: ["Maths", "Science"],
-    rate: "£12 per hour",
+    rate: "£12/hr",
     sessions: "2 hours",
     fee: "£12.00",
     action: "Enroll Now",
-    overview:
-      "Bridges the transition from primary to secondary with academic and emotional support.",
+    overview: `Our S1 & S2 programme bridges the transition from primary to secondary with academic and
+emotional support. Covering Maths and Science, sessions are designed to reinforce
+classroom learning while introducing independent study habits and critical thinking.
+Students engage in group discussions, guided tasks, and problem-solving sessions. Tutors
+provide personalised attention, homework tasks, and regular updates on progress to
+parents. `,
     includes: [
       "Study habit development",
       "Focused topic reviews & skill checks",
       "Personalised support & mentoring",
       "Parent updates every few weeks",
     ],
+    perfectFor:
+      "Students in S1 and S2 looking for extra support in Maths and Science to build confidence and study skills.",
   },
   {
     id: 3,
@@ -73,18 +81,20 @@ export const courses: Course[] = [
     Image: "/images/courses/c1.jpg",
     category: "Secondary",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
-    rate: "£16 per hour",
+    rate: "£16/hr",
     sessions: "1 hour",
     fee: "£16.00",
     action: "Enroll Now",
-    overview:
-      "Early preparation for National 5-level work, helping students deepen understanding of key concepts.",
+    overview: `In S3, students begin early preparation for National 5-level work. Our tutoring focuses on Maths and Science subjects, helping students deepen their understanding of key concepts and begin light exam-style practice in a stress-free way.
+Sessions involve concept exploration, guided questions, structured note-making, and revision strategy building. Tutors assign light homework and provide consistent feedback to help students progress.`,
     includes: [
       "Early intro to National 5-style questions",
       "Concept-focused teaching",
       "Study planning & feedback",
       "Encouragement of independent learning",
     ],
+    perfectFor:
+      "Students in S3 looking to build a strong foundation in Maths and Science while preparing for National 5 exams.",
   },
   {
     id: 4,
@@ -92,12 +102,15 @@ export const courses: Course[] = [
     Image: "/images/courses/c1.jpg",
     category: "National 5",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
-    rate: "£17 per hour",
+    rate: "£17/hr",
     sessions: "1.5 hours",
     fee: "£17.00",
     action: "Enroll Now",
-    overview:
-      "Curriculum-aligned sessions covering Maths and Sciences from August to February.",
+    overview: `Our National 5 tutoring covers Maths, Physics, Chemistry, and Biology in focused,
+curriculum-aligned sessions starting in August to February.
+Each 1.5-hour session includes topic walkthroughs, question practice, and individual
+support. Homework is assigned regularly and checked by tutors, with feedback shared to
+guide improvement. Our tutors also help build exam confidence and study discipline. `,
     includes: [
       "Homework + feedback included",
       "Curriculum-aligned teaching",
@@ -106,6 +119,8 @@ export const courses: Course[] = [
       "Structured lessons with mini quizzes",
       "Personalised tutor support",
     ],
+    perfectFor:
+      "Students in S4 preparing for National 5 exams who want to build confidence and understanding in Maths, Physics, Chemistry, and Biology.",
   },
   {
     id: 5,
@@ -113,13 +128,17 @@ export const courses: Course[] = [
     Image: "/images/courses/c1.jpg",
     category: "Exam Revision",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
-    rate: "£20 per hour",
+    rate: "£20/hr",
     sessions: "2 hours",
     duration: "30 hours total",
-    fee: "£600.00",
+    fee: "£20.00",
     action: "Enroll Now",
-    overview:
-      "Intensive 30-hour revision course preparing students for National 5 exams.",
+    overview: `This 30-hour intensive revision course, starting from January to April, prepares students for
+the National 5 exams in Maths, Physics, Chemistry, and Biology. It includes 2 full Mock
+Exams, revision materials, and expert guidance.
+Each two-hour session focuses on key topics, past paper practice, timed tests, and tips &
+tricks for tackling tricky questions. Mock tests are followed by dedicated review sessions with
+detailed feedback and improvement strategies.`,
     includes: [
       "2 Mock Exams included",
       "Full syllabus revision",
@@ -130,6 +149,8 @@ export const courses: Course[] = [
       "Performance review sessions",
       "Breakdown of SQA marking schemes and grade boundaries",
     ],
+    perfectFor:
+      "Students preparing for National 5 exams who want to boost their confidence and exam performance.",
   },
   {
     id: 6,
@@ -137,12 +158,16 @@ export const courses: Course[] = [
     Image: "/images/courses/c1.jpg",
     category: "Highers",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
-    rate: "£25 per hour",
+    rate: "£25/hr",
     sessions: "1.5 hours",
     fee: "£25.00",
     action: "Enroll Now",
-    overview:
-      "Expert support for students aiming for strong results in S5/S6 and beyond.",
+    overview: `Our Higher-level tutoring starting August to February offers expert support in Maths, Physics,
+Chemistry, and Biology. These sessions are perfect for students aiming for strong results in
+S5/S6 and beyond.
+Each 1.5-hour session includes topic deep dives, past paper-style questions, and structured
+feedback. Homework is tailored and marked with progress tracking. Tutors also support
+students with time management and exam preparation strategies.`,
     includes: [
       "In-depth syllabus coverage",
       "Study planning and workload management",
@@ -150,6 +175,8 @@ export const courses: Course[] = [
       "Weekly tasks and feedback",
       "University preparation guidance",
     ],
+    perfectFor:
+      "Students in S5/S6 looking for tailored support in Maths, Physics, Chemistry, and Biology to excel in their Highers.",
   },
   {
     id: 7,
@@ -157,13 +184,16 @@ export const courses: Course[] = [
     Image: "/images/courses/c1.jpg",
     category: "Exam Revision",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
-    rate: "£25 per hour",
+    rate: "£25/hr",
     sessions: "2 hours",
     duration: "30 hours total",
-    fee: "£750.00",
+    fee: "£25.00",
     action: "Enroll Now",
-    overview:
-      "Focused exam prep programme for Highers with mock exams and detailed reviews.",
+    overview: `This 30-hour course is a focused exam prep programme for Highers in Maths, Physics,
+Chemistry, and Biology. It includes 2 full Mock Exams, timed practice, and detailed review
+sessions.
+We help students master content, develop smart revision techniques, and stay confident
+under exam pressure. Tutors provide marked scripts with actionable feedback.`,
     includes: [
       "2 Mock Exams included with grading, feedback & improvement tips",
       "Intensive revision of critical topics",
@@ -175,6 +205,8 @@ export const courses: Course[] = [
       "Breakdown of SQA marking schemes and grade boundaries",
       "Regular tutor feedback and confidence tracking",
     ],
+    perfectFor:
+      "Students preparing for Highers who want to boost their exam performance and confidence.",
   },
   {
     id: 8,
@@ -182,16 +214,17 @@ export const courses: Course[] = [
     Image: "/images/courses/c1.jpg",
     category: "Mock Exams",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
-    rate: "£50 per subject",
+    rate: "£50/subject",
     fee: "£50.00",
     action: "Book Now",
-    overview:
-      "Full-length mock exam under real exam conditions with detailed feedback.",
+    overview: `Take a full-length mock exam in Maths, Physics, Chemistry, or Biology under real exam conditions. Papers are marked by our tutors and returned with detailed feedback.`,
     includes: [
       "Full test + marking",
       "Individual feedback report",
       "Improvement advice",
     ],
+    perfectFor:
+      "Students who want to experience exam conditions and receive feedback on their performance.",
   },
   {
     id: 9,
@@ -199,15 +232,18 @@ export const courses: Course[] = [
     Image: "/images/courses/c1.jpg",
     category: "Mock Exams",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
-    rate: "£70 per subject",
+    rate: "£70/subject",
     fee: "£70.00",
     action: "Book Now",
-    overview: "Real-exam style mocks to evaluate readiness before finals.",
+    overview: `Real-exam style mocks for Maths, Physics, Chemistry, and Biology—perfect to evaluate
+readiness before finals. Includes personalised tutor marking and feedback.`,
     includes: [
       "Full mock exam",
       "Marked scripts with comments",
       "Performance insights",
     ],
+    perfectFor:
+      "Students who want to assess their exam readiness and receive expert feedback on their performance.",
   },
   {
     id: 10,
@@ -215,16 +251,18 @@ export const courses: Course[] = [
     Image: "/images/courses/c1.jpg",
     category: "Mock Exams",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
-    rate: "£100 per subject",
+    rate: "£100/subject",
     fee: "£100.00",
     action: "Book Now",
-    overview: "Challenging mock exams designed to simulate actual exam stress.",
+    overview: `Challenging mock exams for Advanced Highers in science and maths. Designed to simulate actual exam stress and help students refine their approach.`,
     includes: [
       "Real exam conditions",
       "Expert-marked scripts",
       "Feedback on technique",
       "Suggested next steps",
     ],
+    perfectFor:
+      "Students preparing for Advanced Highers who want to test their knowledge and exam technique under pressure.",
   },
   {
     id: 11,
@@ -232,11 +270,12 @@ export const courses: Course[] = [
     Image: "/images/courses/c1.jpg",
     category: "Tips & Hints",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
-
+    rate: "£100",
     fee: "£100.00",
     action: "Book Now",
-    overview:
-      "Strategic lesson designed to give students an edge before their exams.",
+    overview: `This is not just another revision session — it’s a strategic lesson designed to give students
+an edge before their exams. Our expert tutors break down what really matters, what to
+expect in the exam, and how to maximise marks with smart techniques.`,
     includes: [
       "Breakdown of common question types & how to answer them",
       "Tips for understanding command words: 'describe', 'explain', 'justify'",
@@ -248,6 +287,8 @@ export const courses: Course[] = [
       "Q&A with experienced SQA-focused tutors",
       "Take-home tips sheet with condensed advice",
     ],
+    perfectFor:
+      "Students who’ve already revised and now need a smart, exam-savvy push to gain confidence and squeeze out extra marks.",
   },
   {
     id: 12,
@@ -255,10 +296,12 @@ export const courses: Course[] = [
     Image: "/images/courses/c1.jpg",
     category: "Tips & Hints",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
+    rate: "£150",
     fee: "£150.00",
     action: "Book Now",
-    overview:
-      "Expert-led session with insider strategies for approaching Higher exams confidently.",
+    overview: `This focused, expert-led session equips students with insider strategies to approach Higher
+exams precisely and confidently. It’s packed with actionable techniques, time management
+tools, and insights from tutors who know the SQA exam inside out.`,
     includes: [
       "Advanced exam strategies tailored to each subject",
       "How to structure high-mark written responses",
@@ -270,6 +313,8 @@ export const courses: Course[] = [
       "Live question dissection & group discussion",
       "Post-session cheat sheet with tips and reminders",
     ],
+    perfectFor:
+      "Students aiming for top grades who want to fine-tune their exam performance and reduce last-minute stress.",
   },
   {
     id: 13,
@@ -277,10 +322,12 @@ export const courses: Course[] = [
     Image: "/images/courses/c1.jpg",
     category: "Tips & Hints",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
+    rate: "£250",
     fee: "£250.00",
     action: "Book Now",
-    overview:
-      "Intensive premium session for ambitious students where every mark counts.",
+    overview: `This intensive premium session is designed for ambitious students sitting Advanced Highers,
+where every mark counts. Our tutors provide deep strategic insight, show how to tackle
+complex questions, and share techniques that set A-band candidates apart.`,
     includes: [
       "Advanced techniques for tackling high-mark and essay-style questions",
       "Exam blueprint: how SQA examiners allocate marks",
@@ -292,5 +339,7 @@ export const courses: Course[] = [
       "One-to-one feedback on question approach (if needed)",
       "Exclusive tip booklet for Advanced Highers",
     ],
+    perfectFor:
+      "Students aiming for top-band grades, applying to competitive university courses, or needing tailored guidance to excel under pressure. ",
   },
 ];

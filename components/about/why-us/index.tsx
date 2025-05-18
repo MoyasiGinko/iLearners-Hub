@@ -182,25 +182,25 @@ const WhyChooseUs = () => {
     {
       imageUrl: "/images/about/choose1.png", // Replace with your actual image URL
       color: "bg-blue-200",
-      title: { text: "Super Teachers", color: "text-blue-600" },
+      title: { text: "Quality Focused", color: "text-blue-600" },
       description:
-        "Our friendly teachers know all about National 5 and love helping kids learn in fun ways!",
+        "Our tutors are highly qualified and experienced, with a deep understanding of the National 5 curriculum. They are dedicated to helping students succeed and reach their full potential.",
       icon: <StarIcon />,
     },
     {
       imageUrl: "/images/about/choose2.png", // Replace with your actual image URL
       color: "bg-pink-200",
-      title: { text: "Learning Your Way", color: "text-pink-600" },
+      title: { text: "Personlised Tutoring Plan", color: "text-pink-600" },
       description:
-        "Everyone learns differently! We create special lessons just for you to help with exactly what you need.",
+        "We recognise that every student is unique. Our tutoring sessions are tailored to the individual needs of each student, ensuring targeted support in areas where they need it the most.",
       icon: <BrainIcon />,
     },
     {
       imageUrl: "/images/about/choose3.png", // Replace with your actual image URL
       color: "bg-purple-200",
-      title: { text: "Exam Success", color: "text-purple-600" },
+      title: { text: "Enhanced Support", color: "text-purple-600" },
       description:
-        "Tests can be tricky, but we'll help you practice and learn cool tips so you'll feel confident and ready!",
+        "National 5 exams can be challenging, but with our expert guidance, students can approach exams with confidence. We focus on honing exam skills, providing practice papers, and offering valuable tips for success.",
       icon: <RocketIcon />,
     },
   ];
@@ -422,7 +422,7 @@ const WhyChooseUs = () => {
                     >
                       {card.title.text}
                     </h2>
-                    <p className="text-gray-700 font-medium">
+                    <p className="text-gray-700 font-medium font-['Comic_Sans_MS',cursive,sans-serif]">
                       {card.description}
                     </p>
                   </div>
