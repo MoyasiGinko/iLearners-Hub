@@ -263,7 +263,7 @@ const Hero = () => {
         <FloatingElements />
 
         {/* Left side with images - kept as is */}
-        <div className="relative w-full lg:w-1/2 mb-10 lg:mb-0 flex justify-center scale-105 xl:scale-110">
+        <div className="relative w-full lg:w-1/2 mb-16 lg:mb-0 flex justify-center scale-105 xl:scale-110">
           <div className="relative z-10">
             {/* Main instructor with responsive sizing */}
             <div className="bg-orange-500 rounded-full p-1 sm:p-2 w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 relative flex items-center justify-center overflow-hidden">
