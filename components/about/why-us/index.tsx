@@ -422,7 +422,7 @@ const WhyChooseUs = () => {
                     >
                       {card.title.text}
                     </h2>
-                    <p className="text-gray-700 font-medium">
+                    <p className="text-gray-700 font-medium font-['Comic_Sans_MS',cursive,sans-serif]">
                       {card.description}
                     </p>
                   </div>

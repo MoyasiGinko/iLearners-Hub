@@ -28,16 +28,16 @@ const AboutSection = () => {
           />
         </div>
         <div>
-          <h2 className="text-2xl font-bold text-[#ff9800] mb-4 font-['Comic_Sans_MS',cursive,sans-serif]">
+          <h2 className="text-3xl md:text-4xl mb-4 font-bold text-[#ff9800] font-['Comic_Sans_MS',cursive,sans-serif]">
             Our Story
           </h2>
-          <p className="text-lg leading-relaxed">
+          <p className="text-lg leading-relaxed font-['Comic_Sans_MS',cursive,sans-serif]">
             Our management team is proud to call Aberdeen home, and our
             collective experience is the driving force behind our commitment to
             providing top-tier education support to our primary and secondary
             school students.
           </p>
-          <p className="text-lg leading-relaxed">
+          <p className="text-lg leading-relaxed font-['Comic_Sans_MS',cursive,sans-serif]">
             We strive to empower students with the tools they need to excel
             academically while fostering a love for learning. Join us in
             creating a brighter future for the next generation.
