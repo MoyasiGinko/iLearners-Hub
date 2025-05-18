@@ -108,7 +108,7 @@ const MobileMenu = ({
                     href={item.href}
                     className={`text-white text-xl font-medium transition-colors flex items-center justify-center px-6 py-3 rounded-full text-center ${
                       isActive(item.href)
-                        ? "bg-blue-700 text-yellow-300 font-bold"
+                        ? "bg-blue-600/50 text-yellow-300 font-bold"
                         : "bg-blue-600/40 hover:text-yellow-100"
                     }`}
                     onClick={onClose}
@@ -120,11 +120,13 @@ const MobileMenu = ({
               <motion.div variants={menuItemVariants}>
                 <Link
                   href="/register"
-                  className={`mt-4 px-8 py-3 rounded-full text-xl font-medium transition-all hover:shadow-lg flex items-center justify-center border-2 ${
+                  className={`px-8 py-3 rounded-full inline-block font-semibold shadow-lg border-b-4 active:border-b-0 active:border-t-0 active:shadow-inner active:translate-y-1 hover:-translate-y-1 transform transition-all duration-200 focus:outline-none
+                  ${
                     currentPath === "/register"
-                      ? "bg-yellow-400 text-blue-800 border-yellow-200 font-bold"
-                      : "bg-yellow-300 text-blue-700 border-yellow-100 hover:bg-yellow-200"
-                  }`}
+                      ? "bg-gradient-to-r from-yellow-400 to-amber-400 text-blue-700 border-yellow-600 font-bold"
+                      : "bg-gradient-to-r from-yellow-300 to-yellow-400 text-white border-yellow-500 hover:from-yellow-200 hover:to-yellow-300 hover:text-blue-900"
+                  }
+                  `}
                   onClick={onClose}
                 >
                   Book a Lesson
@@ -265,7 +267,7 @@ const Header = () => {
           </a>
 
           {/* Desktop Navigation - Centered */}
-          <nav className="hidden md:flex items-center justify-center flex-1">
+          <nav className="hidden lg:flex items-center justify-center flex-1">
             <div className="flex items-center space-x-8">
               {navItems.map((item) => (
                 <Link
@@ -314,7 +316,7 @@ const Header = () => {
           </nav>
 
           {/* Register Button - Right */}
-          <div className="hidden h-[56px] md:block">
+          <div className="hidden h-[56px] lg:block">
             <CustomButton
               text="Book a Lesson"
               href="/register"
@@ -328,7 +330,7 @@ const Header = () => {
 
           {/* Mobile Menu Toggle Button */}
           <button
-            className="md:hidden z-40 text-2xl focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 rounded-full p-1.5"
+            className="lg:hidden z-40 text-2xl focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 rounded-full p-1.5"
             onClick={() => setMobileMenuOpen(true)}
             aria-label="Open menu"
             aria-expanded={mobileMenuOpen}
