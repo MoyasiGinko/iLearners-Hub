@@ -15,6 +15,7 @@ export type Course = {
   flexibility?: string;
   action: string;
   overview?: string;
+  perfectFor?: string;
 };
 
 export const courseCategories: string[] = [
@@ -46,6 +47,8 @@ export const courses: Course[] = [
       "Regular feedback to track progress",
       "Supportive, child-friendly tutors",
     ],
+    perfectFor:
+      "Students in P3 to P7 looking for a fun and engaging way to strengthen their core skills in Maths, English, and Science.",
   },
   {
     id: 2,
@@ -69,6 +72,8 @@ parents. `,
       "Personalised support & mentoring",
       "Parent updates every few weeks",
     ],
+    perfectFor:
+      "Students in S1 and S2 looking for extra support in Maths and Science to build confidence and study skills.",
   },
   {
     id: 3,
@@ -88,6 +93,8 @@ Sessions involve concept exploration, guided questions, structured note-making, 
       "Study planning & feedback",
       "Encouragement of independent learning",
     ],
+    perfectFor:
+      "Students in S3 looking to build a strong foundation in Maths and Science while preparing for National 5 exams.",
   },
   {
     id: 4,
@@ -112,6 +119,8 @@ guide improvement. Our tutors also help build exam confidence and study discipli
       "Structured lessons with mini quizzes",
       "Personalised tutor support",
     ],
+    perfectFor:
+      "Students in S4 preparing for National 5 exams who want to build confidence and understanding in Maths, Physics, Chemistry, and Biology.",
   },
   {
     id: 5,
@@ -140,6 +149,8 @@ detailed feedback and improvement strategies.`,
       "Performance review sessions",
       "Breakdown of SQA marking schemes and grade boundaries",
     ],
+    perfectFor:
+      "Students preparing for National 5 exams who want to boost their confidence and exam performance.",
   },
   {
     id: 6,
@@ -164,6 +175,8 @@ students with time management and exam preparation strategies.`,
       "Weekly tasks and feedback",
       "University preparation guidance",
     ],
+    perfectFor:
+      "Students in S5/S6 looking for tailored support in Maths, Physics, Chemistry, and Biology to excel in their Highers.",
   },
   {
     id: 7,
@@ -192,6 +205,8 @@ under exam pressure. Tutors provide marked scripts with actionable feedback.`,
       "Breakdown of SQA marking schemes and grade boundaries",
       "Regular tutor feedback and confidence tracking",
     ],
+    perfectFor:
+      "Students preparing for Highers who want to boost their exam performance and confidence.",
   },
   {
     id: 8,
@@ -208,6 +223,8 @@ under exam pressure. Tutors provide marked scripts with actionable feedback.`,
       "Individual feedback report",
       "Improvement advice",
     ],
+    perfectFor:
+      "Students who want to experience exam conditions and receive feedback on their performance.",
   },
   {
     id: 9,
@@ -225,6 +242,8 @@ readiness before finals. Includes personalised tutor marking and feedback.`,
       "Marked scripts with comments",
       "Performance insights",
     ],
+    perfectFor:
+      "Students who want to assess their exam readiness and receive expert feedback on their performance.",
   },
   {
     id: 10,
@@ -242,6 +261,8 @@ readiness before finals. Includes personalised tutor marking and feedback.`,
       "Feedback on technique",
       "Suggested next steps",
     ],
+    perfectFor:
+      "Students preparing for Advanced Highers who want to test their knowledge and exam technique under pressure.",
   },
   {
     id: 11,
@@ -266,6 +287,8 @@ expect in the exam, and how to maximise marks with smart techniques.`,
       "Q&A with experienced SQA-focused tutors",
       "Take-home tips sheet with condensed advice",
     ],
+    perfectFor:
+      "Students who’ve already revised and now need a smart, exam-savvy push to gain confidence and squeeze out extra marks.",
   },
   {
     id: 12,
@@ -290,6 +313,8 @@ tools, and insights from tutors who know the SQA exam inside out.`,
       "Live question dissection & group discussion",
       "Post-session cheat sheet with tips and reminders",
     ],
+    perfectFor:
+      "Students aiming for top grades who want to fine-tune their exam performance and reduce last-minute stress.",
   },
   {
     id: 13,
@@ -314,5 +339,7 @@ complex questions, and share techniques that set A-band candidates apart.`,
       "One-to-one feedback on question approach (if needed)",
       "Exclusive tip booklet for Advanced Highers",
     ],
+    perfectFor:
+      "Students aiming for top-band grades, applying to competitive university courses, or needing tailored guidance to excel under pressure. ",
   },
 ];

@@ -74,7 +74,7 @@ const CoursePage = () => {
 
           {/* Courses grid */}
           <div className="lg:w-3/4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
               {filteredCourses.map((course, index) => (
                 <motion.div
                   key={course.id}
@@ -99,16 +99,16 @@ const CoursePage = () => {
                     </div>
                   </div>
                   <div className="p-5 flex flex-col flex-grow">
-                    <p className="text-indigo-600">{course.rate}</p>
+                    {/* <p className="text-indigo-600">{course.rate}</p> */}
                     <h3 className="text-xl mb-4 leading-tight tracking-tight font-bold text-indigo-700">
                       {course.title}
                     </h3>
                     <div className="mt-auto flex  justify-between items-center">
-                      <h3 className="inline-block text-left text-xl  text-indigo-600 font-bold rounded-full transition-all">
-                        {course.fee}
+                      <h3 className="inline-block text-left text-lg  text-indigo-600 font-bold rounded-full transition-all">
+                        {course.rate}
                       </h3>
                       <Link href={`/courses/${course.id}`}>
-                        <span className="inline-block text-lg bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-bold px-4 py-2 rounded-full transition-all">
+                        <span className="inline-block text-lg bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-bold px-3 py-1 rounded-full transition-all">
                           Learn More
                         </span>
                       </Link>
