@@ -245,14 +245,29 @@ const Header = () => {
                 <Link
                   key={item.title}
                   href={item.href}
-                  className={`font-semibold transition-colors duration-200 hover:scale-105 transform relative group ${
-                    isScrolled
-                      ? "text-gray-950 hover:text-slate-950"
-                      : "text-gray-900 hover:text-gray-950"
+                  className={`font-semibold transition-all duration-300 transform relative px-3 py-1 rounded-2xl bg-gradient-to-r from-sky-400 to-blue-300 hover:bg-gradient-to-r hover:from-[#fbbf24] hover:to-[#f472b6] overflow-hidden group shadow-lg hover:shadow-2xl hover:scale-105 hover:-translate-y-1 hover:rotate-x-6 hover:rotate-y-3 ${
+                    isScrolled ? "text-gray-50 " : "text-gray-50"
                   }`}
+                  style={{
+                    perspective: "600px",
+                  }}
                 >
-                  {item.title}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-slate-600 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="relative z-10 block transition-transform duration-300 group-hover:translate-y-[-120%] group-hover:opacity-0">
+                    {item.title}
+                  </span>
+                  <span className="absolute left-0 top-0 w-full h-full flex items-center justify-center z-0 transition-transform duration-300 translate-y-[120%] opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
+                    <span className="bg-gradient-to-r from-blue-50 via-purple-50 to-indigo-50 bg-clip-text text-transparent animate-gradient-x">
+                      {item.title}
+                    </span>
+                  </span>
+                  {/* 3D hover background effect */}
+                  <span
+                    className="absolute inset-0 rounded-2xl z-0 transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:scale-110 group-hover:blur-sm"
+                    style={{
+                      boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
+                      filter: "blur(4px)",
+                    }}
+                  />
                 </Link>
               ))}
             </div>
