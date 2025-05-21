@@ -50,9 +50,12 @@ const RegistrationForm = () => {
     } else if (["S1", "S2", "S3"].includes(watchLevel)) {
       setSelectedLevel("Secondary");
       setAvailableSubjects(["Mathematics", "Science"]);
-    } else if (["National 5", "Highers"].includes(watchLevel)) {
+    } else if (["National 5", "Highers", "Advanced Highers"].includes(watchLevel)) {
       setSelectedLevel("Advanced");
       setAvailableSubjects(["Mathematics", "Physics", "Chemistry", "Biology"]);
+    } else if (watchLevel === "Homework Club") {
+      setSelectedLevel("Homework Club");
+      setAvailableSubjects(["All Subjects"]);
     } else {
       setSelectedLevel("");
       setAvailableSubjects([]);
@@ -258,6 +261,8 @@ const RegistrationForm = () => {
                       <option value="S3">S3</option>
                       <option value="National 5">National 5</option>
                       <option value="Highers">Highers</option>
+                      <option value="Advanced Highers">Advanced Highers</option>
+                      <option value="Homework Club">Homework Club</option>
                     </select>
                     {errors.level && (
                       <p className="mt-1 text-sm text-red-500">

@@ -27,6 +27,7 @@ export const courseCategories: string[] = [
   "Exam Revision",
   "Mock Exams",
   "Tips & Hints",
+  "Homework Club", // Added Homework Club as a new subject
 ];
 
 export const courses: Course[] = [
@@ -341,5 +342,26 @@ complex questions, and share techniques that set A-band candidates apart.`,
     ],
     perfectFor:
       "Students aiming for top-band grades, applying to competitive university courses, or needing tailored guidance to excel under pressure. ",
+  },
+  // --- Insert Homework Club course at the end ---
+  {
+    id: 100,
+    title: "Unlock Your Potential with iLearner's Hub Homework Club!",
+    Image: "/images/courses/c1.jpg",
+    category: "Homework Club",
+    subjects: ["All Subjects"],
+    rate: "£10/hr",
+    fee: "£10.00",
+    action: "Join Now",
+    overview: `Need a supportive and focused environment for your primary or secondary student to tackle their homework? Look no further than iLearner's Hub Homework Club!\n\nJoin us weekdays from 4 pm to 6 pm for dedicated homework time with the guidance of our supportive tutors. Students can drop in any time after 3:30 pm.\n\nOur Homework Club offers:\n- A quiet, structured space to complete assignments\n- Friendly tutors available for questions and guidance\n- Support in all school subjects\n- Encouragement of independent study habits\n- Light refreshments provided\n- Flexible attendance: come as often as you need\n\nPricing: £10 per hour. No long-term commitment required.\n\nUnlock your child's potential and make homework time stress-free!`,
+    includes: [
+      "Guided homework support",
+      "All subjects covered",
+      "Flexible drop-in times",
+      "Supportive tutors",
+      "Light refreshments",
+      "No long-term commitment required",
+    ],
+    perfectFor: "Primary and secondary students who need a quiet, supportive place to complete homework with expert help on hand.",
   },
 ];
