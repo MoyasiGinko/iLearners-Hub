@@ -232,12 +232,197 @@ const ClientReview: React.FC = () => {
   const [direction, setDirection] = useState(1);
   const carouselRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const slideWidth = 100 / (duplicatedTestimonials.length / 2);
+  // Touch/swipe handling variables
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startDragPos, setStartDragPos] = useState(0);
+  const [currentDragPos, setCurrentDragPos] = useState(0);
+  const [autoplayTimeout, setAutoplayTimeout] = useState<NodeJS.Timeout | null>(
+    null
+  );
 
+  // Minimum swipe distance (in px)
+  const minSwipeDistance = 50;
+
+  // Slide width calculation
+  const slideWidth = 100 / (duplicatedTestimonials.length / 2);
+
+  // Function to resume autoplay after timeout
+  const scheduleAutoplayResume = () => {
+    // Clear any existing timeout
+    if (autoplayTimeout) {
+      clearTimeout(autoplayTimeout);
+    }
+
+    // Set new timeout to resume autoplay after 10 seconds
+    const timeout = setTimeout(() => {
+      setIsPaused(false);
+    }, 5000);
+
+    setAutoplayTimeout(timeout);
+  };
+
+  // Handle start of touch/drag
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+    setTouchEnd(null);
+    setIsPaused(true);
+  };
+
+  // Handle mouse down for drag
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    setStartDragPos(e.clientX);
+    setCurrentDragPos(e.clientX);
+    setIsPaused(true);
+
+    // Prevent default to avoid text selection during drag
+    e.preventDefault();
+  };
+
+  // Handle mouse move for drag
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging) {
+      setCurrentDragPos(e.clientX);
+
+      // Calculate drag distance as percentage of carousel width
+      const dragDistance =
+        ((startDragPos - e.clientX) / (carouselRef.current?.offsetWidth || 1)) *
+        100;
+      setPosition((prevPosition) => {
+        const newPos = prevPosition + dragDistance;
+        // Keep position within bounds
+        return Math.max(0, Math.min(slideWidth * testimonials.length, newPos));
+      });
+
+      setStartDragPos(e.clientX);
+    }
+  };
+
+  // Handle end of touch/drag
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  // Handle touch end
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    // Calculate swipe distance
+    const distance = touchStart - touchEnd;
+    const isSwipe = Math.abs(distance) > minSwipeDistance;
+
+    if (isSwipe) {
+      // Determine swipe direction and move carousel
+      if (distance > 0) {
+        // Swipe left - move right
+        handleNext();
+      } else {
+        // Swipe right - move left
+        handlePrev();
+      }
+    }
+
+    // Schedule autoplay resume
+    scheduleAutoplayResume();
+  };
+
+  // Handle mouse up for drag end
+  const handleMouseUp = () => {
+    if (isDragging) {
+      setIsDragging(false);
+
+      // Calculate drag distance and determine if it's a significant swipe
+      const distance = startDragPos - currentDragPos;
+      const isSwipe = Math.abs(distance) > minSwipeDistance;
+
+      if (isSwipe) {
+        // Snap to the nearest slide based on swipe direction
+        if (distance > 0) {
+          // Dragged left - move right
+          handleNext();
+        } else {
+          // Dragged right - move left
+          handlePrev();
+        }
+      } else {
+        // For small movements, snap back to the nearest slide
+        const slideIndex = Math.round(position / slideWidth);
+        setPosition(slideIndex * slideWidth);
+      }
+
+      // Schedule autoplay resume
+      scheduleAutoplayResume();
+    }
+  };
+
+  // Handle mouse leave for drag cancel
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      setIsDragging(false);
+
+      // Snap to the nearest slide
+      const slideIndex = Math.round(position / slideWidth);
+      setPosition(slideIndex * slideWidth);
+
+      // Schedule autoplay resume
+      scheduleAutoplayResume();
+    }
+  };
+
+  // Next slide function
+  const handleNext = () => {
+    setPosition((prevPosition) => {
+      // Calculate the next slide position
+      const nextPosition = Math.min(
+        prevPosition + slideWidth,
+        slideWidth * testimonials.length
+      );
+
+      // If we reach the end, update direction
+      if (nextPosition >= slideWidth * testimonials.length) {
+        setDirection(-1);
+      }
+
+      return nextPosition;
+    });
+  };
+
+  // Previous slide function
+  const handlePrev = () => {
+    setPosition((prevPosition) => {
+      // Calculate the previous slide position
+      const prevPos = Math.max(prevPosition - slideWidth, 0);
+
+      // If we reach the beginning, update direction
+      if (prevPos <= 0) {
+        setDirection(1);
+      }
+
+      return prevPos;
+    });
+  };
+
+  // Navigation buttons click handlers
+  const handleNavButtonClick = (direction: "prev" | "next") => {
+    setIsPaused(true);
+
+    if (direction === "prev") {
+      handlePrev();
+    } else {
+      handleNext();
+    }
+
+    // Schedule autoplay resume
+    scheduleAutoplayResume();
+  };
+
+  useEffect(() => {
     let animationId: number;
+
     const moveCarousel = () => {
-      if (!isPaused) {
+      if (!isPaused && !isDragging) {
         setPosition((prevPosition) => {
           let newPosition = prevPosition + 0.05 * direction;
 
@@ -260,8 +445,19 @@ const ClientReview: React.FC = () => {
 
     return () => {
       cancelAnimationFrame(animationId);
+      if (autoplayTimeout) {
+        clearTimeout(autoplayTimeout);
+      }
     };
-  }, [isPaused, testimonials.length, duplicatedTestimonials.length, direction]);
+  }, [
+    isPaused,
+    testimonials.length,
+    duplicatedTestimonials.length,
+    direction,
+    isDragging,
+    slideWidth,
+    autoplayTimeout,
+  ]);
 
   return (
     <div className="bg-transparent py-16 relative overflow-hidden">
@@ -316,17 +512,30 @@ const ClientReview: React.FC = () => {
 
           {/* Right side with testimonials carousel */}
           <div
-            className="w-full lg:w-2/3 overflow-hidden"
+            className="w-full lg:w-2/3 overflow-hidden relative"
             onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
+            onMouseLeave={() => !isDragging && scheduleAutoplayResume()}
             ref={carouselRef}
           >
-            <div className="relative overflow-hidden">
+            <div
+              className="relative overflow-hidden"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}
+              onMouseLeave={handleMouseLeave}
+            >
               {/* Left fade effect */}
               <div className="absolute left-0 top-0 w-16 h-full bg-gradient-to-r from-blue-50 to-transparent z-10"></div>
 
               <div
-                className="flex transition-transform duration-300 ease-linear"
+                className={`flex ${
+                  isDragging
+                    ? ""
+                    : "transition-transform duration-300 ease-linear"
+                }`}
                 style={{ transform: `translateX(-${position}%)` }}
               >
                 {duplicatedTestimonials.map((testimonial, index) => (
@@ -349,6 +558,87 @@ const ClientReview: React.FC = () => {
 
               {/* Right fade effect */}
               <div className="absolute right-0 top-0 w-16 h-full bg-gradient-to-l from-blue-50 to-transparent z-10"></div>
+            </div>
+
+            {/* Navigation buttons */}
+            <div className="flex justify-between absolute top-1/2 left-0 right-0 transform -translate-y-1/2 z-20 px-2">
+              <button
+                onClick={() => handleNavButtonClick("prev")}
+                className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all"
+                aria-label="Previous testimonial"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15 18L9 12L15 6"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+              <button
+                onClick={() => handleNavButtonClick("next")}
+                className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all"
+                aria-label="Next testimonial"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9 6L15 12L9 18"
+                    stroke="currentColor"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            {/* Visual indicator that shows carousel is swipeable */}
+            <div className="flex justify-center mt-4">
+              <div className="px-4 py-2 bg-blue-100 rounded-full flex items-center text-blue-600 text-sm">
+                <svg
+                  className="w-5 h-5 mr-2 animate-pulse"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9 18L15 12L9 6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                Swipe to see more
+                <svg
+                  className="w-5 h-5 ml-2 animate-pulse"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15 18L9 12L15 6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
             </div>
           </div>
         </div>
@@ -415,6 +705,18 @@ const ClientReview: React.FC = () => {
         }
         .animate-twinkle {
           animation: twinkle 4s ease-in-out infinite;
+        }
+        .animate-pulse {
+          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+          0%,
+          100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.5;
+          }
         }
       `}</style>
     </div>
