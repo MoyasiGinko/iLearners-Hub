@@ -1,9 +1,16 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import { gsap } from "gsap";
+import { Draggable } from "gsap/Draggable";
+
+// Register GSAP plugins
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(Draggable);
+}
 
 // Star rating component - updated to use stars with rounded edges
-const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
+const StarRating = ({ rating }: { rating: number }) => {
   return (
     <div className="flex">
       {[...Array(5)].map((_, i) => (
@@ -29,7 +36,7 @@ const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
 };
 
 // Quote icon updated to be more playful
-const QuoteIcon: React.FC = () => {
+const QuoteIcon = () => {
   return (
     <div className="w-14 h-14 flex items-center justify-center bg-blue-500 rounded-full border-4 border-yellow-300 shadow-md">
       <svg
@@ -49,7 +56,7 @@ const QuoteIcon: React.FC = () => {
 };
 
 // New Fun SVG Background Elements
-const BackgroundElements: React.FC = () => {
+const BackgroundElements = () => {
   return (
     <>
       {/* Floating Clouds */}
@@ -147,7 +154,7 @@ const BackgroundElements: React.FC = () => {
   );
 };
 
-// Testimonial Card Component - updated with kid-friendly styling
+// Define interface for TestimonialCard props
 interface TestimonialCardProps {
   name: string;
   position: string;
@@ -156,13 +163,14 @@ interface TestimonialCardProps {
   image: string;
 }
 
-const TestimonialCard: React.FC<TestimonialCardProps> = ({
+// Testimonial Card Component - updated with kid-friendly styling
+const TestimonialCard = ({
   name,
   position,
   content,
   rating,
   image,
-}) => {
+}: TestimonialCardProps) => {
   return (
     <div className="bg-white rounded-3xl p-8 relative h-full border-4 border-blue-400">
       {/* Testimonial Content */}
@@ -183,7 +191,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
 };
 
 // Main Testimonials Section Component
-const ClientReview: React.FC = () => {
+const ClientReview = () => {
   // Extended testimonial data for carousel
   const testimonials = [
     {
@@ -224,240 +232,367 @@ const ClientReview: React.FC = () => {
     },
   ];
 
-  // Duplicate the testimonials to create an infinite effect
-  const duplicatedTestimonials = [...testimonials, ...testimonials];
+  const carouselWrapperRef = useRef(null);
+  const carouselRef = useRef(null);
+  const sliderRef = useRef(null);
+  const autoplayRef = useRef<NodeJS.Timeout | null>(null);
+  const draggableInstanceRef = useRef<Draggable | null>(null);
+  const snapAnimationRef = useRef<gsap.core.Tween | null>(null);
 
-  const [position, setPosition] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [totalSlides, setTotalSlides] = useState(testimonials.length);
+  const [cardWidth, setCardWidth] = useState(0);
+  const [cardGap, setCardGap] = useState(20); // Gap between cards in px
+  const [containerWidth, setContainerWidth] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [direction, setDirection] = useState(1);
-  const carouselRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [direction, setDirection] = useState(1); // 1 for forward (right to left), -1 for backward (left to right)
 
-  // Touch/swipe handling variables
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startDragPos, setStartDragPos] = useState(0);
-  const [currentDragPos, setCurrentDragPos] = useState(0);
-  const [autoplayTimeout, setAutoplayTimeout] = useState<NodeJS.Timeout | null>(
-    null
-  );
+  // Detect mobile/desktop view
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
 
-  // Minimum swipe distance (in px)
-  const minSwipeDistance = 50;
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
-  // Slide width calculation
-  const slideWidth = 100 / (duplicatedTestimonials.length / 2);
+  // Initialize and setup carousel
+  useEffect(() => {
+    // Ref for resize timeout
+    const resizeTimeoutRef = {
+      current: null as ReturnType<typeof setTimeout> | null,
+    };
 
-  // Function to resume autoplay after timeout
-  const scheduleAutoplayResume = () => {
-    // Clear any existing timeout
-    if (autoplayTimeout) {
-      clearTimeout(autoplayTimeout);
-    }
+    if (
+      typeof window === "undefined" ||
+      !carouselRef.current ||
+      !sliderRef.current
+    )
+      return;
 
-    // Set new timeout to resume autoplay after 10 seconds
-    const timeout = setTimeout(() => {
-      setIsPaused(false);
-    }, 5000);
+    const setupCarousel = () => {
+      // Get container width
+      const wrapper = carouselWrapperRef.current;
+      if (!wrapper) return;
+      const wrapperWidth = (wrapper as HTMLElement).offsetWidth;
+      setContainerWidth(wrapperWidth);
 
-    setAutoplayTimeout(timeout);
-  };
+      // Calculate card width: 500px on desktop, full width on mobile
+      const newCardWidth =
+        window.innerWidth < 768 ? wrapperWidth : Math.min(500, wrapperWidth);
+      setCardWidth(newCardWidth);
 
-  // Handle start of touch/drag
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
-    setTouchEnd(null);
-    setIsPaused(true);
-  };
+      // Kill existing draggable instance if it exists
+      if (draggableInstanceRef.current) {
+        draggableInstanceRef.current.kill();
+      }
 
-  // Handle mouse down for drag
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    setStartDragPos(e.clientX);
-    setCurrentDragPos(e.clientX);
-    setIsPaused(true);
+      // Kill existing animations
+      if (snapAnimationRef.current) {
+        gsap.killTweensOf(sliderRef.current);
+      }
 
-    // Prevent default to avoid text selection during drag
-    e.preventDefault();
-  };
+      // Set initial position
+      gsap.set(sliderRef.current, { x: 0 });
 
-  // Handle mouse move for drag
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (isDragging) {
-      setCurrentDragPos(e.clientX);
+      // Apply width to slider items
+      if (!sliderRef.current) return;
+      const slideItems = (sliderRef.current as HTMLElement).children;
 
-      // Calculate drag distance as percentage of carousel width
-      const dragDistance =
-        ((startDragPos - e.clientX) / (carouselRef.current?.offsetWidth || 1)) *
-        100;
-      setPosition((prevPosition) => {
-        const newPos = prevPosition + dragDistance;
-        // Keep position within bounds
-        return Math.max(0, Math.min(slideWidth * testimonials.length, newPos));
+      // Set initial width to all slide items
+      Array.from(slideItems).forEach((item) => {
+        gsap.set(item as Element, {
+          width: newCardWidth,
+          marginRight: cardGap, // Add gap between cards
+        });
       });
 
-      setStartDragPos(e.clientX);
-    }
-  };
+      // Total movement range for the slider
+      const totalMovement =
+        (newCardWidth + cardGap) * (testimonials.length - 1);
 
-  // Handle end of touch/drag
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
+      // Create GSAP Draggable instance
+      draggableInstanceRef.current = Draggable.create(sliderRef.current, {
+        type: "x",
+        inertia: true,
+        // Allow dragging from anywhere on the carousel (by using the outer container)
+        trigger: carouselRef.current,
+        bounds: {
+          minX: -totalMovement,
+          maxX: 0,
+        },
+        // Smoothen the dragging experience
+        edgeResistance: 0.85,
+        throwResistance: 0.85,
+        overshootTolerance: 0.5,
+        // Make the entire card area draggable by using cursor: move
+        dragClickables: true,
 
-  // Handle touch end
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
+        onDragStart: () => {
+          // Pause the continuous animation when user starts dragging
+          pauseAutoplay();
+          setIsAnimating(true);
+        },
 
-    // Calculate swipe distance
-    const distance = touchStart - touchEnd;
-    const isSwipe = Math.abs(distance) > minSwipeDistance;
+        onDrag: function () {
+          // Add visual feedback during dragging
+          gsap.set(carouselRef.current, { cursor: "grabbing" });
+        },
 
-    if (isSwipe) {
-      // Determine swipe direction and move carousel
-      if (distance > 0) {
-        // Swipe left - move right
-        handleNext();
-      } else {
-        // Swipe right - move left
-        handlePrev();
+        onDragEnd: function () {
+          // Calculate the nearest slide based on current position
+          const x = this.endX;
+          const slideUnit = newCardWidth + cardGap;
+          const slideIndex = Math.round(Math.abs(Number(x)) / slideUnit);
+
+          // Animate to the nearest slide with a smoother easing
+          snapAnimationRef.current = gsap.to(sliderRef.current, {
+            x: -slideIndex * slideUnit,
+            duration: 0.4, // Faster snap animation
+            ease: "power2.out", // Slightly faster easing
+            onComplete: () => {
+              setCurrentSlide(slideIndex);
+              setIsAnimating(false);
+
+              // Reset cursor
+              gsap.set(carouselRef.current, { cursor: "grab" });
+
+              // Resume autoplay after 5 seconds of inactivity
+              resumeAutoplay(5000);
+            },
+          });
+        },
+
+        onThrowComplete: function () {
+          // Update current slide after throw animation completes
+          const x = gsap.getProperty(sliderRef.current, "x");
+          const slideUnit = newCardWidth + cardGap;
+          const slideIndex = Math.round(Math.abs(Number(x)) / slideUnit);
+          setCurrentSlide(slideIndex);
+          setIsAnimating(false);
+
+          // Resume autoplay after 5 seconds
+          resumeAutoplay(5000);
+        },
+      })[0];
+
+      // Improve touch responsiveness
+      if (draggableInstanceRef.current) {
+        draggableInstanceRef.current.vars.onPress = function () {
+          gsap.set(carouselRef.current, { cursor: "grabbing" });
+          pauseAutoplay();
+        };
+
+        draggableInstanceRef.current.vars.onRelease = function () {
+          gsap.set(carouselRef.current, { cursor: "grab" });
+        };
       }
-    }
 
-    // Schedule autoplay resume
-    scheduleAutoplayResume();
-  };
+      // Initialize autoplay with continuous animation
+      startAutoplay();
+    };
 
-  // Handle mouse up for drag end
-  const handleMouseUp = () => {
-    if (isDragging) {
-      setIsDragging(false);
+    // Run setup
+    setupCarousel();
 
-      // Calculate drag distance and determine if it's a significant swipe
-      const distance = startDragPos - currentDragPos;
-      const isSwipe = Math.abs(distance) > minSwipeDistance;
+    // Handle window resize
+    const handleResize = () => {
+      // Debounce resize handler
+      if (resizeTimeoutRef.current) {
+        clearTimeout(resizeTimeoutRef.current);
+      }
 
-      if (isSwipe) {
-        // Snap to the nearest slide based on swipe direction
-        if (distance > 0) {
-          // Dragged left - move right
-          handleNext();
-        } else {
-          // Dragged right - move left
-          handlePrev();
+      resizeTimeoutRef.current = setTimeout(() => {
+        // Temporarily pause autoplay
+        const wasPaused = isPaused;
+        pauseAutoplay();
+
+        // Reconfigure the carousel
+        setupCarousel();
+
+        // Reposition to current slide on resize
+        goToSlide(currentSlide, false);
+
+        // Restore autoplay state
+        if (!wasPaused) {
+          setTimeout(() => resumeAutoplay(), 500);
         }
+      }, 250);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+
+      if (draggableInstanceRef.current) {
+        draggableInstanceRef.current.kill();
+      }
+
+      pauseAutoplay();
+
+      if (resizeTimeoutRef.current) {
+        clearTimeout(resizeTimeoutRef.current);
+      }
+    };
+  }, [testimonials.length, cardGap, isMobile]);
+
+  // Autoplay functionality with ping-pong animation (changes direction at ends)
+  // Fix for the startAutoplay function
+  const startAutoplay = () => {
+    if (autoplayRef.current) {
+      clearTimeout(autoplayRef.current); // Changed to clearTimeout from clearInterval
+    }
+
+    // Get current position and info about slider
+    const slideUnit = cardWidth + cardGap;
+    const totalWidth = slideUnit * (testimonials.length - 1); // Total movable distance
+
+    // Only start animation if not already animating and not paused
+    if (!isAnimating && !isPaused && sliderRef.current) {
+      setIsAnimating(true);
+
+      // Get current position
+      const currentX = gsap.getProperty(sliderRef.current, "x") || 0;
+
+      // Determine target based on direction
+      let targetX;
+      let duration;
+
+      if (direction === 1) {
+        // Moving forward (right to left)
+        targetX = -totalWidth;
+        // Calculate how much of the total width we still need to travel
+        duration =
+          (Math.abs(totalWidth + Number(currentX)) / totalWidth) *
+          (testimonials.length * 1.5);
       } else {
-        // For small movements, snap back to the nearest slide
-        const slideIndex = Math.round(position / slideWidth);
-        setPosition(slideIndex * slideWidth);
+        // Moving backward (left to right)
+        targetX = 0;
+        // Calculate how much of the total width we still need to travel
+        duration =
+          (Math.abs(Number(currentX)) / totalWidth) *
+          (testimonials.length * 1.5);
       }
 
-      // Schedule autoplay resume
-      scheduleAutoplayResume();
+      // Create smooth animation with direction change at ends
+      gsap.to(sliderRef.current, {
+        x: targetX,
+        duration: Math.max(duration, 0.5), // Much faster speed, minimum 0.5 second
+        ease: "none", // Linear movement for consistent speed
+        onComplete: () => {
+          // When we reach the end, change direction and restart animation
+          setDirection((prevDir) => prevDir * -1);
+          setIsAnimating(false); // Reset animation flag
+
+          // Directly start the next animation cycle without delay
+          // This ensures the animation continues immediately in the opposite direction
+          setTimeout(() => {
+            if (!isPaused) {
+              startAutoplay();
+            }
+          }, 50); // Small delay to ensure state updates have propagated
+        },
+        onUpdate: () => {
+          // Update current slide based on position
+          if (sliderRef.current) {
+            const currentX = Number(gsap.getProperty(sliderRef.current, "x"));
+            const newSlide =
+              Math.round(Math.abs(currentX) / slideUnit) % testimonials.length;
+            if (newSlide !== currentSlide) {
+              setCurrentSlide(newSlide);
+            }
+          }
+        },
+      });
+    } else if (!isAnimating && !isPaused) {
+      // If we can't start animation now, try again after a short delay
+      // This helps recover from edge cases
+      setTimeout(() => {
+        startAutoplay();
+      }, 100);
     }
   };
 
-  // Handle mouse leave for drag cancel
-  const handleMouseLeave = () => {
-    if (isDragging) {
-      setIsDragging(false);
+  // Pause the autoplay animation
+  const pauseAutoplay = () => {
+    setIsPaused(true);
+    gsap.killTweensOf(sliderRef.current);
+    setIsAnimating(false);
+  };
 
-      // Snap to the nearest slide
-      const slideIndex = Math.round(position / slideWidth);
-      setPosition(slideIndex * slideWidth);
-
-      // Schedule autoplay resume
-      scheduleAutoplayResume();
+  // Resume the autoplay animation with a delay
+  // Fix for the resumeAutoplay function
+  const resumeAutoplay = (delay = 5000) => {
+    // Clear any existing timers
+    if (autoplayRef.current) {
+      clearTimeout(autoplayRef.current);
     }
+
+    // Set a timer to resume autoplay after the specified delay
+    autoplayRef.current = setTimeout(() => {
+      setIsPaused(false);
+      setIsAnimating(false);
+      startAutoplay(); // This calls startAutoplay directly
+    }, delay);
   };
 
-  // Next slide function
-  const handleNext = () => {
-    setPosition((prevPosition) => {
-      // Calculate the next slide position
-      const nextPosition = Math.min(
-        prevPosition + slideWidth,
-        slideWidth * testimonials.length
-      );
+  const goToSlide = (index: number, animated = true) => {
+    // Stop any running animations first
+    pauseAutoplay();
 
-      // If we reach the end, update direction
-      if (nextPosition >= slideWidth * testimonials.length) {
-        setDirection(-1);
-      }
+    // Calculate target position
+    const slideUnit = cardWidth + cardGap;
+    const targetX = -index * slideUnit;
 
-      return nextPosition;
-    });
-  };
+    // Animate to the target slide
+    gsap.to(sliderRef.current, {
+      x: targetX,
+      duration: animated ? 0.5 : 0, // Faster animation (0.5s instead of 0.8s)
+      ease: "power2.out", // Slightly faster easing
+      onComplete: () => {
+        setCurrentSlide(index);
+        setIsAnimating(false);
 
-  // Previous slide function
-  const handlePrev = () => {
-    setPosition((prevPosition) => {
-      // Calculate the previous slide position
-      const prevPos = Math.max(prevPosition - slideWidth, 0);
-
-      // If we reach the beginning, update direction
-      if (prevPos <= 0) {
-        setDirection(1);
-      }
-
-      return prevPos;
+        // Resume autoplay after a short delay
+        resumeAutoplay(5000);
+      },
     });
   };
 
   // Navigation buttons click handlers
-  const handleNavButtonClick = (direction: "prev" | "next") => {
-    setIsPaused(true);
+  const handleNavButtonClick = (direction: string) => {
+    // Pause autoplay
+    pauseAutoplay();
 
+    // Determine next slide index
+    let nextSlide;
     if (direction === "prev") {
-      handlePrev();
+      nextSlide =
+        (currentSlide - 1 + testimonials.length) % testimonials.length;
     } else {
-      handleNext();
+      nextSlide = (currentSlide + 1) % testimonials.length;
     }
 
-    // Schedule autoplay resume
-    scheduleAutoplayResume();
+    // Go to the slide with animation
+    goToSlide(nextSlide);
+
+    // Resume autoplay after 5 seconds
+    resumeAutoplay(5000);
   };
 
-  useEffect(() => {
-    let animationId: number;
-
-    const moveCarousel = () => {
-      if (!isPaused && !isDragging) {
-        setPosition((prevPosition) => {
-          let newPosition = prevPosition + 0.05 * direction;
-
-          if (newPosition >= slideWidth * testimonials.length) {
-            setDirection(-1);
-            return prevPosition;
-          } else if (newPosition <= 0) {
-            setDirection(1);
-            return prevPosition;
-          }
-
-          return newPosition;
-        });
-      }
-
-      animationId = requestAnimationFrame(moveCarousel);
-    };
-
-    animationId = requestAnimationFrame(moveCarousel);
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      if (autoplayTimeout) {
-        clearTimeout(autoplayTimeout);
-      }
-    };
-  }, [
-    isPaused,
-    testimonials.length,
-    duplicatedTestimonials.length,
-    direction,
-    isDragging,
-    slideWidth,
-    autoplayTimeout,
-  ]);
+  // Pagination dot click handler
+  const handleDotClick = (index: number) => {
+    pauseAutoplay();
+    goToSlide(index);
+    // Resume autoplay after 5 seconds
+    resumeAutoplay(5000);
+  };
 
   return (
     <div className="bg-transparent py-16 relative overflow-hidden">
@@ -510,61 +645,83 @@ const ClientReview: React.FC = () => {
             </div>
           </div>
 
-          {/* Right side with testimonials carousel */}
+          {/* Right side with GSAP draggable testimonials carousel */}
           <div
             className="w-full lg:w-2/3 overflow-hidden relative"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => !isDragging && scheduleAutoplayResume()}
-            ref={carouselRef}
+            ref={carouselWrapperRef}
           >
             <div
-              className="relative overflow-hidden"
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-              onMouseLeave={handleMouseLeave}
+              className="relative overflow-hidden cursor-grab touch-pan-y select-none"
+              ref={carouselRef}
+              onMouseEnter={() => {
+                // Pause the carousel when hovering
+                pauseAutoplay();
+              }}
+              onMouseLeave={() => {
+                // Resume autoplay after 5 seconds when mouse leaves
+                resumeAutoplay(5000);
+              }}
+              // Touch-friendly styles
+              style={{
+                WebkitTapHighlightColor: "transparent",
+                touchAction: "pan-y",
+              }}
             >
               {/* Left fade effect */}
-              <div className="absolute left-0 top-0 w-16 h-full bg-gradient-to-r from-blue-50 to-transparent z-10"></div>
+              <div className="absolute left-0 top-0 w-12 h-full bg-gradient-to-r from-blue-50 to-transparent z-10 pointer-events-none"></div>
 
+              {/* Draggable slider container */}
               <div
-                className={`flex ${
-                  isDragging
-                    ? ""
-                    : "transition-transform duration-300 ease-linear"
-                }`}
-                style={{ transform: `translateX(-${position}%)` }}
+                ref={sliderRef}
+                className="flex will-change-transform touch-pan-y"
+                style={{
+                  touchAction: "pan-y",
+                }}
               >
-                {duplicatedTestimonials.map((testimonial, index) => (
+                {testimonials.map((testimonial) => (
                   <div
-                    key={`${testimonial.id}-${index}`}
-                    className="min-w-full md:min-w-[420px] px-4"
+                    key={testimonial.id}
+                    className="px-2 flex-shrink-0"
+                    style={{
+                      width: isMobile ? "100%" : "500px",
+                    }}
                   >
-                    <div className="h-full">
-                      <TestimonialCard
-                        name={testimonial.name}
-                        position={testimonial.position}
-                        content={testimonial.content}
-                        rating={testimonial.rating}
-                        image={testimonial.image}
-                      />
-                    </div>
+                    <TestimonialCard
+                      name={testimonial.name}
+                      position={testimonial.position}
+                      content={testimonial.content}
+                      rating={testimonial.rating}
+                      image={testimonial.image}
+                    />
                   </div>
                 ))}
               </div>
 
               {/* Right fade effect */}
-              <div className="absolute right-0 top-0 w-16 h-full bg-gradient-to-l from-blue-50 to-transparent z-10"></div>
+              <div className="absolute right-0 top-0 w-12 h-full bg-gradient-to-l from-blue-50 to-transparent z-10 pointer-events-none"></div>
             </div>
 
-            {/* Navigation buttons */}
-            <div className="flex justify-between absolute top-1/2 left-0 right-0 transform -translate-y-1/2 z-20 px-2">
+            {/* Pagination dots - move outside the draggable area */}
+            <div className="flex justify-center mt-6 z-20">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  className={`w-4 h-4 mx-1.5 rounded-full transition-all duration-300 ease-in-out ${
+                    index === currentSlide
+                      ? "bg-blue-500 transform scale-125"
+                      : "bg-blue-200 hover:bg-blue-300"
+                  }`}
+                  onClick={() => handleDotClick(index)}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Navigation buttons - positioned with higher z-index and vertically centered */}
+            <div className="absolute top-0 bottom-0 left-0 right-0 z-30 pointer-events-none flex items-center justify-between px-2">
               <button
                 onClick={() => handleNavButtonClick("prev")}
-                className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all"
+                className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all pointer-events-auto"
                 aria-label="Previous testimonial"
               >
                 <svg
@@ -585,7 +742,7 @@ const ClientReview: React.FC = () => {
               </button>
               <button
                 onClick={() => handleNavButtonClick("next")}
-                className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all"
+                className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all pointer-events-auto"
                 aria-label="Next testimonial"
               >
                 <svg
@@ -717,6 +874,21 @@ const ClientReview: React.FC = () => {
           50% {
             opacity: 0.5;
           }
+        }
+
+        /* Add smooth scroll behavior */
+        html {
+          scroll-behavior: smooth;
+        }
+
+        /* Improve touch experience */
+        * {
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Improve slider performance */
+        .will-change-transform {
+          will-change: transform;
         }
       `}</style>
     </div>
