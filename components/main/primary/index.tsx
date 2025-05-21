@@ -33,7 +33,7 @@ const PrimarySection = () => {
     <div className="relative bg-transparent overflow-hidden py-16 md:py-20 rounded-3xl">
       {/* Fun pattern background */}
       <div className="absolute inset-0 z-0 opacity-10">
-        <div className="w-full h-full  bg-no-repeat bg-contain bg-center"></div>
+        <div className="w-full h-full bg-no-repeat bg-contain bg-center"></div>
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -264,20 +264,28 @@ const PrimarySection = () => {
           <div className="w-full lg:w-1/2 lg:pl-12">
             <div className="text-purple-600 font-bold mb-1 text-xl relative">
               <span className="relative inline-block after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-2 after:bg-purple-300 after:-z-10 after:rotate-1">
-                LET'S LEARN TOGETHER!
+                Lets Learn Together!
               </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4 relative">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] to-[#FF9999] drop-shadow-[3px_3px_0px_rgba(255,107,107,0.3)]">
-                Discover, Learn & Grow With Us!
+                Homework Club - Achieve More Together!
               </span>
             </h2>
 
-            <p className="text-gray-600 mb-6 text-lg relative transform hover:translate-x-1 transition-transform duration-300">
-              Join our fun learning adventures! We make learning exciting with
-              friendly teachers, cool activities, and awesome lessons that you
-              can enjoy from anywhere!
-            </p>
+            <div className="text-gray-600 mb-8 relative">
+              <p className="text-lg leading-relaxed mb-3 p-3 bg-white/50 rounded-xl border-l-4 border-purple-300 shadow-sm transform hover:translate-x-1 transition-transform duration-300">
+                Need a supportive and focused environment for your primary or secondary student to tackle their homework? Look no further than iLearner's Hub Homework Club!
+              </p>
+              
+              <p className="text-lg leading-relaxed mb-3 p-3 bg-white/50 rounded-xl border-l-4 border-yellow-300 shadow-sm transform hover:translate-x-1 transition-transform duration-300">
+                Join us weekdays from 4 pm to 6 pm for dedicated homework time with the guidance of our supportive tutors. Students can drop in any time after 3:30 pm.
+              </p>
+              
+              <p className="text-lg leading-relaxed p-3 bg-white/50 rounded-xl border-l-4 border-blue-300 shadow-sm transform hover:translate-x-1 transition-transform duration-300">
+                We provide a safe, educational, and engaging space where they can learn, develop, and complete assignments alongside their peers.
+              </p>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               {/* Feature 1 */}
@@ -287,7 +295,7 @@ const PrimarySection = () => {
                   <Check className="h-5 w-5 text-white drop-shadow-md" />
                 </div>
                 <span className="font-medium text-lg text-yellow-800 group-hover:translate-x-1 transition-transform">
-                  Friendly teachers
+                  Convenient After-School Time
                 </span>
               </div>
 
@@ -298,7 +306,7 @@ const PrimarySection = () => {
                   <Check className="h-5 w-5 text-white drop-shadow-md" />
                 </div>
                 <span className="font-medium text-lg text-blue-800 group-hover:translate-x-1 transition-transform">
-                  Fun online lessons
+                  Homework & Assignment Assistance
                 </span>
               </div>
 
@@ -309,7 +317,7 @@ const PrimarySection = () => {
                   <Check className="h-5 w-5 text-white drop-shadow-md" />
                 </div>
                 <span className="font-medium text-lg text-green-800 group-hover:translate-x-1 transition-transform">
-                  Cool activities
+                  Educational Environment
                 </span>
               </div>
 
@@ -320,31 +328,54 @@ const PrimarySection = () => {
                   <Check className="h-5 w-5 text-white drop-shadow-md" />
                 </div>
                 <span className="font-medium text-lg text-pink-800 group-hover:translate-x-1 transition-transform">
-                  Amazing rewards
+                  Supportive Tutors
                 </span>
               </div>
             </div>
 
-            <Link href="/about">
-              <div className="perspective-500 my-3">
-                <span
-                  className="inline-block relative bg-gradient-to-br from-purple-600 to-purple-500 text-white font-bold px-7 py-3 rounded-full text-lg
-                  border-b-[6px] border-purple-800
-                  shadow-[0_10px_15px_-3px_rgba(147,51,234,0.3)]
-                  hover:shadow-[0_5px_15px_-2px_rgba(147,51,234,0.5)]
-                  transform hover:translate-y-1
-                  active:translate-y-2 active:border-b-[2px]
-                  transition-all duration-200
-                  overflow-hidden
-                  before:content-[''] before:absolute before:inset-0 before:bg-white/10 before:rounded-full
-                  after:content-[''] after:absolute after:h-20 after:w-20 after:bg-white/20 after:top-0 after:-left-10 after:transform after:-skew-x-[45deg] after:transition-all after:duration-700 hover:after:left-[110%]"
-                >
-                  <span className="relative z-10 inline-block transform-gpu drop-shadow-[0_1px_1px_rgba(0,0,0,0.3)]">
-                    START YOUR ADVENTURE!
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link href="/courses">
+                <div className="perspective-500 my-3">
+                  <span
+                    className="inline-block relative bg-gradient-to-br from-purple-600 to-purple-500 text-white font-bold px-7 py-3 rounded-full text-lg
+                    border-b-[6px] border-purple-800
+                    shadow-[0_10px_15px_-3px_rgba(147,51,234,0.3)]
+                    hover:shadow-[0_5px_15px_-2px_rgba(147,51,234,0.5)]
+                    transform hover:translate-y-1
+                    active:translate-y-2 active:border-b-[2px]
+                    transition-all duration-200
+                    overflow-hidden
+                    before:content-[''] before:absolute before:inset-0 before:bg-white/10 before:rounded-full
+                    after:content-[''] after:absolute after:h-20 after:w-20 after:bg-white/20 after:top-0 after:-left-10 after:transform after:-skew-x-[45deg] after:transition-all after:duration-700 hover:after:left-[110%]"
+                  >
+                    <span className="relative z-10 inline-block transform-gpu drop-shadow-[0_1px_1px_rgba(0,0,0,0.3)]">
+                      VIEW COURSES
+                    </span>
                   </span>
-                </span>
-              </div>
-            </Link>
+                </div>
+              </Link>
+
+              <Link href="/contact">
+                <div className="perspective-500 my-3">
+                  <span
+                    className="inline-block relative bg-gradient-to-br from-blue-600 to-blue-500 text-white font-bold px-7 py-3 rounded-full text-lg
+                    border-b-[6px] border-blue-800
+                    shadow-[0_10px_15px_-3px_rgba(37,99,235,0.3)]
+                    hover:shadow-[0_5px_15px_-2px_rgba(37,99,235,0.5)]
+                    transform hover:translate-y-1
+                    active:translate-y-2 active:border-b-[2px]
+                    transition-all duration-200
+                    overflow-hidden
+                    before:content-[''] before:absolute before:inset-0 before:bg-white/10 before:rounded-full
+                    after:content-[''] after:absolute after:h-20 after:w-20 after:bg-white/20 after:top-0 after:-left-10 after:transform after:-skew-x-[45deg] after:transition-all after:duration-700 hover:after:left-[110%]"
+                  >
+                    <span className="relative z-10 inline-block transform-gpu drop-shadow-[0_1px_1px_rgba(0,0,0,0.3)]">
+                      CONTACT US!
+                    </span>
+                  </span>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
