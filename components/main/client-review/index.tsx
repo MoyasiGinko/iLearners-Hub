@@ -9,32 +9,6 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(Draggable);
 }
 
-// Star rating component - updated to use stars with rounded edges
-const StarRating = ({ rating }: { rating: number }) => {
-  return (
-    <div className="flex">
-      {[...Array(5)].map((_, i) => (
-        <svg
-          key={i}
-          className={`w-6 h-6 ${
-            i < rating ? "text-yellow-400" : "text-gray-200"
-          }`}
-          fill="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-          />
-        </svg>
-      ))}
-    </div>
-  );
-};
-
 // Quote icon updated to be more playful
 const QuoteIcon = () => {
   return (
@@ -238,6 +212,8 @@ const ClientReview = () => {
   const autoplayRef = useRef<NodeJS.Timeout | null>(null);
   const draggableInstanceRef = useRef<Draggable | null>(null);
   const snapAnimationRef = useRef<gsap.core.Tween | null>(null);
+  const directionRef = useRef(1); // Use a ref to track direction for immediate access
+  const animationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [totalSlides, setTotalSlides] = useState(testimonials.length);
@@ -439,64 +415,82 @@ const ClientReview = () => {
       if (resizeTimeoutRef.current) {
         clearTimeout(resizeTimeoutRef.current);
       }
+
+      if (animationTimeoutRef.current) {
+        clearTimeout(animationTimeoutRef.current);
+      }
     };
   }, [testimonials.length, cardGap, isMobile]);
 
   // Autoplay functionality with ping-pong animation (changes direction at ends)
-  // Fix for the startAutoplay function
   const startAutoplay = () => {
+    // Clear any existing timeouts
     if (autoplayRef.current) {
-      clearTimeout(autoplayRef.current); // Changed to clearTimeout from clearInterval
+      clearTimeout(autoplayRef.current);
+      autoplayRef.current = null;
+    }
+
+    if (animationTimeoutRef.current) {
+      clearTimeout(animationTimeoutRef.current);
+      animationTimeoutRef.current = null;
     }
 
     // Get current position and info about slider
     const slideUnit = cardWidth + cardGap;
-    const totalWidth = slideUnit * (testimonials.length - 1); // Total movable distance
+    const totalWidth = slideUnit * (testimonials.length - 1);
 
     // Only start animation if not already animating and not paused
     if (!isAnimating && !isPaused && sliderRef.current) {
       setIsAnimating(true);
 
       // Get current position
-      const currentX = gsap.getProperty(sliderRef.current, "x") || 0;
+      const currentX = Number(gsap.getProperty(sliderRef.current, "x") || 0);
+
+      // Use the ref for immediate access to direction
+      const currentDirection = directionRef.current;
 
       // Determine target based on direction
       let targetX;
       let duration;
 
-      if (direction === 1) {
+      if (currentDirection === 1) {
         // Moving forward (right to left)
         targetX = -totalWidth;
-        // Calculate how much of the total width we still need to travel
         duration =
-          (Math.abs(totalWidth + Number(currentX)) / totalWidth) *
+          (Math.abs(totalWidth + currentX) / totalWidth) *
           (testimonials.length * 1.5);
       } else {
         // Moving backward (left to right)
         targetX = 0;
-        // Calculate how much of the total width we still need to travel
         duration =
-          (Math.abs(Number(currentX)) / totalWidth) *
-          (testimonials.length * 1.5);
+          (Math.abs(currentX) / totalWidth) * (testimonials.length * 1.5);
       }
+
+      // Kill any existing animations on the slider
+      gsap.killTweensOf(sliderRef.current);
 
       // Create smooth animation with direction change at ends
       gsap.to(sliderRef.current, {
         x: targetX,
-        duration: Math.max(duration, 0.5), // Much faster speed, minimum 0.5 second
+        duration: Math.max(duration, 0.5), // Minimum 0.5 second
         ease: "none", // Linear movement for consistent speed
         onComplete: () => {
-          // When we reach the end, change direction and restart animation
-          setDirection((prevDir) => prevDir * -1);
-          setIsAnimating(false); // Reset animation flag
+          // When we reach the end, reverse the direction
+          const newDirection = currentDirection * -1;
 
-          // Directly start the next animation cycle without delay
-          // This ensures the animation continues immediately in the opposite direction
-          setTimeout(() => {
+          // Update both the ref and state - ref for immediate access, state for rendering
+          directionRef.current = newDirection;
+          setDirection(newDirection);
+
+          // Reset animation state
+          setIsAnimating(false);
+
+          // Wait a bit longer (200ms) to ensure React state updates are processed
+          animationTimeoutRef.current = setTimeout(() => {
             if (!isPaused) {
               startAutoplay();
             }
-          }, 50); // Small delay to ensure state updates have propagated
+          }, 200);
         },
         onUpdate: () => {
           // Update current slide based on position
@@ -511,34 +505,58 @@ const ClientReview = () => {
         },
       });
     } else if (!isAnimating && !isPaused) {
-      // If we can't start animation now, try again after a short delay
-      // This helps recover from edge cases
-      setTimeout(() => {
+      // Try again after a delay if we couldn't start now
+      animationTimeoutRef.current = setTimeout(() => {
         startAutoplay();
-      }, 100);
+      }, 200);
     }
   };
 
   // Pause the autoplay animation
   const pauseAutoplay = () => {
+    // Mark as paused
     setIsPaused(true);
+
+    // Kill any active animations
     gsap.killTweensOf(sliderRef.current);
+
+    // Reset animation state
     setIsAnimating(false);
+
+    // Clear all timers
+    if (autoplayRef.current) {
+      clearTimeout(autoplayRef.current);
+      autoplayRef.current = null;
+    }
+
+    if (animationTimeoutRef.current) {
+      clearTimeout(animationTimeoutRef.current);
+      animationTimeoutRef.current = null;
+    }
   };
 
   // Resume the autoplay animation with a delay
-  // Fix for the resumeAutoplay function
   const resumeAutoplay = (delay = 5000) => {
-    // Clear any existing timers
+    // Clear any existing timers to prevent multiple timers
     if (autoplayRef.current) {
       clearTimeout(autoplayRef.current);
+      autoplayRef.current = null;
+    }
+
+    if (animationTimeoutRef.current) {
+      clearTimeout(animationTimeoutRef.current);
+      animationTimeoutRef.current = null;
     }
 
     // Set a timer to resume autoplay after the specified delay
     autoplayRef.current = setTimeout(() => {
       setIsPaused(false);
       setIsAnimating(false);
-      startAutoplay(); // This calls startAutoplay directly
+
+      // Small delay to ensure state updates are processed
+      animationTimeoutRef.current = setTimeout(() => {
+        startAutoplay();
+      }, 50);
     }, delay);
   };
 
