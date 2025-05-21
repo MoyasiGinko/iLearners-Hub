@@ -311,23 +311,23 @@ const Testimonials: React.FC = () => {
                 </svg>
               </motion.span>
 
-                {[
-                  "Our students and their parents love learning with us! Discover how iLearners Hub makes education fun, engaging, and effective for every child. See what real families are saying about their adventures and achievements with our courses.",
-                ].map((line, i) => (
-                  <motion.span
-                    key={i}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      delay: 0.5 + i * 0.8,
-                      duration: 0.8,
-                      ease: "easeInOut",
-                    }}
-                    className="block"
-                  >
-                    {line}
-                  </motion.span>
-                ))}
+              {[
+                "Our students and their parents love learning with us! Discover how iLearners Hub makes education fun, engaging, and effective for every child. See what real families are saying about their adventures and achievements with our courses.",
+              ].map((line, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{
+                    delay: 0.5 + i * 0.8,
+                    duration: 0.8,
+                    ease: "easeInOut",
+                  }}
+                  className="block"
+                >
+                  {line}
+                </motion.span>
+              ))}
             </motion.p>
 
             <div className="space-y-4 mb-8 relative">
@@ -336,6 +336,7 @@ const Testimonials: React.FC = () => {
                 "Explore fun activities with thousands of cool lessons",
                 "Discover exciting new topics in your favorite subjects",
                 "Learn with friendly teachers who make learning fun",
+                "Friendly Teachers - DBS Checked, Safe Environment, Mock Tests, Home Assignments",
               ].map((feature, index) => (
                 <div
                   key={index}

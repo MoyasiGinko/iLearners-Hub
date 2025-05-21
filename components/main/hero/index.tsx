@@ -400,26 +400,27 @@ const Hero = () => {
               <span className="absolute inset-0 bg-gradient-to-tr from-blue-500/40 to-transparent rounded-full"></span>
             </a>
           </div>
-
-          <div className="pt-4 z-10 flex items-center">
-            <span className="text-yellow-500 text-2xl mr-2">⭐</span>
-            <p className="text-indigo-500 font-semibold text-lg">
-              Where Learning is Always an Adventure!
-            </p>
-            <span className="text-yellow-500 text-2xl ml-2">⭐</span>
+          <div className="pt-4 z-10 max-w-xl flex items-center justify-center gap-3">
+            <span className="text-yellow-400 text-3xl drop-shadow-glow animate-bounce-slow">
+              ⭐
+            </span>
+            <span className="relative inline-block px-4 py-2 rounded-full bg-gradient-to-r from-yellow-100 via-white to-blue-100 shadow-lg border border-yellow-200">
+              <span className="text-indigo-600 font-bold text-lg md:text-xl tracking-wide drop-shadow-[0_1.2px_1.2px_rgba(99,102,241,0.2)]">
+                Where Learning is Always an Adventure!
+              </span>
+              <span className="absolute -top-2 -left-2 w-4 h-4 bg-yellow-200 rounded-full blur-sm opacity-70"></span>
+              <span className="absolute -bottom-2 -right-2 w-4 h-4 bg-blue-200 rounded-full blur-sm opacity-70"></span>
+            </span>
+            <span className="text-yellow-400 text-3xl drop-shadow-glow animate-bounce-slow">
+              ⭐
+            </span>
           </div>
-    
+
           {/* USP Banner - New Addition */}
           <div className="w-full z-10 text-sm max-w-xl leading-tight tracking-tight bg-yellow-100 text-yellow-900 font-bold text-center py-3 rounded-xl mb-6 shadow-md border-2 border-yellow-300">
-            Friendly Teachers - DBS Checked, Safe Environment, Mock Tests, Home
-            Assignments
+            Aberdeen Based Tuition Center for Primary, Secondary, Highers &
+            Advanced Highers in English, Maths & Science Subjects.
           </div>
-
-          {/* Business description - New Addition */}
-          <p className="text-lg z-10 max-w-xl text-indigo-700 font-semibold text-center mt-4 mb-8">
-            Aberdeen Based Tuition Center for Primary, Secondary, Highers & Advanced Highers in English, Maths & Science Subjects
-          </p>
-
         </div>
       </div>
     </div>
