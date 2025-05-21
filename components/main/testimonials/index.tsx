@@ -243,7 +243,7 @@ const Testimonials: React.FC = () => {
             </motion.div>
 
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6 bg-clip-text text-transparent bg-gradient-to-br from-indigo-600 via-blue-700 to-indigo-800 drop-shadow-[2px_2px_2px_rgba(79,70,229,0.3)]">
-              Join Our Fun Learning Adventure!
+              What Our Students & Their Parents are Saying
             </h2>
 
             <motion.p
@@ -311,25 +311,23 @@ const Testimonials: React.FC = () => {
                 </svg>
               </motion.span>
 
-              {[
-                "Come explore our colorful world of learning where every day brings",
-                "new discoveries! Learn, play, and grow with friends in a safe and",
-                "exciting environment.",
-              ].map((line, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{
-                    delay: 0.5 + i * 0.8,
-                    duration: 0.8,
-                    ease: "easeInOut",
-                  }}
-                  className="block"
-                >
-                  {line}
-                </motion.span>
-              ))}
+                {[
+                  "Our students and their parents love learning with us! Discover how iLearners Hub makes education fun, engaging, and effective for every child. See what real families are saying about their adventures and achievements with our courses.",
+                ].map((line, i) => (
+                  <motion.span
+                    key={i}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{
+                      delay: 0.5 + i * 0.8,
+                      duration: 0.8,
+                      ease: "easeInOut",
+                    }}
+                    className="block"
+                  >
+                    {line}
+                  </motion.span>
+                ))}
             </motion.p>
 
             <div className="space-y-4 mb-8 relative">

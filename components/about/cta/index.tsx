@@ -69,7 +69,7 @@ const AboutCTA: React.FC = () => {
                        border border-blue-300 shadow-[0_6px_0_rgb(191,219,254)] hover:shadow-[0_4px_0px_rgb(191,219,254)]
                        hover:translate-y-[2px] active:translate-y-[6px] active:shadow-none"
             >
-              Enroll Now
+              Sign up for a Free Trial Lesson
             </motion.span>
           </Link>
         </motion.div>

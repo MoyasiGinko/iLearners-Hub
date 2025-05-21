@@ -129,7 +129,7 @@ const MobileMenu = ({
                   `}
                   onClick={onClose}
                 >
-                  Book a Lesson
+                  Book a Free Lesson
                 </Link>
               </motion.div>
             </nav>
@@ -318,7 +318,7 @@ const Header = () => {
           {/* Register Button - Right */}
           <div className="hidden h-[56px] lg:block">
             <CustomButton
-              text="Book a Lesson"
+              text="Book a Free Lesson"
               href="/register"
               className={`hover:translate-y-0 border-yellow-600 transition-colors duration-200 ${
                 isActive("/register")

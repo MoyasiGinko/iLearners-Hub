@@ -408,6 +408,18 @@ const Hero = () => {
             </p>
             <span className="text-yellow-500 text-2xl ml-2">⭐</span>
           </div>
+    
+          {/* USP Banner - New Addition */}
+          <div className="w-full text-sm max-w-xl leading-tight tracking-tight bg-yellow-100 text-yellow-900 font-bold text-center py-3 rounded-xl mb-6 shadow-md border-2 border-yellow-300">
+            Friendly Teachers - DBS Checked, Safe Environment, Mock Tests, Home
+            Assignments
+          </div>
+
+          {/* Business description - New Addition */}
+          <p className="text-lg max-w-xl text-indigo-700 font-semibold text-center mt-4 mb-8">
+            Aberdeen Based Tuition Center for Primary, Secondary, Highers & Advanced Highers in English, Maths & Science Subjects
+          </p>
+
         </div>
       </div>
     </div>
