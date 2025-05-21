@@ -289,47 +289,67 @@ const PrimarySection = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
               {/* Feature 1 */}
-              <div className="flex items-center p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(255,213,79,0.5)] relative overflow-hidden bg-gradient-to-r from-yellow-100 to-yellow-50 border border-yellow-200 group">
+              <div className="flex flex-col justify-between p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(255,213,79,0.5)] relative overflow-hidden bg-gradient-to-r from-yellow-100 to-yellow-50 border border-yellow-200 group">
                 <div className="absolute inset-0 bg-yellow-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
-                  <Check className="h-5 w-5 text-white drop-shadow-md" />
+                <div className="flex items-center mb-2">
+                  <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
+                    <Check className="h-5 w-5 text-white drop-shadow-md" />
+                  </div>
+                  <span className="font-bold text-lg text-yellow-800 group-hover:translate-x-1 transition-transform">
+                    Convenient After-School Time
+                  </span>
                 </div>
-                <span className="font-medium text-lg text-yellow-800 group-hover:translate-x-1 transition-transform">
-                  Convenient After-School Time
-                </span>
+                <p className="text-yellow-700 ml-10 group-hover:translate-x-1 transition-transform text-md">
+                  Make the most of the afternoon hours.
+                </p>
               </div>
 
               {/* Feature 2 */}
-              <div className="flex items-center p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(96,165,250,0.5)] relative overflow-hidden bg-gradient-to-r from-blue-100 to-blue-50 border border-blue-200 group">
+              <div className="flex flex-col justify-between p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(96,165,250,0.5)] relative overflow-hidden bg-gradient-to-r from-blue-100 to-blue-50 border border-blue-200 group">
                 <div className="absolute inset-0 bg-blue-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
-                  <Check className="h-5 w-5 text-white drop-shadow-md" />
+                <div className="flex items-center mb-2">
+                  <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
+                    <Check className="h-5 w-5 text-white drop-shadow-md" />
+                  </div>
+                  <span className="font-bold text-lg text-blue-800 group-hover:translate-x-1 transition-transform">
+                    Homework & Assignment Assistance
+                  </span>
                 </div>
-                <span className="font-medium text-lg text-blue-800 group-hover:translate-x-1 transition-transform">
-                  Homework & Assignment Assistance
-                </span>
+                <p className="text-blue-700 ml-10 group-hover:translate-x-1 transition-transform text-md">
+                  Get personalized support from our experienced tutors.
+                </p>
               </div>
 
               {/* Feature 3 */}
-              <div className="flex items-center p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(74,222,128,0.5)] relative overflow-hidden bg-gradient-to-r from-green-100 to-green-50 border border-green-200 group">
+              <div className="flex flex-col justify-between p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(74,222,128,0.5)] relative overflow-hidden bg-gradient-to-r from-green-100 to-green-50 border border-green-200 group">
                 <div className="absolute inset-0 bg-green-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-green-400 to-green-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
-                  <Check className="h-5 w-5 text-white drop-shadow-md" />
+                <div className="flex items-center mb-2">
+                  <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-green-400 to-green-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
+                    <Check className="h-5 w-5 text-white drop-shadow-md" />
+                  </div>
+                  <span className="font-bold text-lg text-green-800 group-hover:translate-x-1 transition-transform">
+                    Educational Environment
+                  </span>
                 </div>
-                <span className="font-medium text-lg text-green-800 group-hover:translate-x-1 transition-transform">
-                  Educational Environment
-                </span>
+                <p className="text-green-700 ml-10 group-hover:translate-x-1 transition-transform text-md">
+                  A focused space designed for learning and growth.
+                </p>
               </div>
 
               {/* Feature 4 */}
-              <div className="flex items-center p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(244,114,182,0.5)] relative overflow-hidden bg-gradient-to-r from-pink-100 to-pink-50 border border-pink-200 group">
+              <div className="flex flex-col justify-between p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(244,114,182,0.5)] relative overflow-hidden bg-gradient-to-r from-pink-100 to-pink-50 border border-pink-200 group">
                 <div className="absolute inset-0 bg-pink-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-pink-400 to-pink-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
-                  <Check className="h-5 w-5 text-white drop-shadow-md" />
+                <div className="flex items-center mb-2">
+                  <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-pink-400 to-pink-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
+                    <Check className="h-5 w-5 text-white drop-shadow-md" />
+                  </div>
+                  <span className="font-bold text-lg text-pink-800 group-hover:translate-x-1 transition-transform">
+                    Supportive Tutors
+                  </span>
                 </div>
-                <span className="font-medium text-lg text-pink-800 group-hover:translate-x-1 transition-transform">
-                  Supportive Tutors
-                </span>
+                <p className="text-pink-700 ml-10 group-hover:translate-x-1 transition-transform text-md">
+                  Encouragement and guidance every step of the way.
+                </p>
               </div>
             </div>
 
