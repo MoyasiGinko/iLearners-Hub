@@ -9,7 +9,7 @@ const FloatingElements = () => {
     <div className="absolute container inset-0 mx-auto flex items-center justify-center">
       {/* Improved Rocket animation with smoother motion */}
       <motion.div
-        className="absolute inset-0 top-40 left-0 w-20 h-20 z-0 hidden md:block"
+        className="absolute inset-0 top-40 left-0 w-14 h-14 md:w-20 md:h-20 z-0 block"
         animate={{
           x: [0, 500, 0], // Simplified path
           y: [0, -80, 0], // Smooth arc
@@ -27,7 +27,7 @@ const FloatingElements = () => {
 
       {/* Animated Earth SVG */}
       <motion.div
-        className="absolute top-26 right-14 w-20 h-20 md:w-24 md:h-24 z-0 hidden md:block"
+        className="absolute top-26 right-6 w-12 h-12 md:w-24 md:h-24 z-0 block"
         animate={{ rotate: 360 }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       >
@@ -40,7 +40,7 @@ const FloatingElements = () => {
 
       {/* Animated Chemistry Flask SVG */}
       <motion.div
-        className="absolute bottom-20 right-6 w-20 h-20 z-0 hidden md:block"
+        className="absolute opacity-50  bottom-20 right-2 w-10 h-10 md:w-20 md:h-20 z-0 block"
         animate={{
           y: [0, -10, 0],
           rotate: [-5, 5, -5],
@@ -69,7 +69,7 @@ const FloatingElements = () => {
 
       {/* Animated Math Symbols SVG */}
       <motion.div
-        className="absolute top-60 left-16 w-16 h-16 z-0 hidden lg:block"
+        className="absolute opacity-50  top-60 left-4 w-8 h-8 md:w-16 md:h-16 z-0 block"
         animate={{
           scale: [1, 1.1, 1],
           rotate: [0, 10, 0],
@@ -85,9 +85,9 @@ const FloatingElements = () => {
 
       {/* Animated Lightbulb SVG */}
       <motion.div
-        className="absolute top-20 left-1/2 transform -translate-x-1/2 w-16 h-16 z-0 hidden lg:block"
+        className="absolute top-20 left-1/2 transform -translate-x-1/2 w-8 h-8 md:w-16 md:h-16 z-0 block"
         animate={{
-          opacity: [0.7, 1, 0.7],
+          opacity: [0.3, 0.5, 0.3],
           y: [-5, 5, -5],
         }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
@@ -115,9 +115,9 @@ const FloatingElements = () => {
         </svg>
       </motion.div>
 
-      {/* Animated Math SYmbol SVG */}
+      {/* Animated Math Symbol SVG */}
       <motion.div
-        className="absolute bottom-20 left-[47%] transform -translate-x-1/2 w-16 h-16 z-0 hidden lg:block"
+        className="absolute opacity-50  bottom-20 left-[47%] transform -translate-x-1/2 w-8 h-8 md:w-16 md:h-16 z-0 block"
         animate={{
           y: [0, -5, 0],
           rotate: [-3, 5, -6],
@@ -133,7 +133,7 @@ const FloatingElements = () => {
 
       {/* DNA Helix SVG Animation */}
       <motion.div
-        className="absolute bottom-10 left-10 w-26 h-32 z-0 hidden md:block"
+        className="absolute  bottom-10 left-4 w-12 h-16 md:w-26 md:h-32 z-0 block"
         animate={{
           rotateY: 360,
         }}
@@ -148,7 +148,7 @@ const FloatingElements = () => {
 
       {/* Atom SVG Animation */}
       <motion.div
-        className="absolute bottom-16 right-16 w-20 h-20 z-0 hidden lg:block"
+        className="absolute bottom-16 right-4 w-12 h-12 md:w-20 md:h-20 z-0 block"
         animate={{ rotate: 360 }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
       >
@@ -346,7 +346,7 @@ const Hero = () => {
         </div>
 
         {/* Right side with text and buttons - modified for kid-friendly design */}
-        <div className="w-full lg:w-1/2 lg:pl-12 space-y-6">
+        <div className="w-full lg:w-1/2 z-10 lg:pl-12 space-y-6">
           <motion.h1
             className="text-3xl md:text-4xl xl:text-5xl font-bold leading-tight relative"
             initial={{ opacity: 0, y: 20 }}
@@ -401,7 +401,7 @@ const Hero = () => {
             </a>
           </div>
 
-          <div className="pt-4 flex items-center">
+          <div className="pt-4 z-10 flex items-center">
             <span className="text-yellow-500 text-2xl mr-2">⭐</span>
             <p className="text-indigo-500 font-semibold text-lg">
               Where Learning is Always an Adventure!
@@ -410,13 +410,13 @@ const Hero = () => {
           </div>
     
           {/* USP Banner - New Addition */}
-          <div className="w-full text-sm max-w-xl leading-tight tracking-tight bg-yellow-100 text-yellow-900 font-bold text-center py-3 rounded-xl mb-6 shadow-md border-2 border-yellow-300">
+          <div className="w-full z-10 text-sm max-w-xl leading-tight tracking-tight bg-yellow-100 text-yellow-900 font-bold text-center py-3 rounded-xl mb-6 shadow-md border-2 border-yellow-300">
             Friendly Teachers - DBS Checked, Safe Environment, Mock Tests, Home
             Assignments
           </div>
 
           {/* Business description - New Addition */}
-          <p className="text-lg max-w-xl text-indigo-700 font-semibold text-center mt-4 mb-8">
+          <p className="text-lg z-10 max-w-xl text-indigo-700 font-semibold text-center mt-4 mb-8">
             Aberdeen Based Tuition Center for Primary, Secondary, Highers & Advanced Highers in English, Maths & Science Subjects
           </p>
 

@@ -18,7 +18,7 @@ const CTA: React.FC = () => {
             textShadow: "0 4px 6px rgba(59, 130, 246, 0.2)",
           }}
         >
-          Start Your Learning Journey Today
+         Start Your Journey Today at iLearner's Hub
         </motion.h2>
 
         <motion.p
@@ -28,8 +28,7 @@ const CTA: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed drop-shadow-sm"
         >
-          Discover our wide range of courses designed to help you acquire new
-          skills, advance your career, and achieve your educational goals.
+          Discover our wide range of courses designed to help you acquire new skills, advance your level and achieve your educational goals.
         </motion.p>
 
         <motion.div
