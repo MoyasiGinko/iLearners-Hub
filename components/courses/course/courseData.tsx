@@ -345,7 +345,7 @@ complex questions, and share techniques that set A-band candidates apart.`,
   },
   // --- Insert Homework Club course at the end ---
   {
-    id: 100,
+    id: 14,
     title: "Unlock Your Potential with iLearner's Hub Homework Club!",
     Image: "/images/courses/c1.jpg",
     category: "Homework Club",
@@ -353,15 +353,20 @@ complex questions, and share techniques that set A-band candidates apart.`,
     rate: "£10/hr",
     fee: "£10.00",
     action: "Join Now",
-    overview: `Need a supportive and focused environment for your primary or secondary student to tackle their homework? Look no further than iLearner's Hub Homework Club!\n\nJoin us weekdays from 4 pm to 6 pm for dedicated homework time with the guidance of our supportive tutors. Students can drop in any time after 3:30 pm.\n\nOur Homework Club offers:\n- A quiet, structured space to complete assignments\n- Friendly tutors available for questions and guidance\n- Support in all school subjects\n- Encouragement of independent study habits\n- Light refreshments provided\n- Flexible attendance: come as often as you need\n\nPricing: £10 per hour. No long-term commitment required.\n\nUnlock your child's potential and make homework time stress-free!`,
+    overview: `Imagine a calm and encouraging space where your child can confidently complete their homework after school. At iLearner's Hub, our new Homework Club provides just that!
+
+Designed for both primary and secondary students, our 2-hour sessions run on weekdays from 4 pm to 6 pm, offering a valuable opportunity to focus on school assignments with the support of our friendly tutors. Students are welcome to drop in from 3:30 pm onwards, giving them flexibility to settle in.
+
+We believe in creating more than just a homework session. Our Homework Club fosters a safe, educational, and exciting environment where students can learn from our experienced tutors, develop their understanding, and even collaborate with peers.`,
     includes: [
-      "Guided homework support",
-      "All subjects covered",
-      "Flexible drop-in times",
-      "Supportive tutors",
-      "Light refreshments",
-      "No long-term commitment required",
+      "Structured after-school routine: Consistent time and place for homework completion",
+      "Personalized homework & assignment help: Tutors provide guidance and answer questions",
+      "Boosted understanding & grades: Personalized help for challenging assignments",
+      "Development in a learning-focused space: Minimizes distractions, maximizes concentration",
+      "Caring & supportive tutors: Experienced individuals dedicated to student success",
+      "Increased confidence & independence: Skills and support for self-reliant learning",
     ],
-    perfectFor: "Primary and secondary students who need a quiet, supportive place to complete homework with expert help on hand.",
+    perfectFor:
+      "Primary and secondary students who need a quiet, supportive place to complete homework with expert help on hand.",
   },
 ];

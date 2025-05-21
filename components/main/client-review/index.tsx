@@ -1,35 +1,15 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
-import Image from "next/image";
+import { gsap } from "gsap";
+import { Draggable } from "gsap/Draggable";
 
-// Star rating component - updated to use stars with rounded edges
-const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
-  return (
-    <div className="flex">
-      {[...Array(5)].map((_, i) => (
-        <svg
-          key={i}
-          className={`w-6 h-6 ${
-            i < rating ? "text-yellow-400" : "text-gray-200"
-          }`}
-          fill="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-          />
-        </svg>
-      ))}
-    </div>
-  );
-};
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(Draggable);
+}
 
+// ... QuoteIcon and BackgroundElements unchanged ...
 // Quote icon updated to be more playful
-const QuoteIcon: React.FC = () => {
+const QuoteIcon = () => {
   return (
     <div className="w-14 h-14 flex items-center justify-center bg-blue-500 rounded-full border-4 border-yellow-300 shadow-md">
       <svg
@@ -49,7 +29,7 @@ const QuoteIcon: React.FC = () => {
 };
 
 // New Fun SVG Background Elements
-const BackgroundElements: React.FC = () => {
+const BackgroundElements = () => {
   return (
     <>
       {/* Floating Clouds */}
@@ -147,7 +127,6 @@ const BackgroundElements: React.FC = () => {
   );
 };
 
-// Testimonial Card Component - updated with kid-friendly styling
 interface TestimonialCardProps {
   name: string;
   position: string;
@@ -156,21 +135,18 @@ interface TestimonialCardProps {
   image: string;
 }
 
-const TestimonialCard: React.FC<TestimonialCardProps> = ({
+const TestimonialCard = ({
   name,
   position,
   content,
   rating,
   image,
-}) => {
+}: TestimonialCardProps) => {
   return (
     <div className="bg-white rounded-3xl p-8 relative h-full border-4 border-blue-400">
-      {/* Testimonial Content */}
       <p className="text-gray-700 mb-6 text-lg font-medium rounded-xl bg-blue-50 p-4 border-2 border-blue-100">
         {content}
       </p>
-
-      {/* Author Info */}
       <div className="flex items-center">
         <QuoteIcon />
         <div className="ml-4">
@@ -182,9 +158,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
   );
 };
 
-// Main Testimonials Section Component
-const ClientReview: React.FC = () => {
-  // Extended testimonial data for carousel
+const ClientReview = () => {
   const testimonials = [
     {
       id: 1,
@@ -224,59 +198,173 @@ const ClientReview: React.FC = () => {
     },
   ];
 
-  // Duplicate the testimonials to create an infinite effect
-  const duplicatedTestimonials = [...testimonials, ...testimonials];
+  const carouselWrapperRef = useRef(null);
+  const carouselRef = useRef(null);
+  const sliderRef = useRef(null);
+  const draggableInstanceRef = useRef<Draggable | null>(null);
+  const snapAnimationRef = useRef<gsap.core.Tween | null>(null);
 
-  const [position, setPosition] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [direction, setDirection] = useState(1);
-  const carouselRef = useRef<HTMLDivElement>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [cardWidth, setCardWidth] = useState(0);
+  const [cardGap, setCardGap] = useState(20);
+  const [isMobile, setIsMobile] = useState(false);
 
+  // Detect mobile/desktop view
   useEffect(() => {
-    const slideWidth = 100 / (duplicatedTestimonials.length / 2);
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
-    let animationId: number;
-    const moveCarousel = () => {
-      if (!isPaused) {
-        setPosition((prevPosition) => {
-          let newPosition = prevPosition + 0.05 * direction;
+  // Setup carousel (no autoplay)
+  useEffect(() => {
+    if (
+      typeof window === "undefined" ||
+      !carouselRef.current ||
+      !sliderRef.current
+    )
+      return;
 
-          if (newPosition >= slideWidth * testimonials.length) {
-            setDirection(-1);
-            return prevPosition;
-          } else if (newPosition <= 0) {
-            setDirection(1);
-            return prevPosition;
-          }
+    const setupCarousel = () => {
+      const wrapper = carouselWrapperRef.current;
+      if (!wrapper) return;
+      const wrapperWidth = (wrapper as HTMLElement).offsetWidth;
 
-          return newPosition;
-        });
+      const newCardWidth =
+        window.innerWidth < 768 ? wrapperWidth : Math.min(500, wrapperWidth);
+      setCardWidth(newCardWidth);
+
+      if (draggableInstanceRef.current) {
+        draggableInstanceRef.current.kill();
       }
+      if (snapAnimationRef.current) {
+        gsap.killTweensOf(sliderRef.current);
+      }
+      gsap.set(sliderRef.current, { x: 0 });
 
-      animationId = requestAnimationFrame(moveCarousel);
+      if (!sliderRef.current) return;
+      const slideItems = (sliderRef.current as HTMLElement).children;
+      Array.from(slideItems).forEach((item) => {
+        gsap.set(item as Element, {
+          width: newCardWidth,
+          marginRight: cardGap,
+        });
+      });
+
+      const totalMovement =
+        (newCardWidth + cardGap) * (testimonials.length - 1);
+
+      draggableInstanceRef.current = Draggable.create(sliderRef.current, {
+        type: "x",
+        inertia: true,
+        trigger: carouselRef.current,
+        bounds: {
+          minX: -totalMovement,
+          maxX: 0,
+        },
+        edgeResistance: 0.85,
+        throwResistance: 0.85,
+        overshootTolerance: 0.5,
+        dragClickables: true,
+        onDragStart: () => {
+          gsap.set(carouselRef.current, { cursor: "grabbing" });
+        },
+        onDrag: function () {
+          gsap.set(carouselRef.current, { cursor: "grabbing" });
+        },
+        onDragEnd: function () {
+          const x = this.endX;
+          const slideUnit = newCardWidth + cardGap;
+          const slideIndex = Math.round(Math.abs(Number(x)) / slideUnit);
+          snapAnimationRef.current = gsap.to(sliderRef.current, {
+            x: -slideIndex * slideUnit,
+            duration: 0.4,
+            ease: "power2.out",
+            onComplete: () => {
+              setCurrentSlide(slideIndex);
+              gsap.set(carouselRef.current, { cursor: "grab" });
+            },
+          });
+        },
+        onThrowComplete: function () {
+          const x = gsap.getProperty(sliderRef.current, "x");
+          const slideUnit = newCardWidth + cardGap;
+          const slideIndex = Math.round(Math.abs(Number(x)) / slideUnit);
+          setCurrentSlide(slideIndex);
+        },
+      })[0];
+
+      if (draggableInstanceRef.current) {
+        draggableInstanceRef.current.vars.onPress = function () {
+          gsap.set(carouselRef.current, { cursor: "grabbing" });
+        };
+        draggableInstanceRef.current.vars.onRelease = function () {
+          gsap.set(carouselRef.current, { cursor: "grab" });
+        };
+      }
     };
 
-    animationId = requestAnimationFrame(moveCarousel);
+    setupCarousel();
+
+    const handleResize = () => {
+      setupCarousel();
+      goToSlide(currentSlide, false);
+    };
+
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      cancelAnimationFrame(animationId);
+      window.removeEventListener("resize", handleResize);
+      if (draggableInstanceRef.current) {
+        draggableInstanceRef.current.kill();
+      }
+      if (snapAnimationRef.current) {
+        gsap.killTweensOf(sliderRef.current);
+      }
     };
-  }, [isPaused, testimonials.length, duplicatedTestimonials.length, direction]);
+    // eslint-disable-next-line
+  }, [testimonials.length, cardGap, isMobile]);
+
+  const goToSlide = (index: number, animated = true) => {
+    const slideUnit = cardWidth + cardGap;
+    const targetX = -index * slideUnit;
+    gsap.to(sliderRef.current, {
+      x: targetX,
+      duration: animated ? 0.5 : 0,
+      ease: "power2.out",
+      onComplete: () => {
+        setCurrentSlide(index);
+      },
+    });
+  };
+
+  const handleNavButtonClick = (direction: string) => {
+    let nextSlide;
+    if (direction === "prev") {
+      nextSlide =
+        (currentSlide - 1 + testimonials.length) % testimonials.length;
+    } else {
+      nextSlide = (currentSlide + 1) % testimonials.length;
+    }
+    goToSlide(nextSlide);
+  };
+
+  const handleDotClick = (index: number) => {
+    goToSlide(index);
+  };
 
   return (
     <div className="bg-transparent py-16 relative overflow-hidden">
-      {/* Add custom background elements */}
       <BackgroundElements />
-
-      {/* Paper-cut style decorative shapes */}
       <div className="absolute top-0 left-0 w-32 h-32 bg-yellow-200 rounded-br-full z-0 opacity-50"></div>
       <div className="absolute bottom-0 right-0 w-40 h-40 bg-pink-200 rounded-tl-full z-0 opacity-50"></div>
       <div className="absolute top-1/4 right-20 w-24 h-24 bg-green-200 rounded-full z-0 opacity-50"></div>
       <div className="absolute bottom-1/4 left-20 w-20 h-20 bg-purple-200 rounded-full z-0 opacity-50"></div>
-
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="flex flex-col lg:flex-row gap-10 items-start">
-          {/* Left side with heading */}
           <div className="w-full lg:w-1/2">
             <h3
               className="text-pink-500 font-bold mb-4 text-xl"
@@ -297,8 +385,6 @@ const ClientReview: React.FC = () => {
               Hear from our happy students about their exciting adventures in
               learning!
             </p>
-
-            {/* Fun animated pencil icon */}
             <div className="relative w-20 h-20 animate-bounce">
               <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <polygon
@@ -313,48 +399,142 @@ const ClientReview: React.FC = () => {
               </svg>
             </div>
           </div>
-
-          {/* Right side with testimonials carousel */}
           <div
-            className="w-full lg:w-2/3 overflow-hidden"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-            ref={carouselRef}
+            className="w-full lg:w-2/3 overflow-hidden relative"
+            ref={carouselWrapperRef}
           >
-            <div className="relative overflow-hidden">
-              {/* Left fade effect */}
-              <div className="absolute left-0 top-0 w-16 h-full bg-gradient-to-r from-blue-50 to-transparent z-10"></div>
-
-              <div
-                className="flex transition-transform duration-300 ease-linear"
-                style={{ transform: `translateX(-${position}%)` }}
-              >
-                {duplicatedTestimonials.map((testimonial, index) => (
-                  <div
-                    key={`${testimonial.id}-${index}`}
-                    className="min-w-full md:min-w-[420px] px-4"
+            <div
+              className="relative overflow-hidden cursor-grab touch-pan-y select-none"
+              ref={carouselRef}
+              style={{
+                WebkitTapHighlightColor: "transparent",
+                touchAction: "pan-y",
+              }}
+            >
+              <div className="absolute top-0 bottom-0 left-0 right-0 z-30 pointer-events-none flex items-center justify-between px-2">
+                <button
+                  onClick={() => handleNavButtonClick("prev")}
+                  className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all pointer-events-auto"
+                  aria-label="Previous testimonial"
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <div className="h-full">
-                      <TestimonialCard
-                        name={testimonial.name}
-                        position={testimonial.position}
-                        content={testimonial.content}
-                        rating={testimonial.rating}
-                        image={testimonial.image}
-                      />
-                    </div>
+                    <path
+                      d="M15 18L9 12L15 6"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+                <button
+                  onClick={() => handleNavButtonClick("next")}
+                  className="w-12 h-12 rounded-full bg-blue-500 text-white flex items-center justify-center shadow-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all pointer-events-auto"
+                  aria-label="Next testimonial"
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9 6L15 12L9 18"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div className="absolute left-0 top-0 w-12 h-full bg-gradient-to-r from-blue-50 to-transparent z-10 pointer-events-none"></div>
+              <div
+                ref={sliderRef}
+                className="flex will-change-transform touch-pan-y"
+                style={{
+                  touchAction: "pan-y",
+                }}
+              >
+                {testimonials.map((testimonial) => (
+                  <div
+                    key={testimonial.id}
+                    className="px-2 flex-shrink-0"
+                    style={{
+                      width: isMobile ? "100%" : "500px",
+                    }}
+                  >
+                    <TestimonialCard
+                      name={testimonial.name}
+                      position={testimonial.position}
+                      content={testimonial.content}
+                      rating={testimonial.rating}
+                      image={testimonial.image}
+                    />
                   </div>
                 ))}
               </div>
+              <div className="absolute right-0 top-0 w-12 h-full bg-gradient-to-l from-blue-50 to-transparent z-10 pointer-events-none"></div>
+            </div>
+            <div className="flex justify-center mt-6 z-20">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  className={`w-4 h-4 mx-1.5 rounded-full transition-all duration-300 ease-in-out ${
+                    index === currentSlide
+                      ? "bg-blue-500 transform scale-125"
+                      : "bg-blue-200 hover:bg-blue-300"
+                  }`}
+                  onClick={() => handleDotClick(index)}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
 
-              {/* Right fade effect */}
-              <div className="absolute right-0 top-0 w-16 h-full bg-gradient-to-l from-blue-50 to-transparent z-10"></div>
+            <div className="flex justify-center mt-4">
+              <div className="px-4 py-2 bg-blue-100 rounded-full flex items-center text-blue-600 text-sm">
+                <svg
+                  className="w-5 h-5 mr-2 animate-pulse"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9 18L15 12L9 6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                Swipe to see more
+                <svg
+                  className="w-5 h-5 ml-2 animate-pulse"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M15 18L9 12L15 6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Add CSS animations to global styles */}
+      {/* ...styles unchanged... */}
       <style jsx global>{`
         @keyframes float-slow {
           0%,
@@ -415,6 +595,27 @@ const ClientReview: React.FC = () => {
         }
         .animate-twinkle {
           animation: twinkle 4s ease-in-out infinite;
+        }
+        .animate-pulse {
+          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+          0%,
+          100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.5;
+          }
+        }
+        html {
+          scroll-behavior: smooth;
+        }
+        * {
+          -webkit-tap-highlight-color: transparent;
+        }
+        .will-change-transform {
+          will-change: transform;
         }
       `}</style>
     </div>

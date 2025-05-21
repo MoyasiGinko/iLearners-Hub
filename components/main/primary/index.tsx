@@ -262,10 +262,18 @@ const PrimarySection = () => {
 
           {/* Right side with text and features */}
           <div className="w-full lg:w-1/2 lg:pl-12">
-            <div className="text-purple-600 font-bold mb-1 text-xl relative">
-              <span className="relative inline-block after:content-[''] after:absolute after:left-0 after:right-0 after:bottom-0 after:h-2 after:bg-purple-300 after:-z-10 after:rotate-1">
-                Lets Learn Together!
-              </span>
+            <div className="mb-4">
+              <div className="relative inline-block mb-1">
+                <span className="text-purple-700 font-bold text-xl md:text-2xl px-4 py-1 rounded-[8px] bg-gradient-to-r from-purple-100 via-purple-200 to-purple-50 shadow-md border border-purple-200 tracking-wide animate-pulse">
+                  Let’s Learn Together!
+                </span>
+                <span className="absolute left-0 right-0 bottom-0 h-2 bg-purple-300/60 rounded-full blur-sm -z-10"></span>
+              </div>
+              <div className="mt-1">
+                <span className="block text-2xl md:text-4xl font-extrabold leading-tight tracking-tight bg-gradient-to-r from-indigo-500 via-indigo-500 to-indigo-400 bg-clip-text text-transparent drop-shadow-[3px_3px_0px_rgba(168,85,247,0.15)]">
+                  Discover Our Homework Club
+                </span>
+              </div>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4 relative">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] to-[#FF9999] drop-shadow-[3px_3px_0px_rgba(255,107,107,0.3)]">
@@ -275,15 +283,21 @@ const PrimarySection = () => {
 
             <div className="text-gray-600 mb-8 relative">
               <p className="text-lg leading-relaxed mb-3 p-3 bg-white/50 rounded-xl border-l-4 border-purple-300 shadow-sm transform hover:translate-x-1 transition-transform duration-300">
-                Need a supportive and focused environment for your primary or secondary student to tackle their homework? Look no further than iLearner's Hub Homework Club!
+                Need a supportive and focused environment for your primary or
+                secondary student to tackle their homework? Look no further than
+                iLearner's Hub Homework Club!
               </p>
-              
+
               <p className="text-lg leading-relaxed mb-3 p-3 bg-white/50 rounded-xl border-l-4 border-yellow-300 shadow-sm transform hover:translate-x-1 transition-transform duration-300">
-                Join us weekdays from 4 pm to 6 pm for dedicated homework time with the guidance of our supportive tutors. Students can drop in any time after 3:30 pm.
+                Join us weekdays from 4 pm to 6 pm for dedicated homework time
+                with the guidance of our supportive tutors. Students can drop in
+                any time after 3:30 pm.
               </p>
-              
+
               <p className="text-lg leading-relaxed p-3 bg-white/50 rounded-xl border-l-4 border-blue-300 shadow-sm transform hover:translate-x-1 transition-transform duration-300">
-                We provide a safe, educational, and engaging space where they can learn, develop, and complete assignments alongside their peers.
+                We provide a safe, educational, and engaging space where they
+                can learn, develop, and complete assignments alongside their
+                peers.
               </p>
             </div>
 
