@@ -400,7 +400,7 @@ const Hero = () => {
               <span className="absolute inset-0 bg-gradient-to-tr from-blue-500/40 to-transparent rounded-full"></span>
             </a>
           </div>
-          <div className="pt-4 z-10 max-w-xl flex items-center justify-center gap-3">
+          {/* <div className="pt-4 z-10 max-w-xl flex items-center justify-center gap-3">
             <span className="text-yellow-400 text-3xl drop-shadow-glow animate-bounce-slow">
               ⭐
             </span>
@@ -414,13 +414,50 @@ const Hero = () => {
             <span className="text-yellow-400 text-3xl drop-shadow-glow animate-bounce-slow">
               ⭐
             </span>
-          </div>
+          </div> */}
 
           {/* USP Banner - New Addition */}
-          <div className="w-full z-10 text-sm max-w-xl leading-tight tracking-tight bg-yellow-100 text-yellow-900 font-bold text-center py-3 rounded-xl mb-6 shadow-md border-2 border-yellow-300">
-            Aberdeen Based Tuition Center for Primary, Secondary, Highers &
-            Advanced Highers in English, Maths & Science Subjects.
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="w-full rounded-xl z-10 max-w-xl p-4 relative overflow-hidden"
+          >
+            <div
+              className="bg-gradient-to-r from-red-200 via-amber-100 to-yellow-200 text-amber-800 font-bold text-center py-4 px-5 rounded-xl shadow-xl border-2 border-yellow-300 relative transform hover:scale-[1.02] transition-transform duration-300"
+              style={{
+                perspective: "1000px",
+                transform: "rotateX(5deg) rotateY(2deg)",
+                boxShadow:
+                  "0 5px 15px -5px rgba(201, 150, 0, 0.3), 0 4px 6px -3px rgba(0, 0, 0, 0.2)",
+              }}
+            >
+              <h3 className="text-base sm:text-lg leading-tight tracking-tight drop-shadow-sm relative z-10">
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-pink-500 to-orange-500 font-extrabold">
+                  Aberdeen Based Tuition Center for Primary, Secondary, Highers
+                  & Advanced Highers in English, Maths & Science Subjects.
+                </span>
+              </h3>
+
+              <div className="flex justify-center gap-2 mt-1">
+                {["⭐", "⭐", "⭐"].map((icon, i) => (
+                  <motion.span
+                    key={i}
+                    className="text-amber-500 inline-block"
+                    animate={{ y: [0, -5, 0] }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 1.5,
+                      delay: i * 0.3,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    {icon}
+                  </motion.span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </div>
