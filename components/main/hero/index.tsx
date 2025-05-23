@@ -27,7 +27,7 @@ const FloatingElements = () => {
 
       {/* Animated Earth SVG */}
       <motion.div
-        className="absolute top-26 right-6 w-12 h-12 md:w-24 md:h-24 z-0 block"
+        className="absolute opacity-50 top-26 right-6 w-12 h-12 md:w-24 md:h-24 z-0 block"
         animate={{ rotate: 360 }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       >
@@ -133,7 +133,7 @@ const FloatingElements = () => {
 
       {/* DNA Helix SVG Animation */}
       <motion.div
-        className="absolute  bottom-10 left-4 w-12 h-16 md:w-26 md:h-32 z-0 block"
+        className="absolute opacity-50 bottom-10 left-4 w-12 h-16 md:w-26 md:h-32 z-0 block"
         animate={{
           rotateY: 360,
         }}
