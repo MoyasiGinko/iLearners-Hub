@@ -424,22 +424,41 @@ const Hero = () => {
             className="w-full rounded-xl z-10 max-w-xl p-4 relative overflow-hidden"
           >
             <div
-              className="bg-gradient-to-r from-red-200 via-amber-100 to-yellow-200 text-amber-800 font-bold text-center py-4 px-5 rounded-xl shadow-xl border-2 border-yellow-300 relative transform hover:scale-[1.02] transition-transform duration-300"
+              className="bg-white text-gray-800 font-bold py-5 px-6 rounded-lg relative transform hover:scale-[1.02] transition-transform duration-300"
               style={{
                 perspective: "1000px",
-                transform: "rotateX(5deg) rotateY(2deg)",
+                transform: "rotate(-1deg)",
                 boxShadow:
-                  "0 5px 15px -5px rgba(201, 150, 0, 0.3), 0 4px 6px -3px rgba(0, 0, 0, 0.2)",
+                  "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+                backgroundImage:
+                  "linear-gradient(0deg, rgba(254, 243, 199, 0.7) 2px, transparent 2px)",
+                backgroundSize: "100% 20px",
               }}
             >
-              <h3 className="text-base sm:text-lg leading-tight tracking-tight drop-shadow-sm relative z-10">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-pink-500 to-orange-500 font-extrabold">
+              {/* Paper clip */}
+              <div className="absolute -top-3 left-8 w-8 h-14 z-20">
+                <div className="w-full h-6 bg-gray-400 rounded-t-full"></div>
+                <div className="w-full h-8 border-l-2 border-r-2 border-gray-400"></div>
+              </div>
+
+              {/* Torn edge effect at top */}
+              <div
+                className="absolute top-0 left-0 right-0 h-2 bg-white z-10"
+                style={{
+                  clipPath:
+                    "polygon(0% 0%, 5% 100%, 10% 0%, 15% 100%, 20% 0%, 25% 100%, 30% 0%, 35% 100%, 40% 0%, 45% 100%, 50% 0%, 55% 100%, 60% 0%, 65% 100%, 70% 0%, 75% 100%, 80% 0%, 85% 100%, 90% 0%, 95% 100%, 100% 0%)",
+                }}
+              ></div>
+
+              {/* Note content */}
+              <h3 className="text-base sm:text-lg leading-tight tracking-tight relative z-10 font-handwriting mt-3">
+                <span className="text-indigo-700 font-bold border-b-2 border-amber-300">
                   Aberdeen Based Tuition Center for Primary, Secondary, Highers
                   & Advanced Highers in English, Maths & Science Subjects.
                 </span>
               </h3>
 
-              <div className="flex justify-center gap-2 mt-1">
+              <div className="flex justify-center gap-2 mt-3">
                 {["⭐", "⭐", "⭐"].map((icon, i) => (
                   <motion.span
                     key={i}
@@ -456,6 +475,13 @@ const Hero = () => {
                   </motion.span>
                 ))}
               </div>
+
+              {/* Tape pieces */}
+              <div className="absolute -top-1 -right-1 w-16 h-6 bg-gray-200 opacity-70 rotate-12"></div>
+              <div className="absolute -bottom-1 -left-1 w-16 h-6 bg-gray-200 opacity-70 -rotate-12"></div>
+
+              {/* Coffee stain */}
+              <div className="absolute bottom-8 right-6 w-10 h-10 rounded-full bg-amber-100 opacity-40"></div>
             </div>
           </motion.div>
         </div>
