@@ -334,7 +334,7 @@ const Testimonials: React.FC = () => {
               {/* Feature 1 */}
               <div className="flex flex-col justify-center p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(255,213,79,0.5)] relative overflow-hidden bg-gradient-to-r from-yellow-100 to-yellow-50 border border-yellow-200 group">
                 <div className="absolute inset-0 bg-yellow-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                <div className="flex items-center mb-2">
+                <div className="flex items-center">
                   <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
                     <Check className="h-5 w-5 text-white drop-shadow-md" />
                   </div>
@@ -347,7 +347,7 @@ const Testimonials: React.FC = () => {
               {/* Feature 2 */}
               <div className="flex flex-col justify-center p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(96,165,250,0.5)] relative overflow-hidden bg-gradient-to-r from-blue-100 to-blue-50 border border-blue-200 group">
                 <div className="absolute inset-0 bg-blue-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                <div className="flex items-center mb-2">
+                <div className="flex items-center">
                   <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
                     <Check className="h-5 w-5 text-white drop-shadow-md" />
                   </div>
@@ -360,7 +360,7 @@ const Testimonials: React.FC = () => {
               {/* Feature 3 */}
               <div className="flex flex-col justify-center p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(74,222,128,0.5)] relative overflow-hidden bg-gradient-to-r from-green-100 to-green-50 border border-green-200 group">
                 <div className="absolute inset-0 bg-green-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                <div className="flex items-center mb-2">
+                <div className="flex items-center">
                   <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-green-400 to-green-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
                     <Check className="h-5 w-5 text-white drop-shadow-md" />
                   </div>
@@ -373,7 +373,7 @@ const Testimonials: React.FC = () => {
               {/* Feature 4 */}
               <div className="flex flex-col justify-center p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(244,114,182,0.5)] relative overflow-hidden bg-gradient-to-r from-pink-100 to-pink-50 border border-pink-200 group">
                 <div className="absolute inset-0 bg-pink-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                <div className="flex items-center mb-2">
+                <div className="flex items-center">
                   <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-pink-400 to-pink-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
                     <Check className="h-5 w-5 text-white drop-shadow-md" />
                   </div>
