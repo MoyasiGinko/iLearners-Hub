@@ -87,7 +87,7 @@ parents. `,
     category: "Secondary",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
     rate: "£16/hr",
-    sessions: "2 hours",
+    sessions: "1 hours",
     fee: "£16.00",
     action: "Enroll Now",
     overview: `In S3, students begin early preparation for National 5-level work. Our tutoring focuses on Maths and Science subjects, helping students deepen their understanding of key concepts and begin light exam-style practice in a stress-free way.
