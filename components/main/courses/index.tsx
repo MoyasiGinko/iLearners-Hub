@@ -159,20 +159,10 @@ const categoryColors = {
 
 const MiniCourseTablet = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  interface Course {
-    id: number; // Match the type from courseData
-    title: string;
-    category: string;
-    subjects?: string[];
-    rate?: string;
-    duration?: string;
-    sessions?: string;
-    fee?: string;
-    discount?: string;
-    action?: string;
-  }
-
-  const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
+  // Use the Course type imported from courseData rather than defining a local interface
+  const [filteredCourses, setFilteredCourses] = useState<(typeof courses)[0][]>(
+    []
+  );
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
@@ -470,8 +460,22 @@ const MiniCourseTablet = () => {
                   {/* Card content */}
                   <div className="p-6 pt-10 pb-0 flex-grow">
                     <h3 className="text-lg font-bold mb-2 pr-20">
-                      {course.title}
+                      {course.short_title}
                     </h3>
+                  </div>
+
+                  {/* Course details - Subject list */}
+                  <div className="p-6 pt-2 pb-1 flex-grow">
+                    <div className="flex flex-wrap gap-2">
+                      {course.subjects?.map((subject, idx) => (
+                        <span
+                          key={idx}
+                          className={`text-xs px-2 py-1 rounded-full ${colorScheme.bg} ${colorScheme.text} border ${colorScheme.border}`}
+                        >
+                          {subject}
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
                   {/* Price and action button */}
