@@ -218,12 +218,15 @@ const ContactSection: React.FC = () => {
   };
 
   const categories = [
-    { name: "Business Management" },
-    { name: "Arts and Design" },
-    { name: "Computer Science" },
-    { name: "Personal Development" },
-    { name: "Business and Finance" },
-    { name: "Video and Photography" },
+    { name: "Primary" },
+    { name: "Secondary" },
+    { name: "National 5" },
+    { name: "Highers" },
+    { name: "Advanced Highers" },
+    { name: "Exam Revision" },
+    { name: "Mock Exams" },
+    { name: "Tips & Hints" },
+    { name: "Homework Club" },
   ];
 
   return (
