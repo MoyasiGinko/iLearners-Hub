@@ -276,9 +276,7 @@ const MiniCourseTablet = () => {
           repeatType: "reverse",
           ease: "easeInOut",
         }}
-      >
-        <BackgroundElements.Paintbrush />
-      </motion.div>
+      ></motion.div>
 
       {/* Background Educational Elements - Middle Right */}
       <motion.div
@@ -328,7 +326,7 @@ const MiniCourseTablet = () => {
           delay: 1,
         }}
       >
-        <BackgroundElements.Star />
+        {/* <BackgroundElements.Star /> */}
       </motion.div>
 
       {/* Background Educational Elements - Calculator */}
@@ -345,7 +343,7 @@ const MiniCourseTablet = () => {
           ease: "easeInOut",
         }}
       >
-        <BackgroundElements.Calculator />
+        <BackgroundElements.Paintbrush />
       </motion.div>
 
       <div className="max-w-6xl mx-auto relative z-10">
