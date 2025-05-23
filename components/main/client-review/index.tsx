@@ -74,12 +74,20 @@ const ClientReview = () => {
   const [cardGap, setCardGap] = useState(20);
   const [isMobile, setIsMobile] = useState(false);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isHovering, setIsHovering] = useState(false); // New state for hover
   const [direction, setDirection] = useState(1); // 1 for forward, -1 for backward
   const autoPlayIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Auto-play functionality
+  // Auto-play functionality - now considers both isAutoPlaying and isHovering
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    if (!isAutoPlaying || isHovering) {
+      // Clear interval if auto-play is disabled or user is hovering
+      if (autoPlayIntervalRef.current) {
+        clearInterval(autoPlayIntervalRef.current);
+        autoPlayIntervalRef.current = null;
+      }
+      return;
+    }
 
     const startAutoPlay = () => {
       autoPlayIntervalRef.current = setInterval(() => {
@@ -107,14 +115,14 @@ const ClientReview = () => {
         clearInterval(autoPlayIntervalRef.current);
       }
     };
-  }, [isAutoPlaying, direction, testimonials.length]);
+  }, [isAutoPlaying, isHovering, direction, testimonials.length]);
 
   // Auto-scroll to current slide when currentSlide changes from auto-play
   useEffect(() => {
-    if (isAutoPlaying && cardWidth > 0) {
+    if (isAutoPlaying && !isHovering && cardWidth > 0) {
       goToSlide(currentSlide, true);
     }
-  }, [currentSlide, cardWidth, isAutoPlaying]);
+  }, [currentSlide, cardWidth, isAutoPlaying, isHovering]);
 
   // Detect mobile/desktop view
   useEffect(() => {
@@ -126,7 +134,16 @@ const ClientReview = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Setup carousel (no autoplay)
+  // Hover handlers
+  const handleMouseEnter = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+  };
+
+  // Setup carousel
   useEffect(() => {
     if (
       typeof window === "undefined" ||
@@ -177,7 +194,8 @@ const ClientReview = () => {
         overshootTolerance: 0.5,
         dragClickables: true,
         onDragStart: () => {
-          setIsAutoPlaying(false); // Stop auto-play when user starts dragging
+          // Only stop auto-play permanently when dragging starts
+          setIsAutoPlaying(false);
           if (autoPlayIntervalRef.current) {
             clearInterval(autoPlayIntervalRef.current);
           }
@@ -208,14 +226,8 @@ const ClientReview = () => {
         },
       })[0];
 
+      // Removed onPress handler - no longer stops auto-play on simple press/click
       if (draggableInstanceRef.current) {
-        draggableInstanceRef.current.vars.onPress = function () {
-          setIsAutoPlaying(false); // Stop auto-play when user presses
-          if (autoPlayIntervalRef.current) {
-            clearInterval(autoPlayIntervalRef.current);
-          }
-          gsap.set(carouselRef.current, { cursor: "grabbing" });
-        };
         draggableInstanceRef.current.vars.onRelease = function () {
           gsap.set(carouselRef.current, { cursor: "grab" });
         };
@@ -305,6 +317,8 @@ const ClientReview = () => {
           <div
             className="w-full lg:w-2/3 overflow-hidden relative"
             ref={carouselWrapperRef}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             <div
               className="relative overflow-hidden cursor-grab touch-pan-y select-none"
