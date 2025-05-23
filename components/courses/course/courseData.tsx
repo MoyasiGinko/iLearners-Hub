@@ -1,7 +1,8 @@
 import Image from "next/image";
 export type Course = {
   id: number;
-  title: string;
+  short_title?: string;
+  long_title?: string;
   Image?: string;
   category: string;
   subjects?: string[];
@@ -33,7 +34,8 @@ export const courseCategories: string[] = [
 export const courses: Course[] = [
   {
     id: 1,
-    title: "P3 to P7 (All Year Round)",
+    short_title: "P3 to P7",
+    long_title: "P3 to P7: (All Year Round)",
     Image: "/images/courses/c1.jpg",
     category: "Primary",
     subjects: ["Maths", "English", "Science"],
@@ -41,7 +43,7 @@ export const courses: Course[] = [
     rate: "£10/hr",
     fee: "£10.00",
     action: "Enroll Now",
-    overview: `Our P3 to P7 tutoring programme offers year-round support in Maths, English, and Science, designed to develop a strong academic foundation and genuine interest in learning. Sessions are interactive and tailored to each child’s pace, helping them grow confident, creative, and curious learners. Each 2-hour session comprises activities that build core skills while encouraging independent thinking. Students are guided in a supportive, non-lecture-based environment with regular homework, creative tasks, and personalised feedback.`,
+    overview: `Our P3 to P7 tutoring programme offers year-round support in Maths, English, and Science, designed to develop a strong academic foundation and genuine interest in learning. Sessions are interactive and tailored to each child's pace, helping them grow confident, creative, and curious learners. Each 2-hour session comprises activities that build core skills while encouraging independent thinking. Students are guided in a supportive, non-lecture-based environment with regular homework, creative tasks, and personalised feedback.`,
     includes: [
       "Interactive & curiosity-based learning",
       "Weekly homework and skill-building tasks",
@@ -53,7 +55,8 @@ export const courses: Course[] = [
   },
   {
     id: 2,
-    title: "S1 & S2 (All Year Round)",
+    short_title: "S1 & S2",
+    long_title: "S1 & S2: (All Year Round)",
     Image: "/images/courses/c1.jpg",
     category: "Secondary",
     subjects: ["Maths", "Science"],
@@ -78,7 +81,8 @@ parents. `,
   },
   {
     id: 3,
-    title: "S3 (All Year Round)",
+    short_title: "S3",
+    long_title: "S3 (All Year Round)",
     Image: "/images/courses/c1.jpg",
     category: "Secondary",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
@@ -99,7 +103,8 @@ Sessions involve concept exploration, guided questions, structured note-making, 
   },
   {
     id: 4,
-    title: "National 5 (August – February)",
+    short_title: "National 5",
+    long_title: "National 5: (August to February)",
     Image: "/images/courses/c1.jpg",
     category: "National 5",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
@@ -125,7 +130,8 @@ guide improvement. Our tutors also help build exam confidence and study discipli
   },
   {
     id: 5,
-    title: "National 5 Exam Revision Course (January to April)",
+    short_title: "National 5 Exam Revision Course",
+    long_title: "National 5 Exam Revision Course: (January to April)",
     Image: "/images/courses/c1.jpg",
     category: "Exam Revision",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
@@ -155,7 +161,8 @@ detailed feedback and improvement strategies.`,
   },
   {
     id: 6,
-    title: "Highers (August – February)",
+    short_title: "Highers",
+    long_title: "Highers: (August to February)",
     Image: "/images/courses/c1.jpg",
     category: "Highers",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
@@ -181,7 +188,8 @@ students with time management and exam preparation strategies.`,
   },
   {
     id: 7,
-    title: "Highers Exam Revision Course (January to April)",
+    short_title: "Highers Exam Revision Course",
+    long_title: "Highers Exam Revision Course: (January to April)",
     Image: "/images/courses/c1.jpg",
     category: "Exam Revision",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
@@ -211,7 +219,8 @@ under exam pressure. Tutors provide marked scripts with actionable feedback.`,
   },
   {
     id: 8,
-    title: "Advanced Highers From August",
+    short_title: "Advanced Highers",
+    long_title: "Advanced Highers: (From August)",
     Image: "/images/courses/c1.jpg",
     category: "Advanced Highers",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
@@ -232,7 +241,8 @@ under exam pressure. Tutors provide marked scripts with actionable feedback.`,
   },
   {
     id: 9,
-    title: "Advanced Highers Exam Revision Course ( From December)",
+    short_title: "Advanced Highers Exam Revision Course",
+    long_title: "Advanced Highers Exam Revision Course: (From December)",
     Image: "/images/courses/c1.jpg",
     category: "Exam Revision",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
@@ -258,7 +268,8 @@ under exam pressure. Tutors provide marked scripts with actionable feedback.`,
   },
   {
     id: 10,
-    title: "National 5 Mock Exam",
+    short_title: "National 5 Mock Exam",
+    long_title: "National 5 Mock Exam",
     Image: "/images/courses/c1.jpg",
     category: "Mock Exams",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
@@ -276,7 +287,8 @@ under exam pressure. Tutors provide marked scripts with actionable feedback.`,
   },
   {
     id: 11,
-    title: "Highers Mock Exam",
+    short_title: "Highers Mock Exam",
+    long_title: "Highers Mock Exam",
     Image: "/images/courses/c1.jpg",
     category: "Mock Exams",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
@@ -295,7 +307,8 @@ readiness before finals. Includes personalised tutor marking and feedback.`,
   },
   {
     id: 12,
-    title: "Advanced Highers Mock Exam",
+    short_title: "Advanced Highers Mock Exam",
+    long_title: "Advanced Highers Mock Exam",
     Image: "/images/courses/c1.jpg",
     category: "Mock Exams",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
@@ -314,14 +327,15 @@ readiness before finals. Includes personalised tutor marking and feedback.`,
   },
   {
     id: 13,
-    title: "National 5 – Tips & Hints Session",
+    short_title: "National 5: Tips & Hints Session",
+    long_title: "National 5: Tips & Hints Session",
     Image: "/images/courses/c1.jpg",
     category: "Tips & Hints",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
     rate: "£100",
     fee: "£100.00",
     action: "Book Now",
-    overview: `This is not just another revision session — it’s a strategic lesson designed to give students
+    overview: `This is not just another revision session — it's a strategic lesson designed to give students
 an edge before their exams. Our expert tutors break down what really matters, what to
 expect in the exam, and how to maximise marks with smart techniques.`,
     includes: [
@@ -336,11 +350,12 @@ expect in the exam, and how to maximise marks with smart techniques.`,
       "Take-home tips sheet with condensed advice",
     ],
     perfectFor:
-      "Students who’ve already revised and now need a smart, exam-savvy push to gain confidence and squeeze out extra marks.",
+      "Students who've already revised and now need a smart, exam-savvy push to gain confidence and squeeze out extra marks.",
   },
   {
     id: 14,
-    title: "Highers – Tips & Hints Session",
+    short_title: "Highers: Tips & Hints",
+    long_title: "Highers: Tips & Hints Session",
     Image: "/images/courses/c1.jpg",
     category: "Tips & Hints",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
@@ -348,7 +363,7 @@ expect in the exam, and how to maximise marks with smart techniques.`,
     fee: "£150.00",
     action: "Book Now",
     overview: `This focused, expert-led session equips students with insider strategies to approach Higher
-exams precisely and confidently. It’s packed with actionable techniques, time management
+exams precisely and confidently. It's packed with actionable techniques, time management
 tools, and insights from tutors who know the SQA exam inside out.`,
     includes: [
       "Advanced exam strategies tailored to each subject",
@@ -366,7 +381,8 @@ tools, and insights from tutors who know the SQA exam inside out.`,
   },
   {
     id: 15,
-    title: "Advanced Highers – Tips & Hints Session",
+    short_title: "Advanced Highers: Tips & Hints",
+    long_title: "Advanced Highers: Tips & Hints Session",
     Image: "/images/courses/c1.jpg",
     category: "Tips & Hints",
     subjects: ["Maths", "Physics", "Chemistry", "Biology"],
@@ -390,10 +406,10 @@ complex questions, and share techniques that set A-band candidates apart.`,
     perfectFor:
       "Students aiming for top-band grades, applying to competitive university courses, or needing tailored guidance to excel under pressure. ",
   },
-  // --- Insert Homework Club course at the end ---
   {
     id: 16,
-    title: "Unlock Your Potential with iLearner's Hub Homework Club!",
+    short_title: "Homework Club",
+    long_title: "Unlock Your Potential with iLearner's Hub Homework Club!",
     Image: "/images/courses/c1.jpg",
     category: "Homework Club",
     subjects: ["All Subjects"],
