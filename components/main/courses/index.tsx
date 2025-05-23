@@ -525,21 +525,43 @@ const MiniCourseTablet = () => {
         </div>
 
         {/* Call to action */}
-        <div className="text-center">
-          <a
-            href="/courses"
-            className="px-8 inline-block py-3 rounded-full
-            bg-gradient-to-r from-teal-400 to-blue-500 text-white font-medium
-            shadow-lg hover:shadow-xl
-            border-b-4 border-teal-600
-            active:border-b-0 active:border-t-0 active:shadow-inner
-            active:translate-y-1 hover:-translate-y-1
-            transform transition-all duration-200
-            focus:outline-none "
-          >
-            Browse All Courses
-          </a>
-        </div>
+        {selectedCategory === "All" && courses.length > 6 ? (
+          <div className="text-center">
+            <a
+              href="/courses"
+              className="px-8 inline-block py-3 rounded-full
+      bg-gradient-to-r from-teal-400 to-blue-500 text-white font-medium
+      shadow-lg hover:shadow-xl
+      border-b-4 border-teal-600
+      active:border-b-0 active:border-t-0 active:shadow-inner
+      active:translate-y-1 hover:-translate-y-1
+      transform transition-all duration-200
+      focus:outline-none "
+            >
+              Browse All Courses
+            </a>
+          </div>
+        ) : (
+          selectedCategory !== "All" &&
+          courses.filter((course) => course.category === selectedCategory)
+            .length > 6 && (
+            <div className="text-center">
+              <a
+                href={`/courses?category=${selectedCategory}`}
+                className="px-8 inline-block py-3 rounded-full
+        bg-gradient-to-r from-teal-400 to-blue-500 text-white font-medium
+        shadow-lg hover:shadow-xl
+        border-b-4 border-teal-600
+        active:border-b-0 active:border-t-0 active:shadow-inner
+        active:translate-y-1 hover:-translate-y-1
+        transform transition-all duration-200
+        focus:outline-none "
+              >
+                Browse All {selectedCategory} Courses
+              </a>
+            </div>
+          )
+        )}
 
         {/* Fun bottom decorations */}
         <div className="flex justify-center mt-16 opacity-20">
