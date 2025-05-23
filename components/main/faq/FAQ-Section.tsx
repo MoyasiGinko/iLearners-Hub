@@ -26,8 +26,63 @@ const FAQSection: React.FC<FAQSectionProps> = ({ faqItems }) => {
   const showSeeMoreButton = faqItems.length > initialItemsToShow;
 
   return (
-    <div id="faq" className="w-full bg-transparent px-4 py-16">
-      <div className="mx-auto max-w-3xl">
+    <div
+      id="faq"
+      className="w-full bg-transparent px-4 py-16 relative overflow-hidden"
+    >
+      {/* Animated background elements */}
+      <motion.div
+        className="absolute top-20 left-10 w-32 h-32 rounded-full bg-pink-300 opacity-20"
+        animate={{
+          x: [0, 50, 0],
+          y: [0, 30, 0],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      <motion.div
+        className="absolute bottom-40 right-10 w-24 h-24 rounded-full bg-blue-100 opacity-20"
+        animate={{
+          x: [0, -40, 0],
+          y: [0, 50, 0],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      <motion.div
+        className="absolute top-1/2 left-1/4 w-16 h-16 rounded-full bg-yellow-300 opacity-20"
+        animate={{
+          scale: [1, 1.5, 1],
+          rotate: [0, 180, 0],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      <motion.div
+        className="absolute bottom-20 left-20 w-40 h-20 bg-purple-300 opacity-20 rounded-xl"
+        animate={{
+          rotate: [0, 10, 0, -10, 0],
+        }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      <div className="mx-auto max-w-3xl relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -93,7 +148,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({ faqItems }) => {
 
       {showSeeMoreButton && (
         <motion.div
-          className="mt-8 text-center"
+          className="mt-8 text-center relative z-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
