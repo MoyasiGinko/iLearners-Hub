@@ -243,7 +243,7 @@ const Testimonials: React.FC = () => {
             </motion.div>
 
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6 bg-clip-text text-transparent bg-gradient-to-br from-indigo-600 via-blue-700 to-indigo-800 drop-shadow-[2px_2px_2px_rgba(79,70,229,0.3)]">
-              What Our Students & Their Parents are Saying
+              Join Our Fun Learning Adventure!
             </h2>
 
             <motion.p
@@ -330,60 +330,58 @@ const Testimonials: React.FC = () => {
               ))}
             </motion.p>
 
-            <div className="space-y-4 mb-8 relative">
-              {/* Features */}
-              {[
-                "Explore fun activities with thousands of cool lessons",
-                "Discover exciting new topics in your favorite subjects",
-                "Learn with friendly teachers who make learning fun",
-                "Friendly Teachers - DBS Checked, Safe Environment, Mock Tests, Home Assignments",
-              ].map((feature, index) => (
-                <div
-                  key={index}
-                  className="flex items-start transform hover:translate-x-2 transition-transform duration-300"
-                >
-                  <div className="flex-shrink-0 mt-1 mr-3 bg-yellow-300 rounded-full p-1 shadow-md">
-                    <Check className="h-5 w-5 text-indigo-700" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+              {/* Feature 1 */}
+              <div className="flex flex-col justify-center p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(255,213,79,0.5)] relative overflow-hidden bg-gradient-to-r from-yellow-100 to-yellow-50 border border-yellow-200 group">
+                <div className="absolute inset-0 bg-yellow-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                <div className="flex items-center">
+                  <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
+                    <Check className="h-5 w-5 text-white drop-shadow-md" />
                   </div>
-                  <span className="font-medium bg-clip-text text-transparent bg-gradient-to-r from-indigo-700 to-blue-800">
-                    {feature}
+                  <span className="font-bold text-lg text-yellow-800 group-hover:translate-x-1 transition-transform">
+                    Friendly Teachers - DBS Checked
                   </span>
                 </div>
-              ))}
+              </div>
 
-              {/* Animated Paint Brush */}
-              <motion.div
-                className="absolute -right-20 bottom-0"
-                initial={{ rotate: 30 }}
-                animate={{
-                  rotate: [30, 40, 30],
-                  y: [0, -10, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                }}
-              >
-                <svg width="80" height="100" viewBox="0 0 80 100">
-                  <rect x="35" y="20" width="10" height="60" fill="#8B5CF6" />
-                  <path d="M30,20 Q40,5 50,20 Z" fill="#EC4899" />
-                  <motion.ellipse
-                    cx="40"
-                    cy="5"
-                    rx="5"
-                    ry="5"
-                    fill="#EC4899"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: [0, 1, 0] }}
-                    transition={{
-                      duration: 1,
-                      repeat: Infinity,
-                      repeatDelay: 1,
-                    }}
-                  />
-                </svg>
-              </motion.div>
+              {/* Feature 2 */}
+              <div className="flex flex-col justify-center p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(96,165,250,0.5)] relative overflow-hidden bg-gradient-to-r from-blue-100 to-blue-50 border border-blue-200 group">
+                <div className="absolute inset-0 bg-blue-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                <div className="flex items-center">
+                  <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-blue-400 to-blue-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
+                    <Check className="h-5 w-5 text-white drop-shadow-md" />
+                  </div>
+                  <span className="font-bold text-lg text-blue-800 group-hover:translate-x-1 transition-transform">
+                    Safe Environment
+                  </span>
+                </div>
+              </div>
+
+              {/* Feature 3 */}
+              <div className="flex flex-col justify-center p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(74,222,128,0.5)] relative overflow-hidden bg-gradient-to-r from-green-100 to-green-50 border border-green-200 group">
+                <div className="absolute inset-0 bg-green-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                <div className="flex items-center">
+                  <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-green-400 to-green-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
+                    <Check className="h-5 w-5 text-white drop-shadow-md" />
+                  </div>
+                  <span className="font-bold text-lg text-green-800 group-hover:translate-x-1 transition-transform">
+                    Mock Tests
+                  </span>
+                </div>
+              </div>
+
+              {/* Feature 4 */}
+              <div className="flex flex-col justify-center p-4 rounded-2xl transform transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_15px_25px_-5px_rgba(244,114,182,0.5)] relative overflow-hidden bg-gradient-to-r from-pink-100 to-pink-50 border border-pink-200 group">
+                <div className="absolute inset-0 bg-pink-200 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                <div className="flex items-center">
+                  <div className="flex-shrink-0 mr-3 bg-gradient-to-br from-pink-400 to-pink-500 rounded-full p-2 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.1)]">
+                    <Check className="h-5 w-5 text-white drop-shadow-md" />
+                  </div>
+                  <span className="font-bold text-lg text-pink-800 group-hover:translate-x-1 transition-transform">
+                    Home Assignments
+                  </span>
+                </div>
+              </div>
             </div>
 
             <Link href="/courses">

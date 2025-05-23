@@ -159,20 +159,10 @@ const categoryColors = {
 
 const MiniCourseTablet = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  interface Course {
-    id: number; // Match the type from courseData
-    title: string;
-    category: string;
-    subjects?: string[];
-    rate?: string;
-    duration?: string;
-    sessions?: string;
-    fee?: string;
-    discount?: string;
-    action?: string;
-  }
-
-  const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
+  // Use the Course type imported from courseData rather than defining a local interface
+  const [filteredCourses, setFilteredCourses] = useState<(typeof courses)[0][]>(
+    []
+  );
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
@@ -286,9 +276,7 @@ const MiniCourseTablet = () => {
           repeatType: "reverse",
           ease: "easeInOut",
         }}
-      >
-        <BackgroundElements.Paintbrush />
-      </motion.div>
+      ></motion.div>
 
       {/* Background Educational Elements - Middle Right */}
       <motion.div
@@ -338,7 +326,7 @@ const MiniCourseTablet = () => {
           delay: 1,
         }}
       >
-        <BackgroundElements.Star />
+        {/* <BackgroundElements.Star /> */}
       </motion.div>
 
       {/* Background Educational Elements - Calculator */}
@@ -355,7 +343,7 @@ const MiniCourseTablet = () => {
           ease: "easeInOut",
         }}
       >
-        <BackgroundElements.Calculator />
+        <BackgroundElements.Paintbrush />
       </motion.div>
 
       <div className="max-w-6xl mx-auto relative z-10">
@@ -470,8 +458,22 @@ const MiniCourseTablet = () => {
                   {/* Card content */}
                   <div className="p-6 pt-10 pb-0 flex-grow">
                     <h3 className="text-lg font-bold mb-2 pr-20">
-                      {course.title}
+                      {course.short_title}
                     </h3>
+                  </div>
+
+                  {/* Course details - Subject list */}
+                  <div className="p-6 pt-2 pb-1 flex-grow">
+                    <div className="flex flex-wrap gap-2">
+                      {course.subjects?.map((subject, idx) => (
+                        <span
+                          key={idx}
+                          className={`text-xs px-2 py-1 rounded-full ${colorScheme.bg} ${colorScheme.text} border ${colorScheme.border}`}
+                        >
+                          {subject}
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
                   {/* Price and action button */}
@@ -521,21 +523,43 @@ const MiniCourseTablet = () => {
         </div>
 
         {/* Call to action */}
-        <div className="text-center">
-          <a
-            href="/courses"
-            className="px-8 inline-block py-3 rounded-full
-            bg-gradient-to-r from-teal-400 to-blue-500 text-white font-medium
-            shadow-lg hover:shadow-xl
-            border-b-4 border-teal-600
-            active:border-b-0 active:border-t-0 active:shadow-inner
-            active:translate-y-1 hover:-translate-y-1
-            transform transition-all duration-200
-            focus:outline-none "
-          >
-            Browse All Courses
-          </a>
-        </div>
+        {selectedCategory === "All" && courses.length > 6 ? (
+          <div className="text-center">
+            <a
+              href="/courses"
+              className="px-8 inline-block py-3 rounded-full
+      bg-gradient-to-r from-teal-400 to-blue-500 text-white font-medium
+      shadow-lg hover:shadow-xl
+      border-b-4 border-teal-600
+      active:border-b-0 active:border-t-0 active:shadow-inner
+      active:translate-y-1 hover:-translate-y-1
+      transform transition-all duration-200
+      focus:outline-none "
+            >
+              Browse All Courses
+            </a>
+          </div>
+        ) : (
+          selectedCategory !== "All" &&
+          courses.filter((course) => course.category === selectedCategory)
+            .length > 6 && (
+            <div className="text-center">
+              <a
+                href={`/courses?category=${selectedCategory}`}
+                className="px-8 inline-block py-3 rounded-full
+        bg-gradient-to-r from-teal-400 to-blue-500 text-white font-medium
+        shadow-lg hover:shadow-xl
+        border-b-4 border-teal-600
+        active:border-b-0 active:border-t-0 active:shadow-inner
+        active:translate-y-1 hover:-translate-y-1
+        transform transition-all duration-200
+        focus:outline-none "
+              >
+                Browse All {selectedCategory} Courses
+              </a>
+            </div>
+          )
+        )}
 
         {/* Fun bottom decorations */}
         <div className="flex justify-center mt-16 opacity-20">

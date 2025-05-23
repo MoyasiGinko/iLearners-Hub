@@ -27,7 +27,7 @@ const FloatingElements = () => {
 
       {/* Animated Earth SVG */}
       <motion.div
-        className="absolute top-26 right-6 w-12 h-12 md:w-24 md:h-24 z-0 block"
+        className="absolute opacity-20 top-26 right-6 w-12 h-12 md:w-24 md:h-24 z-0 block"
         animate={{ rotate: 360 }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       >
@@ -40,7 +40,7 @@ const FloatingElements = () => {
 
       {/* Animated Chemistry Flask SVG */}
       <motion.div
-        className="absolute opacity-50  bottom-20 right-2 w-10 h-10 md:w-20 md:h-20 z-0 block"
+        className="absolute opacity-20  bottom-20 right-2 w-10 h-10 md:w-20 md:h-20 z-0 block"
         animate={{
           y: [0, -10, 0],
           rotate: [-5, 5, -5],
@@ -69,7 +69,7 @@ const FloatingElements = () => {
 
       {/* Animated Math Symbols SVG */}
       <motion.div
-        className="absolute opacity-50  top-60 left-4 w-8 h-8 md:w-16 md:h-16 z-0 block"
+        className="absolute opacity-20  top-60 left-4 w-8 h-8 md:w-16 md:h-16 z-0 block"
         animate={{
           scale: [1, 1.1, 1],
           rotate: [0, 10, 0],
@@ -117,7 +117,7 @@ const FloatingElements = () => {
 
       {/* Animated Math Symbol SVG */}
       <motion.div
-        className="absolute opacity-50  bottom-20 left-[47%] transform -translate-x-1/2 w-8 h-8 md:w-16 md:h-16 z-0 block"
+        className="absolute opacity-20  bottom-20 left-[47%] transform -translate-x-1/2 w-8 h-8 md:w-16 md:h-16 z-0 block"
         animate={{
           y: [0, -5, 0],
           rotate: [-3, 5, -6],
@@ -133,7 +133,7 @@ const FloatingElements = () => {
 
       {/* DNA Helix SVG Animation */}
       <motion.div
-        className="absolute  bottom-10 left-4 w-12 h-16 md:w-26 md:h-32 z-0 block"
+        className="absolute opacity-20 bottom-10 left-4 w-12 h-16 md:w-26 md:h-32 z-0 block"
         animate={{
           rotateY: 360,
         }}
@@ -400,7 +400,7 @@ const Hero = () => {
               <span className="absolute inset-0 bg-gradient-to-tr from-blue-500/40 to-transparent rounded-full"></span>
             </a>
           </div>
-          <div className="pt-4 z-10 max-w-xl flex items-center justify-center gap-3">
+          {/* <div className="pt-4 z-10 max-w-xl flex items-center justify-center gap-3">
             <span className="text-yellow-400 text-3xl drop-shadow-glow animate-bounce-slow">
               ⭐
             </span>
@@ -414,13 +414,76 @@ const Hero = () => {
             <span className="text-yellow-400 text-3xl drop-shadow-glow animate-bounce-slow">
               ⭐
             </span>
-          </div>
+          </div> */}
 
           {/* USP Banner - New Addition */}
-          <div className="w-full z-10 text-sm max-w-xl leading-tight tracking-tight bg-yellow-100 text-yellow-900 font-bold text-center py-3 rounded-xl mb-6 shadow-md border-2 border-yellow-300">
-            Aberdeen Based Tuition Center for Primary, Secondary, Highers &
-            Advanced Highers in English, Maths & Science Subjects.
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="w-full rounded-xl z-10 max-w-xl p-4 relative overflow-hidden"
+          >
+            <div
+              className="bg-white text-gray-800 font-bold py-5 px-6 rounded-lg relative transform hover:scale-[1.02] transition-transform duration-300"
+              style={{
+                perspective: "1000px",
+                transform: "rotate(-1deg)",
+                boxShadow:
+                  "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)",
+                backgroundImage:
+                  "linear-gradient(0deg, rgba(254, 243, 199, 0.7) 2px, transparent 2px)",
+                backgroundSize: "100% 20px",
+              }}
+            >
+              {/* Paper clip */}
+              <div className="absolute -top-3 left-8 w-8 h-14 z-20">
+                <div className="w-full h-6 bg-gray-400 rounded-t-full"></div>
+                <div className="w-full h-8 border-l-2 border-r-2 border-gray-400"></div>
+              </div>
+
+              {/* Torn edge effect at top */}
+              <div
+                className="absolute top-0 left-0 right-0 h-2 bg-white z-10"
+                style={{
+                  clipPath:
+                    "polygon(0% 0%, 5% 100%, 10% 0%, 15% 100%, 20% 0%, 25% 100%, 30% 0%, 35% 100%, 40% 0%, 45% 100%, 50% 0%, 55% 100%, 60% 0%, 65% 100%, 70% 0%, 75% 100%, 80% 0%, 85% 100%, 90% 0%, 95% 100%, 100% 0%)",
+                }}
+              ></div>
+
+              {/* Note content */}
+              <h3 className="text-base sm:text-lg leading-tight tracking-tight relative z-10 font-handwriting mt-3">
+                <span className="text-indigo-700 font-bold border-b-2 border-amber-300">
+                  Aberdeen Based Tuition Center for Primary, Secondary, Highers
+                  & Advanced Highers in English, Maths & Science Subjects.
+                </span>
+              </h3>
+
+              <div className="flex justify-center gap-2 mt-3">
+                {["⭐", "⭐", "⭐"].map((icon, i) => (
+                  <motion.span
+                    key={i}
+                    className="text-amber-500 inline-block"
+                    animate={{ y: [0, -5, 0] }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 1.5,
+                      delay: i * 0.3,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    {icon}
+                  </motion.span>
+                ))}
+              </div>
+
+              {/* Tape pieces */}
+              <div className="absolute -top-1 -right-1 w-16 h-6 bg-gray-200 opacity-70 rotate-12"></div>
+              <div className="absolute -bottom-1 -left-1 w-16 h-6 bg-gray-200 opacity-70 -rotate-12"></div>
+
+              {/* Coffee stain */}
+              <div className="absolute bottom-8 right-6 w-10 h-10 rounded-full bg-amber-100 opacity-40"></div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </div>

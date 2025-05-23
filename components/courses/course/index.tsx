@@ -91,7 +91,7 @@ const CoursePage = () => {
                   <div className="relative h-48 bg-gray-200">
                     <img
                       src={course.Image}
-                      alt={course.title}
+                      alt={course.short_title}
                       className="object-cover w-full h-full"
                     />
                     <div className="absolute top-0 right-0 bg-yellow-400 text-indigo-700 px-3 py-1 m-3 rounded-full text-sm font-bold">
@@ -101,7 +101,7 @@ const CoursePage = () => {
                   <div className="p-5 flex flex-col flex-grow">
                     {/* <p className="text-indigo-600">{course.rate}</p> */}
                     <h3 className="text-xl mb-4 leading-tight tracking-tight font-bold text-indigo-700">
-                      {course.title}
+                      {course.short_title}
                     </h3>
                     <div className="mt-auto flex  justify-between items-center">
                       <h3 className="inline-block text-left text-lg  text-indigo-600 font-bold rounded-full transition-all">

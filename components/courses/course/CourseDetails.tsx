@@ -102,7 +102,7 @@ const CourseDetailsPage = () => {
           <div className="relative h-64 md:h-80 bg-gray-200">
             <img
               src="/images/courses/c1.jpg"
-              alt={course.title}
+              alt={course.short_title}
               className="object-cover w-full h-full"
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-indigo-600/80 to-transparent p-6">
@@ -113,7 +113,7 @@ const CourseDetailsPage = () => {
                 <span className="text-2xl">✨</span>
               </div>
               <h1 className="text-3xl md:text-4xl font-bold text-white">
-                {course.title}
+                {course.long_title}
               </h1>
             </div>
           </div>
@@ -285,7 +285,7 @@ const CourseDetailsPage = () => {
                   <div className="relative h-48 bg-gray-200">
                     <img
                       src={similarCourse.Image}
-                      alt={similarCourse.title}
+                      alt={similarCourse.short_title}
                       className="object-cover w-full h-full"
                     />
                     <div className="absolute top-0 right-0 bg-yellow-400 text-indigo-700 px-3 py-1 m-3 rounded-full text-sm font-bold">
@@ -295,7 +295,7 @@ const CourseDetailsPage = () => {
                   <div className="p-5 flex flex-col flex-grow">
                     <p className="text-indigo-600">{similarCourse.rate}</p>
                     <h3 className="text-xl mb-4 leading-tight tracking-tight font-bold text-indigo-700">
-                      {similarCourse.title}
+                      {similarCourse.short_title}
                     </h3>
                     <div className="mt-auto flex  justify-between items-center">
                       <h3 className="inline-block text-left text-xl  text-indigo-600 font-bold rounded-full transition-all">

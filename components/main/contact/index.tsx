@@ -6,88 +6,56 @@ import { motion } from "framer-motion";
 const FloatingElements = () => {
   return (
     <div className="absolute container inset-0 mx-auto flex items-center justify-center">
-      {/* Improved Rocket animation with smoother motion */}
+      {/* Rocket - now visible on mobile but smaller */}
       <motion.div
-        className="absolute inset-0 top-40 left-0 w-20 h-20 z-0 hidden md:block"
+        className="absolute inset-0 top-26 left-0 w-16 h-16 md:top-40 md:w-20 md:h-20 z-0"
         animate={{
-          x: [0, 500, 0], // Simplified path
-          y: [0, -150, 0], // Smooth arc
-          rotate: [0, 45, 180, 360], // Smooth rotation
+          x: [0, 300, 0], // Smaller path for mobile
+          y: [0, -100, 0],
+          rotate: [0, 45, 180, 360],
         }}
         transition={{
           duration: 12,
           repeat: Infinity,
-          ease: "easeInOut", // Smooth transitions
-          times: [0, 0.5, 1], // Control timing
+          ease: "easeInOut",
+          times: [0, 0.5, 1],
         }}
       >
         <img src="/images/rocket.gif" alt="Rocket" className="w-full h-full" />
       </motion.div>
 
-      {/* Animated Earth SVG */}
+      {/* Earth - now visible on mobile */}
       <motion.div
-        className="absolute top-16 right-14 w-20 h-20 md:w-24 md:h-24 z-0 hidden md:block"
+        className="absolute opacity-20 top-10 right-8 w-16 h-16 md:top-16 md:right-14 md:w-24 md:h-24 z-0"
         animate={{ rotate: 360 }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       >
         <img
           src="/images/planet/planet1.svg"
-          alt="Rocket"
+          alt="Planet"
           className="w-full h-full"
         />
       </motion.div>
 
-      {/* Animated Chemistry Flask SVG */}
+      {/* Marker - now visible on smaller screens */}
       <motion.div
-        className="absolute bottom-20 right-6 w-20 h-20 z-0 hidden md:block"
+        className="absolute opacity-20 top-2 left-1/2 transform -translate-x-1/2 w-12 h-12 md:w-16 md:h-16 z-0"
         animate={{
-          y: [0, -10, 0],
-          rotate: [-5, 5, -5],
-        }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <img
-          src="/images/study-materials/color-pencils.svg"
-          alt="Rocket"
-          className="w-full h-full"
-        />
-      </motion.div>
-
-      {/* Animated Math Symbols SVG */}
-      <motion.div
-        className="absolute top-60 left-16 w-16 h-16 z-0 hidden lg:block"
-        animate={{
-          scale: [1, 1.1, 1],
-          rotate: [0, 10, 0],
-        }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <img
-          src="/images/study-materials/scissor.svg"
-          alt="Math Symbols"
-          className="w-full h-full"
-        />
-      </motion.div>
-
-      {/* Animated Lightbulb SVG */}
-      <motion.div
-        className="absolute top-20 left-1/2 transform -translate-x-1/2 w-16 h-16 z-0 hidden lg:block"
-        animate={{
-          opacity: [0.7, 1, 0.7],
+          opacity: [0.3, 0.5, 0.3],
           y: [-5, 5, -5],
         }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
       >
         <img
           src="/images/study-materials/marker.svg"
-          alt="Math Symbols"
+          alt="Marker"
           className="w-full h-full"
         />
       </motion.div>
 
-      {/* Animated Math SYmbol SVG */}
+      {/* Math Symbol - now visible on mobile */}
       <motion.div
-        className="absolute bottom-20 left-[47%] transform -translate-x-1/2 w-16 h-16 z-0 hidden lg:block"
+        className="absolute opacity-20 bottom-2 left-[47%] transform -translate-x-1/2 w-12 h-12 md:w-16 md:h-16 z-0"
         animate={{
           y: [0, -5, 0],
           rotate: [-3, 5, -6],
@@ -96,29 +64,35 @@ const FloatingElements = () => {
       >
         <img
           src="/images/math-elements/pie.svg"
-          alt="Math Symbols"
+          alt="Math Symbol"
           className="w-full h-full"
         />
       </motion.div>
 
-      {/* DNA Helix SVG Animation */}
+      {/* Book - now visible on mobile */}
       <motion.div
-        className="absolute bottom-10 left-10 w-26 h-32 z-0 hidden md:block"
+        className="absolute opacity-20 bottom-6 left-4 w-20 h-24 md:bottom-10 md:left-10 md:w-26 md:h-32 z-0"
         animate={{
-          rotateY: 360,
+          x: [-5, 5, -5],
+          rotate: [-2, 2, -2],
         }}
-        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "easeInOut",
+        }}
       >
         <img
-          src="/images/math-elements/root.svg"
-          alt="Math Symbols"
+          src="/images/study-materials/book.svg"
+          alt="Book"
           className="w-full h-full"
         />
       </motion.div>
 
-      {/* Atom SVG Animation */}
+      {/* Atom - now visible on mobile but smaller */}
       <motion.div
-        className="absolute bottom-16 right-16 w-20 h-20 z-0 hidden lg:block"
+        className="absolute bottom-10 right-10 w-16 h-16 md:bottom-16 md:right-16 md:w-20 md:h-20 z-0"
         animate={{ rotate: 360 }}
         transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
       >
@@ -218,12 +192,15 @@ const ContactSection: React.FC = () => {
   };
 
   const categories = [
-    { name: "Business Management" },
-    { name: "Arts and Design" },
-    { name: "Computer Science" },
-    { name: "Personal Development" },
-    { name: "Business and Finance" },
-    { name: "Video and Photography" },
+    { name: "Primary" },
+    { name: "Secondary" },
+    { name: "National 5" },
+    { name: "Highers" },
+    { name: "Advanced Highers" },
+    { name: "Exam Revision" },
+    { name: "Mock Exams" },
+    { name: "Tips & Hints" },
+    { name: "Homework Club" },
   ];
 
   return (
