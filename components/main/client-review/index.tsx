@@ -12,8 +12,6 @@ interface TestimonialCardProps {
   name: string;
   position: string;
   content: string;
-  rating: number;
-  image: string;
 }
 
 const TestimonialCard = ({ name, position, content }: TestimonialCardProps) => {
@@ -41,8 +39,6 @@ const ClientReview = () => {
       position: "Happy Student",
       content:
         "I love the fun activities in my classes! The teachers are super nice and I learned so many cool things!",
-      rating: 5,
-      image: "/images/testimonial-1.jpg",
     },
     {
       id: 2,
@@ -50,8 +46,6 @@ const ClientReview = () => {
       position: "Awesome Learner",
       content:
         "The games we play while learning are my favorite part. I made new friends and can't wait for class every day!",
-      rating: 5,
-      image: "/images/testimonial-2.jpg",
     },
     {
       id: 3,
@@ -59,8 +53,6 @@ const ClientReview = () => {
       position: "Creative Kid",
       content:
         "I used to think school was boring, but these classes are super fun! I get to create cool projects and play while learning!",
-      rating: 4,
-      image: "/images/testimonial-1.jpg",
     },
     {
       id: 4,
@@ -68,8 +60,6 @@ const ClientReview = () => {
       position: "Young Explorer",
       content:
         "My mom says I'm always talking about what I learned in class. I love all the colorful books and fun games we play!",
-      rating: 5,
-      image: "/images/testimonial-2.jpg",
     },
   ];
 
@@ -83,6 +73,48 @@ const ClientReview = () => {
   const [cardWidth, setCardWidth] = useState(0);
   const [cardGap, setCardGap] = useState(20);
   const [isMobile, setIsMobile] = useState(false);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [direction, setDirection] = useState(1); // 1 for forward, -1 for backward
+  const autoPlayIntervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+
+    const startAutoPlay = () => {
+      autoPlayIntervalRef.current = setInterval(() => {
+        setCurrentSlide((prevSlide) => {
+          let nextSlide = prevSlide + direction;
+
+          // Check if we need to reverse direction
+          if (nextSlide >= testimonials.length - 1) {
+            setDirection(-1);
+            return testimonials.length - 1;
+          } else if (nextSlide <= 0) {
+            setDirection(1);
+            return 0;
+          }
+
+          return nextSlide;
+        });
+      }, 3000); // Change slide every 3 seconds
+    };
+
+    startAutoPlay();
+
+    return () => {
+      if (autoPlayIntervalRef.current) {
+        clearInterval(autoPlayIntervalRef.current);
+      }
+    };
+  }, [isAutoPlaying, direction, testimonials.length]);
+
+  // Auto-scroll to current slide when currentSlide changes from auto-play
+  useEffect(() => {
+    if (isAutoPlaying && cardWidth > 0) {
+      goToSlide(currentSlide, true);
+    }
+  }, [currentSlide, cardWidth, isAutoPlaying]);
 
   // Detect mobile/desktop view
   useEffect(() => {
@@ -145,6 +177,10 @@ const ClientReview = () => {
         overshootTolerance: 0.5,
         dragClickables: true,
         onDragStart: () => {
+          setIsAutoPlaying(false); // Stop auto-play when user starts dragging
+          if (autoPlayIntervalRef.current) {
+            clearInterval(autoPlayIntervalRef.current);
+          }
           gsap.set(carouselRef.current, { cursor: "grabbing" });
         },
         onDrag: function () {
@@ -174,6 +210,10 @@ const ClientReview = () => {
 
       if (draggableInstanceRef.current) {
         draggableInstanceRef.current.vars.onPress = function () {
+          setIsAutoPlaying(false); // Stop auto-play when user presses
+          if (autoPlayIntervalRef.current) {
+            clearInterval(autoPlayIntervalRef.current);
+          }
           gsap.set(carouselRef.current, { cursor: "grabbing" });
         };
         draggableInstanceRef.current.vars.onRelease = function () {
@@ -198,6 +238,9 @@ const ClientReview = () => {
       }
       if (snapAnimationRef.current) {
         gsap.killTweensOf(sliderRef.current);
+      }
+      if (autoPlayIntervalRef.current) {
+        clearInterval(autoPlayIntervalRef.current);
       }
     };
     // eslint-disable-next-line
@@ -291,8 +334,6 @@ const ClientReview = () => {
                       name={testimonial.name}
                       position={testimonial.position}
                       content={testimonial.content}
-                      rating={testimonial.rating}
-                      image={testimonial.image}
                     />
                   </div>
                 ))}
@@ -302,80 +343,7 @@ const ClientReview = () => {
           </div>
         </div>
       </div>
-      {/* ...styles unchanged... */}
       <style jsx global>{`
-        @keyframes float-slow {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-        @keyframes float-slower {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-15px);
-          }
-        }
-        @keyframes float-medium {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-25px);
-          }
-        }
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-30px);
-          }
-        }
-        @keyframes twinkle {
-          0%,
-          100% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0.3;
-          }
-        }
-        .animate-float-slow {
-          animation: float-slow 8s ease-in-out infinite;
-        }
-        .animate-float-slower {
-          animation: float-slower 12s ease-in-out infinite;
-        }
-        .animate-float-medium {
-          animation: float-medium 6s ease-in-out infinite;
-        }
-        .animate-float {
-          animation: float 5s ease-in-out infinite;
-        }
-        .animate-twinkle {
-          animation: twinkle 4s ease-in-out infinite;
-        }
-        .animate-pulse {
-          animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        @keyframes pulse {
-          0%,
-          100% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0.5;
-          }
-        }
         html {
           scroll-behavior: smooth;
         }
