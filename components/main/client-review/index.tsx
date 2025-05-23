@@ -67,62 +67,18 @@ const ClientReview = () => {
   const carouselRef = useRef(null);
   const sliderRef = useRef(null);
   const draggableInstanceRef = useRef<Draggable | null>(null);
-  const snapAnimationRef = useRef<gsap.core.Tween | null>(null);
+  const continuousAnimationRef = useRef<gsap.core.Timeline | null>(null);
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [cardWidth, setCardWidth] = useState(0);
   const [cardGap, setCardGap] = useState(20);
   const [isMobile, setIsMobile] = useState(false);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [isHovering, setIsHovering] = useState(false); // New state for hover
-  const [direction, setDirection] = useState(1); // 1 for forward, -1 for backward
-  const autoPlayIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [isHovering, setIsHovering] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
 
-  // Auto-play functionality - now considers both isAutoPlaying and isHovering
-  useEffect(() => {
-    if (!isAutoPlaying || isHovering) {
-      // Clear interval if auto-play is disabled or user is hovering
-      if (autoPlayIntervalRef.current) {
-        clearInterval(autoPlayIntervalRef.current);
-        autoPlayIntervalRef.current = null;
-      }
-      return;
-    }
-
-    const startAutoPlay = () => {
-      autoPlayIntervalRef.current = setInterval(() => {
-        setCurrentSlide((prevSlide) => {
-          let nextSlide = prevSlide + direction;
-
-          // Check if we need to reverse direction
-          if (nextSlide >= testimonials.length - 1) {
-            setDirection(-1);
-            return testimonials.length - 1;
-          } else if (nextSlide <= 0) {
-            setDirection(1);
-            return 0;
-          }
-
-          return nextSlide;
-        });
-      }, 3000); // Change slide every 3 seconds
-    };
-
-    startAutoPlay();
-
-    return () => {
-      if (autoPlayIntervalRef.current) {
-        clearInterval(autoPlayIntervalRef.current);
-      }
-    };
-  }, [isAutoPlaying, isHovering, direction, testimonials.length]);
-
-  // Auto-scroll to current slide when currentSlide changes from auto-play
-  useEffect(() => {
-    if (isAutoPlaying && !isHovering && cardWidth > 0) {
-      goToSlide(currentSlide, true);
-    }
-  }, [currentSlide, cardWidth, isAutoPlaying, isHovering]);
+  // Create duplicated testimonials for seamless looping
+  const duplicatedTestimonials = [...testimonials, ...testimonials];
 
   // Detect mobile/desktop view
   useEffect(() => {
@@ -142,6 +98,58 @@ const ClientReview = () => {
   const handleMouseLeave = () => {
     setIsHovering(false);
   };
+
+  // Create continuous smooth animation
+  const createContinuousAnimation = () => {
+    if (!sliderRef.current || cardWidth === 0) return;
+
+    // Kill existing animation
+    if (continuousAnimationRef.current) {
+      continuousAnimationRef.current.kill();
+    }
+
+    const slideUnit = cardWidth + cardGap;
+    const totalDistance = slideUnit * testimonials.length; // Distance for one complete cycle
+    const duration = 20; // Total duration for one complete cycle (adjust for speed)
+
+    continuousAnimationRef.current = gsap.timeline({ repeat: -1 });
+
+    continuousAnimationRef.current.to(sliderRef.current, {
+      x: -totalDistance,
+      duration: duration,
+      ease: "none", // Linear movement for smooth continuous flow
+      onUpdate: () => {
+        // Calculate current slide based on position for any visual indicators if needed
+        const currentX = gsap.getProperty(sliderRef.current, "x") as number;
+        const slideIndex =
+          Math.floor(Math.abs(currentX) / slideUnit) % testimonials.length;
+        setCurrentSlide(slideIndex);
+      },
+      onComplete: () => {
+        // Reset to beginning position seamlessly
+        gsap.set(sliderRef.current, { x: 0 });
+      },
+    });
+
+    return continuousAnimationRef.current;
+  };
+
+  // Control animation based on states
+  useEffect(() => {
+    if (!isAutoPlaying || isHovering || isDragging) {
+      // Pause animation
+      if (continuousAnimationRef.current) {
+        continuousAnimationRef.current.pause();
+      }
+    } else {
+      // Resume or start animation
+      if (continuousAnimationRef.current) {
+        continuousAnimationRef.current.resume();
+      } else {
+        createContinuousAnimation();
+      }
+    }
+  }, [isAutoPlaying, isHovering, isDragging, cardWidth]);
 
   // Setup carousel
   useEffect(() => {
@@ -164,8 +172,8 @@ const ClientReview = () => {
       if (draggableInstanceRef.current) {
         draggableInstanceRef.current.kill();
       }
-      if (snapAnimationRef.current) {
-        gsap.killTweensOf(sliderRef.current);
+      if (continuousAnimationRef.current) {
+        continuousAnimationRef.current.kill();
       }
       gsap.set(sliderRef.current, { x: 0 });
 
@@ -179,7 +187,7 @@ const ClientReview = () => {
       });
 
       const totalMovement =
-        (newCardWidth + cardGap) * (testimonials.length - 1);
+        (newCardWidth + cardGap) * (duplicatedTestimonials.length - 1);
 
       draggableInstanceRef.current = Draggable.create(sliderRef.current, {
         type: "x",
@@ -194,51 +202,48 @@ const ClientReview = () => {
         overshootTolerance: 0.5,
         dragClickables: true,
         onDragStart: () => {
-          // Only stop auto-play permanently when dragging starts
-          setIsAutoPlaying(false);
-          if (autoPlayIntervalRef.current) {
-            clearInterval(autoPlayIntervalRef.current);
-          }
+          setIsDragging(true);
+          setIsAutoPlaying(false); // Stop auto-play permanently when dragging starts
           gsap.set(carouselRef.current, { cursor: "grabbing" });
         },
         onDrag: function () {
           gsap.set(carouselRef.current, { cursor: "grabbing" });
         },
         onDragEnd: function () {
+          setIsDragging(false);
           const x = this.endX;
           const slideUnit = newCardWidth + cardGap;
           const slideIndex = Math.round(Math.abs(Number(x)) / slideUnit);
-          snapAnimationRef.current = gsap.to(sliderRef.current, {
+
+          gsap.to(sliderRef.current, {
             x: -slideIndex * slideUnit,
             duration: 0.4,
             ease: "power2.out",
             onComplete: () => {
-              setCurrentSlide(slideIndex);
+              const finalIndex = slideIndex % testimonials.length;
+              setCurrentSlide(finalIndex);
               gsap.set(carouselRef.current, { cursor: "grab" });
             },
           });
         },
         onThrowComplete: function () {
+          setIsDragging(false);
           const x = gsap.getProperty(sliderRef.current, "x");
           const slideUnit = newCardWidth + cardGap;
           const slideIndex = Math.round(Math.abs(Number(x)) / slideUnit);
-          setCurrentSlide(slideIndex);
+          const finalIndex = slideIndex % testimonials.length;
+          setCurrentSlide(finalIndex);
+        },
+        onRelease: function () {
+          gsap.set(carouselRef.current, { cursor: "grab" });
         },
       })[0];
-
-      // Removed onPress handler - no longer stops auto-play on simple press/click
-      if (draggableInstanceRef.current) {
-        draggableInstanceRef.current.vars.onRelease = function () {
-          gsap.set(carouselRef.current, { cursor: "grab" });
-        };
-      }
     };
 
     setupCarousel();
 
     const handleResize = () => {
       setupCarousel();
-      goToSlide(currentSlide, false);
     };
 
     window.addEventListener("resize", handleResize);
@@ -248,28 +253,18 @@ const ClientReview = () => {
       if (draggableInstanceRef.current) {
         draggableInstanceRef.current.kill();
       }
-      if (snapAnimationRef.current) {
-        gsap.killTweensOf(sliderRef.current);
-      }
-      if (autoPlayIntervalRef.current) {
-        clearInterval(autoPlayIntervalRef.current);
+      if (continuousAnimationRef.current) {
+        continuousAnimationRef.current.kill();
       }
     };
-    // eslint-disable-next-line
-  }, [testimonials.length, cardGap, isMobile]);
+  }, [duplicatedTestimonials.length, cardGap, isMobile]);
 
-  const goToSlide = (index: number, animated = true) => {
-    const slideUnit = cardWidth + cardGap;
-    const targetX = -index * slideUnit;
-    gsap.to(sliderRef.current, {
-      x: targetX,
-      duration: animated ? 0.5 : 0,
-      ease: "power2.out",
-      onComplete: () => {
-        setCurrentSlide(index);
-      },
-    });
-  };
+  // Create continuous animation when cardWidth is available
+  useEffect(() => {
+    if (cardWidth > 0 && isAutoPlaying && !isHovering && !isDragging) {
+      createContinuousAnimation();
+    }
+  }, [cardWidth]);
 
   return (
     <div className="bg-transparent py-16 relative overflow-hidden">
@@ -336,9 +331,9 @@ const ClientReview = () => {
                   touchAction: "pan-y",
                 }}
               >
-                {testimonials.map((testimonial) => (
+                {duplicatedTestimonials.map((testimonial, index) => (
                   <div
-                    key={testimonial.id}
+                    key={`${testimonial.id}-${index}`}
                     className="px-2 flex-shrink-0"
                     style={{
                       width: isMobile ? "100%" : "500px",
