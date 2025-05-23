@@ -50,7 +50,9 @@ const RegistrationForm = () => {
     } else if (["S1", "S2", "S3"].includes(watchLevel)) {
       setSelectedLevel("Secondary");
       setAvailableSubjects(["Mathematics", "Science"]);
-    } else if (["National 5", "Highers", "Advanced Highers"].includes(watchLevel)) {
+    } else if (
+      ["National 5", "Highers", "Advanced Highers"].includes(watchLevel)
+    ) {
       setSelectedLevel("Advanced");
       setAvailableSubjects(["Mathematics", "Physics", "Chemistry", "Biology"]);
     } else if (watchLevel === "Homework Club") {

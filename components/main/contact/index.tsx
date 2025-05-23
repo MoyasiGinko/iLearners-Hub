@@ -26,7 +26,7 @@ const FloatingElements = () => {
 
       {/* Earth - now visible on mobile */}
       <motion.div
-        className="absolute opacity-50 top-10 right-8 w-16 h-16 md:top-16 md:right-14 md:w-24 md:h-24 z-0"
+        className="absolute opacity-20 top-10 right-8 w-16 h-16 md:top-16 md:right-14 md:w-24 md:h-24 z-0"
         animate={{ rotate: 360 }}
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
       >
@@ -39,7 +39,7 @@ const FloatingElements = () => {
 
       {/* Marker - now visible on smaller screens */}
       <motion.div
-        className="absolute opacity-50 top-2 left-1/2 transform -translate-x-1/2 w-12 h-12 md:w-16 md:h-16 z-0"
+        className="absolute opacity-20 top-2 left-1/2 transform -translate-x-1/2 w-12 h-12 md:w-16 md:h-16 z-0"
         animate={{
           opacity: [0.3, 0.5, 0.3],
           y: [-5, 5, -5],
@@ -55,7 +55,7 @@ const FloatingElements = () => {
 
       {/* Math Symbol - now visible on mobile */}
       <motion.div
-        className="absolute opacity-50 bottom-2 left-[47%] transform -translate-x-1/2 w-12 h-12 md:w-16 md:h-16 z-0"
+        className="absolute opacity-20 bottom-2 left-[47%] transform -translate-x-1/2 w-12 h-12 md:w-16 md:h-16 z-0"
         animate={{
           y: [0, -5, 0],
           rotate: [-3, 5, -6],
@@ -71,7 +71,7 @@ const FloatingElements = () => {
 
       {/* Book - now visible on mobile */}
       <motion.div
-        className="absolute opacity-50 bottom-6 left-4 w-20 h-24 md:bottom-10 md:left-10 md:w-26 md:h-32 z-0"
+        className="absolute opacity-20 bottom-6 left-4 w-20 h-24 md:bottom-10 md:left-10 md:w-26 md:h-32 z-0"
         animate={{
           x: [-5, 5, -5],
           rotate: [-2, 2, -2],
