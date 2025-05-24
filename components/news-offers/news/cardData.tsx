@@ -10,20 +10,12 @@ export interface CardDataType {
     url?: string;
   };
   category: string;
-  // Event fields
   date?: string;
-  time?: string;
   location?: string;
   capacity?: string;
-  registrationUrl?: string;
-  // News fields
-  author?: string;
-  publishedAt?: string;
-  readTime?: string;
-  // Offer fields
+
+  // OFFERS
   logo?: string;
-  companyName?: string;
-  tagline?: string;
   originalPrice?: string;
   salePrice?: string;
   discount?: string;
@@ -36,9 +28,7 @@ export const cardData: CardDataType[] = [
   {
     id: "7",
     logo: "🎒",
-    companyName: "iLearnersHub UK",
     title: "Summer Learning Package",
-    tagline: "Accelerate Your Learning Journey",
     description:
       "Get our comprehensive summer learning package including online courses, study materials, and 1-on-1 tutoring sessions at a special discounted rate!",
     originalPrice: "£199.99",
@@ -66,7 +56,6 @@ export const cardData: CardDataType[] = [
     },
     category: "events",
     date: "October 12, 2024",
-    time: "10:00 AM - 5:00 PM",
     location: "iLearnersHub Campus, London",
     capacity: "150 attendees",
   },
@@ -76,9 +65,6 @@ export const cardData: CardDataType[] = [
     subtitle: "CURRICULUM UPDATE",
     description:
       "iLearnersHub UK is proud to announce our newly updated GCSE preparation courses aligned with the latest curriculum changes. Our expert tutors have developed comprehensive study materials to ensure student success.",
-    author: "Academic Team",
-    publishedAt: "3 days ago",
-    readTime: "4 min read",
     image:
       "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=600&fit=crop",
     category: "news",
