@@ -64,7 +64,6 @@ const EventCard: React.FC<{ card: CardDataType }> = ({ card }) => (
               <Calendar className="w-5 h-5 text-pink-500" />
               <span className="font-medium">{card.date}</span>
               <Clock className="w-5 h-5 text-orange-500 ml-2" />
-              <span className="font-medium">{card.time}</span>
             </div>
 
             {card.location && (
@@ -81,18 +80,6 @@ const EventCard: React.FC<{ card: CardDataType }> = ({ card }) => (
               </div>
             )}
           </div>
-
-          {/* Registration info */}
-          {card.registrationUrl && (
-            <div className="bg-yellow-50 p-3 rounded-xl border-2 border-yellow-200 mb-4">
-              <p className="text-purple-700 text-sm font-medium">
-                Sign up here! 📝
-              </p>
-              <p className="text-purple-800 font-bold">
-                {card.registrationUrl}
-              </p>
-            </div>
-          )}
 
           {/* Action button */}
           <Link href="/gallery" className="inline-block mb-2">

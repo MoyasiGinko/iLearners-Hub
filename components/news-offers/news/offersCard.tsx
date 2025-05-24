@@ -34,14 +34,6 @@ const OfferCard: React.FC<{ card: CardDataType }> = ({ card }) => (
 
         {/* Right Section - Content (will be bottom on mobile) */}
         <div className="md:w-2/3 p-8 rounded-r-3xl text-white">
-          {/* Company Info */}
-          <div className="flex items-center mb-5">
-            <div className="text-5xl mr-4">{card.logo}</div>
-            <h3 className="text-white font-bold text-2xl">
-              {card.companyName}
-            </h3>
-          </div>
-
           {/* Title */}
           <h1 className="text-yellow-300 text-5xl md:text-6xl font-black leading-tight tracking-tight mb-6 drop-shadow-lg">
             {card.title}
@@ -72,7 +64,10 @@ const OfferCard: React.FC<{ card: CardDataType }> = ({ card }) => (
           </div>
 
           {/* Action Button */}
-          <Link href="/gallery" className="inline-block mb-6">
+          <Link
+            href={card.actionButton.url || "#"}
+            className="inline-block mb-6"
+          >
             <button
               className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-3 px-6 rounded-full transition-all duration-300
               shadow-[0_5px_0_rgb(147,51,234)] hover:shadow-[0_2px_0_rgb(147,51,234)]
