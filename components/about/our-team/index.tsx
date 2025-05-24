@@ -21,6 +21,14 @@ const teamMembers: TeamMember[] = [
     icon: "⚖️",
   },
   {
+    name: "Shovon Mostofa",
+    title: "AEROSPACE ENGINEER",
+    description: "6+ YEARS EXPERIENCE IN TEACHING NATIONAL 5",
+    imageUrl: "/images/about/team5.png", // Replace with actual image
+    color: "bg-pink-200",
+    icon: "🚀",
+  },
+  {
     name: "Dr. M Ahmmad",
     title: "PROFESSIONAL ENGINEER",
     description: "15 YEARS EXPERINCE IN ENGINEERING PRACTICE & TEACHING",
@@ -44,14 +52,6 @@ const teamMembers: TeamMember[] = [
     imageUrl: "/images/about/team4.png", // Replace with actual image
     color: "bg-purple-200",
     icon: "🎓",
-  },
-  {
-    name: "Shovon Mostofa",
-    title: "AEROSPACE ENGINEER",
-    description: "6+ YEARS EXPERIENCE IN TEACHING NATIONAL 5",
-    imageUrl: "/images/about/team5.png", // Replace with actual image
-    color: "bg-pink-200",
-    icon: "🚀",
   },
 ];
 
