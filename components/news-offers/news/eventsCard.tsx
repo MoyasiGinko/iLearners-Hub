@@ -42,7 +42,7 @@ const EventCard: React.FC<{ card: CardDataType }> = ({ card }) => (
             </p>
           )}
 
-          <h1 className="text-white text-5xl md:text-6xl font-black leading-tight mb-6 drop-shadow-lg">
+          <h1 className="text-white text-5xl md:text-6xl font-black leading-tight tracking-tight mb-6 drop-shadow-lg">
             {card.title}
           </h1>
         </div>

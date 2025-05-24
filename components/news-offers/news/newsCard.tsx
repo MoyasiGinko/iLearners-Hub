@@ -34,7 +34,7 @@ const NewsCard: React.FC<{ card: CardDataType }> = ({ card }) => {
           {/* Right Section - Text Content */}
           <div className="lg:w-3/5 p-6 flex flex-col justify-between">
             {/* Title with 3D effect */}
-            <h1 className="text-white text-5xl md:text-6xl font-black leading-tight mb-6 drop-shadow-lg">
+            <h1 className="text-white text-5xl md:text-6xl font-black leading-tight tracking-tight mb-6 drop-shadow-lg">
               {card.title}
             </h1>
 

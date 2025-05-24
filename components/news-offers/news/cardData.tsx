@@ -36,28 +36,28 @@ export const cardData: CardDataType[] = [
   {
     id: "7",
     logo: "🎒",
-    companyName: "Happy Learning Store",
-    title: "Back to School Sale!",
-    tagline: "Super Fun Learning",
+    companyName: "iLearnersHub UK",
+    title: "Summer Learning Package",
+    tagline: "Accelerate Your Learning Journey",
     description:
-      "Get ready for an amazing school year with our colorful notebooks, fun pencils, and exciting learning materials that make studying feel like play!",
-    originalPrice: "$25.99",
-    salePrice: "$15.99",
-    discount: "40",
+      "Get our comprehensive summer learning package including online courses, study materials, and 1-on-1 tutoring sessions at a special discounted rate!",
+    originalPrice: "£199.99",
+    salePrice: "£129.99",
+    discount: "35",
     image:
-      "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
-    validUntil: "Sept 30, 2024",
-    phone: "(555) 123-KIDS",
-    actionButton: { text: "Get My School Supplies!" },
+      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop",
+    validUntil: "August 31, 2024",
+    phone: "+44 20 1234 5678",
+    actionButton: { text: "Claim This Offer" },
     category: "offers",
   },
 
   // Event card
   {
     id: "1",
-    title: "Annual Tech Conference 2025",
+    title: "Annual Education Summit",
     description:
-      "Join us for the biggest technology conference of the year featuring keynotes from industry leaders, networking opportunities, and hands-on workshops.",
+      "Join leading educators and students for our biggest event of the year in iLearnersHub. Featuring workshops on innovative learning techniques, career guidance, and networking opportunities with top UK universities.",
     image:
       "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop",
     actionButton: {
@@ -65,26 +65,26 @@ export const cardData: CardDataType[] = [
       url: "#register",
     },
     category: "events",
-    date: "June 15, 2025",
-    time: "9:00 AM - 6:00 PM",
-    location: "Convention Center",
-    capacity: "50 per workshop",
+    date: "October 12, 2024",
+    time: "10:00 AM - 5:00 PM",
+    location: "iLearnersHub Campus, London",
+    capacity: "150 attendees",
   },
   {
     id: "5",
-    title: "BREAKING NEWS",
-    subtitle: "LIVE UPDATE",
+    title: "New GCSE Preparation Courses",
+    subtitle: "CURRICULUM UPDATE",
     description:
-      "Stay informed with the latest developments as they unfold. Get real-time updates and expert analysis on this developing story.",
-    author: "News Team",
-    publishedAt: "2 hours ago",
-    readTime: "5 min read",
+      "iLearnersHub UK is proud to announce our newly updated GCSE preparation courses aligned with the latest curriculum changes. Our expert tutors have developed comprehensive study materials to ensure student success.",
+    author: "Academic Team",
+    publishedAt: "3 days ago",
+    readTime: "4 min read",
     image:
-      "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=600&fit=crop",
     category: "news",
     actionButton: {
-      text: "Read Full Story",
+      text: "Learn More",
     },
-    date: "Sept 15, 2024",
+    date: "July 22, 2024",
   },
 ];
