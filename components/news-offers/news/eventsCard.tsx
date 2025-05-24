@@ -9,7 +9,8 @@ import {
 } from "lucide-react";
 
 import React from "react";
-import { CardDataType } from "./cardData"; // Assuming cardData is imported from a separate file
+import { CardDataType } from "./cardData"; // Assuming cardData is imported from a separate file\
+import Link from "next/link";
 
 // Event Card Component matching the YouTube cover design
 const EventCard: React.FC<{ card: CardDataType }> = ({ card }) => (
@@ -47,35 +48,35 @@ const EventCard: React.FC<{ card: CardDataType }> = ({ card }) => (
         </div>
 
         {/* Info card section */}
-        <div className="relative z-10 bg-white rounded-2xl p-6 shadow-xl">
-          <h3 className="text-gray-800 font-bold text-xl mb-3 flex items-center gap-2">
-            <GraduationCap className="w-6 h-6 text-green-600" />
-            HAVE FUN AT SCHOOL
+        <div className="relative z-10 bg-white rounded-3xl p-6 shadow-xl border-4 border-dashed border-yellow-400">
+          <h3 className="text-blue-600 font-bold text-xl mb-3 flex items-center gap-2">
+            <GraduationCap className="w-7 h-7 text-purple-600" />
+            LET'S HAVE FUN TOGETHER!
           </h3>
 
           <p className="text-gray-600 text-sm mb-4 leading-relaxed">
             {card.description}
           </p>
 
-          {/* Event details */}
-          <div className="space-y-2 mb-4">
+          {/* Event details with playful icons */}
+          <div className="space-y-3 mb-4 bg-blue-50 p-3 rounded-xl">
             <div className="flex items-center gap-2 text-sm text-gray-700">
-              <Calendar className="w-4 h-4 text-green-600" />
+              <Calendar className="w-5 h-5 text-pink-500" />
               <span className="font-medium">{card.date}</span>
-              <Clock className="w-4 h-4 text-green-600 ml-2" />
+              <Clock className="w-5 h-5 text-orange-500 ml-2" />
               <span className="font-medium">{card.time}</span>
             </div>
 
             {card.location && (
               <div className="flex items-center gap-2 text-sm text-gray-700">
-                <MapPin className="w-4 h-4 text-green-600" />
+                <MapPin className="w-5 h-5 text-red-500" />
                 <span className="font-medium">{card.location}</span>
               </div>
             )}
 
             {card.capacity && (
               <div className="flex items-center gap-2 text-sm text-gray-700">
-                <Users className="w-4 h-4 text-green-600" />
+                <Users className="w-5 h-5 text-indigo-500" />
                 <span className="font-medium">{card.capacity}</span>
               </div>
             )}
@@ -83,18 +84,28 @@ const EventCard: React.FC<{ card: CardDataType }> = ({ card }) => (
 
           {/* Registration info */}
           {card.registrationUrl && (
-            <div className="bg-green-50 p-3 rounded-lg border border-green-200 mb-4">
-              <p className="text-green-800 text-sm font-medium">
-                Registration Info Visit:
+            <div className="bg-yellow-50 p-3 rounded-xl border-2 border-yellow-200 mb-4">
+              <p className="text-purple-700 text-sm font-medium">
+                Sign up here! 📝
               </p>
-              <p className="text-green-700 font-bold">{card.registrationUrl}</p>
+              <p className="text-purple-800 font-bold">
+                {card.registrationUrl}
+              </p>
             </div>
           )}
 
           {/* Action button */}
-          <button className="w-full bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-800 font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-            {card.actionButton.text}
-          </button>
+          <Link href="/gallery" className="inline-block mb-2">
+            <button
+              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 px-6 rounded-full transition-all duration-300
+              shadow-[0_6px_0_rgb(147,51,234)] hover:shadow-[0_3px_0_rgb(147,51,234)]
+              hover:translate-y-1 active:translate-y-2 active:shadow-none
+              border-2 border-purple-400 flex items-center gap-2 text-lg"
+            >
+              {card.actionButton.text}
+              <span className="text-xl">✨</span>
+            </button>
+          </Link>
         </div>
 
         {/* Decorative pencil icon */}
@@ -112,7 +123,7 @@ const EventCard: React.FC<{ card: CardDataType }> = ({ card }) => (
         />
 
         {/* Overlay text */}
-        <div className="absolute inset-0 bg-black bg-opacity-20 flex items-end">
+        <div className="absolute inset-0 bg-black/5 bg-opacity-20 flex items-end">
           <div className="p-6 text-white">
             <h2 className="text-2xl font-bold drop-shadow-lg">
               IT'S TIME TO LEARN

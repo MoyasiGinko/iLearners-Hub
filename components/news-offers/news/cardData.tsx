@@ -7,7 +7,7 @@ export interface CardDataType {
   image: string;
   actionButton: {
     text: string;
-    url: string;
+    url?: string;
   };
   category: string;
   date?: string;
@@ -22,15 +22,26 @@ export interface CardDataType {
   validUntil?: string;
   offerType?: string;
   author?: string;
+  likes?: string;
   publishedAt?: string;
   readTime?: string;
   isBreaking?: boolean;
   views?: string;
   comments?: string;
   source?: string;
+  // New fields
+  logo?: string;
+  companyName?: string;
+  offerDate?: string;
+  phone?: string;
+  email?: string;
+  website?: string;
+  tagline?: string;
 }
+
 // Centralized data variable
 export const cardData: CardDataType[] = [
+  // Existing data...
   {
     id: "1",
     title: "Annual Tech Conference 2025",
@@ -46,15 +57,17 @@ export const cardData: CardDataType[] = [
     date: "June 15, 2025",
     time: "9:00 AM - 6:00 PM",
     location: "Convention Center",
+    capacity: "50 per workshop",
     featured: true,
   },
+  // Other existing items...
   {
     id: "2",
     title: "Summer Workshop Series",
     description:
       "Enhance your skills with our comprehensive workshop series covering web development, design thinking, and project management.",
     image:
-      "https://images.unsplash.com/photo-1559223607-d9176c8a1cd3?w=800&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop",
     actionButton: {
       text: "Join Workshop",
       url: "#workshop",
@@ -63,106 +76,101 @@ export const cardData: CardDataType[] = [
     date: "July 10-12, 2025",
     time: "10:00 AM - 4:00 PM",
     capacity: "50 per workshop",
+    location: "Tech Hub",
+    registrationUrl: "https://example.com/register",
   },
-  {
-    id: "3",
-    title: "50% Off Premium Membership",
-    subtitle: "Limited Time Offer",
-    description:
-      "Unlock exclusive features, priority support, and advanced tools with our premium membership. Limited time offer for new subscribers only.",
-    image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
-    actionButton: {
-      text: "Claim Offer",
-      url: "#premium",
-    },
-    category: "offers",
-    discount: "50% OFF",
-    date: "Valid until July 31, 2025",
-    validUntil: "July 31, 2025",
-    offerType: "Membership",
-  },
-  {
-    id: "4",
-    title: "Early Bird Special - Course Bundle",
-    description:
-      "Get access to our complete course library including advanced tutorials, project files, and lifetime updates. Save big with early bird pricing.",
-    image:
-      "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=600&fit=crop",
-    actionButton: {
-      text: "Get Bundle",
-      url: "#bundle",
-    },
-    category: "offers",
-    discount: "30% OFF",
-    date: "Ends August 15, 2025",
-    validUntil: "August 15, 2025",
-    offerType: "Early Bird",
-    originalPrice: "$249",
-    salePrice: "$174",
-  },
+
   {
     id: "5",
     title: "BREAKING NEWS",
     subtitle: "LIVE UPDATE",
     description:
-      "Stay informed with the latest developments as this story unfolds. Our reporters are on the ground providing real-time coverage of this significant event.",
-    image:
-      "https://images.unsplash.com/photo-1504711434969-e33886168f5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    author: "Sarah Johnson",
+      "Stay informed with the latest developments as they unfold. Get real-time updates and expert analysis on this developing story.",
+    author: "News Team",
     publishedAt: "2 hours ago",
-    readTime: "3 min read",
+    readTime: "5 min read",
+    views: "125K",
+    comments: "1.2K",
+    likes: "8.5K",
+    image:
+      "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=600&fit=crop",
     category: "news",
-    isBreaking: true,
-    views: "12.5K",
-    comments: "248",
     source: "Global News Network",
-    location: "Washington, DC",
+    location: "New York",
+    isBreaking: true,
     actionButton: {
       text: "Read Full Story",
-      url: "#",
     },
+    date: "Sept 15, 2024",
+    time: "10:00 AM",
   },
   {
     id: "6",
     title: "BREAKING NEWS",
     subtitle: "LIVE UPDATE",
     description:
-      "Stay informed with the latest developments as this story unfolds. Our reporters are on the ground providing real-time coverage of this significant event.",
-    image:
-      "https://images.unsplash.com/photo-1504711434969-e33886168f5c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    author: "Sarah Johnson",
+      "Stay informed with the latest developments as they unfold. Get real-time updates and expert analysis on this developing story.",
+    author: "News Team",
     publishedAt: "2 hours ago",
-    readTime: "3 min read",
+    readTime: "5 min read",
+    views: "125K",
+    comments: "1.2K",
+    likes: "8.5K",
+    image:
+      "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=600&fit=crop",
     category: "news",
-    isBreaking: true,
-    views: "12.5K",
-    comments: "248",
     source: "Global News Network",
-    location: "Washington, DC",
+    location: "New York",
+    isBreaking: true,
     actionButton: {
       text: "Read Full Story",
-      url: "#",
     },
+    date: "Sept 15, 2024",
+    time: "10:00 AM",
   },
   {
     id: "7",
-    title: "MEGA SALE",
-    subtitle: "LIMITED TIME",
+    logo: "🎒",
+    companyName: "Happy Learning Store",
+    title: "Back to School Sale!",
+    tagline: "Super Fun Learning",
     description:
-      "Don't miss out on this incredible opportunity! Get amazing discounts on all our premium courses and educational materials.",
+      "Get ready for an amazing school year with our colorful notebooks, fun pencils, and exciting learning materials that make studying feel like play!",
+    originalPrice: "$25.99",
+    salePrice: "$15.99",
+    discount: "40",
     image:
-      "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    discount: "70% OFF",
-    originalPrice: "$299",
-    salePrice: "$89",
-    validUntil: "Dec 31, 2024",
-    offerType: "Flash Sale",
-    featured: true,
+      "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
+    offerDate: "Aug 15, 2024",
+    validUntil: "Sept 30, 2024",
+    phone: "(555) 123-KIDS",
+    email: "fun@happylearning.com",
+    website: "www.happylearning.com",
+    actionButton: { text: "Get My School Supplies!" },
+    offerType: "BACK TO SCHOOL SPECIAL",
     category: "offers",
-    actionButton: {
-      text: "Claim Offer Now",
-      url: "#",
-    },
+  },
+  // New card
+  {
+    id: "8",
+    logo: "🎒",
+    companyName: "Happy Learning Store",
+    title: "Back to School Sale!",
+    tagline: "Super Fun Learning",
+    description:
+      "Get ready for an amazing school year with our colorful notebooks, fun pencils, and exciting learning materials that make studying feel like play!",
+    originalPrice: "$25.99",
+    salePrice: "$15.99",
+    discount: "40",
+    image:
+      "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=300&fit=crop",
+    offerDate: "Aug 15, 2024",
+    validUntil: "Sept 30, 2024",
+    phone: "(555) 123-KIDS",
+    email: "fun@happylearning.com",
+    website: "www.happylearning.com",
+    actionButton: { text: "Get My School Supplies!" },
+    offerType: "BACK TO SCHOOL SPECIAL",
+    category: "offers",
   },
 ];
