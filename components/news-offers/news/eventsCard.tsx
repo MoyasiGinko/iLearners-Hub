@@ -81,12 +81,15 @@ const EventCard: React.FC<{ card: CardDataType }> = ({ card }) => (
           </div>
 
           {/* Action button */}
-          <Link href="/gallery" className="inline-block mb-1 md:mb-2">
+          <Link
+            href={card.actionButton.url || "#"}
+            className="inline-block mb-1 md:mb-2"
+          >
             <button
-              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-2 sm:py-2.5 md:py-3 px-4 sm:px-5 md:px-6 rounded-full transition-all duration-300
-              shadow-[0_4px_0_rgb(147,51,234)] md:shadow-[0_6px_0_rgb(147,51,234)] hover:shadow-[0_2px_0_rgb(147,51,234)]
+              className="bg-gradient-to-r from-green-500 to-green-400 text-white font-bold py-2 sm:py-2.5 md:py-3 px-4 sm:px-5 md:px-6 rounded-full transition-all duration-300
+              shadow-[0_4px_0_rgb(16,185,129)] md:shadow-[0_6px_0_rgb(16,185,129)] hover:shadow-[0_2px_0_rgb(16,185,129)]
               hover:translate-y-1 active:translate-y-2 active:shadow-none
-              border border-purple-400 md:border-2 flex items-center gap-1 md:gap-2 text-sm sm:text-base md:text-lg"
+              border border-green-400 md:border-2 flex items-center gap-1 md:gap-2 text-sm sm:text-base md:text-lg"
             >
               {card.actionButton.text}
               <span className="text-base md:text-xl">✨</span>

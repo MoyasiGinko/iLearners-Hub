@@ -66,7 +66,7 @@ const NewsCard: React.FC<{ card: CardDataType }> = ({ card }) => {
             </div>
 
             {/* Action Button */}
-            <Link href="/gallery" className="inline-block">
+            <Link href={card.actionButton.url || "#"} className="inline-block">
               <button
                 className="bg-gradient-to-r from-blue-500 to-sky-400 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 text-sm sm:text-base rounded-full transition-all duration-300
               shadow-[0_3px_0_rgb(37,99,235)] sm:shadow-[0_5px_0_rgb(37,99,235)] hover:shadow-[0_2px_0_rgb(37,99,235)]
