@@ -4,8 +4,11 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { FaMapMarkerAlt, FaPhone, FaEnvelope } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 const Footer = () => {
+  const router = useRouter();
+
   const quickLinks = [
     { label: "Courses", href: "/courses" },
     { label: "News & Offers", href: "/news-offers" },
@@ -15,13 +18,39 @@ const Footer = () => {
   ];
 
   const resourceLinks = [
-    { label: "S3 Course", href: "/courses" },
-    { label: "S4 Course", href: "/courses" },
-    { label: "National 5 Course", href: "/courses" },
-    { label: "P3 to P7 Course", href: "/courses" },
+    { label: "Primary", href: "/courses/primary" },
+    { label: "Secondary", href: "/courses/secondary" },
+    { label: "National 5", href: "/courses/national-5" },
+    { label: "Highers", href: "/courses/highers" },
+    { label: "Advanced Highers", href: "/courses/advanced-highers" },
   ];
 
   const currentYear = new Date().getFullYear();
+
+  // Function to handle navigation to course categories with smooth scrolling
+  const handleCategoryClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    e.preventDefault();
+
+    // Navigate to the courses page
+    router.push(href);
+
+    // After navigation, scroll to courses-content
+    // Using setTimeout to ensure the navigation completes first
+    setTimeout(() => {
+      const coursesContent = document.getElementById("courses-content");
+      if (coursesContent) {
+        const offsetPosition =
+          coursesContent.getBoundingClientRect().top + window.scrollY - 100;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    }, 300);
+  };
 
   return (
     <footer className="relative py-16 bg-gradient-to-b from-sky-100 to-indigo-100 border-t border-blue-200">
@@ -84,13 +113,18 @@ const Footer = () => {
                 <li key={i}>
                   <Link
                     href={link.href}
+                    onClick={(e) => {
+                      if (link.href.includes("/courses")) {
+                        handleCategoryClick(e, link.href);
+                      }
+                    }}
                     className="text-indigo-600 hover:text-purple-700 transition-colors duration-300
-                           relative group"
+                     relative group"
                   >
                     {link.label}
                     <span
                       className="absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-400
-                                 group-hover:w-full transition-all duration-300"
+                       group-hover:w-full transition-all duration-300"
                     />
                   </Link>
                 </li>
@@ -114,6 +148,7 @@ const Footer = () => {
                 <li key={i}>
                   <Link
                     href={link.href}
+                    onClick={(e) => handleCategoryClick(e, link.href)}
                     className="text-indigo-600 hover:text-purple-700 transition-colors duration-300
                            relative group"
                   >
