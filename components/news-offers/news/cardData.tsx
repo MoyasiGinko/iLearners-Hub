@@ -38,7 +38,7 @@ export const cardData: CardDataType[] = [
       "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop",
     validUntil: "August 31, 2024",
     phone: "+44 20 1234 5678",
-    actionButton: { text: "Claim This Offer" },
+    actionButton: { text: "Claim This Offer", url: "/register" },
     category: "offers",
   },
 
@@ -52,7 +52,7 @@ export const cardData: CardDataType[] = [
       "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop",
     actionButton: {
       text: "Register Now",
-      url: "#register",
+      url: "/register",
     },
     category: "events",
     date: "October 12, 2024",
@@ -70,6 +70,7 @@ export const cardData: CardDataType[] = [
     category: "news",
     actionButton: {
       text: "Learn More",
+      url: "/courses",
     },
     date: "July 22, 2024",
   },

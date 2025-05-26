@@ -21,7 +21,7 @@ const renderCard = (card: CardDataType) => {
 // Main Component
 const NewsAndEvents: React.FC = () => {
   return (
-    <div className="h-auto bg-transparent pt-20 px-4 sm:px-6 lg:px-8">
+    <div className="h-auto bg-transparent pt-20">
       {/* Header */}
       <div className="mb-16 text-center">
         <h2 className="mb-4 leading-tight bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-3xl font-bold text-transparent md:text-5xl drop-shadow-lg">

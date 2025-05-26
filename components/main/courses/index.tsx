@@ -180,7 +180,9 @@ const MiniCourseTablet = () => {
 
   const handleCategoryChange = (category: string): void => {
     setSelectedCategory(category);
-    setActiveTab(courseCategories.indexOf(category) + 1);
+    setActiveTab(
+      courseCategories.findIndex((cat) => cat.name === category) + 1
+    );
   };
 
   // Helper function to safely get color scheme
@@ -409,7 +411,7 @@ const MiniCourseTablet = () => {
 
             {courseCategories.map((category, index) => {
               // Safely get color scheme for each category
-              const colorScheme = getColorScheme(category);
+              const colorScheme = getColorScheme(category.name);
 
               return (
                 <motion.button
@@ -420,9 +422,9 @@ const MiniCourseTablet = () => {
                       ? `bg-gradient-to-b ${colorScheme.accent} text-white shadow-lg translate-y-1`
                       : `${colorScheme.bg} ${colorScheme.text} shadow-md hover:shadow-lg hover:translate-y-0.5`
                   }`}
-                  onClick={() => handleCategoryChange(category)}
+                  onClick={() => handleCategoryChange(category.name)}
                 >
-                  {category}
+                  {category.name}
                 </motion.button>
               );
             })}
