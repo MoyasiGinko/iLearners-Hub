@@ -18,7 +18,7 @@ const Footer = () => {
     { label: "S3 Course", href: "/courses" },
     { label: "S4 Course", href: "/courses" },
     { label: "National 5 Course", href: "/courses" },
-    { label: "P4 to P7 Course", href: "/courses" },
+    { label: "P3 to P7 Course", href: "/courses" },
   ];
 
   const currentYear = new Date().getFullYear();
@@ -45,10 +45,9 @@ const Footer = () => {
               />
             </div>
             <p className="text-gray-600 mb-4">
-              Ready to excel in your National 5 exams? Contact us today to
-              discuss your tutoring needs and schedule a consultation with one
-              of our expert tutors. Let’s embark on a journey toward academic
-              success together!
+              Boost your exam performance with our expert tutoring. Contact us
+              today to discuss your learning goals and book a session with our
+              specialist tutors. Your academic success journey starts here!
             </p>
             <div className="flex gap-4 mt-2">
               {[...Array(5)].map((_, i) => (
