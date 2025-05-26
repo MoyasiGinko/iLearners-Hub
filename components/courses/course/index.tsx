@@ -3,15 +3,64 @@ import React, { useState, useEffect } from "react";
 import { courses, courseCategories } from "./courseData";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const CoursePage = () => {
+  const pathname = usePathname();
+  const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState("All Courses");
-  // Remove mousePosition state and tilt calculation as it's causing issues
+
+  // Extract category from URL pathname
+  useEffect(() => {
+    // Get the path segments and filter out empty strings
+    const pathSegments = pathname.split("/").filter(Boolean);
+
+    // Check if we're on the base courses page
+    if (pathSegments.length === 1 && pathSegments[0] === "courses") {
+      setSelectedCategory("All Courses");
+      return;
+    }
+
+    // Check if we're on a category page (/courses/[slug]) or course detail page (/courses/[slug]/[id])
+    if (pathSegments.length >= 2 && pathSegments[0] === "courses") {
+      const categorySlug = pathSegments[1];
+
+      // Find matching category by slug
+      const matchingCategory = courseCategories.find(
+        (category) => category.slug === categorySlug
+      );
+
+      if (matchingCategory) {
+        setSelectedCategory(matchingCategory.name);
+      } else {
+        // If no matching category found, default to "All Courses"
+        setSelectedCategory("All Courses");
+      }
+    }
+  }, [pathname]);
 
   const filteredCourses =
     selectedCategory === "All Courses"
       ? courses
       : courses.filter((course) => course.category === selectedCategory);
+
+  // Function to handle category selection and URL navigation
+  const handleCategorySelect = (categoryName: string) => {
+    setSelectedCategory(categoryName);
+
+    // Navigate to the appropriate URL
+    if (categoryName === "All Courses") {
+      router.push("/courses");
+    } else {
+      const categorySlug = courseCategories.find(
+        (cat) => cat.name === categoryName
+      )?.slug;
+      if (categorySlug) {
+        router.push(`/courses/${categorySlug}`);
+      }
+    }
+  };
 
   return (
     <section className="bg-transparent pt-20 min-h-screen">
@@ -39,32 +88,32 @@ const CoursePage = () => {
                 >
                   <button
                     className={`px-8 w-full inline-block py-3 rounded-full font-medium shadow-sm hover:shadow-md border-b-4
-                      active:border-b-0 active:border-t-0   active:shadow-inner active:translate-y-1 transform transition-all duration-200 focus:outline-none ${
+                      active:border-b-0 active:border-t-0 active:shadow-inner active:translate-y-1 transform transition-all duration-200 focus:outline-none ${
                         selectedCategory === "All Courses"
                           ? "bg-indigo-500 border-indigo-600 text-white shadow-sm"
                           : "bg-indigo-100 border-indigo-300 text-indigo-700 "
                       }`}
-                    onClick={() => setSelectedCategory("All Courses")}
+                    onClick={() => handleCategorySelect("All Courses")}
                   >
                     All Courses
                   </button>
                 </motion.li>
                 {courseCategories.map((category) => (
                   <motion.li
-                    key={category}
+                    key={category.slug}
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.99 }}
                   >
                     <button
                       className={`px-8 w-full inline-block py-3 rounded-full font-medium shadow-sm hover:shadow-md border-b-4
-                      active:border-b-0 active:border-t-0   active:shadow-inner active:translate-y-1 transform transition-all duration-200 focus:outline-none ${
-                        selectedCategory === category
+                      active:border-b-0 active:border-t-0 active:shadow-inner active:translate-y-1 transform transition-all duration-200 focus:outline-none ${
+                        selectedCategory === category.name
                           ? "bg-indigo-500 border-indigo-600 text-white shadow-sm"
                           : "bg-indigo-100 border-indigo-300 text-indigo-700 "
                       }`}
-                      onClick={() => setSelectedCategory(category)}
+                      onClick={() => handleCategorySelect(category.name)}
                     >
-                      {category}
+                      {category.name}
                     </button>
                   </motion.li>
                 ))}
@@ -84,7 +133,11 @@ const CoursePage = () => {
                   className="rounded-2xl bg-white hover:scale-101 shadow-xl overflow-hidden transition-all border-4 border-indigo-100 flex flex-col"
                 >
                   <Link
-                    href={`/courses/${course.id}`}
+                    href={`/courses/${
+                      courseCategories.find(
+                        (cat) => cat.name === course.category
+                      )?.slug || "general"
+                    }/${course.id}`}
                     className="flex flex-col h-full"
                   >
                     <div className="relative h-48 bg-gray-200">

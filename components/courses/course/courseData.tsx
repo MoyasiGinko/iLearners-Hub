@@ -19,16 +19,16 @@ export type Course = {
   perfectFor?: string;
 };
 
-export const courseCategories: string[] = [
-  "Primary",
-  "Secondary",
-  "National 5",
-  "Highers",
-  "Advanced Highers",
-  "Exam Revision",
-  "Mock Exams",
-  "Tips & Hints",
-  "Homework Club", // Added Homework Club as a new subject
+export const courseCategories: { name: string; slug: string }[] = [
+  { name: "Primary", slug: "primary" },
+  { name: "Secondary", slug: "secondary" },
+  { name: "National 5", slug: "national-5" },
+  { name: "Highers", slug: "highers" },
+  { name: "Advanced Highers", slug: "advanced-highers" },
+  { name: "Exam Revision", slug: "exam-revision" },
+  { name: "Mock Exams", slug: "mock-exams" },
+  { name: "Tips & Hints", slug: "tips-and-hints" },
+  { name: "Homework Club", slug: "homework-club" },
 ];
 
 export const courses: Course[] = [
