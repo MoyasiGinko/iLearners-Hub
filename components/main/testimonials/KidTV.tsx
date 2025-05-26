@@ -139,8 +139,9 @@ export default function KidFriendlyTV() {
             {!isOn && (
               <div className="absolute inset-0 bg-gray-900 flex flex-col items-center justify-center space-y-4">
                 <div className="w-2 h-2 bg-white rounded-full animate-ping"></div>
-                <p className="text-white text-sm px-2 font-bold">
-                  Press the power button to start the TV
+                <p className="text-white text-lg px-2 font-bold">
+                  Press <span className="text-green-500">power button</span> to
+                  start TV
                 </p>
               </div>
             )}
@@ -172,8 +173,11 @@ export default function KidFriendlyTV() {
 
             {/* Play/Pause Overlay when video is paused */}
             {isOn && !isPlaying && !showStatic && (
-              <div className="absolute inset-0 flex items-center justify-center z-20 bg-black bg-opacity-30">
-                <div className="text-white text-6xl">▶️</div>
+              <div className="absolute inset-0 flex items-center justify-center z-20 bg-black/70 bg-opacity-30">
+                <div className="text-white text-center text-lg font-bold">
+                  Press <span className="text-blue-500">blue</span> button to
+                  play
+                </div>
               </div>
             )}
 
@@ -237,43 +241,53 @@ export default function KidFriendlyTV() {
             </div>
 
             {/* Play/Pause Button */}
-            <motion.button
-              className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shadow-lg bg-gradient-to-b from-blue-400 to-blue-600 border-2 border-blue-300 transform hover:translate-y-0.5 active:translate-y-1 transition-transform"
-              style={{
-                boxShadow: "0 4px 0 0 rgba(30, 64, 175, 1)",
-              }}
-              whileTap={{ scale: 0.9 }}
-              onClick={togglePlayPause}
-              disabled={!isOn}
-            >
-              <div className="text-white text-lg sm:text-2xl font-bold">
-                {isPlaying ? "❚❚" : "▶"}
-              </div>
-            </motion.button>
+            <div className="flex flex-col items-center space-y-1">
+              <motion.button
+                className="w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shadow-lg bg-gradient-to-b from-blue-400 to-blue-600 border-2 border-blue-300 transform hover:translate-y-0.5 active:translate-y-1 transition-transform"
+                style={{
+                  boxShadow: "0 4px 0 0 rgba(30, 64, 175, 1)",
+                }}
+                whileTap={{ scale: 0.9 }}
+                onClick={togglePlayPause}
+                disabled={!isOn}
+              >
+                <div className="text-white text-center items-center text-lg sm:text-2xl font-bold">
+                  {isPlaying ? "❚❚" : "▶"}
+                </div>
+              </motion.button>
+              <span className="text-xs text-center sm:text-sm text-white font-semibold">
+                {isPlaying ? "Pause" : "Play"}
+              </span>
+            </div>
 
             {/* Power Button */}
-            <motion.button
-              className={`w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shadow-lg border-2 transform hover:translate-y-0.5 active:translate-y-1 transition-transform ${
-                isOn
-                  ? "bg-gradient-to-b from-red-400 to-red-600 border-red-300"
-                  : "bg-gradient-to-b from-green-400 to-green-600 border-green-300"
-              }`}
-              style={{
-                boxShadow: isOn
-                  ? "0 4px 0 0 rgba(185, 28, 28, 1)"
-                  : "0 4px 0 0 rgba(22, 101, 52, 1)",
-              }}
-              whileTap={{ scale: 0.9 }}
-              onClick={togglePower}
-            >
-              <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white rounded-full flex items-center justify-center">
-                <div
-                  className={`w-4 h-4 sm:w-6 sm:h-6 ${
-                    isOn ? "bg-red-500" : "bg-green-500"
-                  } rounded-full`}
-                ></div>
-              </div>
-            </motion.button>
+            <div className="flex flex-col items-center space-y-1">
+              <motion.button
+                className={`w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center shadow-lg border-2 transform hover:translate-y-0.5 active:translate-y-1 transition-transform ${
+                  isOn
+                    ? "bg-gradient-to-b from-red-400 to-red-600 border-red-300"
+                    : "bg-gradient-to-b from-green-400 to-green-600 border-green-300"
+                }`}
+                style={{
+                  boxShadow: isOn
+                    ? "0 4px 0 0 rgba(185, 28, 28, 1)"
+                    : "0 4px 0 0 rgba(22, 101, 52, 1)",
+                }}
+                whileTap={{ scale: 0.9 }}
+                onClick={togglePower}
+              >
+                <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white rounded-full flex items-center justify-center">
+                  <div
+                    className={`w-4 h-4 sm:w-6 sm:h-6 ${
+                      isOn ? "bg-red-500" : "bg-green-500"
+                    } rounded-full`}
+                  ></div>
+                </div>
+              </motion.button>
+              <span className="text-xs text-center sm:text-sm text-white font-semibold">
+                {isOn ? "Off" : "On"}
+              </span>
+            </div>
 
             {/* Channel Control */}
             <div className="flex flex-col items-center space-y-2">
