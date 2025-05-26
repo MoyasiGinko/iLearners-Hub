@@ -394,11 +394,11 @@ const CTA: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto leading-relaxed drop-shadow-sm"
+          className="text-xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed drop-shadow-sm"
         >
-          Join our community of learners and educators. Expand your knowledge,
-          enhance your skills, and explore new opportunities at iLearner's Hub -
-          your gateway to a world of learning!
+          Join our community of learners and educators. Access interactive
+          courses and develop new skills with personalized learning paths.
+          iLearner's Hub provides the support you need to succeed.
         </motion.p>
 
         <motion.div
