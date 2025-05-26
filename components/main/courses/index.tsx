@@ -485,7 +485,9 @@ const MiniCourseTablet = () => {
                         <span className="text-sm text-gray-500">
                           Course Fee
                         </span>
-                        <span className="text-2xl font-bold">{course.fee}</span>
+                        <span className="text-2xl font-bold">
+                          {course.rate}
+                        </span>
                         {course.discount && (
                           <span className="text-xs text-green-600 font-medium">
                             {course.discount}
