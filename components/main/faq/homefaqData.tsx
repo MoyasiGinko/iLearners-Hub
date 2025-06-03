@@ -8,121 +8,84 @@ const faqItems: FAQItem[] = [
     question: "What is iLearner’s Hub?",
     answer: (
       <p>
-        iLearner’s Hub is a private tuition centre in Aberdeen providing
-        specialised tuition in Maths and English for P4 to P7 students, and
-        Maths, English, and Physics for S3 to National 5 students.
+        We’re a friendly, in-person tutoring centre in Aberdeen supporting
+        learners from P3 to Advanced Highers. Whether it’s building confidence,
+        catching up, or getting ahead, we help young people make real academic
+        progress in a supportive environment.
       </p>
     ),
   },
   {
-    question: "Where is iLearner’s Hub located?",
+    question: "How do you know what my child needs help with?",
     answer: (
       <p>
-        We are conveniently located in the <strong>heart of Aberdeen</strong>.
-        Please visit our Contact Us page for the exact address and directions.
+        Before your child joins a group, we carry out a relaxed 20-minute
+        assessment — not to test them, but to understand where they’re at. This
+        helps us: ✔ Identify strengths and gaps ✔ Place your child in the right
+        group ✔ Equip the tutor to personalise their teaching It’s how we make
+        sure every learner starts strong and never feels lost.
       </p>
     ),
   },
   {
-    question: "What is the duration of each tuition session?",
+    question: "How do you make sure the teaching is high quality?",
     answer: (
       <p>
-        Each tuition session typically lasts <strong>1 to 1.5 hours</strong>.
-        Please check with us for specific timings.
+        All of our tutors are university students with strong academic results
+        and great communication skills. They’re trained to follow SQA learning
+        goals and supported by our team to ensure every session is focused,
+        clear, and genuinely helpful.
       </p>
     ),
   },
   {
-    question: "How can I contact iLearner’s Hub?",
+    question: "What is the Homework Club?",
     answer: (
       <p>
-        You can contact us via phone <strong>+44 7448 231096</strong>, email{" "}
-        <strong>info@ilearnershub.co.uk</strong>, or through our website’s
-        registration form. Visit our <strong>Book a Lesson</strong> page for
-        more details.
+        A quiet, focused study space that runs every weekday from 3:30 PM to
+        6:00 PM. Students work independently — on homework, revision or study —
+        with tutors available nearby for guidance and encouragement.
       </p>
     ),
   },
   {
-    question: "Do you offer one-on-one or group tuition?",
+    question: "Can my child bring any work to the Homework Club?",
     answer: (
       <p>
-        We offer both one-on-one and small group tuition sessions, depending on
-        the student’s preference and learning style.
+        Absolutely. Whether it’s homework, a school project, or preparing for a
+        test, this time is theirs — and our team is there when they need help.
       </p>
     ),
   },
   {
-    question:
-      "Do you provide support for students with dyslexia or other learning difficulties?",
+    question: "What subjects or courses do you offer?",
     answer: (
       <p>
-        Yes, we have experience in supporting students with a range of learning
-        difficulties and can provide tailored strategies to assist them.
+        We support students across the following levels: o Primary: Maths,
+        Science, English o Secondary: Maths & Science o National 5, Highers &
+        Advanced Highers: Physics, Chemistry, Biology, Maths
       </p>
     ),
   },
   {
-    question: "Who are your tutors?",
+    question: "How can I contact iLearners Hub?",
     answer: (
       <p>
-        Our tutors are highly qualified professionals with extensive experience
-        in teaching and subject-specific expertise.
+        You can get in touch with us in the way that suits you best: 📍 Visit
+        us: 1–3 Albyn Terrace, Aberdeen, AB10 1YP 📞 Call or WhatsApp: +44 7448
+        231096 ✉ Email: info@ilearnershub.co.uk 🌐 Or use our Contact Form:
+        <a href="/register">Click Here</a>"
       </p>
     ),
   },
   {
-    question: "Can I choose a specific tutor for my child?",
+    question: "What’s the student-to-tutor ratio at iLearners Hub?",
     answer: (
       <p>
-        Yes, we try to accommodate requests for specific tutors based on
-        availability and the student’s needs.
-      </p>
-    ),
-  },
-  {
-    question: "Do you provide learning materials?",
-    answer: (
-      <p>
-        Yes, we provide all necessary learning materials, including worksheets,
-        practice tests, and revision notes.
-      </p>
-    ),
-  },
-  {
-    question: "Is online tuition available?",
-    answer: (
-      <p>
-        Is online tuition available? No as we believe in face to face being the
-        most effective method.
-      </p>
-    ),
-  },
-  {
-    question: "Do you offer holiday tuition?",
-    answer: (
-      <p>
-        Yes, we provide holiday tuition programmes to help students stay on
-        track or get ahead during school breaks.
-      </p>
-    ),
-  },
-  {
-    question: "Can you accommodate students with special educational needs?",
-    answer: (
-      <p>
-        Yes, we have experience in supporting students with a variety of special
-        educational needs and can tailor our approach accordingly.
-      </p>
-    ),
-  },
-  {
-    question:
-      "Do you offer support for students aiming for university entrance exams?",
-    answer: (
-      <p>
-        Yes, we provide tailored preparation for university entrance exams,
-        including subject-specific support and exam strategies.
+        To ensure every learner gets the attention they need, we keep our groups
+        small — with a maximum of 5 to 7 students per tutor per session. This
+        allows for focused support, more interaction, and personalised guidance
+        throughout the session.
       </p>
     ),
   },
