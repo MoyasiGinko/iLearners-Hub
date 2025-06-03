@@ -17,6 +17,8 @@ export type Course = {
   action: string;
   overview?: string;
   perfectFor?: string;
+  billingCycle?: string;
+  subscriptionFee?: string;
 };
 
 export const courseCategories: { name: string; slug: string }[] = [
@@ -42,6 +44,8 @@ export const courses: Course[] = [
     subjects: ["All Subjects"],
     rate: "£15/hr",
     fee: "£15.00",
+    billingCycle: "Monthly",
+    subscriptionFee: "£250.00",
     action: "Join Now",
     overview: `Imagine a calm and encouraging space where your child can confidently complete their homework after school. At iLearner's Hub, our new Homework Club provides just that!
 

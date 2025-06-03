@@ -194,64 +194,121 @@ const CourseDetailsPage = () => {
               </div>
 
               {/* Pricing Card */}
-              <div className="rounded-3xl bg-gradient-to-br from-indigo-50 to-pink-50 border-4 border-indigo-100 p-6 h-fit shadow-lg">
-                <h3 className="text-2xl font-bold text-indigo-700 mb-6 text-center">
-                  Join This Adventure!
-                </h3>
-                <div className="space-y-4 mb-8">
-                  {/* <div className="flex justify-between items-center bg-white p-3 rounded-xl">
+              <div>
+                <div className="rounded-3xl bg-gradient-to-br from-indigo-50 to-pink-50 border-4 border-indigo-100 p-6 h-fit shadow-lg">
+                  <h3 className="text-2xl font-bold text-indigo-700 mb-6 text-center">
+                    Join This Adventure!
+                  </h3>
+                  <div className="space-y-4 mb-8">
+                    {/* <div className="flex justify-between items-center bg-white p-3 rounded-xl">
                     <span className="text-indigo-600 font-medium">Rate:</span>
                     <span className="font-bold text-indigo-700">
                       {course.rate}
                     </span>
                   </div> */}
 
-                  {course.duration && (
-                    <div className="flex justify-between items-center bg-white p-3 rounded-xl">
-                      <span className="text-indigo-600 font-medium">
-                        Duration:
-                      </span>
-                      <span className="font-bold text-indigo-700">
-                        {course.duration}
+                    {course.duration && (
+                      <div className="flex justify-between items-center bg-white p-3 rounded-xl">
+                        <span className="text-indigo-600 font-medium">
+                          Duration:
+                        </span>
+                        <span className="font-bold text-indigo-700">
+                          {course.duration}
+                        </span>
+                      </div>
+                    )}
+
+                    {course.sessions && (
+                      <div className="flex justify-between items-start bg-white p-3 rounded-xl">
+                        <span className="text-indigo-600 font-medium">
+                          Sessions:
+                        </span>
+                        <span className="font-bold flex-wrap text-right text-indigo-700">
+                          {course.sessions}
+                        </span>
+                      </div>
+                    )}
+
+                    <div className="flex justify-between items-center bg-indigo-100 p-4 rounded-xl">
+                      <span className="text-indigo-700 font-medium">Fee:</span>
+                      <span className="font-bold text-2xl text-indigo-700">
+                        {course.rate}
                       </span>
                     </div>
-                  )}
 
-                  {course.sessions && (
-                    <div className="flex justify-between items-start bg-white p-3 rounded-xl">
-                      <span className="text-indigo-600 font-medium">
-                        Sessions:
-                      </span>
-                      <span className="font-bold flex-wrap text-right text-indigo-700">
-                        {course.sessions}
-                      </span>
-                    </div>
-                  )}
-
-                  <div className="flex justify-between items-center bg-indigo-100 p-4 rounded-xl">
-                    <span className="text-indigo-700 font-medium">Fee:</span>
-                    <span className="font-bold text-2xl text-indigo-700">
-                      {course.rate}
-                    </span>
+                    {course.discount && (
+                      <div className="bg-yellow-100 text-indigo-700 p-4 rounded-xl text-center">
+                        <span className="font-bold">Special Offer:</span>{" "}
+                        {course.discount}
+                      </div>
+                    )}
                   </div>
 
-                  {course.discount && (
-                    <div className="bg-yellow-100 text-indigo-700 p-4 rounded-xl text-center">
-                      <span className="font-bold">Special Offer:</span>{" "}
-                      {course.discount}
-                    </div>
-                  )}
+                  <div className="pt-4">
+                    <Link
+                      href="/register"
+                      className="inline-block  hover:shadow-xl border-b-4 active:border-b-0 active:border-t-0 active:shadow-inner
+                    active:translate-y-1  duration-200 focus:outline-none w-full bg-indigo-500 hover:bg-indigo-600 border-indigo-700 text-white text-center font-bold py-4 px-6 rounded-full transition-all transform  shadow-md text-lg"
+                    >
+                      {course.action}
+                    </Link>
+                  </div>
                 </div>
 
-                <div className="pt-4">
-                  <Link
-                    href="/register"
-                    className="inline-block  hover:shadow-xl border-b-4 active:border-b-0 active:border-t-0 active:shadow-inner
-                    active:translate-y-1  duration-200 focus:outline-none w-full bg-indigo-500 hover:bg-indigo-600 border-indigo-700 text-white text-center font-bold py-4 px-6 rounded-full transition-all transform  shadow-md text-lg"
-                  >
-                    {course.action}
-                  </Link>
-                </div>
+                {/* Additional Info Card */}
+                {course.category === "Homework Club" && (
+                  <div className="rounded-3xl bg-gradient-to-br from-green-50 to-indigo-50 border-4 border-green-100 p-6 h-fit shadow-lg mt-8">
+                    <h3 className="text-2xl font-bold text-green-700 mb-6 text-center">
+                      Subscription Details
+                    </h3>
+                    <div className="space-y-4 mb-8">
+                      <div className="flex items-center bg-white p-3 rounded-xl">
+                        <span className="text-green-600 font-medium mr-2">
+                          💳
+                        </span>
+                        <span className="text-green-700">
+                          Subscription Fee:{" "}
+                          <span className="font-bold">
+                            {course.subscriptionFee
+                              ? course.subscriptionFee
+                              : "N/A"}
+                          </span>
+                        </span>
+                      </div>
+                      <div className="flex items-center bg-white p-3 rounded-xl">
+                        <span className="text-green-600 font-medium mr-2">
+                          📅
+                        </span>
+                        <span className="text-green-700">
+                          Billing Cycle:{" "}
+                          <span className="font-bold">
+                            {course.billingCycle
+                              ? course.billingCycle
+                              : "Monthly"}
+                          </span>
+                        </span>
+                      </div>
+                      <div className="flex items-center bg-white p-3 rounded-xl">
+                        <span className="text-green-600 font-medium mr-2">
+                          🔄
+                        </span>
+                        <span className="text-green-700">
+                          Weekday Access:{" "}
+                          <span className="font-bold">Unlimited</span>
+                        </span>
+                      </div>
+                    </div>
+                    <div className="pt-4 text-center">
+                      <Link
+                        href="/register"
+                        className="inline-block hover:shadow-xl border-b-4 active:border-b-0 active:border-t-0 active:shadow-inner
+                      active:translate-y-1 duration-200 focus:outline-none w-full bg-green-500 hover:bg-green-600 border-green-700 text-white text-center font-bold py-4 px-6 rounded-full transition-all transform shadow-md text-lg"
+                      >
+                        Subscribe Now
+                      </Link>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
