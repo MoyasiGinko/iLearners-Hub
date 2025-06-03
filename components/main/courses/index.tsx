@@ -88,28 +88,6 @@ const BackgroundElements = {
   ),
 };
 
-const useAnimatedCounter = (value: number, duration: number = 2000): number => {
-  const [count, setCount] = useState<number>(0);
-
-  useEffect(() => {
-    let start: number = 0;
-    const end: number = parseInt(value.toString());
-    const incrementTime: number = duration / end;
-
-    let timer: NodeJS.Timeout = setInterval(() => {
-      start += 1;
-      setCount(start);
-      if (start === end) clearInterval(timer);
-    }, incrementTime);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, [value, duration]);
-
-  return count;
-};
-
 // Color mapping for categories
 const categoryColors = {
   "All Courses": {
