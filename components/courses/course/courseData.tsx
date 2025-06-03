@@ -34,6 +34,32 @@ export const courseCategories: { name: string; slug: string }[] = [
 
 export const courses: Course[] = [
   {
+    id: 16,
+    short_title: "Homework Club",
+    long_title: "Unlock Your Potential with iLearner's Hub Homework Club!",
+    Image: "/images/courses/c16.jpg",
+    category: "Homework Club",
+    subjects: ["All Subjects"],
+    rate: "£15/hr",
+    fee: "£15.00",
+    action: "Join Now",
+    overview: `Imagine a calm and encouraging space where your child can confidently complete their homework after school. At iLearner's Hub, our new Homework Club provides just that!
+
+Designed for both primary and secondary students, our 2-hour sessions run on weekdays from 4 pm to 6 pm, offering a valuable opportunity to focus on school assignments with the support of our friendly tutors. Students are welcome to drop in from 3:30 pm onwards, giving them flexibility to settle in.
+
+We believe in creating more than just a homework session. Our Homework Club fosters a safe, educational, and exciting environment where students can learn from our experienced tutors, develop their understanding, and even collaborate with peers.`,
+    includes: [
+      "Structured after-school routine: Consistent time and place for homework completion",
+      "Personalized homework & assignment help: Tutors provide guidance and answer questions",
+      "Boosted understanding & grades: Personalized help for challenging assignments",
+      "Development in a learning-focused space: Minimizes distractions, maximizes concentration",
+      "Caring & supportive tutors: Experienced individuals dedicated to student success",
+      "Increased confidence & independence: Skills and support for self-reliant learning",
+    ],
+    perfectFor:
+      "Primary and secondary students who need a quiet, supportive place to complete homework with expert help on hand.",
+  },
+  {
     id: 1,
     short_title: "P3 to P7",
     long_title: "P3 to P7: (All Year Round)",
@@ -406,31 +432,5 @@ complex questions, and share techniques that set A-band candidates apart.`,
     ],
     perfectFor:
       "Students aiming for top-band grades, applying to competitive university courses, or needing tailored guidance to excel under pressure. ",
-  },
-  {
-    id: 16,
-    short_title: "Homework Club",
-    long_title: "Unlock Your Potential with iLearner's Hub Homework Club!",
-    Image: "/images/courses/c16.jpg",
-    category: "Homework Club",
-    subjects: ["All Subjects"],
-    rate: "£15/hr",
-    fee: "£15.00",
-    action: "Join Now",
-    overview: `Imagine a calm and encouraging space where your child can confidently complete their homework after school. At iLearner's Hub, our new Homework Club provides just that!
-
-Designed for both primary and secondary students, our 2-hour sessions run on weekdays from 4 pm to 6 pm, offering a valuable opportunity to focus on school assignments with the support of our friendly tutors. Students are welcome to drop in from 3:30 pm onwards, giving them flexibility to settle in.
-
-We believe in creating more than just a homework session. Our Homework Club fosters a safe, educational, and exciting environment where students can learn from our experienced tutors, develop their understanding, and even collaborate with peers.`,
-    includes: [
-      "Structured after-school routine: Consistent time and place for homework completion",
-      "Personalized homework & assignment help: Tutors provide guidance and answer questions",
-      "Boosted understanding & grades: Personalized help for challenging assignments",
-      "Development in a learning-focused space: Minimizes distractions, maximizes concentration",
-      "Caring & supportive tutors: Experienced individuals dedicated to student success",
-      "Increased confidence & independence: Skills and support for self-reliant learning",
-    ],
-    perfectFor:
-      "Primary and secondary students who need a quiet, supportive place to complete homework with expert help on hand.",
   },
 ];
