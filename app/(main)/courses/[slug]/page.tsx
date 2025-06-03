@@ -1,108 +1,76 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useMemo, useTransition, Suspense } from "react";
 import { courseCategories } from "@/components/courses/course/courseData";
 import { motion } from "framer-motion";
-import { usePathname, useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Hero from "@/components/courses/hero";
 import CTA from "@/components/courses/cta";
 import CoursePage from "@/components/courses/course";
 
+// Create a simple loading component
+const CoursesLoadingSkeleton = () => (
+  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+    {Array.from({ length: 6 }).map((_, i) => (
+      <div key={i} className="rounded-2xl bg-gray-100 animate-pulse h-80" />
+    ))}
+  </div>
+);
+
 export default function Page() {
-  const pathname = usePathname();
+  const params = useParams();
   const router = useRouter();
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [displayedCategory, setDisplayedCategory] = useState<string | null>(
-    null
-  ); // For UI highlighting
-  const isUserNavigation = useRef(false);
-  const pendingCategoryRef = useRef<string | null>(null);
+  const [isPending, startTransition] = useTransition();
 
-  // Initialize state based on URL on mount
-  useEffect(() => {
-    const pathSegments = pathname.split("/").filter(Boolean);
+  // Extract current category from URL params - single source of truth
+  const currentSlug = (params?.slug as string) || "all-courses";
 
-    // Check if we're on a category page (/courses/[slug])
-    if (pathSegments.length >= 2 && pathSegments[0] === "courses") {
-      const categorySlug = pathSegments[1];
+  // Memoize category mappings once
+  const { categoryName, categoryToSlugMap } = useMemo(() => {
+    const slugToName = new Map();
+    const nameToSlug = new Map();
 
-      // Handle "all-courses" slug for "All Courses"
-      if (categorySlug === "all-courses") {
-        setSelectedCategory("All Courses");
-        setDisplayedCategory("All Courses");
-        return;
-      }
+    slugToName.set("all-courses", "All Courses");
+    nameToSlug.set("All Courses", "all-courses");
 
-      // Find matching category by slug
-      const matchingCategory = courseCategories.find(
-        (category) => category.slug === categorySlug
-      );
+    courseCategories.forEach((cat) => {
+      slugToName.set(cat.slug, cat.name);
+      nameToSlug.set(cat.name, cat.slug);
+    });
 
-      if (matchingCategory) {
-        setSelectedCategory(matchingCategory.name);
-        setDisplayedCategory(matchingCategory.name);
-      } else {
-        // If no matching category found, redirect to all courses
-        router.replace("/courses/all-courses");
-      }
-    } else if (pathSegments.length === 1 && pathSegments[0] === "courses") {
-      // Base courses page - redirect to all-courses
-      router.replace("/courses/all-courses");
-    }
-  }, [pathname, router]);
+    return {
+      categoryName: slugToName.get(currentSlug) || "All Courses",
+      categoryToSlugMap: nameToSlug,
+    };
+  }, [currentSlug]);
 
-  // Function to handle category selection with URL navigation
+  // Simple category handler with optimistic UI updates
   const handleCategorySelect = (categoryName: string) => {
-    // Don't allow navigation if we're still loading
-    if (selectedCategory === null) return;
+    const targetSlug = categoryToSlugMap.get(categoryName) || "all-courses";
 
-    // Prevent any interference from useEffect
-    isUserNavigation.current = true;
+    if (currentSlug === targetSlug) return; // Already on this category
 
-    // Store the pending category to avoid conflicts
-    pendingCategoryRef.current = categoryName;
+    // Use React's useTransition for smooth updates
+    startTransition(() => {
+      router.push(`/courses/${targetSlug}`, { scroll: false });
+    });
 
-    // Update data state immediately for instant course filtering
-    setSelectedCategory(categoryName);
-    // Don't update displayedCategory yet - wait for render completion
-
-    // Find the slug for the selected category
-    const categorySlug =
-      categoryName === "All Courses"
-        ? "all-courses"
-        : courseCategories.find((cat) => cat.name === categoryName)?.slug ||
-          "all-courses";
-
-    // Navigate to the new URL with shallow routing to avoid full page reload
-    router.push(`/courses/${categorySlug}`, { scroll: false });
-
-    // Reset navigation flag after navigation is complete
-    setTimeout(() => {
-      isUserNavigation.current = false;
-      pendingCategoryRef.current = null;
-    }, 100);
-
-    // Smooth scroll to courses content after state update
-    setTimeout(() => {
+    // Smooth scroll without blocking
+    requestAnimationFrame(() => {
       const coursesContent = document.getElementById("courses-content");
       if (coursesContent) {
         const elementPosition = coursesContent.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.scrollY - 100;
-
         window.scrollTo({
           top: offsetPosition,
           behavior: "smooth",
         });
       }
-    }, 50);
+    });
   };
 
-  // Callback when CoursePage rendering is complete
-  const handleRenderComplete = () => {
-    // Update the displayed category for UI highlighting only after rendering is done
-    if (selectedCategory !== null) {
-      setDisplayedCategory(selectedCategory);
-    }
-  };
+  console.log(
+    `🏠 Main component render - Category: ${categoryName}, isPending: ${isPending}`
+  );
 
   return (
     <>
@@ -120,7 +88,7 @@ export default function Page() {
           </div>
 
           <div className="flex flex-col lg:flex-row gap-10">
-            {/* Sidebar with categories - Now truly sticky */}
+            {/* Sidebar with categories */}
             <div className="lg:w-1/4">
               <div className="sticky top-24 rounded-3xl bg-white p-6 shadow-xl hover:shadow-2xl transition-all duration-300 backdrop-blur-sm bg-opacity-80">
                 <h3 className="mb-4 text-xl font-bold text-indigo-700">
@@ -136,12 +104,12 @@ export default function Page() {
                       <button
                         className={`px-8 w-full inline-block py-3 rounded-full font-medium shadow-sm hover:shadow-md border-b-4
                         active:border-b-0 active:border-t-0 active:shadow-inner active:translate-y-1 transform transition-all duration-100 focus:outline-none ${
-                          displayedCategory === category.name
+                          categoryName === category.name
                             ? "bg-indigo-500 border-indigo-600 text-white shadow-sm"
-                            : "bg-indigo-100 border-indigo-300 text-indigo-700 "
-                        }`}
+                            : "bg-indigo-100 border-indigo-300 text-indigo-700"
+                        } ${isPending ? "opacity-70 pointer-events-none" : ""}`}
                         onClick={() => handleCategorySelect(category.name)}
-                        disabled={selectedCategory === null} // Disable during loading
+                        disabled={isPending}
                       >
                         {category.name}
                       </button>
@@ -151,9 +119,17 @@ export default function Page() {
               </div>
             </div>
 
-            {/* Courses grid - Dynamic content that updates smoothly */}
+            {/* Courses grid with Suspense */}
             <div id="courses-content" className="lg:w-3/4">
-              <CoursePage selectedCategory={selectedCategory} />
+              <Suspense fallback={<CoursesLoadingSkeleton />}>
+                <div
+                  className={`transition-opacity duration-200 ${
+                    isPending ? "opacity-70" : "opacity-100"
+                  }`}
+                >
+                  <CoursePage selectedCategory={categoryName} />
+                </div>
+              </Suspense>
             </div>
           </div>
         </div>
