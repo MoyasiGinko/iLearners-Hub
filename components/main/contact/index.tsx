@@ -217,8 +217,8 @@ const ContactSection: React.FC = () => {
                   Sign up for a Free Trial Lesson
                 </h2>
                 <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6">
-                  Quisque commodo, magna nec accu mani euismod tellus mi ornare
-                  enim, quis congue elit.
+                  Join iLearnersHub and explore a wide range of engaging courses
+                  for all levels and interests!
                 </p>
                 <div className="flex space-x-2">
                   {["🎨", "🔍", "🌟", "🧩", "🎯"].map((emoji, i) => (
