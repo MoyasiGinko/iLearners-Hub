@@ -16,14 +16,14 @@ const OfferCard: React.FC<{ card: CardDataType }> = ({ card }) => (
             className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
           />
           {/* Fun Badge */}
-          <div className="absolute top-2 right-2 md:top-4 md:right-4 bg-red-400 text-white px-2 py-1 md:px-4 md:py-3 rounded-full shadow-lg font-bold transform -rotate-12 border-2 md:border-4 border-white">
+          {/* <div className="absolute top-2 right-2 md:top-4 md:right-4 bg-red-400 text-white px-2 py-1 md:px-4 md:py-3 rounded-full shadow-lg font-bold transform -rotate-12 border-2 md:border-4 border-white">
             <div className="text-center">
               <div className="text-lg md:text-2xl font-extrabold">
                 {card.discount}%
               </div>
               <div className="text-xs md:text-sm -mt-1">OFF!</div>
             </div>
-          </div>
+          </div> */}
 
           {/* Category badge */}
           <div className="absolute top-2 left-2 md:top-3 md:left-3">
@@ -41,14 +41,14 @@ const OfferCard: React.FC<{ card: CardDataType }> = ({ card }) => (
           </h1>
 
           {/* Description */}
-          <div className="bg-white/90 rounded-2xl p-3 md:p-5 shadow-md mb-3 md:mb-5 border-2 md:border-4 border-blue-300 border-dashed transform -rotate-1">
+          <div className="bg-white/90 rounded-2xl p-3 md:p-5 shadow-md mb-3 md:mb-5 border-2 md:border-4 border-blue-300 border-dashed transform ">
             <p className="text-gray-700 text-sm md:text-base leading-relaxed">
               {card.description}
             </p>
           </div>
 
           {/* Price Section */}
-          <div className="bg-green-100 rounded-2xl p-3 md:p-5 mb-3 md:mb-5 border-2 md:border-4 border-green-300 transform rotate-1 shadow-md">
+          {/* <div className="bg-green-100 rounded-2xl p-3 md:p-5 mb-3 md:mb-5 border-2 md:border-4 border-green-300 transform rotate-1 shadow-md">
             <div className="flex flex-wrap items-center justify-start gap-2 md:gap-4">
               <div>
                 <p className="text-gray-600 line-through text-sm md:text-lg">
@@ -64,12 +64,12 @@ const OfferCard: React.FC<{ card: CardDataType }> = ({ card }) => (
                 DISCOUNT {card.discount}% OFF
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Action Button */}
           <Link
             href={card.actionButton.url || "#"}
-            className="inline-block mb-3 md:mb-6"
+            className="inline-block mb-1 md:mb-2"
           >
             <button
               className="bg-gradient-to-r from-purple-600 to-pink-500 text-white font-bold py-2 px-4 md:py-3 md:px-6 rounded-full transition-all duration-300
@@ -83,7 +83,7 @@ const OfferCard: React.FC<{ card: CardDataType }> = ({ card }) => (
           </Link>
 
           {/* Footer Info */}
-          <div className="flex flex-col sm:flex-row justify-between text-xs md:text-md text-yellow-200 font-medium gap-2">
+          {/* <div className="flex flex-col sm:flex-row justify-between text-xs md:text-md text-yellow-200 font-medium gap-2">
             <div className="flex items-center">
               <span className="text-lg md:text-xl mr-1 md:mr-2">🎉</span> Valid
               until: {card.validUntil}
@@ -92,7 +92,7 @@ const OfferCard: React.FC<{ card: CardDataType }> = ({ card }) => (
               <span className="text-lg md:text-xl mr-1 md:mr-2">📞</span>{" "}
               {card.phone}
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

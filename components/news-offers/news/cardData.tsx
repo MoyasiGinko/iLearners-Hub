@@ -24,54 +24,53 @@ export interface CardDataType {
 }
 
 export const cardData: CardDataType[] = [
-  // Offer card
+  // Offer card: Homework Club
   {
-    id: "7",
-    logo: "🎒",
-    title: "Summer Learning Package",
+    id: "1",
+    logo: "📚",
+    title: "Homework Club – Extra Support for Your Child",
     description:
-      "Get our comprehensive summer learning package including online courses, study materials, and 1-on-1 tutoring sessions at a special discounted rate!",
-    originalPrice: "£199.99",
-    salePrice: "£129.99",
-    discount: "35",
+      "Looking for a calm space where your child can focus and get schoolwork done—with expert support just a call away? Our Homework Club helps learners of any level complete homework, revise, and build confidence. Flexible attendance and affordable plans mean it fits right into your schedule.\n\nDon’t forget to subscribe to our News & Offers page to stay updated!",
     image:
       "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop",
-    validUntil: "August 31, 2024",
-    phone: "+44 20 1234 5678",
-    actionButton: { text: "Claim This Offer", url: "/register" },
+    actionButton: {
+      text: "Find out more and sign up",
+      url: "/courses/homework-club/16",
+    },
     category: "offers",
   },
 
-  // Event card
+  // Event card: Eid on the Terrace
   {
-    id: "1",
-    title: "Annual Education Summit",
+    id: "2",
+    logo: "🎉",
+    title: "Visit Us at Eid on the Terrace – Sunday 22nd June!",
     description:
-      "Join leading educators and students for our biggest event of the year in iLearnersHub. Featuring workshops on innovative learning techniques, career guidance, and networking opportunities with top UK universities.",
+      "We’ll be at “Eid on the Terrace,” a lively community celebration in the centre of Aberdeen!\n\nCome along and visit the iLearners Hub stall – we’d love to see you there!",
     image:
       "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop",
     actionButton: {
-      text: "Register Now",
-      url: "/register",
+      text: "Event Details",
+      url: "/register", // Replace with actual event link
     },
     category: "events",
-    date: "October 12, 2024",
-    location: "iLearnersHub Campus, London",
-    capacity: "150 attendees",
+    date: "Sunday 22nd June 2025, 11:00 AM – 5:00 PM",
+    location: "Union Terrace Gardens, Aberdeen AB10 1NJ",
   },
+
+  // News card: All Courses Starting August
   {
-    id: "5",
-    title: "New GCSE Preparation Courses",
-    subtitle: "CURRICULUM UPDATE",
+    id: "3",
+    title: "ALL Courses Starting This August",
+    subtitle: "ENROLMENT OPEN",
     description:
-      "iLearnersHub UK is proud to announce our newly updated GCSE preparation courses aligned with the latest curriculum changes. Our expert tutors have developed comprehensive study materials to ensure student success.",
+      "Whether you’re aiming to strengthen skills or take on new challenges, our courses across Primary and Secondary levels, including National 5, Highers, and Advanced Highers, have something for everyone. Don’t miss your chance to enrol and boost your confidence this school year.\n\nKeep up with all the latest — subscribe to our News & Offers page!",
     image:
       "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=600&fit=crop",
     category: "news",
     actionButton: {
-      text: "Learn More",
+      text: "Explore courses and enroll",
       url: "/courses/all-courses",
     },
-    date: "July 22, 2024",
   },
 ];

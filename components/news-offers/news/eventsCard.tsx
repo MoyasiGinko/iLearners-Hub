@@ -122,7 +122,7 @@ const EventCard: React.FC<{ card: CardDataType }> = ({ card }) => (
 
           <div className="text-white">
             <h2 className="text-xl sm:text-2xl md:text-3xl font-bold drop-shadow-lg">
-              IT'S TIME TO LEARN
+              JOIN US NOW
             </h2>
           </div>
         </div>
