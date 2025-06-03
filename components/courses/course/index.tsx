@@ -56,7 +56,7 @@ const CoursePage: React.FC<CoursePageProps> = memo(({ selectedCategory }) => {
                 alt={course.short_title}
                 className="object-cover w-full h-full"
               />
-              <div className="absolute top-0 right-0 bg-yellow-400 text-indigo-700 px-3 py-1 m-3 rounded-full text-sm font-bold">
+              <div className="absolute top-0 right-0 bg-indigo-100 text-indigo-700 px-3 py-1 m-3 rounded-full text-sm font-bold">
                 {course.category}
               </div>
             </div>
