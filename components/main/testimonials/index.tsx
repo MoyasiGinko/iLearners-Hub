@@ -384,7 +384,7 @@ const Testimonials: React.FC = () => {
               </div>
             </div>
 
-            <Link href="/courses">
+            <Link href="/courses/all-course">
               <motion.span
                 className="inline-block bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold px-8 py-3 rounded-full uppercase tracking-wide
                 shadow-[0_6px_0_rgb(79,70,229)]

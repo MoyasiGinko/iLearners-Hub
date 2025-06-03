@@ -204,7 +204,7 @@ const Header = () => {
 
   // Navigation items
   const navItems = [
-    { title: "COURSES", href: "/courses" },
+    { title: "COURSES", href: "/courses/all-course" },
     { title: "NEWS & OFFERS", href: "/news-offers" },
     { title: "GALLERY", href: "/gallery" },
     { title: "ABOUT", href: "/about" },

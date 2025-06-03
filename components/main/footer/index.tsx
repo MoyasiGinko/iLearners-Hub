@@ -10,7 +10,7 @@ const Footer = () => {
   const router = useRouter();
 
   const quickLinks = [
-    { label: "Courses", href: "/courses" },
+    { label: "Courses", href: "/courses/all-course" },
     { label: "News & Offers", href: "/news-offers" },
     { label: "Gallery", href: "/gallery" },
     { label: "About", href: "/about" },
