@@ -39,7 +39,7 @@ const AboutCTA: React.FC = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="flex flex-col sm:flex-row justify-center items-center gap-4"
         >
-          <Link href="/courses">
+          <Link href="/courses/all-courses">
             <motion.span
               whileHover={{ scale: 1.05, y: -5 }}
               whileTap={{

@@ -526,7 +526,7 @@ const MiniCourseTablet = () => {
         {selectedCategory === "All Courses" && courses.length > 6 ? (
           <div className="text-center">
             <a
-              href="/courses"
+              href="/courses/all-courses"
               className="px-8 inline-block py-3 rounded-full
       bg-gradient-to-r from-teal-400 to-blue-500 text-white font-medium
       shadow-lg hover:shadow-xl
