@@ -61,7 +61,7 @@ const CourseDetailsPage = () => {
             Sorry, we couldn't find the learning adventure you're looking for.
           </p>{" "}
           <button
-            onClick={() => router.push("/courses/all-course")}
+            onClick={() => router.push("/courses/all-courses")}
             className="bg-yellow-400 hover:bg-yellow-500 text-indigo-700 font-medium py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-md"
           >
             Explore Other Courses
@@ -77,7 +77,7 @@ const CourseDetailsPage = () => {
         <div className="mb-8">
           {" "}
           <button
-            onClick={() => router.push("/courses/all-course")}
+            onClick={() => router.push("/courses/all-courses")}
             className="flex items-center cursor-pointer text-indigo-600 hover:text-indigo-800 transition-colors font-medium"
           >
             <svg
@@ -306,7 +306,7 @@ const CourseDetailsPage = () => {
                         href={`/courses/${
                           courseCategories.find(
                             (cat) => cat.name === similarCourse.category
-                          )?.slug || "all-course"
+                          )?.slug || "all-courses"
                         }/${similarCourse.id}`}
                       >
                         <span className="inline-block text-lg bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-bold px-4 py-2 rounded-full transition-all">
@@ -331,7 +331,7 @@ const CourseDetailsPage = () => {
               No other courses found in the {course.category} category right
               now. Let's explore different learning paths!
             </p>
-            <Link href="/courses/all-course">
+            <Link href="/courses/all-courses">
               <span className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-md">
                 See All Courses
               </span>

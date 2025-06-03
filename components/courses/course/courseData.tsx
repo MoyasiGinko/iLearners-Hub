@@ -20,7 +20,7 @@ export type Course = {
 };
 
 export const courseCategories: { name: string; slug: string }[] = [
-  { name: "All Courses", slug: "all-course" },
+  { name: "All Courses", slug: "all-courses" },
   { name: "Primary", slug: "primary" },
   { name: "Secondary", slug: "secondary" },
   { name: "National 5", slug: "national-5" },
@@ -414,8 +414,8 @@ complex questions, and share techniques that set A-band candidates apart.`,
     Image: "/images/courses/c16.jpg",
     category: "Homework Club",
     subjects: ["All Subjects"],
-    rate: "£10/hr",
-    fee: "£10.00",
+    rate: "£15/hr",
+    fee: "£15.00",
     action: "Join Now",
     overview: `Imagine a calm and encouraging space where your child can confidently complete their homework after school. At iLearner's Hub, our new Homework Club provides just that!
 

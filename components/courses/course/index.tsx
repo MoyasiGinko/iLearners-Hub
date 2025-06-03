@@ -46,7 +46,7 @@ const CoursePage: React.FC<CoursePageProps> = memo(({ selectedCategory }) => {
           <Link
             href={`/courses/${
               courseCategories.find((cat) => cat.name === course.category)
-                ?.slug || "all-course"
+                ?.slug || "all-courses"
             }/${course.id}`}
             className="flex flex-col h-full"
           >

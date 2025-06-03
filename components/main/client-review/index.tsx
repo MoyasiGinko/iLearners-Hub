@@ -280,7 +280,7 @@ const ClientReview = () => {
               className="text-pink-500 font-bold mb-4 text-xl"
               style={{ textShadow: "0 1px 2px rgba(0,0,0,0.1)" }}
             >
-              WHAT KIDS ARE SAYING
+              WHAT PARENTS & KIDS ARE SAYING
             </h3>
             <h2
               className="text-3xl md:text-4xl lg:text-5xl font-bold text-blue-600 leading-tight mb-6"

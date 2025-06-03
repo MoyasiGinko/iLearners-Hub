@@ -6,7 +6,7 @@ export default function CoursesPage() {
   const router = useRouter();
 
   useEffect(() => {
-    router.push("/courses/all-course");
+    router.push("/courses/all-courses");
   }, [router]);
 
   return (

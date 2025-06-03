@@ -70,7 +70,7 @@ export const cardData: CardDataType[] = [
     category: "news",
     actionButton: {
       text: "Learn More",
-      url: "/courses/all-course",
+      url: "/courses/all-courses",
     },
     date: "July 22, 2024",
   },

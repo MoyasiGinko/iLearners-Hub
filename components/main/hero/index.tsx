@@ -386,7 +386,7 @@ const Hero = () => {
 
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <a
-              href="/courses/all-course"
+              href="/courses/all-courses"
               className="w-full sm:w-auto relative bg-gradient-to-br from-orange-400 to-red-500 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-[0_8px_0_rgb(217,119,6)] hover:shadow-[0_4px_0px_rgb(217,119,6)] ease-in-out hover:translate-y-1 active:translate-y-2 active:shadow-none text-lg overflow-hidden"
             >
               <span className="relative z-10">Explore Courses</span>

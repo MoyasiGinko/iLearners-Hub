@@ -25,8 +25,8 @@ export default function Page() {
     if (pathSegments.length >= 2 && pathSegments[0] === "courses") {
       const categorySlug = pathSegments[1];
 
-      // Handle "all-course" slug for "All Courses"
-      if (categorySlug === "all-course") {
+      // Handle "all-courses" slug for "All Courses"
+      if (categorySlug === "all-courses") {
         setSelectedCategory("All Courses");
         setDisplayedCategory("All Courses");
         return;
@@ -42,11 +42,11 @@ export default function Page() {
         setDisplayedCategory(matchingCategory.name);
       } else {
         // If no matching category found, redirect to all courses
-        router.replace("/courses/all-course");
+        router.replace("/courses/all-courses");
       }
     } else if (pathSegments.length === 1 && pathSegments[0] === "courses") {
-      // Base courses page - redirect to all-course
-      router.replace("/courses/all-course");
+      // Base courses page - redirect to all-courses
+      router.replace("/courses/all-courses");
     }
   }, [pathname, router]);
 
@@ -68,9 +68,9 @@ export default function Page() {
     // Find the slug for the selected category
     const categorySlug =
       categoryName === "All Courses"
-        ? "all-course"
+        ? "all-courses"
         : courseCategories.find((cat) => cat.name === categoryName)?.slug ||
-          "all-course";
+          "all-courses";
 
     // Navigate to the new URL with shallow routing to avoid full page reload
     router.push(`/courses/${categorySlug}`, { scroll: false });
