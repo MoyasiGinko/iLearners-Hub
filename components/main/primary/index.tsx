@@ -289,9 +289,8 @@ const PrimarySection = () => {
               </p>
 
               <p className="text-lg leading-relaxed mb-3 p-3 bg-white/50 rounded-xl border-l-4 border-yellow-300 shadow-sm transform hover:translate-x-1 transition-transform duration-300">
-                Join us weekdays from 4 pm to 6 pm for dedicated homework time
-                with the guidance of our supportive tutors. Students can drop in
-                any time after 3:30 pm.
+                Join us weekdays from 3:30 pm to 6 pm for dedicated homework
+                time with the guidance of our supportive tutors.
               </p>
 
               <p className="text-lg leading-relaxed p-3 bg-white/50 rounded-xl border-l-4 border-blue-300 shadow-sm transform hover:translate-x-1 transition-transform duration-300">
@@ -368,7 +367,7 @@ const PrimarySection = () => {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/courses">
+              <Link href="/courses/all-courses">
                 <div className="perspective-500 my-3">
                   <span
                     className="inline-block relative bg-gradient-to-br from-purple-600 to-purple-500 text-white font-bold px-7 py-3 rounded-full text-lg

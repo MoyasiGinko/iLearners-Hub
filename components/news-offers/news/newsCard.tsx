@@ -60,18 +60,21 @@ const NewsCard: React.FC<{ card: CardDataType }> = ({ card }) => {
             </div>
 
             {/* Date */}
-            <div className="flex items-center gap-1 sm:gap-2 mb-3 sm:mb-5 text-blue-100 font-medium text-sm sm:text-base">
+            {/* <div className="flex items-center gap-1 sm:gap-2 mb-3 sm:mb-5 text-blue-100 font-medium text-sm sm:text-base">
               <Clock className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>{card.date}</span>
-            </div>
+            </div> */}
 
             {/* Action Button */}
-            <Link href={card.actionButton.url || "#"} className="inline-block">
+            <Link
+              href={card.actionButton.url || "#"}
+              className="inline-block mb-1 md:mb-2"
+            >
               <button
-                className="bg-gradient-to-r from-blue-500 to-sky-400 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 text-sm sm:text-base rounded-full transition-all duration-300
+                className="bg-gradient-to-r from-blue-600 to-sky-500 text-white font-bold py-2 px-4 md:py-3 md:px-6 rounded-full transition-all duration-300
               shadow-[0_3px_0_rgb(37,99,235)] sm:shadow-[0_5px_0_rgb(37,99,235)] hover:shadow-[0_2px_0_rgb(37,99,235)]
               hover:translate-y-1 active:translate-y-2 active:shadow-none
-              border-2 border-blue-600/50 flex items-center gap-1 sm:gap-2"
+              border-2 border-blue-500 flex items-center gap-1 md:gap-2 text-sm md:text-base"
               >
                 {card.actionButton.text}
                 <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />

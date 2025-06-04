@@ -7,123 +7,184 @@ const faqItems: FAQItem[] = [
   {
     question: "What is iLearner’s Hub?",
     answer: (
-      <p>
-        iLearner’s Hub is a private tuition centre in Aberdeen providing
-        specialised tuition in Maths and English for P4 to P7 students, and
-        Maths, English, and Physics for S3 to National 5 students.
-      </p>
+      <div className="bg-yellow-100/80 rounded-2xl shadow-lg p-5 border-4 border-yellow-300">
+        <h3 className="text-blue-800 text-lg font-semibold mb-2">About Us</h3>
+        <p className="text-blue-800">
+          We’re a friendly, in-person tutoring centre in Aberdeen supporting
+          learners from P3 to Advanced Highers.
+          <br />
+          Whether it’s building confidence, catching up, or getting ahead, we
+          help young people make real academic progress in a supportive
+          environment.
+        </p>
+      </div>
     ),
   },
   {
-    question: "Where is iLearner’s Hub located?",
+    question: "How do you know what my child needs help with?",
     answer: (
-      <p>
-        We are conveniently located in the <strong>heart of Aberdeen</strong>.
-        Please visit our Contact Us page for the exact address and directions.
-      </p>
+      <div className="bg-pink-100/80 rounded-2xl shadow-lg p-5 border-4 border-pink-300">
+        <h3 className="text-purple-800 text-lg font-semibold mb-2">
+          Personalised Assessment
+        </h3>
+        <p className="text-purple-800 mb-2">
+          Before your child joins a group, we carry out a relaxed 20-minute
+          assessment — not to test them, but to understand where they’re at.
+          This helps us:
+        </p>
+        <ul className="list-disc list-inside text-purple-700 space-y-1 pl-6">
+          <li>🌟 Identify strengths and gaps</li>
+          <li>👫 Place your child in the right group</li>
+          <li>🧑‍🏫 Equip the tutor to personalise their teaching</li>
+        </ul>
+        <p className="text-purple-800 mt-2">
+          It’s how we make sure every learner starts strong and never feels
+          lost.
+        </p>
+      </div>
     ),
   },
   {
-    question: "What is the duration of each tuition session?",
+    question: "How do you make sure the teaching is high quality?",
     answer: (
-      <p>
-        Each tuition session typically lasts <strong>1 to 1.5 hours</strong>.
-        Please check with us for specific timings.
-      </p>
+      <div className="bg-green-100/80 rounded-2xl shadow-lg p-5 border-4 border-green-300">
+        <h3 className="text-green-900 text-lg font-semibold mb-2">
+          Quality Teaching
+        </h3>
+        <p className="text-green-900">
+          All of our tutors are university students with strong academic results
+          and great communication skills.
+          <br />
+          They’re trained to follow SQA learning goals and supported by our team
+          to ensure every session is focused, clear, and genuinely helpful.
+        </p>
+      </div>
     ),
   },
   {
-    question: "How can I contact iLearner’s Hub?",
+    question: "What is the Homework Club?",
     answer: (
-      <p>
-        You can contact us via phone <strong>+44 7448 231096</strong>, email{" "}
-        <strong>info@ilearnershub.co.uk</strong>, or through our website’s
-        registration form. Visit our <strong>Book a Lesson</strong> page for
-        more details.
-      </p>
+      <div className="bg-blue-100/80 rounded-2xl shadow-lg p-5 border-4 border-blue-300">
+        <h3 className="text-blue-900 text-lg font-bold mb-2 flex items-center gap-2">
+          <span className="text-2xl">📚</span> Homework Club
+        </h3>
+        <p className="text-blue-900 mb-2">
+          A quiet, focused study space open every weekday from{" "}
+          <strong>3:30 PM to 6:00 PM</strong>.<br />
+          Students can work independently on homework, revision, or study.
+        </p>
+        <ul className="list-disc list-inside text-blue-800 space-y-1 pl-6">
+          <li>Supportive tutors always nearby for guidance</li>
+          <li>Encouraging, distraction-free environment</li>
+          <li>Perfect for building good study habits</li>
+        </ul>
+      </div>
     ),
   },
   {
-    question: "Do you offer one-on-one or group tuition?",
+    question: "Can my child bring any work to the Homework Club?",
     answer: (
-      <p>
-        We offer both one-on-one and small group tuition sessions, depending on
-        the student’s preference and learning style.
-      </p>
+      <div className="bg-orange-100/80 rounded-2xl shadow-lg p-5 border-4 border-orange-300">
+        <h3 className="text-orange-900 text-lg font-semibold mb-2">
+          Bring Any Work
+        </h3>
+        <p className="text-orange-900">
+          Absolutely. Whether it’s homework, a school project, or preparing for
+          a test, this time is theirs — and our team is there when they need
+          help.
+        </p>
+      </div>
     ),
   },
   {
-    question:
-      "Do you provide support for students with dyslexia or other learning difficulties?",
+    question: "What subjects or courses do you offer?",
     answer: (
-      <p>
-        Yes, we have experience in supporting students with a range of learning
-        difficulties and can provide tailored strategies to assist them.
-      </p>
+      <div className="bg-purple-100/80 rounded-2xl shadow-lg p-5 border-4 border-purple-300">
+        <h3 className="text-purple-900 text-lg font-semibold mb-2">
+          Subjects We Offer
+        </h3>
+        <ul className="list-disc list-inside text-purple-800 space-y-1 pl-6">
+          <li>
+            <strong>Primary:</strong> Maths, Science, English
+          </li>
+          <li>
+            <strong>Secondary:</strong> Maths & Science
+          </li>
+          <li>
+            <strong>National 5, Highers & Advanced Highers:</strong> Physics,
+            Chemistry, Biology, Maths
+          </li>
+        </ul>
+      </div>
     ),
   },
   {
-    question: "Who are your tutors?",
+    question: "How can I contact iLearners Hub?",
     answer: (
-      <p>
-        Our tutors are highly qualified professionals with extensive experience
-        in teaching and subject-specific expertise.
-      </p>
+      <div className="bg-teal-100/80 rounded-2xl shadow-lg p-5 border-4 border-teal-300">
+        <h3 className="font-bold text-teal-900 mb-3">Contact Us</h3>
+        <ul className="space-y-2">
+          <li className="flex items-start gap-3">
+            <span className="text-2xl">📍</span>
+            <div>
+              <strong>Visit us:</strong>
+              <br />
+              <span className="text-teal-800">
+                1–3 Albyn Terrace, Aberdeen, AB10 1YP
+              </span>
+            </div>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="text-2xl">📞</span>
+            <div>
+              <strong>Call or WhatsApp:</strong>
+              <br />
+              <span className="text-teal-800">+44 7448 231096</span>
+            </div>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="text-2xl">✉️</span>
+            <div>
+              <strong>Email:</strong>
+              <br />
+              <span className="text-teal-800">info@ilearnershub.co.uk</span>
+            </div>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="text-2xl">🌐</span>
+            <div>
+              <strong>Contact Form:</strong>
+              <br />
+              <a
+                href="/register"
+                className="text-blue-600 underline hover:text-blue-800"
+              >
+                Click Here
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
     ),
   },
   {
-    question: "Can I choose a specific tutor for my child?",
+    question: "What’s the student-to-tutor ratio at iLearners Hub?",
     answer: (
-      <p>
-        Yes, we try to accommodate requests for specific tutors based on
-        availability and the student’s needs.
-      </p>
-    ),
-  },
-  {
-    question: "Do you provide learning materials?",
-    answer: (
-      <p>
-        Yes, we provide all necessary learning materials, including worksheets,
-        practice tests, and revision notes.
-      </p>
-    ),
-  },
-  {
-    question: "Is online tuition available?",
-    answer: (
-      <p>
-        Is online tuition available? No as we believe in face to face being the
-        most effective method.
-      </p>
-    ),
-  },
-  {
-    question: "Do you offer holiday tuition?",
-    answer: (
-      <p>
-        Yes, we provide holiday tuition programmes to help students stay on
-        track or get ahead during school breaks.
-      </p>
-    ),
-  },
-  {
-    question: "Can you accommodate students with special educational needs?",
-    answer: (
-      <p>
-        Yes, we have experience in supporting students with a variety of special
-        educational needs and can tailor our approach accordingly.
-      </p>
-    ),
-  },
-  {
-    question:
-      "Do you offer support for students aiming for university entrance exams?",
-    answer: (
-      <p>
-        Yes, we provide tailored preparation for university entrance exams,
-        including subject-specific support and exam strategies.
-      </p>
+      <div className="bg-red-100/80 rounded-2xl shadow-lg p-5 border-4 border-red-300">
+        <h3 className="text-red-900 text-lg font-bold mb-2 flex items-center gap-2">
+          <span className="text-2xl">👩‍🏫</span> Small Groups, Big Impact
+        </h3>
+        <p className="text-red-900 mb-2">
+          To ensure every learner gets the attention they need, we keep our
+          groups small — with a maximum of{" "}
+          <strong>5 to 7 students per tutor per session</strong>.
+        </p>
+        <ul className="list-disc list-inside text-red-800 space-y-1 pl-6">
+          <li>Focused support for each student</li>
+          <li>More interaction and engagement</li>
+          <li>Personalised guidance throughout the session</li>
+        </ul>
+      </div>
     ),
   },
 ];

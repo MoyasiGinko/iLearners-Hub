@@ -25,7 +25,7 @@ const CtaNews: React.FC<CTANewsProps> = () => {
               Join Us Now
             </h2>
             <p className="text-sm sm:text-md md:text-lg lg:text-xl mb-4 sm:mb-6 px-2 sm:px-4">
-              Join iLearnersHub and unlock exciting learning opportunities!
+              Join iLearners Hub and unlock exciting learning opportunities!
               Register now and start your journey with us!
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">

@@ -16,11 +16,14 @@ type FormData = {
   studentName: string;
   institutionName: string;
   parentName: string;
+  address: string;
+  postalCode: string;
   email: string;
   phone: string;
   level: string;
   levelDetail: string;
-  subject: string;
+  subjects: string[];
+  homeworkClubOption: string;
   message: string;
 };
 
@@ -41,30 +44,37 @@ const RegistrationForm = () => {
 
   // Watch the level field to update subjects
   const watchLevel = watch("level");
-
   // Update available subjects when level changes
   useEffect(() => {
     if (watchLevel === "Primary") {
       setSelectedLevel("Primary");
       setAvailableSubjects(["Mathematics", "English", "Science"]);
-    } else if (["S1", "S2", "S3"].includes(watchLevel)) {
+    } else if (["S1", "S2"].includes(watchLevel)) {
       setSelectedLevel("Secondary");
       setAvailableSubjects(["Mathematics", "Science"]);
-    } else if (
-      ["National 5", "Highers", "Advanced Highers"].includes(watchLevel)
-    ) {
-      setSelectedLevel("Advanced");
+    } else if (watchLevel === "S3") {
+      setSelectedLevel("Secondary");
+      setAvailableSubjects(["Mathematics", "Physics", "Chemistry", "Biology"]);
+    } else if (watchLevel === "National 5") {
+      setSelectedLevel("National 5");
+      setAvailableSubjects(["Mathematics", "Physics", "Chemistry", "Biology"]);
+    } else if (watchLevel === "Highers") {
+      setSelectedLevel("Highers");
+      setAvailableSubjects(["Mathematics", "Physics", "Chemistry", "Biology"]);
+    } else if (watchLevel === "Advanced Highers") {
+      setSelectedLevel("Advanced Highers");
       setAvailableSubjects(["Mathematics", "Physics", "Chemistry", "Biology"]);
     } else if (watchLevel === "Homework Club") {
       setSelectedLevel("Homework Club");
-      setAvailableSubjects(["All Subjects"]);
+      setAvailableSubjects([]);
     } else {
       setSelectedLevel("");
       setAvailableSubjects([]);
     }
 
-    // Reset subject when level changes
-    setValue("subject", "");
+    // Reset subjects when level changes
+    setValue("subjects", []);
+    setValue("homeworkClubOption", "");
   }, [watchLevel, setValue]);
 
   const onSubmit = async (data: FormData) => {
@@ -192,21 +202,92 @@ const RegistrationForm = () => {
                     )}
                   </div>
 
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Address
+                    </label>
+                    <input
+                      {...register("address", {
+                        required: "Address is required",
+                      })}
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Your address"
+                    />
+                    {errors.address && (
+                      <p className="mt-1 text-sm text-red-500">
+                        {errors.address.message}
+                      </p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Postal Code
+                    </label>
+                    <input
+                      {...register("postalCode", {
+                        required: "Postal code is required",
+                      })}
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Postal code"
+                    />
+                    {errors.postalCode && (
+                      <p className="mt-1 text-sm text-red-500">
+                        {errors.postalCode.message}
+                      </p>
+                    )}
+                  </div>
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="flex items-center text-sm font-medium text-gray-700">
                         <FaPhone className="mr-1" /> Contact no.
-                      </label>
+                      </label>{" "}
                       <input
                         {...register("phone", {
                           required: "Phone number is required",
                           pattern: {
-                            value: /^[0-9\+\-\(\) ]+$/,
-                            message: "Please enter a valid phone number",
+                            value: /^(\+44\s?|0)([1-9]\d{8,9}|[1-9]\d{9})$/,
+                            message:
+                              "Please enter a valid UK phone number (e.g., +44 7123 456789)",
+                          },
+                          validate: {
+                            maxDigits: (value) => {
+                              // Remove all non-digit characters except +
+                              const digitsOnly = value.replace(/[^\d+]/g, "");
+                              // For +44 format, max 13 chars (+44 + 10 digits)
+                              // For 0 format, max 11 digits
+                              if (value.startsWith("+44")) {
+                                return (
+                                  digitsOnly.length <= 13 ||
+                                  "UK phone number with +44 cannot exceed 13 characters"
+                                );
+                              } else {
+                                return (
+                                  digitsOnly.length <= 11 ||
+                                  "UK phone number cannot exceed 11 digits"
+                                );
+                              }
+                            },
+                            minDigits: (value) => {
+                              const digitsOnly = value.replace(/[^\d+]/g, "");
+                              if (value.startsWith("+44")) {
+                                return (
+                                  digitsOnly.length >= 12 ||
+                                  "UK phone number with +44 must be at least 12 characters"
+                                );
+                              } else {
+                                return (
+                                  digitsOnly.length >= 10 ||
+                                  "UK phone number must be at least 10 digits"
+                                );
+                              }
+                            },
                           },
                         })}
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Your phone number"
+                        placeholder="e.g., +44 7123 456789"
+                        maxLength={17}
                       />
                       {errors.phone && (
                         <p className="mt-1 text-sm text-red-500">
@@ -218,18 +299,31 @@ const RegistrationForm = () => {
                     <div>
                       <label className="flex items-center text-sm font-medium text-gray-700">
                         <FaEnvelope className="mr-1" /> Email address
-                      </label>
+                      </label>{" "}
                       <input
                         type="email"
                         {...register("email", {
-                          required: "Email is required",
+                          required: "Email address is required",
                           pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                            message: "Please enter a valid email",
+                            value:
+                              /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+                            message: "Please enter a valid email address",
+                          },
+                          validate: {
+                            noSpaces: (value) =>
+                              !/\s/.test(value) ||
+                              "Email address cannot contain spaces",
+                            validDomain: (value) => {
+                              const domain = value.split("@")[1];
+                              return (
+                                (domain && domain.includes(".")) ||
+                                "Please enter a valid email domain"
+                              );
+                            },
                           },
                         })}
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="your@email.com"
+                        placeholder="your.name@example.com"
                       />
                       {errors.email && (
                         <p className="mt-1 text-sm text-red-500">
@@ -246,6 +340,7 @@ const RegistrationForm = () => {
                   <FaGraduationCap className="mr-2" /> Educational Information
                 </h2>
                 <div className="mt-4 space-y-4">
+                  {" "}
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
                       Level
@@ -272,7 +367,6 @@ const RegistrationForm = () => {
                       </p>
                     )}
                   </div>
-
                   {selectedLevel === "Primary" && (
                     <div>
                       <label className="block text-sm font-medium text-gray-700">
@@ -297,34 +391,81 @@ const RegistrationForm = () => {
                         </p>
                       )}
                     </div>
-                  )}
-
-                  {availableSubjects.length > 0 && (
+                  )}{" "}
+                  {availableSubjects.length > 0 &&
+                    selectedLevel !== "Homework Club" && (
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Subjects (Select all that apply)
+                        </label>
+                        <div className="space-y-2 max-h-32 overflow-y-auto border border-gray-300 rounded-md p-3 bg-gray-50">
+                          {availableSubjects.map((subject) => (
+                            <label
+                              key={subject}
+                              className="flex items-center space-x-2"
+                            >
+                              <input
+                                type="checkbox"
+                                {...register("subjects", {
+                                  required:
+                                    "Please select at least one subject",
+                                })}
+                                value={subject}
+                                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                              />
+                              <span className="text-sm text-gray-700">
+                                {subject}
+                              </span>
+                            </label>
+                          ))}
+                        </div>
+                        {errors.subjects && (
+                          <p className="mt-1 text-sm text-red-500">
+                            {errors.subjects.message}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                  {selectedLevel === "Homework Club" && (
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
-                        Subject
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Homework Club Options
                       </label>
-                      <select
-                        {...register("subject", {
-                          required: "Please select a subject",
-                        })}
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
-                      >
-                        <option value="">Select a subject</option>
-                        {availableSubjects.map((subject) => (
-                          <option key={subject} value={subject}>
-                            {subject}
-                          </option>
-                        ))}
-                      </select>
-                      {errors.subject && (
+                      <div className="space-y-2">
+                        <label className="flex items-center space-x-2">
+                          <input
+                            type="radio"
+                            {...register("homeworkClubOption", {
+                              required: "Please select a homework club option",
+                            })}
+                            value="per-hour-inquiry"
+                            className="border-gray-300 text-blue-600 focus:ring-blue-500"
+                          />
+                          <span className="text-sm text-gray-700">
+                            Per hour inquiry
+                          </span>
+                        </label>
+                        <label className="flex items-center space-x-2">
+                          <input
+                            type="radio"
+                            {...register("homeworkClubOption", {
+                              required: "Please select a homework club option",
+                            })}
+                            value="subscription-inquiry"
+                            className="border-gray-300 text-blue-600 focus:ring-blue-500"
+                          />
+                          <span className="text-sm text-gray-700">
+                            Subscription inquiry
+                          </span>
+                        </label>
+                      </div>
+                      {errors.homeworkClubOption && (
                         <p className="mt-1 text-sm text-red-500">
-                          {errors.subject.message}
+                          {errors.homeworkClubOption.message}
                         </p>
                       )}
                     </div>
                   )}
-
                   <div>
                     <label className="text-sm font-medium text-gray-700 flex items-center">
                       <FaBook className="mr-1" /> Questions or Comments

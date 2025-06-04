@@ -386,7 +386,7 @@ const Hero = () => {
 
           <div className="flex flex-col sm:flex-row items-center gap-4">
             <a
-              href="/courses"
+              href="/courses/all-courses"
               className="w-full sm:w-auto relative bg-gradient-to-br from-orange-400 to-red-500 text-white font-bold py-3 px-8 rounded-full transition-all duration-300 shadow-[0_8px_0_rgb(217,119,6)] hover:shadow-[0_4px_0px_rgb(217,119,6)] ease-in-out hover:translate-y-1 active:translate-y-2 active:shadow-none text-lg overflow-hidden"
             >
               <span className="relative z-10">Explore Courses</span>
@@ -451,10 +451,10 @@ const Hero = () => {
               ></div>
 
               {/* Note content */}
-              <h3 className="text-base sm:text-lg leading-tight tracking-tight relative z-10 font-handwriting mt-3">
+              <h3 className="text-lg sm:text-2xl leading-tight tracking-tight relative z-10 font-handwriting mt-3">
                 <span className="text-indigo-700 font-bold border-b-2 border-amber-300">
                   Aberdeen Based Tuition Center for Primary, Secondary, Highers
-                  & Advanced Highers in English, Maths & Science Subjects.
+                  & Advanced Highers.
                 </span>
               </h3>
 

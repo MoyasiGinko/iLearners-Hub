@@ -1,61 +1,76 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useMemo, useTransition, Suspense } from "react";
 import { courseCategories } from "@/components/courses/course/courseData";
 import { motion } from "framer-motion";
-import { usePathname } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Hero from "@/components/courses/hero";
 import CTA from "@/components/courses/cta";
 import CoursePage from "@/components/courses/course";
 
+// Create a simple loading component
+const CoursesLoadingSkeleton = () => (
+  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
+    {Array.from({ length: 6 }).map((_, i) => (
+      <div key={i} className="rounded-2xl bg-gray-100 animate-pulse h-80" />
+    ))}
+  </div>
+);
+
 export default function Page() {
-  const pathname = usePathname();
-  const [selectedCategory, setSelectedCategory] = useState("All Courses");
+  const params = useParams();
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
-  // Only set initial category from URL on mount, don't react to pathname changes
-  useEffect(() => {
-    // Get the path segments and filter out empty strings
-    const pathSegments = pathname.split("/").filter(Boolean);
+  // Extract current category from URL params - single source of truth
+  const currentSlug = (params?.slug as string) || "all-courses";
 
-    // Check if we're on the base courses page
-    if (pathSegments.length === 1 && pathSegments[0] === "courses") {
-      setSelectedCategory("All Courses");
-      return;
-    }
+  // Memoize category mappings once
+  const { categoryName, categoryToSlugMap } = useMemo(() => {
+    const slugToName = new Map();
+    const nameToSlug = new Map();
 
-    // Check if we're on a category page (/courses/[slug]) or course detail page (/courses/[slug]/[id])
-    if (pathSegments.length >= 2 && pathSegments[0] === "courses") {
-      const categorySlug = pathSegments[1];
+    slugToName.set("all-courses", "All Courses");
+    nameToSlug.set("All Courses", "all-courses");
 
-      // Find matching category by slug
-      const matchingCategory = courseCategories.find(
-        (category) => category.slug === categorySlug
-      );
+    courseCategories.forEach((cat) => {
+      slugToName.set(cat.slug, cat.name);
+      nameToSlug.set(cat.name, cat.slug);
+    });
 
-      if (matchingCategory) {
-        setSelectedCategory(matchingCategory.name);
-      } else {
-        // If no matching category found, default to "All Courses"
-        setSelectedCategory("All Courses");
-      }
-    }
-  }, []); // Remove pathname dependency to prevent re-renders
-  // Function to handle category selection without URL navigation
+    return {
+      categoryName: slugToName.get(currentSlug) || "All Courses",
+      categoryToSlugMap: nameToSlug,
+    };
+  }, [currentSlug]);
+
+  // Simple category handler with optimistic UI updates
   const handleCategorySelect = (categoryName: string) => {
-    setSelectedCategory(categoryName);
+    const targetSlug = categoryToSlugMap.get(categoryName) || "all-courses";
 
-    // Smooth scroll to a position slightly above the courses content area
-    const coursesContent = document.getElementById("courses-content");
-    if (coursesContent) {
-      // Get the element's position
-      const elementPosition = coursesContent.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - 100; // 100px offset from the top
+    if (currentSlug === targetSlug) return; // Already on this category
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
+    // Use React's useTransition for smooth updates
+    startTransition(() => {
+      router.push(`/courses/${targetSlug}`, { scroll: false });
+    });
+
+    // Smooth scroll without blocking
+    requestAnimationFrame(() => {
+      const coursesContent = document.getElementById("courses-content");
+      if (coursesContent) {
+        const elementPosition = coursesContent.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - 100;
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      }
+    });
   };
+
+  console.log(
+    `🏠 Main component render - Category: ${categoryName}, isPending: ${isPending}`
+  );
 
   return (
     <>
@@ -73,29 +88,13 @@ export default function Page() {
           </div>
 
           <div className="flex flex-col lg:flex-row gap-10">
-            {/* Sidebar with categories - Now truly sticky */}
+            {/* Sidebar with categories */}
             <div className="lg:w-1/4">
               <div className="sticky top-24 rounded-3xl bg-white p-6 shadow-xl hover:shadow-2xl transition-all duration-300 backdrop-blur-sm bg-opacity-80">
                 <h3 className="mb-4 text-xl font-bold text-indigo-700">
                   Pick a Category!
                 </h3>
                 <ul className="space-y-3">
-                  <motion.li
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
-                  >
-                    <button
-                      className={`px-8 w-full inline-block py-3 rounded-full font-medium shadow-sm hover:shadow-md border-b-4
-                        active:border-b-0 active:border-t-0 active:shadow-inner active:translate-y-1 transform transition-all duration-200 focus:outline-none ${
-                          selectedCategory === "All Courses"
-                            ? "bg-indigo-500 border-indigo-600 text-white shadow-sm"
-                            : "bg-indigo-100 border-indigo-300 text-indigo-700 "
-                        }`}
-                      onClick={() => handleCategorySelect("All Courses")}
-                    >
-                      All Courses
-                    </button>
-                  </motion.li>
                   {courseCategories.map((category) => (
                     <motion.li
                       key={category.slug}
@@ -104,12 +103,13 @@ export default function Page() {
                     >
                       <button
                         className={`px-8 w-full inline-block py-3 rounded-full font-medium shadow-sm hover:shadow-md border-b-4
-                        active:border-b-0 active:border-t-0 active:shadow-inner active:translate-y-1 transform transition-all duration-200 focus:outline-none ${
-                          selectedCategory === category.name
+                        active:border-b-0 active:border-t-0 active:shadow-inner active:translate-y-1 transform transition-all duration-100 focus:outline-none ${
+                          categoryName === category.name
                             ? "bg-indigo-500 border-indigo-600 text-white shadow-sm"
-                            : "bg-indigo-100 border-indigo-300 text-indigo-700 "
-                        }`}
+                            : "bg-indigo-100 border-indigo-300 text-indigo-700"
+                        } ${isPending ? "opacity-70 pointer-events-none" : ""}`}
                         onClick={() => handleCategorySelect(category.name)}
+                        disabled={isPending}
                       >
                         {category.name}
                       </button>
@@ -119,9 +119,17 @@ export default function Page() {
               </div>
             </div>
 
-            {/* Courses grid - Dynamic content that updates smoothly */}
+            {/* Courses grid with Suspense */}
             <div id="courses-content" className="lg:w-3/4">
-              <CoursePage selectedCategory={selectedCategory} />
+              <Suspense fallback={<CoursesLoadingSkeleton />}>
+                <div
+                  className={`transition-opacity duration-200 ${
+                    isPending ? "opacity-70" : "opacity-100"
+                  }`}
+                >
+                  <CoursePage selectedCategory={categoryName} />
+                </div>
+              </Suspense>
             </div>
           </div>
         </div>

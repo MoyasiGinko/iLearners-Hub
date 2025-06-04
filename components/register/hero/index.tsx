@@ -55,7 +55,7 @@ const Hero: React.FC = () => {
           <div className="flex flex-wrap gap-3 md:gap-4">
             <CustomButton
               text="Explore Courses"
-              href="/courses"
+              href="/courses/all-courses"
               className="bg-gradient-to-r from-yellow-400 to-yellow-500 border-yellow-600 hover:bg-opacity-90"
             />
             <CustomButton

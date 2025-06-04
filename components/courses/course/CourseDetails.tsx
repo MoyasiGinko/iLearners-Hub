@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
-import { courses, Course } from "./courseData";
+import { courses, Course, courseCategories } from "./courseData";
 import { motion } from "framer-motion";
 
 const CourseDetailsPage = () => {
@@ -59,9 +59,9 @@ const CourseDetailsPage = () => {
           </h2>
           <p className="text-lg text-indigo-500 mb-8">
             Sorry, we couldn't find the learning adventure you're looking for.
-          </p>
+          </p>{" "}
           <button
-            onClick={() => router.push("/courses")}
+            onClick={() => router.push("/courses/all-courses")}
             className="bg-yellow-400 hover:bg-yellow-500 text-indigo-700 font-medium py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-md"
           >
             Explore Other Courses
@@ -75,8 +75,9 @@ const CourseDetailsPage = () => {
     <section className="bg-transparent py-10 min-h-screen">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="mb-8">
+          {" "}
           <button
-            onClick={() => router.push("/courses")}
+            onClick={() => router.push("/courses/all-courses")}
             className="flex items-center cursor-pointer text-indigo-600 hover:text-indigo-800 transition-colors font-medium"
           >
             <svg
@@ -101,7 +102,7 @@ const CourseDetailsPage = () => {
           {/* Course Header */}
           <div className="relative h-64 md:h-80 bg-gray-200">
             <img
-              src="/images/courses/c1.jpg"
+              src="/images/courses/cover.jpg"
               alt={course.short_title}
               className="object-cover w-full h-full"
             />
@@ -193,64 +194,121 @@ const CourseDetailsPage = () => {
               </div>
 
               {/* Pricing Card */}
-              <div className="rounded-3xl bg-gradient-to-br from-indigo-50 to-pink-50 border-4 border-indigo-100 p-6 h-fit shadow-lg">
-                <h3 className="text-2xl font-bold text-indigo-700 mb-6 text-center">
-                  Join This Adventure!
-                </h3>
-                <div className="space-y-4 mb-8">
-                  {/* <div className="flex justify-between items-center bg-white p-3 rounded-xl">
+              <div>
+                <div className="rounded-3xl bg-gradient-to-br from-indigo-50 to-pink-50 border-4 border-indigo-100 p-6 h-fit shadow-lg">
+                  <h3 className="text-2xl font-bold text-indigo-700 mb-6 text-center">
+                    Join This Adventure!
+                  </h3>
+                  <div className="space-y-4 mb-8">
+                    {/* <div className="flex justify-between items-center bg-white p-3 rounded-xl">
                     <span className="text-indigo-600 font-medium">Rate:</span>
                     <span className="font-bold text-indigo-700">
                       {course.rate}
                     </span>
                   </div> */}
 
-                  {course.duration && (
-                    <div className="flex justify-between items-center bg-white p-3 rounded-xl">
-                      <span className="text-indigo-600 font-medium">
-                        Duration:
-                      </span>
-                      <span className="font-bold text-indigo-700">
-                        {course.duration}
+                    {course.duration && (
+                      <div className="flex justify-between items-center bg-white p-3 rounded-xl">
+                        <span className="text-indigo-600 font-medium">
+                          Duration:
+                        </span>
+                        <span className="font-bold text-indigo-700">
+                          {course.duration}
+                        </span>
+                      </div>
+                    )}
+
+                    {course.sessions && (
+                      <div className="flex justify-between items-start bg-white p-3 rounded-xl">
+                        <span className="text-indigo-600 font-medium">
+                          Sessions:
+                        </span>
+                        <span className="font-bold flex-wrap text-right text-indigo-700">
+                          {course.sessions}
+                        </span>
+                      </div>
+                    )}
+
+                    <div className="flex justify-between items-center bg-indigo-100 p-4 rounded-xl">
+                      <span className="text-indigo-700 font-medium">Fee:</span>
+                      <span className="font-bold text-2xl text-indigo-700">
+                        {course.rate}
                       </span>
                     </div>
-                  )}
 
-                  {course.sessions && (
-                    <div className="flex justify-between items-start bg-white p-3 rounded-xl">
-                      <span className="text-indigo-600 font-medium">
-                        Sessions:
-                      </span>
-                      <span className="font-bold flex-wrap text-right text-indigo-700">
-                        {course.sessions}
-                      </span>
-                    </div>
-                  )}
-
-                  <div className="flex justify-between items-center bg-indigo-100 p-4 rounded-xl">
-                    <span className="text-indigo-700 font-medium">Fee:</span>
-                    <span className="font-bold text-2xl text-indigo-700">
-                      {course.rate}
-                    </span>
+                    {course.discount && (
+                      <div className="bg-yellow-100 text-indigo-700 p-4 rounded-xl text-center">
+                        <span className="font-bold">Special Offer:</span>{" "}
+                        {course.discount}
+                      </div>
+                    )}
                   </div>
 
-                  {course.discount && (
-                    <div className="bg-yellow-100 text-indigo-700 p-4 rounded-xl text-center">
-                      <span className="font-bold">Special Offer:</span>{" "}
-                      {course.discount}
-                    </div>
-                  )}
+                  <div className="pt-4">
+                    <Link
+                      href="/register"
+                      className="inline-block  hover:shadow-xl border-b-4 active:border-b-0 active:border-t-0 active:shadow-inner
+                    active:translate-y-1  duration-200 focus:outline-none w-full bg-indigo-500 hover:bg-indigo-600 border-indigo-700 text-white text-center font-bold py-4 px-6 rounded-full transition-all transform  shadow-md text-lg"
+                    >
+                      {course.action}
+                    </Link>
+                  </div>
                 </div>
 
-                <div className="pt-4">
-                  <Link
-                    href="/register"
-                    className="inline-block  hover:shadow-xl border-b-4 active:border-b-0 active:border-t-0 active:shadow-inner
-                    active:translate-y-1  duration-200 focus:outline-none w-full bg-indigo-500 hover:bg-indigo-600 border-indigo-700 text-white text-center font-bold py-4 px-6 rounded-full transition-all transform  shadow-md text-lg"
-                  >
-                    {course.action}
-                  </Link>
-                </div>
+                {/* Additional Info Card */}
+                {course.category === "Homework Club" && (
+                  <div className="rounded-3xl bg-gradient-to-br from-green-50 to-indigo-50 border-4 border-green-100 p-6 h-fit shadow-lg mt-8">
+                    <h3 className="text-2xl font-bold text-green-700 mb-6 text-center">
+                      Subscription Details
+                    </h3>
+                    <div className="space-y-4 mb-8">
+                      <div className="flex items-center bg-white p-3 rounded-xl">
+                        <span className="text-green-600 font-medium mr-2">
+                          💳
+                        </span>
+                        <span className="text-green-700">
+                          Subscription Fee:{" "}
+                          <span className="font-bold">
+                            {course.subscriptionFee
+                              ? course.subscriptionFee
+                              : "N/A"}
+                          </span>
+                        </span>
+                      </div>
+                      <div className="flex items-center bg-white p-3 rounded-xl">
+                        <span className="text-green-600 font-medium mr-2">
+                          📅
+                        </span>
+                        <span className="text-green-700">
+                          Billing Cycle:{" "}
+                          <span className="font-bold">
+                            {course.billingCycle
+                              ? course.billingCycle
+                              : "Monthly"}
+                          </span>
+                        </span>
+                      </div>
+                      <div className="flex items-center bg-white p-3 rounded-xl">
+                        <span className="text-green-600 font-medium mr-2">
+                          🔄
+                        </span>
+                        <span className="text-green-700">
+                          Weekday Access:{" "}
+                          <span className="font-bold">Unlimited</span>
+                        </span>
+                      </div>
+                    </div>
+                    <div className="pt-4 text-center">
+                      <Link
+                        href="/register"
+                        className="inline-block hover:shadow-xl border-b-4 active:border-b-0 active:border-t-0 active:shadow-inner
+                      active:translate-y-1 duration-200 focus:outline-none w-full bg-green-500 hover:bg-green-600 border-green-700 text-white text-center font-bold py-4 px-6 rounded-full transition-all transform shadow-md text-lg"
+                      >
+                        Subscribe Now
+                      </Link>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -301,7 +359,13 @@ const CourseDetailsPage = () => {
                       <h3 className="inline-block text-left text-xl  text-indigo-600 font-bold rounded-full transition-all">
                         {similarCourse.fee}
                       </h3>
-                      <Link href={`/courses/${similarCourse.id}`}>
+                      <Link
+                        href={`/courses/${
+                          courseCategories.find(
+                            (cat) => cat.name === similarCourse.category
+                          )?.slug || "all-courses"
+                        }/${similarCourse.id}`}
+                      >
                         <span className="inline-block text-lg bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-bold px-4 py-2 rounded-full transition-all">
                           Learn More
                         </span>
@@ -324,7 +388,7 @@ const CourseDetailsPage = () => {
               No other courses found in the {course.category} category right
               now. Let's explore different learning paths!
             </p>
-            <Link href="/courses">
+            <Link href="/courses/all-courses">
               <span className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105 shadow-md">
                 See All Courses
               </span>

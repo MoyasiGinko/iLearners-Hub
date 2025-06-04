@@ -88,50 +88,21 @@ const BackgroundElements = {
   ),
 };
 
-const useAnimatedCounter = (value: number, duration: number = 2000): number => {
-  const [count, setCount] = useState<number>(0);
-
-  useEffect(() => {
-    let start: number = 0;
-    const end: number = parseInt(value.toString());
-    const incrementTime: number = duration / end;
-
-    let timer: NodeJS.Timeout = setInterval(() => {
-      start += 1;
-      setCount(start);
-      if (start === end) clearInterval(timer);
-    }, incrementTime);
-
-    return () => {
-      clearInterval(timer);
-    };
-  }, [value, duration]);
-
-  return count;
-};
-
 // Color mapping for categories
 const categoryColors = {
-  Intensive: {
-    bg: "bg-red-100",
-    text: "text-red-600",
-    border: "border-red-300",
-    button: "bg-red-500 hover:bg-red-600",
-    accent: "from-red-400 to-pink-500",
+  "All Courses": {
+    bg: "bg-purple-100",
+    text: "text-purple-700",
+    border: "border-purple-300",
+    button: "bg-purple-500 hover:bg-purple-600",
+    accent: "from-purple-400 to-purple-600",
   },
-  Higher: {
-    bg: "bg-teal-100",
-    text: "text-teal-600",
-    border: "border-teal-300",
-    button: "bg-teal-500 hover:bg-teal-600",
-    accent: "from-teal-400 to-blue-500",
-  },
-  Revision: {
-    bg: "bg-yellow-100",
-    text: "text-yellow-600",
-    border: "border-yellow-300",
-    button: "bg-yellow-500 hover:bg-yellow-600",
-    accent: "from-yellow-400 to-orange-500",
+  Primary: {
+    bg: "bg-blue-100",
+    text: "text-blue-600",
+    border: "border-blue-300",
+    button: "bg-blue-500 hover:bg-blue-600",
+    accent: "from-blue-400 to-indigo-500",
   },
   Secondary: {
     bg: "bg-green-100",
@@ -140,12 +111,54 @@ const categoryColors = {
     button: "bg-green-500 hover:bg-green-600",
     accent: "from-green-400 to-teal-500",
   },
-  Primary: {
-    bg: "bg-blue-100",
-    text: "text-blue-600",
-    border: "border-blue-300",
-    button: "bg-blue-500 hover:bg-blue-600",
-    accent: "from-blue-400 to-indigo-500",
+  "National 5": {
+    bg: "bg-orange-100",
+    text: "text-orange-600",
+    border: "border-orange-300",
+    button: "bg-orange-500 hover:bg-orange-600",
+    accent: "from-orange-400 to-red-500",
+  },
+  Highers: {
+    bg: "bg-teal-100",
+    text: "text-teal-600",
+    border: "border-teal-300",
+    button: "bg-teal-500 hover:bg-teal-600",
+    accent: "from-teal-400 to-blue-500",
+  },
+  "Advanced Highers": {
+    bg: "bg-red-100",
+    text: "text-red-600",
+    border: "border-red-300",
+    button: "bg-red-500 hover:bg-red-600",
+    accent: "from-red-400 to-pink-500",
+  },
+  "Exam Revision": {
+    bg: "bg-yellow-100",
+    text: "text-yellow-600",
+    border: "border-yellow-300",
+    button: "bg-yellow-500 hover:bg-yellow-600",
+    accent: "from-yellow-400 to-orange-500",
+  },
+  "Mock Exams": {
+    bg: "bg-pink-100",
+    text: "text-pink-600",
+    border: "border-pink-300",
+    button: "bg-pink-500 hover:bg-pink-600",
+    accent: "from-pink-400 to-rose-500",
+  },
+  "Tips & Hints": {
+    bg: "bg-indigo-100",
+    text: "text-indigo-600",
+    border: "border-indigo-300",
+    button: "bg-indigo-500 hover:bg-indigo-600",
+    accent: "from-indigo-400 to-purple-500",
+  },
+  "Homework Club": {
+    bg: "bg-emerald-100",
+    text: "text-emerald-600",
+    border: "border-emerald-300",
+    button: "bg-emerald-500 hover:bg-emerald-600",
+    accent: "from-emerald-400 to-green-500",
   },
   // Add a default color scheme for any category that might not be explicitly defined
   default: {
@@ -158,7 +171,7 @@ const categoryColors = {
 };
 
 const MiniCourseTablet = () => {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("All Courses");
   // Use the Course type imported from courseData rather than defining a local interface
   const [filteredCourses, setFilteredCourses] = useState<(typeof courses)[0][]>(
     []
@@ -167,7 +180,7 @@ const MiniCourseTablet = () => {
 
   useEffect(() => {
     // Show all courses initially or filter by category
-    if (selectedCategory === "All") {
+    if (selectedCategory === "All Courses") {
       setFilteredCourses(courses.slice(0, 6)); // Show only 6 courses initially
     } else {
       setFilteredCourses(
@@ -180,9 +193,7 @@ const MiniCourseTablet = () => {
 
   const handleCategoryChange = (category: string): void => {
     setSelectedCategory(category);
-    setActiveTab(
-      courseCategories.findIndex((cat) => cat.name === category) + 1
-    );
+    setActiveTab(courseCategories.findIndex((cat) => cat.name === category));
   };
 
   // Helper function to safely get color scheme
@@ -357,7 +368,6 @@ const MiniCourseTablet = () => {
           >
             Explore Fun Learning Adventures!
           </h2>
-
           <div className="flex justify-center items-center space-x-2 text-gray-700 mb-6">
             <div className="flex items-center">
               <span
@@ -390,25 +400,9 @@ const MiniCourseTablet = () => {
                 100+ happy students
               </span>
             </div>
-          </div>
-
+          </div>{" "}
           {/* Category tabs */}
           <div className="flex flex-wrap justify-center mb-8 border-b border-gray-200">
-            <motion.button
-              whileTap={{ scale: 0.95 }}
-              className={`px-6 py-3 mr-3 mb-3 rounded-full font-bold transition transform ${
-                activeTab === 0
-                  ? "bg-gradient-to-b from-purple-400 to-purple-600 text-white shadow-lg translate-y-1"
-                  : "bg-purple-100 text-purple-700 shadow-md hover:shadow-lg hover:translate-y-0.5"
-              }`}
-              onClick={() => {
-                setSelectedCategory("All");
-                setActiveTab(0);
-              }}
-            >
-              All Courses
-            </motion.button>
-
             {courseCategories.map((category, index) => {
               // Safely get color scheme for each category
               const colorScheme = getColorScheme(category.name);
@@ -418,7 +412,7 @@ const MiniCourseTablet = () => {
                   key={index}
                   whileTap={{ scale: 0.95 }}
                   className={`px-6 py-3 mr-3 mb-3 rounded-full font-bold transition transform ${
-                    activeTab === index + 1
+                    activeTab === index
                       ? `bg-gradient-to-b ${colorScheme.accent} text-white shadow-lg translate-y-1`
                       : `${colorScheme.bg} ${colorScheme.text} shadow-md hover:shadow-lg hover:translate-y-0.5`
                   }`}
@@ -430,7 +424,6 @@ const MiniCourseTablet = () => {
             })}
           </div>
         </div>
-
         {/* Course cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
           {filteredCourses.length > 0 ? (
@@ -496,7 +489,11 @@ const MiniCourseTablet = () => {
                       </div>
 
                       <motion.a
-                        href={`/courses/${course.id}`}
+                        href={`/courses/${
+                          courseCategories.find(
+                            (cat) => cat.name === course.category
+                          )?.slug || course.category.toLowerCase()
+                        }/${course.id}`}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className={`px-4 py-2 rounded-full text-white font-medium shadow-md ${colorScheme.button}`}
@@ -524,13 +521,12 @@ const MiniCourseTablet = () => {
               No courses yet
             </div>
           )}
-        </div>
-
+        </div>{" "}
         {/* Call to action */}
-        {selectedCategory === "All" && courses.length > 6 ? (
+        {selectedCategory === "All Courses" && courses.length > 6 ? (
           <div className="text-center">
             <a
-              href="/courses"
+              href="/courses/all-courses"
               className="px-8 inline-block py-3 rounded-full
       bg-gradient-to-r from-teal-400 to-blue-500 text-white font-medium
       shadow-lg hover:shadow-xl
@@ -544,12 +540,15 @@ const MiniCourseTablet = () => {
             </a>
           </div>
         ) : (
-          selectedCategory !== "All" &&
+          selectedCategory !== "All Courses" &&
           courses.filter((course) => course.category === selectedCategory)
             .length > 6 && (
             <div className="text-center">
               <a
-                href={`/courses?category=${selectedCategory}`}
+                href={`/courses/${
+                  courseCategories.find((cat) => cat.name === selectedCategory)
+                    ?.slug || selectedCategory.toLowerCase()
+                }`}
                 className="px-8 inline-block py-3 rounded-full
         bg-gradient-to-r from-teal-400 to-blue-500 text-white font-medium
         shadow-lg hover:shadow-xl
@@ -564,7 +563,6 @@ const MiniCourseTablet = () => {
             </div>
           )
         )}
-
         {/* Fun bottom decorations */}
         <div className="flex justify-center mt-16 opacity-20">
           <motion.div
