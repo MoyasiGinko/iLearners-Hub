@@ -4,11 +4,11 @@ import Hero from "@/components/courses/hero";
 import CTA from "@/components/main/cta";
 
 type Props = {
-  params: { slug: string; id: string };
+  params: Promise<{ slug: string; id: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug, id } = params;
+  const { slug, id } = await params;
 
   // You can fetch course data here if needed
   // For now, we'll create a generic title based on the slug and id
