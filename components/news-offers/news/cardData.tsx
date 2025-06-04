@@ -24,25 +24,9 @@ export interface CardDataType {
 }
 
 export const cardData: CardDataType[] = [
-  // Offer card: Homework Club
-  {
-    id: "1",
-    logo: "📚",
-    title: "Homework Club – Extra Support for Your Child",
-    description:
-      "Looking for a calm space where your child can focus and get schoolwork done—with expert support just a call away? Our Homework Club helps learners of any level complete homework, revise, and build confidence. Flexible attendance and affordable plans mean it fits right into your schedule.\n\nDon’t forget to subscribe to our News & Offers page to stay updated!",
-    image:
-      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop",
-    actionButton: {
-      text: "Find out more and sign up",
-      url: "/courses/homework-club/16",
-    },
-    category: "offers",
-  },
-
   // Event card: Eid on the Terrace
   {
-    id: "2",
+    id: "1",
     logo: "🎉",
     title: "Visit Us at Eid on the Terrace – Sunday 22nd June!",
     description:
@@ -57,6 +41,21 @@ export const cardData: CardDataType[] = [
     date: "Sunday 22nd June 2025, 11:00 AM – 5:00 PM",
     location: "Union Terrace Gardens, Aberdeen AB10 1NJ",
   },
+  // Offer card: Homework Club
+  {
+    id: "2",
+    logo: "📚",
+    title: "Homework Club – Extra Support for Your Child",
+    description:
+      "Looking for a calm space where your child can focus and get schoolwork done—with expert support just a call away? Our Homework Club helps learners of any level complete homework, revise, and build confidence. Flexible attendance and affordable plans mean it fits right into your schedule.\n\nDon’t forget to subscribe to our News & Offers page to stay updated!",
+    image:
+      "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop",
+    actionButton: {
+      text: "Find Out More",
+      url: "/courses/homework-club/16",
+    },
+    category: "offers",
+  },
 
   // News card: All Courses Starting August
   {
@@ -69,7 +68,7 @@ export const cardData: CardDataType[] = [
       "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800&h=600&fit=crop",
     category: "news",
     actionButton: {
-      text: "Explore courses and enroll",
+      text: "Explore Courses and Enroll",
       url: "/courses/all-courses",
     },
   },
