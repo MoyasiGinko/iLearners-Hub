@@ -99,21 +99,57 @@ const MobileMenu = ({
               >
                 <IoMdClose />
               </button>
-            </div>
-
+            </div>{" "}
             <nav className="flex flex-col space-y-6 items-center mt-4">
               {navItems.map((item) => (
                 <motion.div key={item.title} variants={menuItemVariants}>
                   <Link
                     href={item.href}
-                    className={`text-white text-xl font-medium transition-colors flex items-center justify-center px-6 py-3 rounded-full text-center ${
+                    className={`text-white text-xl font-medium transition-colors flex items-center justify-center px-6 py-3 rounded-full text-center relative overflow-hidden ${
                       isActive(item.href)
-                        ? "bg-blue-600/50 text-yellow-300 font-bold"
+                        ? `bg-blue-600/50 text-yellow-300 font-bold ${
+                            item.title === "NEWS & OFFERS"
+                              ? "animate-celebration-glow animate-celebration-pulse"
+                              : ""
+                          }`
                         : "bg-blue-600/40 hover:text-yellow-100"
                     }`}
                     onClick={onClose}
                   >
-                    {item.title}
+                    {/* Celebration effects for NEWS & OFFERS when active in mobile */}
+                    {isActive(item.href) && item.title === "NEWS & OFFERS" && (
+                      <>
+                        {/* Mobile sparkle elements - smaller and fewer */}
+                        <div
+                          className="absolute -top-1 -left-1 w-2 h-2 bg-yellow-300 rounded-full animate-sparkle"
+                          style={{ animationDelay: "0s" }}
+                        />
+                        <div
+                          className="absolute -top-2 right-3 w-1 h-1 bg-pink-300 rounded-full animate-sparkle"
+                          style={{ animationDelay: "0.5s" }}
+                        />
+                        <div
+                          className="absolute -bottom-1 -right-1 w-2 h-2 bg-blue-300 rounded-full animate-sparkle"
+                          style={{ animationDelay: "1s" }}
+                        />
+                        <div
+                          className="absolute -bottom-2 left-3 w-1 h-1 bg-purple-300 rounded-full animate-sparkle"
+                          style={{ animationDelay: "1.5s" }}
+                        />
+
+                        {/* Mobile shimmer overlay */}
+                        <div className="absolute inset-0 rounded-full animate-celebration-shimmer pointer-events-none" />
+                      </>
+                    )}
+                    <span
+                      className={`relative z-10 ${
+                        isActive(item.href) && item.title === "NEWS & OFFERS"
+                          ? "animate-celebration-bounce"
+                          : ""
+                      }`}
+                    >
+                      {item.title}
+                    </span>{" "}
                   </Link>
                 </motion.div>
               ))}
@@ -133,7 +169,6 @@ const MobileMenu = ({
                 </Link>
               </motion.div>
             </nav>
-
             {/* Social Media Icons */}
             <motion.div
               variants={menuItemVariants}
@@ -269,23 +304,84 @@ const Header = () => {
           {/* Desktop Navigation - Centered */}
           <nav className="hidden lg:flex items-center justify-center flex-1">
             <div className="flex items-center space-x-8">
+              {" "}
               {navItems.map((item) => (
                 <Link
                   key={item.title}
                   href={item.href}
                   className={`font-semibold transition-all duration-300 transform relative px-3 py-1 rounded-2xl overflow-hidden group shadow-lg ${
                     isActive(item.href)
-                      ? "bg-gradient-to-r from-[#fbbf24] to-[#f472b6] text-blue-50 scale-105"
+                      ? `bg-gradient-to-r from-[#fbbf24] to-[#f472b6] text-blue-50 scale-105 ${
+                          item.title === "NEWS & OFFERS"
+                            ? "animate-celebration-glow animate-celebration-pulse"
+                            : ""
+                        }`
                       : "bg-gradient-to-r from-sky-400 to-blue-300 text-gray-50 hover:bg-gradient-to-r hover:from-[#fbbf24] hover:to-[#f472b6] hover:shadow-2xl hover:scale-105 hover:-translate-y-1 hover:rotate-x-6 hover:rotate-y-3"
                   }`}
                   style={{
                     perspective: "600px",
                   }}
                 >
+                  {/* Celebration effects for NEWS & OFFERS when active */}
+                  {isActive(item.href) && item.title === "NEWS & OFFERS" && (
+                    <>
+                      {/* Sparkle elements */}
+                      <div
+                        className="absolute -top-2 -left-2 w-3 h-3 bg-yellow-300 rounded-full animate-sparkle"
+                        style={{ animationDelay: "0s" }}
+                      />
+                      <div
+                        className="absolute -top-3 right-4 w-2 h-2 bg-pink-300 rounded-full animate-sparkle"
+                        style={{ animationDelay: "0.5s" }}
+                      />
+                      <div
+                        className="absolute -bottom-2 -right-2 w-3 h-3 bg-blue-300 rounded-full animate-sparkle"
+                        style={{ animationDelay: "1s" }}
+                      />
+                      <div
+                        className="absolute -bottom-3 left-4 w-2 h-2 bg-purple-300 rounded-full animate-sparkle"
+                        style={{ animationDelay: "1.5s" }}
+                      />
+                      <div
+                        className="absolute top-1 right-1 w-1 h-1 bg-white rounded-full animate-sparkle"
+                        style={{ animationDelay: "0.3s" }}
+                      />
+                      <div
+                        className="absolute bottom-1 left-1 w-1 h-1 bg-white rounded-full animate-sparkle"
+                        style={{ animationDelay: "0.8s" }}
+                      />
+
+                      {/* Confetti elements */}
+                      <div
+                        className="absolute -top-4 left-2 w-1 h-3 bg-yellow-400 animate-confetti"
+                        style={{ animationDelay: "0s" }}
+                      />
+                      <div
+                        className="absolute -top-4 right-2 w-1 h-3 bg-pink-400 animate-confetti"
+                        style={{ animationDelay: "0.4s" }}
+                      />
+                      <div
+                        className="absolute -top-4 left-6 w-1 h-2 bg-blue-400 animate-confetti"
+                        style={{ animationDelay: "0.8s" }}
+                      />
+                      <div
+                        className="absolute -top-4 right-6 w-1 h-2 bg-purple-400 animate-confetti"
+                        style={{ animationDelay: "1.2s" }}
+                      />
+
+                      {/* Shimmer overlay */}
+                      <div className="absolute inset-0 rounded-2xl animate-celebration-shimmer pointer-events-none" />
+                    </>
+                  )}
+
                   <span
                     className={`relative z-10 block transition-transform duration-300 ${
                       isActive(item.href)
-                        ? "font-bold"
+                        ? `font-bold ${
+                            item.title === "NEWS & OFFERS"
+                              ? "animate-celebration-bounce"
+                              : ""
+                          }`
                         : "group-hover:translate-y-[-120%] group-hover:opacity-0"
                     }`}
                   >
