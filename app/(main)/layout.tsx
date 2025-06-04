@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "@/app/globals.css";
 import Header from "@/components/main/header";
 import Footer from "@/components/main/footer";
+import TawkChat from "@/app/tawkChat";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <TawkChat />
       </body>
     </html>
   );
