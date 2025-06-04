@@ -2,11 +2,11 @@ import { Metadata } from "next";
 import ClientPage from "./client-page";
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const slug = params.slug;
+  const { slug } = await params;
 
   // Map slugs to proper titles and descriptions
   const categoryMap: Record<string, { title: string; description: string }> = {
