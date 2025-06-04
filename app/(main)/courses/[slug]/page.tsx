@@ -1,4 +1,5 @@
 "use client";
+import { Metadata } from "next";
 import React, { useMemo, useTransition, Suspense } from "react";
 import { courseCategories } from "@/components/courses/course/courseData";
 import { motion } from "framer-motion";
@@ -6,6 +7,12 @@ import { useParams, useRouter } from "next/navigation";
 import Hero from "@/components/courses/hero";
 import CTA from "@/components/courses/cta";
 import CoursePage from "@/components/courses/course";
+
+export const metadata: Metadata = {
+  title: "Courses - iLearner's Hub | Student Learning Moments",
+  description:
+    "Explore our courses at iLearner's Hub! Choose from a variety of subjects and levels, from Primary to Advanced Highers. Join our interactive learning community today!",
+};
 
 // Create a simple loading component
 const CoursesLoadingSkeleton = () => (
