@@ -22,7 +22,8 @@ type FormData = {
   phone: string;
   level: string;
   levelDetail: string;
-  subject: string;
+  subjects: string[];
+  homeworkClubOption: string;
   message: string;
 };
 
@@ -43,30 +44,37 @@ const RegistrationForm = () => {
 
   // Watch the level field to update subjects
   const watchLevel = watch("level");
-
   // Update available subjects when level changes
   useEffect(() => {
     if (watchLevel === "Primary") {
       setSelectedLevel("Primary");
       setAvailableSubjects(["Mathematics", "English", "Science"]);
-    } else if (["S1", "S2", "S3"].includes(watchLevel)) {
+    } else if (["S1", "S2"].includes(watchLevel)) {
       setSelectedLevel("Secondary");
       setAvailableSubjects(["Mathematics", "Science"]);
-    } else if (
-      ["National 5", "Highers", "Advanced Highers"].includes(watchLevel)
-    ) {
-      setSelectedLevel("Advanced");
+    } else if (watchLevel === "S3") {
+      setSelectedLevel("Secondary");
+      setAvailableSubjects(["Mathematics", "Physics", "Chemistry", "Biology"]);
+    } else if (watchLevel === "National 5") {
+      setSelectedLevel("National 5");
+      setAvailableSubjects(["Mathematics", "Physics", "Chemistry", "Biology"]);
+    } else if (watchLevel === "Highers") {
+      setSelectedLevel("Highers");
+      setAvailableSubjects(["Mathematics", "Physics", "Chemistry", "Biology"]);
+    } else if (watchLevel === "Advanced Highers") {
+      setSelectedLevel("Advanced Highers");
       setAvailableSubjects(["Mathematics", "Physics", "Chemistry", "Biology"]);
     } else if (watchLevel === "Homework Club") {
       setSelectedLevel("Homework Club");
-      setAvailableSubjects(["All Subjects"]);
+      setAvailableSubjects([]);
     } else {
       setSelectedLevel("");
       setAvailableSubjects([]);
     }
 
-    // Reset subject when level changes
-    setValue("subject", "");
+    // Reset subjects when level changes
+    setValue("subjects", []);
+    setValue("homeworkClubOption", "");
   }, [watchLevel, setValue]);
 
   const onSubmit = async (data: FormData) => {
@@ -332,6 +340,7 @@ const RegistrationForm = () => {
                   <FaGraduationCap className="mr-2" /> Educational Information
                 </h2>
                 <div className="mt-4 space-y-4">
+                  {" "}
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
                       Level
@@ -358,7 +367,6 @@ const RegistrationForm = () => {
                       </p>
                     )}
                   </div>
-
                   {selectedLevel === "Primary" && (
                     <div>
                       <label className="block text-sm font-medium text-gray-700">
@@ -383,34 +391,81 @@ const RegistrationForm = () => {
                         </p>
                       )}
                     </div>
-                  )}
-
-                  {availableSubjects.length > 0 && (
+                  )}{" "}
+                  {availableSubjects.length > 0 &&
+                    selectedLevel !== "Homework Club" && (
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Subjects (Select all that apply)
+                        </label>
+                        <div className="space-y-2 max-h-32 overflow-y-auto border border-gray-300 rounded-md p-3 bg-gray-50">
+                          {availableSubjects.map((subject) => (
+                            <label
+                              key={subject}
+                              className="flex items-center space-x-2"
+                            >
+                              <input
+                                type="checkbox"
+                                {...register("subjects", {
+                                  required:
+                                    "Please select at least one subject",
+                                })}
+                                value={subject}
+                                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                              />
+                              <span className="text-sm text-gray-700">
+                                {subject}
+                              </span>
+                            </label>
+                          ))}
+                        </div>
+                        {errors.subjects && (
+                          <p className="mt-1 text-sm text-red-500">
+                            {errors.subjects.message}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                  {selectedLevel === "Homework Club" && (
                     <div>
-                      <label className="block text-sm font-medium text-gray-700">
-                        Subject
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Homework Club Options
                       </label>
-                      <select
-                        {...register("subject", {
-                          required: "Please select a subject",
-                        })}
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
-                      >
-                        <option value="">Select a subject</option>
-                        {availableSubjects.map((subject) => (
-                          <option key={subject} value={subject}>
-                            {subject}
-                          </option>
-                        ))}
-                      </select>
-                      {errors.subject && (
+                      <div className="space-y-2">
+                        <label className="flex items-center space-x-2">
+                          <input
+                            type="radio"
+                            {...register("homeworkClubOption", {
+                              required: "Please select a homework club option",
+                            })}
+                            value="per-hour-inquiry"
+                            className="border-gray-300 text-blue-600 focus:ring-blue-500"
+                          />
+                          <span className="text-sm text-gray-700">
+                            Per hour inquiry
+                          </span>
+                        </label>
+                        <label className="flex items-center space-x-2">
+                          <input
+                            type="radio"
+                            {...register("homeworkClubOption", {
+                              required: "Please select a homework club option",
+                            })}
+                            value="subscription-inquiry"
+                            className="border-gray-300 text-blue-600 focus:ring-blue-500"
+                          />
+                          <span className="text-sm text-gray-700">
+                            Subscription inquiry
+                          </span>
+                        </label>
+                      </div>
+                      {errors.homeworkClubOption && (
                         <p className="mt-1 text-sm text-red-500">
-                          {errors.subject.message}
+                          {errors.homeworkClubOption.message}
                         </p>
                       )}
                     </div>
                   )}
-
                   <div>
                     <label className="text-sm font-medium text-gray-700 flex items-center">
                       <FaBook className="mr-1" /> Questions or Comments
