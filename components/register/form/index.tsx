@@ -16,6 +16,8 @@ type FormData = {
   studentName: string;
   institutionName: string;
   parentName: string;
+  address: string;
+  postalCode: string;
   email: string;
   phone: string;
   level: string;
@@ -188,6 +190,42 @@ const RegistrationForm = () => {
                     {errors.parentName && (
                       <p className="mt-1 text-sm text-red-500">
                         {errors.parentName.message}
+                      </p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Address
+                    </label>
+                    <input
+                      {...register("address", {
+                        required: "Address is required",
+                      })}
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Your address"
+                    />
+                    {errors.address && (
+                      <p className="mt-1 text-sm text-red-500">
+                        {errors.address.message}
+                      </p>
+                    )}
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Postal Code
+                    </label>
+                    <input
+                      {...register("postalCode", {
+                        required: "Postal code is required",
+                      })}
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Postal code"
+                    />
+                    {errors.postalCode && (
+                      <p className="mt-1 text-sm text-red-500">
+                        {errors.postalCode.message}
                       </p>
                     )}
                   </div>

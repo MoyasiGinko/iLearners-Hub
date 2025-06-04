@@ -34,7 +34,7 @@ export const cardData: CardDataType[] = [
     image:
       "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop",
     actionButton: {
-      text: "Event Details",
+      text: "Get in Touch",
       url: "/register", // Replace with actual event link
     },
     category: "events",
