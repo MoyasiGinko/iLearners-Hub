@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 import {
   FaChild,
   FaUser,
@@ -32,6 +33,17 @@ const RegistrationForm = () => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [selectedLevel, setSelectedLevel] = useState("");
   const [availableSubjects, setAvailableSubjects] = useState<string[]>([]);
+  const [submitError, setSubmitError] = useState<string>("");
+
+  // EmailJS configuration
+  const EMAILJS_SERVICE_ID = "service_zmcguyp";
+  const EMAILJS_TEMPLATE_ID = "template_0635406";
+  const EMAILJS_PUBLIC_KEY = "EuPOodosn6vBQJ3kx";
+
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  }, []);
 
   const {
     register,
@@ -76,20 +88,66 @@ const RegistrationForm = () => {
     setValue("subjects", []);
     setValue("homeworkClubOption", "");
   }, [watchLevel, setValue]);
-
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
+    setSubmitError("");
 
     try {
-      // Here you would connect to your API to send the form data
-      // For now, we'll just simulate a successful submission
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("Form submitted:", data);
-      setIsSuccess(true);
-      reset();
-      setTimeout(() => setIsSuccess(false), 5000);
+      // Format the current time
+      const currentTime = new Date().toLocaleString("en-GB", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZone: "Europe/London",
+      });
+
+      // Prepare the email payload according to the template structure
+      const emailPayload = {
+        time: currentTime,
+        student_name: data.studentName,
+        name_of_institution: data.institutionName,
+        parent_Name: data.parentName,
+        address: data.address,
+        post_code: data.postalCode,
+        number: data.phone,
+        email: data.email,
+        level: data.level,
+        primary_level: data.levelDetail || "N/A",
+        subjects:
+          data.subjects && data.subjects.length > 0
+            ? data.subjects.join(", ")
+            : "N/A",
+        homework_club_options: data.homeworkClubOption || "N/A",
+        message: data.message || "No additional message provided",
+      };
+
+      console.log("Sending email with payload:", emailPayload);
+
+      // Send email using EmailJS
+      const result = await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        emailPayload,
+        EMAILJS_PUBLIC_KEY
+      );
+
+      if (result.status === 200) {
+        console.log("Email sent successfully:", result);
+        setIsSuccess(true);
+        reset();
+        setTimeout(() => setIsSuccess(false), 5000);
+      } else {
+        throw new Error(`EmailJS error: ${result.text}`);
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
+      setSubmitError(
+        error instanceof Error
+          ? `Failed to send email: ${error.message}`
+          : "An unexpected error occurred. Please try again."
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -137,6 +195,31 @@ const RegistrationForm = () => {
             </motion.div>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} className="p-8 space-y-6">
+              {/* Error message display */}
+              {submitError && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-4"
+                >
+                  <div className="flex items-center">
+                    <svg
+                      className="w-5 h-5 mr-2"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    <span className="font-medium">Error: </span>
+                    <span>{submitError}</span>
+                  </div>
+                </motion.div>
+              )}
+
               <div className="bg-yellow-100 p-4 rounded-lg mb-6 border-2 border-dashed border-yellow-300">
                 <h2 className="text-xl font-bold text-yellow-700 flex items-center">
                   <FaChild className="mr-2" /> Student Information
