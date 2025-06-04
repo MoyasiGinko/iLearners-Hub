@@ -330,42 +330,13 @@ const RegistrationForm = () => {
                         {...register("phone", {
                           required: "Phone number is required",
                           pattern: {
-                            value: /^(\+44\s?|0)([1-9]\d{8,9}|[1-9]\d{9})$/,
+                            value: /^[\d+\s]*$/,
                             message:
-                              "Please enter a valid UK phone number (e.g., +44 7123 456789)",
+                              "Only numbers, + symbol and spaces are allowed",
                           },
-                          validate: {
-                            maxDigits: (value) => {
-                              // Remove all non-digit characters except +
-                              const digitsOnly = value.replace(/[^\d+]/g, "");
-                              // For +44 format, max 13 chars (+44 + 10 digits)
-                              // For 0 format, max 11 digits
-                              if (value.startsWith("+44")) {
-                                return (
-                                  digitsOnly.length <= 13 ||
-                                  "UK phone number with +44 cannot exceed 13 characters"
-                                );
-                              } else {
-                                return (
-                                  digitsOnly.length <= 11 ||
-                                  "UK phone number cannot exceed 11 digits"
-                                );
-                              }
-                            },
-                            minDigits: (value) => {
-                              const digitsOnly = value.replace(/[^\d+]/g, "");
-                              if (value.startsWith("+44")) {
-                                return (
-                                  digitsOnly.length >= 12 ||
-                                  "UK phone number with +44 must be at least 12 characters"
-                                );
-                              } else {
-                                return (
-                                  digitsOnly.length >= 10 ||
-                                  "UK phone number must be at least 10 digits"
-                                );
-                              }
-                            },
+                          maxLength: {
+                            value: 17,
+                            message: "Phone number cannot exceed 17 characters",
                           },
                         })}
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
