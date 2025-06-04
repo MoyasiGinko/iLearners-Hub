@@ -234,17 +234,52 @@ const RegistrationForm = () => {
                     <div>
                       <label className="flex items-center text-sm font-medium text-gray-700">
                         <FaPhone className="mr-1" /> Contact no.
-                      </label>
+                      </label>{" "}
                       <input
                         {...register("phone", {
                           required: "Phone number is required",
                           pattern: {
-                            value: /^[0-9\+\-\(\) ]+$/,
-                            message: "Please enter a valid phone number",
+                            value: /^(\+44\s?|0)([1-9]\d{8,9}|[1-9]\d{9})$/,
+                            message:
+                              "Please enter a valid UK phone number (e.g., +44 7123 456789)",
+                          },
+                          validate: {
+                            maxDigits: (value) => {
+                              // Remove all non-digit characters except +
+                              const digitsOnly = value.replace(/[^\d+]/g, "");
+                              // For +44 format, max 13 chars (+44 + 10 digits)
+                              // For 0 format, max 11 digits
+                              if (value.startsWith("+44")) {
+                                return (
+                                  digitsOnly.length <= 13 ||
+                                  "UK phone number with +44 cannot exceed 13 characters"
+                                );
+                              } else {
+                                return (
+                                  digitsOnly.length <= 11 ||
+                                  "UK phone number cannot exceed 11 digits"
+                                );
+                              }
+                            },
+                            minDigits: (value) => {
+                              const digitsOnly = value.replace(/[^\d+]/g, "");
+                              if (value.startsWith("+44")) {
+                                return (
+                                  digitsOnly.length >= 12 ||
+                                  "UK phone number with +44 must be at least 12 characters"
+                                );
+                              } else {
+                                return (
+                                  digitsOnly.length >= 10 ||
+                                  "UK phone number must be at least 10 digits"
+                                );
+                              }
+                            },
                           },
                         })}
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="Your phone number"
+                        placeholder="e.g., +44 7123 456789"
+                        maxLength={17}
                       />
                       {errors.phone && (
                         <p className="mt-1 text-sm text-red-500">
@@ -256,18 +291,31 @@ const RegistrationForm = () => {
                     <div>
                       <label className="flex items-center text-sm font-medium text-gray-700">
                         <FaEnvelope className="mr-1" /> Email address
-                      </label>
+                      </label>{" "}
                       <input
                         type="email"
                         {...register("email", {
-                          required: "Email is required",
+                          required: "Email address is required",
                           pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                            message: "Please enter a valid email",
+                            value:
+                              /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+                            message: "Please enter a valid email address",
+                          },
+                          validate: {
+                            noSpaces: (value) =>
+                              !/\s/.test(value) ||
+                              "Email address cannot contain spaces",
+                            validDomain: (value) => {
+                              const domain = value.split("@")[1];
+                              return (
+                                (domain && domain.includes(".")) ||
+                                "Please enter a valid email domain"
+                              );
+                            },
                           },
                         })}
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
-                        placeholder="your@email.com"
+                        placeholder="your.name@example.com"
                       />
                       {errors.email && (
                         <p className="mt-1 text-sm text-red-500">
