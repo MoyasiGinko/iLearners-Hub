@@ -1,6 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import emailjs from "@emailjs/browser";
 
 // Separate component for floating SVG elements
 const FloatingElements = () => {
@@ -175,6 +176,21 @@ const ContactSection: React.FC = () => {
     email: "",
     course: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
+
+  // Reset status back to idle after timeout
+  useEffect(() => {
+    if (submitStatus === "success" || submitStatus === "error") {
+      const timer = setTimeout(() => {
+        setSubmitStatus("idle");
+      }, 3000); // Reset after 3 seconds
+
+      return () => clearTimeout(timer);
+    }
+  }, [submitStatus]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -185,10 +201,59 @@ const ContactSection: React.FC = () => {
       [name]: value,
     }));
   };
+  const handleSubmit = async () => {
+    if (!formData.name || !formData.email || !formData.course) {
+      setSubmitStatus("error");
+      return;
+    }
 
-  const handleSubmit = () => {
-    console.log("Form submitted:", formData);
-    // Add your form submission logic here
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+
+    try {
+      // Initialize EmailJS with your public key
+      emailjs.init("EuPOodosn6vBQJ3kx");
+
+      // Prepare template parameters according to your variable structure
+      const templateParams = {
+        name: formData.name,
+        time: new Date().toLocaleString(),
+        email: formData.email,
+        subject: `Free Trial Lesson Request - ${formData.course}`,
+        message: `New free trial lesson request:
+
+Name: ${formData.name}
+Email: ${formData.email}
+Selected Course: ${formData.course}
+Request Time: ${new Date().toLocaleString()}
+
+Please contact this student to schedule their free trial lesson.`,
+      };
+
+      // Send email using EmailJS
+      const response = await emailjs.send(
+        "service_zmcguyp", // service ID
+        "template_bm06l9f", // template ID
+        templateParams
+      );
+
+      if (response.status === 200) {
+        setSubmitStatus("success");
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          course: "",
+        });
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const categories = [
@@ -250,7 +315,6 @@ const ContactSection: React.FC = () => {
                     className="w-full p-2 sm:p-3 text-sm sm:text-base rounded-xl bg-gray-950/80 border-2 border-teal-400/5 text-white placeholder:text-gray-400 focus:border-teal-300 focus:outline-none shadow-inner"
                   />
                 </div>
-
                 <div className="mb-3 sm:mb-4">
                   <label className="block text-white text-sm sm:text-base font-medium mb-1">
                     Email Address
@@ -264,7 +328,6 @@ const ContactSection: React.FC = () => {
                     className="w-full p-2 sm:p-3 text-sm sm:text-base rounded-xl bg-gray-950/80 border-2 border-teal-400/5 text-white placeholder:text-gray-400 focus:border-teal-300 focus:outline-none shadow-inner"
                   />
                 </div>
-
                 <div className="mb-4 sm:mb-5">
                   <label className="block text-white text-sm sm:text-base font-medium mb-1">
                     Pick Your Favorite Subject
@@ -287,14 +350,64 @@ const ContactSection: React.FC = () => {
                       </option>
                     ))}
                   </select>
-                </div>
-
+                </div>{" "}
                 <button
                   onClick={handleSubmit}
-                  className="relative bg-gradient-to-r from-pink-500 to-orange-400 text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-full shadow-[0_6px_0_rgb(194,24,91)] active:shadow-[0_0px_0px_rgb(194,24,91)] active:translate-y-[6px] transition-all duration-150 text-xs sm:text-sm md:text-base flex items-center justify-center w-full"
+                  disabled={isSubmitting}
+                  className={`relative text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-full transition-all duration-150 text-xs sm:text-sm md:text-base flex items-center justify-center w-full ${
+                    isSubmitting
+                      ? "bg-gray-500 cursor-not-allowed"
+                      : submitStatus === "success"
+                      ? "bg-green-500 shadow-[0_6px_0_rgb(34,197,94)] active:shadow-[0_0px_0px_rgb(34,197,94)] active:translate-y-[6px]"
+                      : submitStatus === "error"
+                      ? "bg-red-500 shadow-[0_6px_0_rgb(239,68,68)] active:shadow-[0_0px_0px_rgb(239,68,68)] active:translate-y-[6px]"
+                      : "bg-gradient-to-r from-pink-500 to-orange-400 shadow-[0_6px_0_rgb(194,24,91)] active:shadow-[0_0px_0px_rgb(194,24,91)] active:translate-y-[6px]"
+                  }`}
                 >
-                  Let's Start Learning!
+                  {isSubmitting ? (
+                    <>
+                      <svg
+                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                        ></path>
+                      </svg>
+                      Sending...
+                    </>
+                  ) : submitStatus === "success" ? (
+                    "Request Sent! ✓"
+                  ) : submitStatus === "error" ? (
+                    "Try Again"
+                  ) : (
+                    "Let's Start Learning!"
+                  )}
                 </button>
+                {/* Status Messages */}
+                {submitStatus === "success" && (
+                  <div className="mt-3 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg text-sm">
+                    🎉 Great! Your request has been sent. We'll contact you
+                    soon!
+                  </div>
+                )}
+                {submitStatus === "error" && (
+                  <div className="mt-3 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
+                    ❌ Oops! Please fill in all fields and try again.
+                  </div>
+                )}
               </div>
             </div>
           </div>

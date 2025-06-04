@@ -9,6 +9,13 @@ import Image from "next/image";
 import ContactSection from "@/components/main/contact";
 import FAQSection from "@/components/main/faq/FAQ-Section";
 import faqItems from "../../components/main/faq/homefaqData";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "iLearner's Hub - Home | Interactive Learning Platform",
+  description:
+    "Welcome to iLearner's Hub! Discover engaging courses from Primary to Advanced Highers. Expert tutoring, interactive lessons, and personalized learning experiences await.",
+};
 
 export default function Home() {
   return (
