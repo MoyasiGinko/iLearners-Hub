@@ -24,32 +24,92 @@ const Footer = () => {
     { label: "Highers", href: "/courses/highers" },
     { label: "Advanced Highers", href: "/courses/advanced-highers" },
   ];
-
-  const currentYear = new Date().getFullYear();
-
-  // Function to handle navigation to course categories with smooth scrolling
+  const currentYear = new Date().getFullYear(); // Function to handle navigation to course categories with smooth scrolling
   const handleCategoryClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
     e.preventDefault();
 
-    // Navigate to the courses page
-    router.push(href);
+    // Get current path and target slug
+    const currentPath = window.location.pathname;
+    const targetSlug = href.split("/").pop() || "all-courses";
+    const currentSlug = currentPath.split("/").pop() || ""; // If we're already on the target course page, just scroll
+    if (currentPath.startsWith("/courses/") && currentSlug === targetSlug) {
+      console.log(
+        "🔄 Same page scroll attempt - Current:",
+        currentSlug,
+        "Target:",
+        targetSlug
+      );
 
-    // After navigation, scroll to courses-content
-    // Using setTimeout to ensure the navigation completes first
-    setTimeout(() => {
+      // Use a small delay to ensure any pending renders are complete
+      setTimeout(() => {
+        const coursesContent = document.getElementById("courses-content");
+        console.log("📍 Found courses-content element:", !!coursesContent);
+
+        if (coursesContent) {
+          const elementPosition = coursesContent.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY - 100;
+
+          console.log(
+            "📏 Scroll calculation - Element top:",
+            elementPosition,
+            "Offset:",
+            offsetPosition
+          );
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }
+      }, 100);
+      return;
+    } // Navigate to the new course page
+    console.log("🚀 Navigating from", currentSlug, "to", targetSlug);
+    router.push(href, { scroll: false });
+
+    // Wait for navigation and then scroll
+    const scrollToCoursesContent = (attempts = 0) => {
+      const maxAttempts = 15;
       const coursesContent = document.getElementById("courses-content");
+
+      console.log(
+        `📍 Scroll attempt ${attempts + 1}/${maxAttempts} - Found element:`,
+        !!coursesContent
+      );
+
       if (coursesContent) {
-        const offsetPosition =
-          coursesContent.getBoundingClientRect().top + window.scrollY - 100;
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
+        requestAnimationFrame(() => {
+          const elementPosition = coursesContent.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY - 100;
+
+          console.log(
+            "📏 Cross-page scroll - Element top:",
+            elementPosition,
+            "Offset:",
+            offsetPosition
+          );
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
         });
+      } else if (attempts < maxAttempts) {
+        setTimeout(() => scrollToCoursesContent(attempts + 1), 100);
+      } else {
+        console.log(
+          "❌ Failed to find courses-content after",
+          maxAttempts,
+          "attempts"
+        );
       }
-    }, 300);
+    };
+
+    // Start scroll attempt after navigation
+    setTimeout(() => scrollToCoursesContent(), 200);
   };
 
   return (
