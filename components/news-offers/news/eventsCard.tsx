@@ -109,11 +109,13 @@ const EventCard: React.FC<{ card: CardDataType }> = ({ card }) => (
         {/* Info card section with subtle hover animation */}
         <div className="relative z-10 bg-white rounded-2xl md:rounded-3xl p-4 sm:p-5 md:p-6 shadow-xl border-2 md:border-4 border-dashed border-yellow-400 hover:shadow-2xl hover:scale-[1.02] transition-all duration-500">
           <h3 className="text-blue-600 font-bold text-base sm:text-lg md:text-xl mb-2 md:mb-3 flex items-center gap-1 md:gap-2">
-            <GraduationCap
-              className="w-5 h-5 md:w-7 md:h-7 text-purple-600 animate-bounce"
-              style={{ animationDelay: "2s", animationDuration: "2s" }}
-            />
-            LET'S HAVE FUN TOGETHER!
+            <span>
+              <GraduationCap
+                className="w-5 h-5 md:w-7 md:h-7 text-purple-600 animate-bounce"
+                style={{ animationDelay: "2s", animationDuration: "2s" }}
+              />
+            </span>
+            WANT TO FIND OUT MORE ABOUT OUR COURSES?
           </h3>
           <p className="text-gray-600 text-xs sm:text-sm mb-3 md:mb-4 leading-relaxed">
             {card.description}
@@ -172,29 +174,32 @@ const EventCard: React.FC<{ card: CardDataType }> = ({ card }) => (
         <img
           src={card.image}
           alt={card.title}
-          className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700 ease-out"
+          className="absolute inset-0 w-full h-full object-fit cover hover:scale-105 transition-transform duration-700 ease-out"
         />
 
         {/* Overlay text with animations */}
-        <div className="absolute inset-0 bg-black/30 flex flex-col justify-between p-4 md:p-6">
+        <div className="absolute inset-0 flex flex-col justify-between p-4 md:p-6 transition-all duration-500 group">
+          {/* Shining effect overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
+
           <div
-            className="self-end animate-float"
+            className="self-end animate-float hover:animate-bounce transform group-hover:translate-y-1 transition-transform duration-300 relative z-10"
             style={{ animationDelay: "1s" }}
           >
             {/* Category badge */}
-            <div className="bg-white bg-opacity-90 text-gray-800 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-bold shadow-lg hover:bg-opacity-100 transition-all duration-300">
+            <div className="bg-white bg-opacity-90 text-gray-800 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-bold shadow-lg hover:bg-opacity-100 hover:scale-110 hover:shadow-xl transition-all duration-300 animate-pulse">
               {card.category}
             </div>
           </div>
 
-          <div
-            className="text-white animate-pulse"
-            style={{ animationDuration: "4s" }}
+          {/* <div
+            className="text-white animate-fade-in-up opacity-0 hover:opacity-100 transition-opacity duration-700"
+            style={{ animationDelay: "2s", animationFillMode: "forwards" }}
           >
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold drop-shadow-lg">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold drop-shadow-lg animate-glow hover:animate-pulse transition-all duration-500">
               JOIN US NOW
             </h2>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

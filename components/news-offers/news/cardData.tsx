@@ -31,8 +31,7 @@ export const cardData: CardDataType[] = [
     title: "Visit Us at Eid on the Terrace – Sunday 22nd June!",
     description:
       "We’ll be at “Eid on the Terrace,” a lively community celebration in the centre of Aberdeen!\n\nCome along and visit the iLearners Hub stall – we’d love to see you there!",
-    image:
-      "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop",
+    image: "/images/news/event1.jpg",
     actionButton: {
       text: "Get in Touch",
       url: "/register", // Replace with actual event link

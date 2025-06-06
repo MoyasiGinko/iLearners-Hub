@@ -174,12 +174,18 @@ const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    course: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
+  const [emailError, setEmailError] = useState("");
+  const [nameError, setNameError] = useState("");
+  // Email validation function
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   // Reset status back to idle after timeout
   useEffect(() => {
@@ -200,9 +206,39 @@ const ContactSection: React.FC = () => {
       ...prev,
       [name]: value,
     }));
+
+    // Clear errors when user starts typing
+    if (name === "email") {
+      setEmailError("");
+    }
+    if (name === "name") {
+      setNameError("");
+    }
   };
-  const handleSubmit = async () => {
-    if (!formData.name || !formData.email || !formData.course) {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault(); // Prevent default form submission
+
+    // Clear previous errors
+    setEmailError("");
+    setNameError("");
+
+    // Validate fields
+    let hasErrors = false;
+
+    if (!formData.name.trim()) {
+      setNameError("Name is required");
+      hasErrors = true;
+    }
+
+    if (!formData.email.trim()) {
+      setEmailError("Email is required");
+      hasErrors = true;
+    } else if (!validateEmail(formData.email)) {
+      setEmailError("Please enter a valid email address");
+      hasErrors = true;
+    }
+
+    if (hasErrors) {
       setSubmitStatus("error");
       return;
     }
@@ -214,20 +250,10 @@ const ContactSection: React.FC = () => {
       // Initialize EmailJS with your public key
       emailjs.init("EuPOodosn6vBQJ3kx");
 
-      // Prepare template parameters according to your variable structure
+      // Prepare template parameters with only name and email
       const templateParams = {
         name: formData.name,
-        time: new Date().toLocaleString(),
         email: formData.email,
-        subject: `Free Trial Lesson Request - ${formData.course}`,
-        message: `New free trial lesson request:
-
-Name: ${formData.name}
-Email: ${formData.email}
-Selected Course: ${formData.course}
-Request Time: ${new Date().toLocaleString()}
-
-Please contact this student to schedule their free trial lesson.`,
       };
 
       // Send email using EmailJS
@@ -243,7 +269,6 @@ Please contact this student to schedule their free trial lesson.`,
         setFormData({
           name: "",
           email: "",
-          course: "",
         });
       } else {
         setSubmitStatus("error");
@@ -255,21 +280,12 @@ Please contact this student to schedule their free trial lesson.`,
       setIsSubmitting(false);
     }
   };
-
-  const categories = [
-    { name: "Primary" },
-    { name: "Secondary" },
-    { name: "National 5" },
-    { name: "Highers" },
-    { name: "Advanced Highers" },
-    { name: "Exam Revision" },
-    { name: "Mock Exams" },
-    { name: "Tips & Hints" },
-    { name: "Homework Club" },
-  ];
-
   return (
-    <div className="w-full bg-transparent py-20 px-4 overflow-hidden relative">
+    <div
+      className="w-full bg-transparent py-20 px-4 overflow-hidden relative"
+      data-contact-section
+      id="contact-form"
+    >
       <FloatingElements />
       <div className="w-full max-w-6xl bg-transparent mx-auto px-3 sm:px-4 md:px-6 relative z-10">
         {/* Background SVG */}
@@ -278,8 +294,9 @@ Please contact this student to schedule their free trial lesson.`,
             {/* Left Section */}
             <div className="pt-6 px-4 sm:pt-6 sm:px-6 md:p-8 min-h-[250px] sm:min-h-[300px] md:min-h-[440px] md:w-1/2 flex items-center justify-center">
               <div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-4">
-                  Sign up for a Free Trial Lesson
+                {" "}
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold tracking-tight text-white mb-2 sm:mb-4">
+                  Subscribe now to receive special offers and discounts!
                 </h2>
                 <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6">
                   Join iLearners-Hub and explore a wide range of engaging
@@ -301,113 +318,112 @@ Please contact this student to schedule their free trial lesson.`,
 
             {/* Right Section - Form */}
             <div className="pb-6 px-4 sm:pb-6 sm:px-6 md:p-8 md:w-1/2 flex items-center justify-center">
+              {" "}
               <div className="w-full bg-gradient-to-r from-gray-800 to-teal-500 p-3 sm:p-4 md:p-6 rounded-3xl  shadow-[0_8px_16px_rgba(0,0,0,0.3)] transform hover:translate-y-[-2px] transition-all duration-300">
-                <div className="mb-3 sm:mb-4">
-                  <label className="block text-white text-sm sm:text-base font-medium mb-1">
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="What should we call you?"
-                    className="w-full p-2 sm:p-3 text-sm sm:text-base rounded-xl bg-gray-950/80 border-2 border-teal-400/5 text-white placeholder:text-gray-400 focus:border-teal-300 focus:outline-none shadow-inner"
-                  />
-                </div>
-                <div className="mb-3 sm:mb-4">
-                  <label className="block text-white text-sm sm:text-base font-medium mb-1">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder="Where can we reach you?"
-                    className="w-full p-2 sm:p-3 text-sm sm:text-base rounded-xl bg-gray-950/80 border-2 border-teal-400/5 text-white placeholder:text-gray-400 focus:border-teal-300 focus:outline-none shadow-inner"
-                  />
-                </div>
-                <div className="mb-4 sm:mb-5">
-                  <label className="block text-white text-sm sm:text-base font-medium mb-1">
-                    Pick Your Favorite Subject
-                  </label>
-                  <select
-                    name="course"
-                    value={formData.course}
-                    onChange={handleChange}
-                    className="w-full p-2 sm:p-3 text-sm sm:text-base rounded-xl bg-gray-950/80 border-2 border-teal-400/5 text-white focus:border-teal-300 focus:outline-none appearance-none shadow-inner"
+                <form onSubmit={handleSubmit} noValidate>
+                  <div className="mb-3 sm:mb-4">
+                    <label className="block text-white text-sm sm:text-base font-medium mb-1">
+                      Your Name
+                    </label>{" "}
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="What should we call you?"
+                      required
+                      className={`w-full p-2 sm:p-3 text-sm sm:text-base rounded-xl bg-gray-950/80 border-2 text-white placeholder:text-gray-400 focus:outline-none shadow-inner transition-colors ${
+                        nameError
+                          ? "border-red-400 focus:border-red-300"
+                          : "border-teal-400/5 focus:border-teal-300"
+                      }`}
+                    />
+                    {nameError && (
+                      <p className="mt-1 text-red-300 text-xs">{nameError}</p>
+                    )}
+                  </div>
+                  <div className="mb-3 sm:mb-4">
+                    <label className="block text-white text-sm sm:text-base font-medium mb-1">
+                      Email Address
+                    </label>{" "}
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="Where can we reach you?"
+                      required
+                      className={`w-full p-2 sm:p-3 text-sm sm:text-base rounded-xl bg-gray-950/80 border-2 text-white placeholder:text-gray-400 focus:outline-none shadow-inner transition-colors ${
+                        emailError
+                          ? "border-red-400 focus:border-red-300"
+                          : "border-teal-400/5 focus:border-teal-300"
+                      }`}
+                    />
+                    {emailError && (
+                      <p className="mt-1 text-red-300 text-xs">{emailError}</p>
+                    )}
+                  </div>{" "}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className={`relative text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-full transition-all duration-150 text-xs sm:text-sm md:text-base flex items-center justify-center w-full ${
+                      isSubmitting
+                        ? "bg-gray-500 cursor-not-allowed"
+                        : submitStatus === "success"
+                        ? "bg-green-500 shadow-[0_6px_0_rgb(34,197,94)] active:shadow-[0_0px_0px_rgb(34,197,94)] active:translate-y-[6px]"
+                        : submitStatus === "error"
+                        ? "bg-red-500 shadow-[0_6px_0_rgb(239,68,68)] active:shadow-[0_0px_0px_rgb(239,68,68)] active:translate-y-[6px]"
+                        : "bg-gradient-to-r from-pink-500 to-orange-400 shadow-[0_6px_0_rgb(194,24,91)] active:shadow-[0_0px_0px_rgb(194,24,91)] active:translate-y-[6px]"
+                    }`}
                   >
-                    <option value="" disabled>
-                      Choose something fun to learn!
-                    </option>
-                    {categories.map((category, index) => (
-                      <option
-                        key={index}
-                        value={category.name.toLowerCase().replace(/\s+/g, "-")}
-                      >
-                        {category.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>{" "}
-                <button
-                  onClick={handleSubmit}
-                  disabled={isSubmitting}
-                  className={`relative text-white font-bold py-2 sm:py-3 px-4 sm:px-6 rounded-full transition-all duration-150 text-xs sm:text-sm md:text-base flex items-center justify-center w-full ${
-                    isSubmitting
-                      ? "bg-gray-500 cursor-not-allowed"
-                      : submitStatus === "success"
-                      ? "bg-green-500 shadow-[0_6px_0_rgb(34,197,94)] active:shadow-[0_0px_0px_rgb(34,197,94)] active:translate-y-[6px]"
-                      : submitStatus === "error"
-                      ? "bg-red-500 shadow-[0_6px_0_rgb(239,68,68)] active:shadow-[0_0px_0px_rgb(239,68,68)] active:translate-y-[6px]"
-                      : "bg-gradient-to-r from-pink-500 to-orange-400 shadow-[0_6px_0_rgb(194,24,91)] active:shadow-[0_0px_0px_rgb(194,24,91)] active:translate-y-[6px]"
-                  }`}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <svg
-                        className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        ></path>
-                      </svg>
-                      Sending...
-                    </>
-                  ) : submitStatus === "success" ? (
-                    "Request Sent! ✓"
-                  ) : submitStatus === "error" ? (
-                    "Try Again"
-                  ) : (
-                    "Let's Start Learning!"
+                    {isSubmitting ? (
+                      <>
+                        <svg
+                          className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          ></path>
+                        </svg>
+                        Subscribing...
+                      </>
+                    ) : submitStatus === "success" ? (
+                      "Subscribed! ✓"
+                    ) : submitStatus === "error" ? (
+                      "Try Again"
+                    ) : (
+                      "Subscribe"
+                    )}
+                  </button>
+                  {/* Status Messages */}
+                  {submitStatus === "success" && (
+                    <div className="mt-3 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg text-sm">
+                      🎉 Welcome! You've successfully subscribed to our
+                      newsletter. Get ready for amazing content!
+                    </div>
+                  )}{" "}
+                  {submitStatus === "error" && (
+                    <div className="mt-3 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
+                      ❌{" "}
+                      {emailError ||
+                        nameError ||
+                        "Something went wrong. Please try again."}
+                    </div>
                   )}
-                </button>
-                {/* Status Messages */}
-                {submitStatus === "success" && (
-                  <div className="mt-3 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg text-sm">
-                    🎉 Great! Your request has been sent. We'll contact you
-                    soon!
-                  </div>
-                )}
-                {submitStatus === "error" && (
-                  <div className="mt-3 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
-                    ❌ Oops! Please fill in all fields and try again.
-                  </div>
-                )}
+                </form>
               </div>
             </div>
           </div>
