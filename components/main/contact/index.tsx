@@ -174,7 +174,6 @@ const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    course: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
@@ -202,7 +201,7 @@ const ContactSection: React.FC = () => {
     }));
   };
   const handleSubmit = async () => {
-    if (!formData.name || !formData.email || !formData.course) {
+    if (!formData.name || !formData.email) {
       setSubmitStatus("error");
       return;
     }
@@ -212,14 +211,12 @@ const ContactSection: React.FC = () => {
 
     try {
       // Initialize EmailJS with your public key
-      emailjs.init("EuPOodosn6vBQJ3kx"); // Prepare template parameters with only name, email, and subject
+      emailjs.init("EuPOodosn6vBQJ3kx");
+
+      // Prepare template parameters with only name and email
       const templateParams = {
         name: formData.name,
         email: formData.email,
-        subject: `Free Trial Lesson Request - ${formData.course
-          .split("-")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")}`,
       };
 
       // Send email using EmailJS
@@ -235,7 +232,6 @@ const ContactSection: React.FC = () => {
         setFormData({
           name: "",
           email: "",
-          course: "",
         });
       } else {
         setSubmitStatus("error");
@@ -248,18 +244,6 @@ const ContactSection: React.FC = () => {
     }
   };
 
-  const categories = [
-    { name: "Primary" },
-    { name: "Secondary" },
-    { name: "National 5" },
-    { name: "Highers" },
-    { name: "Advanced Highers" },
-    { name: "Exam Revision" },
-    { name: "Mock Exams" },
-    { name: "Tips & Hints" },
-    { name: "Homework Club" },
-  ];
-
   return (
     <div className="w-full bg-transparent py-20 px-4 overflow-hidden relative">
       <FloatingElements />
@@ -270,6 +254,7 @@ const ContactSection: React.FC = () => {
             {/* Left Section */}
             <div className="pt-6 px-4 sm:pt-6 sm:px-6 md:p-8 min-h-[250px] sm:min-h-[300px] md:min-h-[440px] md:w-1/2 flex items-center justify-center">
               <div>
+                {" "}
                 <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-4">
                   Sign up for a Free Trial Lesson
                 </h2>
@@ -318,30 +303,7 @@ const ContactSection: React.FC = () => {
                     onChange={handleChange}
                     placeholder="Where can we reach you?"
                     className="w-full p-2 sm:p-3 text-sm sm:text-base rounded-xl bg-gray-950/80 border-2 border-teal-400/5 text-white placeholder:text-gray-400 focus:border-teal-300 focus:outline-none shadow-inner"
-                  />
-                </div>
-                <div className="mb-4 sm:mb-5">
-                  <label className="block text-white text-sm sm:text-base font-medium mb-1">
-                    Pick Your Favorite Subject
-                  </label>
-                  <select
-                    name="course"
-                    value={formData.course}
-                    onChange={handleChange}
-                    className="w-full p-2 sm:p-3 text-sm sm:text-base rounded-xl bg-gray-950/80 border-2 border-teal-400/5 text-white focus:border-teal-300 focus:outline-none appearance-none shadow-inner"
-                  >
-                    <option value="" disabled>
-                      Choose something fun to learn!
-                    </option>
-                    {categories.map((category, index) => (
-                      <option
-                        key={index}
-                        value={category.name.toLowerCase().replace(/\s+/g, "-")}
-                      >
-                        {category.name}
-                      </option>
-                    ))}
-                  </select>
+                  />{" "}
                 </div>{" "}
                 <button
                   onClick={handleSubmit}
@@ -378,26 +340,27 @@ const ContactSection: React.FC = () => {
                           d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                         ></path>
                       </svg>
-                      Sending...
+                      Subscribing...
                     </>
                   ) : submitStatus === "success" ? (
-                    "Request Sent! ✓"
+                    "Subscribed! ✓"
                   ) : submitStatus === "error" ? (
                     "Try Again"
                   ) : (
-                    "Let's Start Learning!"
+                    "Subscribe to Newsletter"
                   )}
                 </button>
                 {/* Status Messages */}
                 {submitStatus === "success" && (
                   <div className="mt-3 p-3 bg-green-100 border border-green-400 text-green-700 rounded-lg text-sm">
-                    🎉 Great! Your request has been sent. We'll contact you
-                    soon!
+                    🎉 Welcome! You've successfully subscribed to our
+                    newsletter. Get ready for amazing content!
                   </div>
                 )}
                 {submitStatus === "error" && (
                   <div className="mt-3 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
-                    ❌ Oops! Please fill in all fields and try again.
+                    ❌ Oops! Please fill in both name and email fields to
+                    subscribe.
                   </div>
                 )}
               </div>
