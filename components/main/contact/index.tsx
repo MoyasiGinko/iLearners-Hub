@@ -212,22 +212,14 @@ const ContactSection: React.FC = () => {
 
     try {
       // Initialize EmailJS with your public key
-      emailjs.init("EuPOodosn6vBQJ3kx");
-
-      // Prepare template parameters according to your variable structure
+      emailjs.init("EuPOodosn6vBQJ3kx"); // Prepare template parameters with only name, email, and subject
       const templateParams = {
         name: formData.name,
-        time: new Date().toLocaleString(),
         email: formData.email,
-        subject: `Free Trial Lesson Request - ${formData.course}`,
-        message: `New free trial lesson request:
-
-Name: ${formData.name}
-Email: ${formData.email}
-Selected Course: ${formData.course}
-Request Time: ${new Date().toLocaleString()}
-
-Please contact this student to schedule their free trial lesson.`,
+        subject: `Free Trial Lesson Request - ${formData.course
+          .split("-")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ")}`,
       };
 
       // Send email using EmailJS
