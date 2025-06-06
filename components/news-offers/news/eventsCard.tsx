@@ -176,9 +176,12 @@ const EventCard: React.FC<{ card: CardDataType }> = ({ card }) => (
         />
 
         {/* Overlay text with animations */}
-        <div className="absolute bg-black/5 hover:bg-transparent inset-0 flex flex-col justify-between p-4 md:p-6 transition-all duration-500 group">
+        <div className="absolute inset-0 flex flex-col justify-between p-4 md:p-6 transition-all duration-500 group">
+          {/* Shining effect overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out"></div>
+
           <div
-            className="self-end animate-float hover:animate-bounce transform group-hover:translate-y-1 transition-transform duration-300"
+            className="self-end animate-float hover:animate-bounce transform group-hover:translate-y-1 transition-transform duration-300 relative z-10"
             style={{ animationDelay: "1s" }}
           >
             {/* Category badge */}
