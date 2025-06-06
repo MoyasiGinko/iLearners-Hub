@@ -304,7 +304,6 @@ const Header = () => {
           {/* Desktop Navigation - Centered */}
           <nav className="hidden lg:flex items-center justify-center flex-1">
             <div className="flex items-center space-x-8">
-              {" "}
               {navItems.map((item) => (
                 <Link
                   key={item.title}
@@ -316,14 +315,18 @@ const Header = () => {
                             ? "animate-celebration-glow animate-celebration-pulse"
                             : ""
                         }`
-                      : "bg-gradient-to-r from-sky-400 to-blue-300 text-gray-50 hover:bg-gradient-to-r hover:from-[#fbbf24] hover:to-[#f472b6] hover:shadow-2xl hover:scale-105 hover:-translate-y-1 hover:rotate-x-6 hover:rotate-y-3"
+                      : `${
+                          item.title === "NEWS & OFFERS"
+                            ? "bg-gradient-to-r from-pink-400 to-purple-400 text-gray-50 animate-celebration-glow animate-celebration-pulse"
+                            : "bg-gradient-to-r from-sky-400 to-blue-300 text-gray-50"
+                        } hover:bg-gradient-to-r hover:from-[#fbbf24] hover:to-[#f472b6] hover:shadow-2xl hover:scale-105 hover:-translate-y-1 hover:rotate-x-6 hover:rotate-y-3`
                   }`}
                   style={{
                     perspective: "600px",
                   }}
                 >
-                  {/* Celebration effects for NEWS & OFFERS when active */}
-                  {isActive(item.href) && item.title === "NEWS & OFFERS" && (
+                  {/* Always show celebration effects for NEWS & OFFERS */}
+                  {item.title === "NEWS & OFFERS" && (
                     <>
                       {/* Sparkle elements */}
                       <div
@@ -382,12 +385,16 @@ const Header = () => {
                               ? "animate-celebration-bounce"
                               : ""
                           }`
-                        : "group-hover:translate-y-[-120%] group-hover:opacity-0"
+                        : `${
+                            item.title === "NEWS & OFFERS"
+                              ? "font-bold animate-celebration-bounce"
+                              : "group-hover:translate-y-[-120%] group-hover:opacity-0"
+                          }`
                     }`}
                   >
                     {item.title}
                   </span>
-                  {!isActive(item.href) && (
+                  {!isActive(item.href) && item.title !== "NEWS & OFFERS" && (
                     <span className="absolute left-0 top-0 w-full h-full flex items-center justify-center z-0 transition-transform duration-300 translate-y-[120%] opacity-0 group-hover:translate-y-0 group-hover:opacity-100">
                       <span className="bg-gradient-to-r from-blue-50 via-purple-50 to-indigo-50 bg-clip-text text-transparent animate-gradient-x">
                         {item.title}
