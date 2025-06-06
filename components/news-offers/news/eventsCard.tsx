@@ -109,11 +109,13 @@ const EventCard: React.FC<{ card: CardDataType }> = ({ card }) => (
         {/* Info card section with subtle hover animation */}
         <div className="relative z-10 bg-white rounded-2xl md:rounded-3xl p-4 sm:p-5 md:p-6 shadow-xl border-2 md:border-4 border-dashed border-yellow-400 hover:shadow-2xl hover:scale-[1.02] transition-all duration-500">
           <h3 className="text-blue-600 font-bold text-base sm:text-lg md:text-xl mb-2 md:mb-3 flex items-center gap-1 md:gap-2">
-            <GraduationCap
-              className="w-5 h-5 md:w-7 md:h-7 text-purple-600 animate-bounce"
-              style={{ animationDelay: "2s", animationDuration: "2s" }}
-            />
-            LET'S HAVE FUN TOGETHER!
+            <span>
+              <GraduationCap
+                className="w-5 h-5 md:w-7 md:h-7 text-purple-600 animate-bounce"
+                style={{ animationDelay: "2s", animationDuration: "2s" }}
+              />
+            </span>
+            WANT TO FIND OUT MORE ABOUT OUR COURSES?
           </h3>
           <p className="text-gray-600 text-xs sm:text-sm mb-3 md:mb-4 leading-relaxed">
             {card.description}
