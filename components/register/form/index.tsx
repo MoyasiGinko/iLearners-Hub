@@ -16,6 +16,7 @@ import {
 type FormData = {
   studentName: string;
   institutionName: string;
+  studyYear: string;
   parentName: string;
   address: string;
   postalCode: string;
@@ -101,13 +102,12 @@ const RegistrationForm = () => {
         hour: "2-digit",
         minute: "2-digit",
         timeZone: "Europe/London",
-      });
-
-      // Prepare the email payload according to the template structure
+      }); // Prepare the email payload according to the template structure
       const emailPayload = {
         time: currentTime,
         student_name: data.studentName,
         name_of_institution: data.institutionName,
+        study_year: data.studyYear,
         parent_Name: data.parentName,
         address: data.address,
         post_code: data.postalCode,
@@ -241,7 +241,7 @@ const RegistrationForm = () => {
                         {errors.studentName.message}
                       </p>
                     )}
-                  </div>
+                  </div>{" "}
                   <div>
                     <label className=" text-sm font-medium text-gray-700 flex items-center">
                       <FaSchool className="mr-2" /> Institution Name
@@ -256,6 +256,23 @@ const RegistrationForm = () => {
                     {errors.institutionName && (
                       <p className="mt-1 text-sm text-red-500">
                         {errors.institutionName.message}
+                      </p>
+                    )}
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Which year you're currently studying
+                    </label>
+                    <input
+                      {...register("studyYear", {
+                        required: "Current study year is required",
+                      })}
+                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-3 focus:ring-blue-500 focus:border-blue-500"
+                      placeholder="Enter which year"
+                    />
+                    {errors.studyYear && (
+                      <p className="mt-1 text-sm text-red-500">
+                        {errors.studyYear.message}
                       </p>
                     )}
                   </div>
@@ -397,7 +414,7 @@ const RegistrationForm = () => {
                   {" "}
                   <div>
                     <label className="block text-sm font-medium text-gray-700">
-                      Level
+                      Which level you're interested in?
                     </label>
                     <select
                       {...register("level", {
