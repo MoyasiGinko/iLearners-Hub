@@ -112,12 +112,16 @@ const MobileMenu = ({
                               ? "animate-celebration-glow animate-celebration-pulse"
                               : ""
                           }`
-                        : "bg-blue-600/40 hover:text-yellow-100"
+                        : `bg-blue-600/40 hover:text-yellow-100 ${
+                            item.title === "NEWS & OFFERS"
+                              ? "animate-celebration-glow animate-celebration-pulse"
+                              : ""
+                          }`
                     }`}
                     onClick={onClose}
                   >
-                    {/* Celebration effects for NEWS & OFFERS when active in mobile */}
-                    {isActive(item.href) && item.title === "NEWS & OFFERS" && (
+                    {/* Always show celebration effects for NEWS & OFFERS in mobile */}
+                    {item.title === "NEWS & OFFERS" && (
                       <>
                         {/* Mobile sparkle elements - smaller and fewer */}
                         <div
@@ -136,6 +140,32 @@ const MobileMenu = ({
                           className="absolute -bottom-2 left-3 w-1 h-1 bg-purple-300 rounded-full animate-sparkle"
                           style={{ animationDelay: "1.5s" }}
                         />
+                        <div
+                          className="absolute top-1 right-1 w-1 h-1 bg-white rounded-full animate-sparkle"
+                          style={{ animationDelay: "0.3s" }}
+                        />
+                        <div
+                          className="absolute bottom-1 left-1 w-1 h-1 bg-white rounded-full animate-sparkle"
+                          style={{ animationDelay: "0.8s" }}
+                        />
+
+                        {/* Mobile confetti elements */}
+                        <div
+                          className="absolute -top-3 left-2 w-1 h-2 bg-yellow-400 animate-confetti"
+                          style={{ animationDelay: "0s" }}
+                        />
+                        <div
+                          className="absolute -top-3 right-2 w-1 h-2 bg-pink-400 animate-confetti"
+                          style={{ animationDelay: "0.4s" }}
+                        />
+                        <div
+                          className="absolute -top-3 left-4 w-1 h-1 bg-blue-400 animate-confetti"
+                          style={{ animationDelay: "0.8s" }}
+                        />
+                        <div
+                          className="absolute -top-3 right-4 w-1 h-1 bg-purple-400 animate-confetti"
+                          style={{ animationDelay: "1.2s" }}
+                        />
 
                         {/* Mobile shimmer overlay */}
                         <div className="absolute inset-0 rounded-full animate-celebration-shimmer pointer-events-none" />
@@ -143,8 +173,8 @@ const MobileMenu = ({
                     )}
                     <span
                       className={`relative z-10 ${
-                        isActive(item.href) && item.title === "NEWS & OFFERS"
-                          ? "animate-celebration-bounce"
+                        item.title === "NEWS & OFFERS"
+                          ? "font-bold animate-celebration-bounce"
                           : ""
                       }`}
                     >
@@ -157,12 +187,12 @@ const MobileMenu = ({
                 <Link
                   href="/register"
                   className={`px-8 py-3 rounded-full inline-block font-semibold shadow-lg border-b-4 active:border-b-0 active:border-t-0 active:shadow-inner active:translate-y-1 hover:-translate-y-1 transform transition-all duration-200 focus:outline-none
-                  ${
-                    currentPath === "/register"
-                      ? "bg-gradient-to-r from-yellow-400 to-amber-400 text-blue-700 border-yellow-600 font-bold"
-                      : "bg-gradient-to-r from-yellow-300 to-yellow-400 text-white border-yellow-500 hover:from-yellow-200 hover:to-yellow-300 hover:text-blue-900"
-                  }
-                  `}
+                ${
+                  currentPath === "/register"
+                    ? "bg-gradient-to-r from-yellow-400 to-amber-400 text-blue-700 border-yellow-600 font-bold"
+                    : "bg-gradient-to-r from-yellow-300 to-yellow-400 text-white border-yellow-500 hover:from-yellow-200 hover:to-yellow-300 hover:text-blue-900"
+                }
+                `}
                   onClick={onClose}
                 >
                   Book a Free Lesson
