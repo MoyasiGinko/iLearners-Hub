@@ -467,7 +467,7 @@ const RegistrationForm = () => {
                     selectedLevel !== "Homework Club" && (
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Subjects (Select all that apply)
+                          Your Query (Select all that apply)
                         </label>
                         <div className="space-y-2 max-h-32 overflow-y-auto border border-gray-300 rounded-md p-3 bg-gray-50">
                           {availableSubjects.map((subject) => (
@@ -539,7 +539,7 @@ const RegistrationForm = () => {
                   )}
                   <div>
                     <label className="text-sm font-medium text-gray-700 flex items-center">
-                      <FaBook className="mr-1" /> Your Query
+                      <FaBook className="mr-1" /> Questions or Comments
                     </label>
                     <textarea
                       {...register("message")}
