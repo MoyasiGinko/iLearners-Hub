@@ -295,8 +295,8 @@ const ContactSection: React.FC = () => {
             <div className="pt-6 px-4 sm:pt-6 sm:px-6 md:p-8 min-h-[250px] sm:min-h-[300px] md:min-h-[440px] md:w-1/2 flex items-center justify-center">
               <div>
                 {" "}
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 sm:mb-4">
-                  Sign up for a Free Trial Lesson
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl font-bold tracking-tight text-white mb-2 sm:mb-4">
+                  Subscribe now to receive special offers and discounts!
                 </h2>
                 <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6">
                   Join iLearners-Hub and explore a wide range of engaging
@@ -405,7 +405,7 @@ const ContactSection: React.FC = () => {
                     ) : submitStatus === "error" ? (
                       "Try Again"
                     ) : (
-                      "Subscribe to Newsletter"
+                      "Subscribe"
                     )}
                   </button>
                   {/* Status Messages */}

@@ -297,42 +297,63 @@ const CourseDetailsPage = () => {
                           <span className="font-bold">Unlimited</span>
                         </span>
                       </div>
-                    </div>{" "}
-                    <div className="pt-4 text-center">
+                    </div>{" "}                    <div className="pt-4 text-center">
                       <button
                         onClick={() => {
                           // Navigate to home page and scroll to contact form
                           router.push("/", { scroll: false });
 
+                          // Custom smooth scroll function with enhanced easing
+                          const smoothScrollToElement = (element: Element, duration: number = 1500) => {
+                            const targetPosition = element.getBoundingClientRect().top + window.scrollY - 100;
+                            const startPosition = window.scrollY;
+                            const distance = targetPosition - startPosition;
+                            let startTime: number;
+
+                            // Easing function for smoother animation (ease-out-cubic)
+                            const easeOutCubic = (t: number): number => {
+                              return 1 - Math.pow(1 - t, 3);
+                            };
+
+                            const animateScroll = (currentTime: number) => {
+                              if (!startTime) startTime = currentTime;
+                              const timeElapsed = currentTime - startTime;
+                              const progress = Math.min(timeElapsed / duration, 1);
+                              
+                              const easedProgress = easeOutCubic(progress);
+                              const currentPosition = startPosition + (distance * easedProgress);
+                              
+                              window.scrollTo(0, currentPosition);
+                              
+                              if (progress < 1) {
+                                requestAnimationFrame(animateScroll);
+                              }
+                            };
+
+                            requestAnimationFrame(animateScroll);
+                          };
+
                           // Wait for navigation and then scroll to contact form
                           const scrollToContact = (attempts = 0) => {
-                            const maxAttempts = 20;
+                            const maxAttempts = 25;
                             const contactSection =
                               document.querySelector(
                                 "[data-contact-section]"
                               ) || document.getElementById("contact-form");
 
                             if (contactSection) {
-                              requestAnimationFrame(() => {
-                                const elementPosition =
-                                  contactSection.getBoundingClientRect().top;
-                                const offsetPosition =
-                                  elementPosition + window.scrollY - 100;
-
-                                window.scrollTo({
-                                  top: offsetPosition,
-                                  behavior: "smooth",
-                                });
-                              });
+                              // Use custom smooth scroll with longer duration
+                              smoothScrollToElement(contactSection, 1800);
                             } else if (attempts < maxAttempts) {
                               setTimeout(
                                 () => scrollToContact(attempts + 1),
-                                100
+                                80
                               );
                             }
                           };
 
-                          setTimeout(scrollToContact, 100);
+                          // Longer delay to ensure page is fully loaded
+                          setTimeout(scrollToContact, 200);
                         }}
                         className="inline-block hover:shadow-xl border-b-4 active:border-b-0 active:border-t-0 active:shadow-inner
                     active:translate-y-1 duration-200 focus:outline-none w-full bg-green-500 hover:bg-green-600 border-green-700 text-white text-center font-bold py-4 px-6 rounded-full transition-all transform shadow-md text-lg"
