@@ -513,7 +513,7 @@ const RegistrationForm = () => {
                             className="border-gray-300 text-blue-600 focus:ring-blue-500"
                           />
                           <span className="text-sm text-gray-700">
-                            Per hour inquiry
+                            Per Hour Inquiry
                           </span>
                         </label>
                         <label className="flex items-center space-x-2">
@@ -526,7 +526,7 @@ const RegistrationForm = () => {
                             className="border-gray-300 text-blue-600 focus:ring-blue-500"
                           />
                           <span className="text-sm text-gray-700">
-                            Subscription inquiry
+                            Subscription Inquiry
                           </span>
                         </label>
                       </div>
@@ -539,7 +539,7 @@ const RegistrationForm = () => {
                   )}
                   <div>
                     <label className="text-sm font-medium text-gray-700 flex items-center">
-                      <FaBook className="mr-1" /> Questions or Comments
+                      <FaBook className="mr-1" /> Your Query
                     </label>
                     <textarea
                       {...register("message")}
