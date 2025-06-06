@@ -280,9 +280,12 @@ const ContactSection: React.FC = () => {
       setIsSubmitting(false);
     }
   };
-
   return (
-    <div className="w-full bg-transparent py-20 px-4 overflow-hidden relative">
+    <div
+      className="w-full bg-transparent py-20 px-4 overflow-hidden relative"
+      data-contact-section
+      id="contact-form"
+    >
       <FloatingElements />
       <div className="w-full max-w-6xl bg-transparent mx-auto px-3 sm:px-4 md:px-6 relative z-10">
         {/* Background SVG */}

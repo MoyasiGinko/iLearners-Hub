@@ -297,15 +297,48 @@ const CourseDetailsPage = () => {
                           <span className="font-bold">Unlimited</span>
                         </span>
                       </div>
-                    </div>
+                    </div>{" "}
                     <div className="pt-4 text-center">
-                      <Link
-                        href="/register"
+                      <button
+                        onClick={() => {
+                          // Navigate to home page and scroll to contact form
+                          router.push("/", { scroll: false });
+
+                          // Wait for navigation and then scroll to contact form
+                          const scrollToContact = (attempts = 0) => {
+                            const maxAttempts = 20;
+                            const contactSection =
+                              document.querySelector(
+                                "[data-contact-section]"
+                              ) || document.getElementById("contact-form");
+
+                            if (contactSection) {
+                              requestAnimationFrame(() => {
+                                const elementPosition =
+                                  contactSection.getBoundingClientRect().top;
+                                const offsetPosition =
+                                  elementPosition + window.scrollY - 100;
+
+                                window.scrollTo({
+                                  top: offsetPosition,
+                                  behavior: "smooth",
+                                });
+                              });
+                            } else if (attempts < maxAttempts) {
+                              setTimeout(
+                                () => scrollToContact(attempts + 1),
+                                100
+                              );
+                            }
+                          };
+
+                          setTimeout(scrollToContact, 100);
+                        }}
                         className="inline-block hover:shadow-xl border-b-4 active:border-b-0 active:border-t-0 active:shadow-inner
-                      active:translate-y-1 duration-200 focus:outline-none w-full bg-green-500 hover:bg-green-600 border-green-700 text-white text-center font-bold py-4 px-6 rounded-full transition-all transform shadow-md text-lg"
+                    active:translate-y-1 duration-200 focus:outline-none w-full bg-green-500 hover:bg-green-600 border-green-700 text-white text-center font-bold py-4 px-6 rounded-full transition-all transform shadow-md text-lg"
                       >
                         Subscribe Now
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 )}
