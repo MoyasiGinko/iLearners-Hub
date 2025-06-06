@@ -172,29 +172,29 @@ const EventCard: React.FC<{ card: CardDataType }> = ({ card }) => (
         <img
           src={card.image}
           alt={card.title}
-          className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-700 ease-out"
+          className="absolute inset-0 w-full h-full object-fit cover hover:scale-105 transition-transform duration-700 ease-out"
         />
 
         {/* Overlay text with animations */}
-        <div className="absolute inset-0 bg-black/30 flex flex-col justify-between p-4 md:p-6">
+        <div className="absolute bg-black/5 hover:bg-transparent inset-0 flex flex-col justify-between p-4 md:p-6 transition-all duration-500 group">
           <div
-            className="self-end animate-float"
+            className="self-end animate-float hover:animate-bounce transform group-hover:translate-y-1 transition-transform duration-300"
             style={{ animationDelay: "1s" }}
           >
             {/* Category badge */}
-            <div className="bg-white bg-opacity-90 text-gray-800 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-bold shadow-lg hover:bg-opacity-100 transition-all duration-300">
+            <div className="bg-white bg-opacity-90 text-gray-800 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-bold shadow-lg hover:bg-opacity-100 hover:scale-110 hover:shadow-xl transition-all duration-300 animate-pulse">
               {card.category}
             </div>
           </div>
 
-          <div
-            className="text-white animate-pulse"
-            style={{ animationDuration: "4s" }}
+          {/* <div
+            className="text-white animate-fade-in-up opacity-0 hover:opacity-100 transition-opacity duration-700"
+            style={{ animationDelay: "2s", animationFillMode: "forwards" }}
           >
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold drop-shadow-lg">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold drop-shadow-lg animate-glow hover:animate-pulse transition-all duration-500">
               JOIN US NOW
             </h2>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
