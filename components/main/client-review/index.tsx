@@ -16,15 +16,17 @@ interface TestimonialCardProps {
 
 const TestimonialCard = ({ name, position, content }: TestimonialCardProps) => {
   return (
-    <div className="bg-white rounded-3xl p-8 relative h-full border-4 border-blue-400">
-      <p className="text-gray-700 mb-6 text-lg font-medium rounded-xl bg-blue-50 p-4 border-2 border-blue-100">
-        {content}
-      </p>
-      <div className="flex items-center">
+    <div className="bg-white rounded-3xl p-8 relative h-full border-4 border-blue-400 flex flex-col justify-between min-h-[280px]">
+      <div className="flex-1 mb-2">
+        <p className="text-gray-700 h-full mb-6 text-lg font-medium rounded-xl bg-blue-50 p-4 border-2 border-blue-100">
+          {content}
+        </p>
+      </div>
+      <div className="flex items-center mt-auto">
         <QuoteIcon />
         <div className="ml-4">
           <h4 className="font-bold text-xl text-blue-600">{name}</h4>
-          <p className="text-purple-500 text-md">{position}</p>
+          {/* <p className="text-purple-500 text-md">{position}</p> */}
         </div>
       </div>
     </div>
@@ -35,31 +37,43 @@ const ClientReview = () => {
   const testimonials = [
     {
       id: 1,
-      name: "James Ickres",
+      name: "Imani Ahmed",
       position: "Happy Student",
-      content:
-        "I love the fun activities in my classes! The teachers are super nice and I learned so many cool things!",
+      content: "Helpful tutors, nice place to learn!",
     },
     {
       id: 2,
-      name: "Aleesha Brown",
+      name: "Ahmad Al Qadi",
       position: "Awesome Learner",
-      content:
-        "The games we play while learning are my favorite part. I made new friends and can't wait for class every day!",
+      content: "Great place, nice people to work with, very helpful.",
     },
     {
       id: 3,
-      name: "Michael Johnson",
+      name: "Fahmid Ahmed",
       position: "Creative Kid",
       content:
-        "I used to think school was boring, but these classes are super fun! I get to create cool projects and play while learning!",
+        "Very good people , nice staff , work is enjoyable, learn really quickly and a overall pleasant and great experience.",
     },
     {
       id: 4,
-      name: "Sarah Williams",
+      name: "Lama Haytham",
       position: "Young Explorer",
       content:
-        "My mom says I'm always talking about what I learned in class. I love all the colorful books and fun games we play!",
+        "Staff are nice and respectful , always willing and open to help. Nice environment to be in.",
+    },
+    {
+      id: 5,
+      name: "Adnan Prodhan",
+      position: "Future Leader",
+      content:
+        "Good staff, and teaching definatly made me more confident in my skills, only thing would be organisation but it wasent a big deal.",
+    },
+    {
+      id: 6,
+      name: "Sofiyyah Adebayo",
+      position: "Eager Learner",
+      content:
+        "Amazing experience over 2 years. Improved from D to B grade with excellent teachers like Marcus and Zara. Highly recommend despite the cost.",
     },
   ];
 
