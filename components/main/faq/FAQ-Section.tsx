@@ -88,10 +88,9 @@ const FAQSection: React.FC<FAQSectionProps> = ({ faqItems }) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-4xl md:text-5xl text-center font-bold mb-8 text-pink-600"
+          className="text-4xl md:text-5xl text-center font-bold mb-8 text-pink-600 font-playful"
           style={{
             textShadow: "0 4px 6px rgba(255, 105, 180, 0.4)",
-            fontFamily: "'Comic Sans MS', cursive, sans-serif",
           }}
         >
           Frequently Asked Questions
@@ -155,10 +154,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({ faqItems }) => {
         >
           <button
             onClick={() => setShowAllItems(!showAllItems)}
-            className="rounded-full bg-gradient-to-t from-pink-400 via-pink-500 to-pink-600 px-4 py-2 text-white transition-colors hover:brightness-110"
-            style={{
-              fontFamily: "'Comic Sans MS', cursive, sans-serif",
-            }}
+            className="rounded-full bg-gradient-to-t from-pink-400 via-pink-500 to-pink-600 px-4 py-2 text-white transition-colors hover:brightness-110 font-playful"
           >
             {showAllItems
               ? "Show Less"

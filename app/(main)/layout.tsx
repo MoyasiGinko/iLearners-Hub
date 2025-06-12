@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Fredoka, Kalam } from "next/font/google";
 import "@/app/globals.css";
 import Header from "@/components/main/header";
 import Footer from "@/components/main/footer";
@@ -13,6 +13,21 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+// Fun, playful fonts for children's education site that work consistently across all devices
+const fredoka = Fredoka({
+  subsets: ["latin"],
+  variable: "--font-fredoka",
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap", // Ensures good loading performance
+});
+
+const kalam = Kalam({
+  subsets: ["latin"],
+  variable: "--font-kalam",
+  weight: ["300", "400", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -62,7 +77,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${fredoka.variable} ${kalam.variable} antialiased`}
       >
         <Header />
         {children}

@@ -297,15 +297,22 @@ const CourseDetailsPage = () => {
                           <span className="font-bold">Unlimited</span>
                         </span>
                       </div>
-                    </div>{" "}                    <div className="pt-4 text-center">
+                    </div>{" "}
+                    <div className="pt-4 text-center">
                       <button
                         onClick={() => {
                           // Navigate to home page and scroll to contact form
                           router.push("/", { scroll: false });
 
                           // Custom smooth scroll function with enhanced easing
-                          const smoothScrollToElement = (element: Element, duration: number = 1500) => {
-                            const targetPosition = element.getBoundingClientRect().top + window.scrollY - 100;
+                          const smoothScrollToElement = (
+                            element: Element,
+                            duration: number = 1500
+                          ) => {
+                            const targetPosition =
+                              element.getBoundingClientRect().top +
+                              window.scrollY -
+                              100;
                             const startPosition = window.scrollY;
                             const distance = targetPosition - startPosition;
                             let startTime: number;
@@ -318,13 +325,17 @@ const CourseDetailsPage = () => {
                             const animateScroll = (currentTime: number) => {
                               if (!startTime) startTime = currentTime;
                               const timeElapsed = currentTime - startTime;
-                              const progress = Math.min(timeElapsed / duration, 1);
-                              
+                              const progress = Math.min(
+                                timeElapsed / duration,
+                                1
+                              );
+
                               const easedProgress = easeOutCubic(progress);
-                              const currentPosition = startPosition + (distance * easedProgress);
-                              
+                              const currentPosition =
+                                startPosition + distance * easedProgress;
+
                               window.scrollTo(0, currentPosition);
-                              
+
                               if (progress < 1) {
                                 requestAnimationFrame(animateScroll);
                               }
