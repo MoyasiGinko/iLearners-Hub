@@ -339,7 +339,7 @@ const Testimonials: React.FC = () => {
                     <Check className="h-5 w-5 text-white drop-shadow-md" />
                   </div>
                   <span className="font-bold text-lg text-yellow-800 group-hover:translate-x-1 transition-transform">
-                    Friendly Teachers - DBS Checked
+                    Friendly Teachers - PVG Checked
                   </span>
                 </div>
               </div>
