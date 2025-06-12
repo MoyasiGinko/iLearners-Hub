@@ -432,7 +432,11 @@ const MiniCourseTablet = () => {
               const colorScheme = getColorScheme(course.category);
 
               return (
-                <motion.div
+                <motion.a
+                  href={`/courses/${
+                    courseCategories.find((cat) => cat.name === course.category)
+                      ?.slug || course.category.toLowerCase()
+                  }/${course.id}`}
                   key={course.id}
                   className={`flex flex-col justify-between h-full rounded-xl overflow-hidden border-2 ${colorScheme.border} ${colorScheme.bg} relative`}
                   animate={{ opacity: 1, y: 0 }}
@@ -513,7 +517,7 @@ const MiniCourseTablet = () => {
                       <path d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18Z" />
                     </svg>
                   </div>
-                </motion.div>
+                </motion.a>
               );
             })
           ) : (
