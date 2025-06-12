@@ -312,7 +312,7 @@ const Testimonials: React.FC = () => {
               </motion.span>
 
               {[
-                "Our students and their parents love learning with us! Discover how iLearners Hub makes education fun, engaging, and effective for every child. See what real families are saying about their adventures and achievements with our courses.",
+                "Our students and their parents love learning with us! Discover how iLearner's Hub makes education fun, engaging, and effective for every child. See what real families are saying about their adventures and achievements with our courses.",
               ].map((line, i) => (
                 <motion.span
                   key={i}

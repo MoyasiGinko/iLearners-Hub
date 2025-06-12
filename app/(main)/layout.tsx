@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     title: "iLearner's Hub - Interactive Learning Platform",
     description:
       "Join thousands of students achieving their educational goals with expert tutoring and engaging courses.",
-    url: "https://ilearners-hub.com",
+    url: "https://iLearner's Hub.com",
     siteName: "iLearner's Hub",
     type: "website",
   },

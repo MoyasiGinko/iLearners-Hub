@@ -119,7 +119,7 @@ const faqItems: FAQItem[] = [
     ),
   },
   {
-    question: "How can I contact iLearners Hub?",
+    question: "How can I contact iLearner's Hub?",
     answer: (
       <div className="bg-teal-100/80 rounded-2xl shadow-lg p-5 border-4 border-teal-300">
         <h3 className="font-bold text-teal-900 mb-3">Contact Us</h3>
@@ -168,7 +168,7 @@ const faqItems: FAQItem[] = [
     ),
   },
   {
-    question: "What’s the student-to-tutor ratio at iLearners Hub?",
+    question: "What’s the student-to-tutor ratio at iLearner's Hub?",
     answer: (
       <div className="bg-red-100/80 rounded-2xl shadow-lg p-5 border-4 border-red-300">
         <h3 className="text-red-900 text-lg font-bold mb-2 flex items-center gap-2">

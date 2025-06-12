@@ -20,7 +20,7 @@ const OurMission = () => {
             </div>
             <p className="text-lg leading-relaxed text-gray-600 font-['Comic_Sans_MS',cursive,sans-serif]">
               At{" "}
-              <span className="text-orange-500 font-bold">iLearners Hub</span>,
+              <span className="text-orange-500 font-bold">iLearner's Hub</span>,
               we want every child to shine bright like a star! 🌟 Our goal is to
               help kids learn, grow, and be the best they can be. We're not just
               a place for learning; we're a place where dreams come true!

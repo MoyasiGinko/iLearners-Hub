@@ -46,10 +46,10 @@ const Hero: React.FC = () => {
           className="max-w-xl md:max-w-2xl lg:max-w-3xl"
         >
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6 text-white drop-shadow-md leading-tight">
-            Join iLearnersHub Today!
+            Join iLearner's Hub Today!
           </h1>
           <p className="text-base sm:text-lg md:text-xl mb-6 md:mb-8 text-white drop-shadow-sm max-w-md md:max-w-lg lg:max-w-xl">
-            Register now to get program details and join iLearnersHub. We're
+            Register now to get program details and join iLearner's Hub. We're
             here to support your learning journey!
           </p>
           <div className="flex flex-wrap gap-3 md:gap-4">

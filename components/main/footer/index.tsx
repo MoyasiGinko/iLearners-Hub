@@ -127,7 +127,7 @@ const Footer = () => {
             <div className="mb-3">
               <Image
                 src="/images/logo.png"
-                alt="iLearners Hub Logo"
+                alt="iLearner's Hub Logo"
                 width={150}
                 height={50}
                 className="object-contain"
@@ -262,7 +262,7 @@ const Footer = () => {
           className="pt-8 border-t border-blue-200 text-center"
         >
           <div className="text-indigo-500">
-            © {currentYear} iLearners Hub. All rights reserved. Where learning
+            © {currentYear} iLearner's Hub. All rights reserved. Where learning
             is fun!
           </div>
         </motion.div>
