@@ -362,8 +362,9 @@ const MiniCourseTablet = () => {
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Fun header with animated elements */}
         <div className="text-center mb-8 relative">
+          {" "}
           <h2
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-red-400 leading-tight mb-6"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-red-400 leading-tight mb-6 font-playful"
             style={{ textShadow: "2px 2px 4px rgba(0,105,255,0.2)" }}
           >
             Explore Fun Learning Adventures!
@@ -411,7 +412,7 @@ const MiniCourseTablet = () => {
                 <motion.button
                   key={index}
                   whileTap={{ scale: 0.95 }}
-                  className={`px-6 py-3 mr-3 mb-3 rounded-full font-bold transition transform ${
+                  className={`px-6 py-3 mr-3 mb-3 rounded-full font-bold transition transform font-playful ${
                     activeTab === index
                       ? `bg-gradient-to-b ${colorScheme.accent} text-white shadow-lg translate-y-1`
                       : `${colorScheme.bg} ${colorScheme.text} shadow-md hover:shadow-lg hover:translate-y-0.5`
@@ -432,19 +433,22 @@ const MiniCourseTablet = () => {
               const colorScheme = getColorScheme(course.category);
 
               return (
-                <motion.a
-                  href={`/courses/${
-                    courseCategories.find((cat) => cat.name === course.category)
-                      ?.slug || course.category.toLowerCase()
-                  }/${course.id}`}
+                <motion.div
                   key={course.id}
-                  className={`flex flex-col justify-between h-full rounded-xl overflow-hidden border-2 ${colorScheme.border} ${colorScheme.bg} relative`}
+                  className={`flex flex-col justify-between h-full rounded-xl overflow-hidden border-2 ${colorScheme.border} ${colorScheme.bg} relative cursor-pointer`}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
                   whileHover={{
                     y: -5,
                     boxShadow:
                       "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                  }}
+                  onClick={() => {
+                    const categorySlug =
+                      courseCategories.find(
+                        (cat) => cat.name === course.category
+                      )?.slug || course.category.toLowerCase();
+                    window.location.href = `/courses/${categorySlug}/${course.id}`;
                   }}
                 >
                   {/* Category ribbon */}
@@ -453,14 +457,12 @@ const MiniCourseTablet = () => {
                   >
                     {course.category}
                   </div>
-
                   {/* Card content */}
                   <div className="p-6 pt-10 pb-0 flex-grow">
                     <h3 className="text-lg font-bold mb-2 pr-20">
                       {course.short_title}
                     </h3>
                   </div>
-
                   {/* Course details - Subject list */}
                   <div className="p-6 pt-2 pb-1 flex-grow">
                     <div className="flex flex-wrap gap-2">
@@ -474,7 +476,6 @@ const MiniCourseTablet = () => {
                       ))}
                     </div>
                   </div>
-
                   {/* Price and action button */}
                   <div className="p-6 ">
                     <div className="flex items-center justify-between">
@@ -490,23 +491,24 @@ const MiniCourseTablet = () => {
                             {course.discount}
                           </span>
                         )}
-                      </div>
-
-                      <motion.a
-                        href={`/courses/${
-                          courseCategories.find(
-                            (cat) => cat.name === course.category
-                          )?.slug || course.category.toLowerCase()
-                        }/${course.id}`}
+                      </div>{" "}
+                      <motion.button
+                        onClick={(e) => {
+                          e.stopPropagation(); // Prevent card click
+                          const categorySlug =
+                            courseCategories.find(
+                              (cat) => cat.name === course.category
+                            )?.slug || course.category.toLowerCase();
+                          window.location.href = `/courses/${categorySlug}/${course.id}`;
+                        }}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className={`px-4 py-2 rounded-full text-white font-medium shadow-md ${colorScheme.button}`}
+                        className={`px-4 cursor-pointer py-2 rounded-full text-white font-medium shadow-md font-playful ${colorScheme.button}`}
                       >
                         Learn More
-                      </motion.a>
+                      </motion.button>
                     </div>
-                  </div>
-
+                  </div>{" "}
                   {/* Fun decorative elements */}
                   <div className="absolute bottom-1/2 left-1/2 transform -translate-x-1/2 translate-y-1/2 opacity-5">
                     <svg
@@ -517,7 +519,7 @@ const MiniCourseTablet = () => {
                       <path d="M12 3L1 9L12 15L21 10.09V17H23V9M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18Z" />
                     </svg>
                   </div>
-                </motion.a>
+                </motion.div>
               );
             })
           ) : (
@@ -529,10 +531,11 @@ const MiniCourseTablet = () => {
         {/* Call to action */}
         {selectedCategory === "All Courses" && courses.length > 6 ? (
           <div className="text-center">
+            {" "}
             <a
               href="/courses/all-courses"
               className="px-8 inline-block py-3 rounded-full
-      bg-gradient-to-r from-teal-400 to-blue-500 text-white font-medium
+      bg-gradient-to-r from-teal-400 to-blue-500 text-white font-medium font-playful
       shadow-lg hover:shadow-xl
       border-b-4 border-teal-600
       active:border-b-0 active:border-t-0 active:shadow-inner
@@ -548,13 +551,14 @@ const MiniCourseTablet = () => {
           courses.filter((course) => course.category === selectedCategory)
             .length > 6 && (
             <div className="text-center">
+              {" "}
               <a
                 href={`/courses/${
                   courseCategories.find((cat) => cat.name === selectedCategory)
                     ?.slug || selectedCategory.toLowerCase()
                 }`}
                 className="px-8 inline-block py-3 rounded-full
-        bg-gradient-to-r from-teal-400 to-blue-500 text-white font-medium
+        bg-gradient-to-r from-teal-400 to-blue-500 text-white font-medium font-playful
         shadow-lg hover:shadow-xl
         border-b-4 border-teal-600
         active:border-b-0 active:border-t-0 active:shadow-inner
