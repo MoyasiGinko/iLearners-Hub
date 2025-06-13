@@ -38,7 +38,7 @@ export const courses: Course[] = [
   {
     id: 16,
     short_title: "Homework Club",
-    long_title: "🟩 Homework Club at iLearner's Hub",
+    long_title: "Homework Club at iLearner's Hub",
     Image: "/images/courses/c16.jpg",
     category: "Homework Club",
     subjects: ["All Subjects"],
