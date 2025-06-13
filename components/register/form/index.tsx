@@ -108,7 +108,7 @@ const RegistrationForm = () => {
         student_name: data.studentName,
         name_of_institution: data.institutionName,
         study_year: data.studyYear,
-        parent_Name: data.parentName,
+        parent_name: data.parentName,
         address: data.address,
         post_code: data.postalCode,
         number: data.phone,
