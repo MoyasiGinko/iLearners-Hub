@@ -116,7 +116,7 @@ const TeamMemberCard: React.FC<{ member: TeamMember; index: number }> = ({
             <img
               src={member.imageUrl}
               alt={member.name}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-fit cover"
             />
           </div>
         </div>
