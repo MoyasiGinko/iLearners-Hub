@@ -8,7 +8,7 @@ type GalleryImage = {
   id: number;
   src: string;
   alt: string;
-  category: "classroom" | "activities" | "events" | "outdoor";
+  category: "classroom" | "activities" | "events" | "videos";
 };
 
 const galleryImages: GalleryImage[] = [
@@ -22,43 +22,43 @@ const galleryImages: GalleryImage[] = [
     id: 2,
     src: "/images/gallery/gp2.jpg",
     alt: "Children engaged in art activities",
-    category: "activities",
+    category: "classroom",
   },
   {
     id: 3,
     src: "/images/gallery/gp3.jpg",
     alt: "Annual science fair",
-    category: "events",
+    category: "classroom",
   },
   {
     id: 4,
     src: "/images/gallery/gp4.jpg",
     alt: "Children playing in outdoor playground",
-    category: "outdoor",
+    category: "activities",
   },
   {
     id: 5,
     src: "/images/gallery/gp5.jpg",
     alt: "Reading corner with bean bags",
-    category: "classroom",
+    category: "activities",
   },
   {
     id: 6,
     src: "/images/gallery/gp6.jpg",
     alt: "Group music lesson",
-    category: "activities",
+    category: "events",
   },
   {
     id: 7,
     src: "/images/gallery/gp7.jpg",
     alt: "Parent-teacher conference",
-    category: "events",
+    category: "activities",
   },
   {
     id: 8,
     src: "/images/gallery/gp8.jpg",
     alt: "Garden learning area",
-    category: "outdoor",
+    category: "activities",
   },
   // Add more images as needed
 ];
@@ -134,10 +134,10 @@ const GalleryPage: React.FC = () => {
             Events
           </CategoryButton>
           <CategoryButton
-            active={selectedCategory === "outdoor"}
-            onClick={() => setSelectedCategory("outdoor")}
+            active={selectedCategory === "videos"}
+            onClick={() => setSelectedCategory("videos")}
           >
-            Outdoor Learning
+            Videos
           </CategoryButton>
         </div>
 
@@ -160,7 +160,9 @@ const GalleryPage: React.FC = () => {
                 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <p className="text-white text-sm font-medium">{image.alt}</p>
+                <p className="text-white text-sm font-medium">
+                  {image.category}
+                </p>
               </div>
             </motion.div>
           ))}
