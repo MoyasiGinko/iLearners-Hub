@@ -16,7 +16,7 @@ const teamMembers: TeamMember[] = [
     name: "Ma'aruf Razzak",
     title: "LAWYER",
     description: "15 YEARS EXPERIENCE IN LEGAL, PROPERTY & CHARITY SECTORS",
-    imageUrl: "/images/about/team1.png", // Replace with actual image
+    imageUrl: "/images/about/team1.jpg", // Replace with actual image
     color: "bg-blue-200",
     icon: "⚖️",
   },
@@ -24,7 +24,7 @@ const teamMembers: TeamMember[] = [
     name: "Shovon Mostofa",
     title: "AEROSPACE ENGINEER",
     description: "6+ YEARS EXPERIENCE IN TEACHING NATIONAL 5",
-    imageUrl: "/images/about/team5.png", // Replace with actual image
+    imageUrl: "/images/about/team5.jpg", // Replace with actual image
     color: "bg-pink-200",
     icon: "🚀",
   },
@@ -32,7 +32,7 @@ const teamMembers: TeamMember[] = [
     name: "Dr. M Ahmmad",
     title: "PROFESSIONAL ENGINEER",
     description: "15 YEARS EXPERINCE IN ENGINEERING PRACTICE & TEACHING",
-    imageUrl: "/images/about/team2.png", // Replace with actual image
+    imageUrl: "/images/about/team2.jpg", // Replace with actual image
     color: "bg-green-200",
     icon: "🏗️",
   },
@@ -41,7 +41,7 @@ const teamMembers: TeamMember[] = [
     title: "CHARTERED ACCOUNTANT",
     description:
       "Managing Director of A2Z Accounting Solutions Limited Former Accounting Supervisor at Subsea 7",
-    imageUrl: "/images/about/team3.png", // Replace with actual image
+    imageUrl: "/images/about/team3.jpg", // Replace with actual image
     color: "bg-yellow-200",
     icon: "🔢",
   },
@@ -49,7 +49,7 @@ const teamMembers: TeamMember[] = [
     name: "Dr. Sheikh Zahidul Islam",
     title: "UNIVERSITY LECTURER",
     description: "15+ YEARS EXPERIENCE IN TEACHING IN COLLEGE & UNIVERSITY",
-    imageUrl: "/images/about/team4.png", // Replace with actual image
+    imageUrl: "/images/about/team4.jpg", // Replace with actual image
     color: "bg-purple-200",
     icon: "🎓",
   },
