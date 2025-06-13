@@ -18,6 +18,12 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        playful: ["var(--font-fredoka)", "system-ui", "sans-serif"],
+        handwritten: ["var(--font-kalam)", "cursive", "sans-serif"],
+        sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
+        mono: ["var(--font-geist-mono)", "monospace"],
+      },
       colors: {
         black: {
           DEFAULT: "#000",

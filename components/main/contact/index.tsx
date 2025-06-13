@@ -299,7 +299,7 @@ const ContactSection: React.FC = () => {
                   Subscribe now to receive special offers and discounts!
                 </h2>
                 <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6">
-                  Join iLearners-Hub and explore a wide range of engaging
+                  Join iLearner's Hub and explore a wide range of engaging
                   courses for all levels and interests!
                 </p>
                 <div className="flex space-x-2">

@@ -321,7 +321,7 @@ const Header = () => {
             <div className="flex items-center">
               <Image
                 src="/images/logo.png"
-                alt="iLearnersHub Logo"
+                alt="iLearner's Hub Logo"
                 width={120}
                 height={40}
                 className={`transition-transform duration-300 ${

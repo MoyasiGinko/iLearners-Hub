@@ -23,6 +23,22 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Ensure consistent font rendering across all devices */
+.font-playful {
+  font-feature-settings: "kern" 1;
+  font-kerning: auto;
+  font-variant-ligatures: common-ligatures;
+}
+
+.font-handwritten {
+  font-feature-settings: "kern" 1;
+  font-kerning: auto;
+  font-variant-ligatures: common-ligatures;
 }
 
 @keyframes spin-slow {

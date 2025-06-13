@@ -275,8 +275,8 @@ const PrimarySection = () => {
                 </span>
               </div>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-4 relative">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#FF6B6B] to-[#FF9999] drop-shadow-[3px_3px_0px_rgba(255,107,107,0.3)]">
+            <h2 className="text-4xl md:text-5xl font-black leading-tight mb-4 relative">
+              <span className="text-[#fc5252] drop-shadow-[3px_3px_0px_rgba(255,51,51,0.4)] font-black">
                 Homework Club - Achieve More Together!
               </span>
             </h2>
