@@ -102,7 +102,7 @@ const CourseDetailsPage = () => {
           {/* Course Header */}
           <div className="relative h-64 md:h-80 bg-gray-200">
             <img
-              src="/images/courses/cover.jpg"
+              src={course.coverImage}
               alt={course.short_title}
               className="object-cover w-full h-full"
             />
