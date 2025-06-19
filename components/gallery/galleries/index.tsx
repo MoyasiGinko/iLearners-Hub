@@ -447,14 +447,14 @@ const GalleryPage: React.FC = () => {
 
                 {/* Hover Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                  <div>
+                  {/* <div>
                     <p className="text-white text-sm font-medium capitalize mb-1">
                       {item.category}
                     </p>
-                    {/* <p className="text-white/80 text-xs line-clamp-2">
+                    <p className="text-white/80 text-xs line-clamp-2">
                       {item.alt}
-                    </p> */}
-                  </div>
+                    </p>
+                  </div> */}
                 </div>
               </motion.div>
             ))}
@@ -514,7 +514,7 @@ const GalleryPage: React.FC = () => {
 
             <div className="absolute bottom-6 text-white text-center w-full px-4">
               <div className="bg-black/50 rounded-lg p-4 max-w-2xl mx-auto">
-                <div className="flex items-center justify-center gap-2 mb-2">
+                {/* <div className="flex items-center justify-center gap-2 mb-2">
                   <span
                     className={`px-2 py-1 rounded text-xs ${
                       filteredItems[currentImageIndex].type === "video"
@@ -532,7 +532,7 @@ const GalleryPage: React.FC = () => {
                 </div>
                 <p className="text-lg">
                   {filteredItems[currentImageIndex].alt}
-                </p>
+                </p> */}
                 {filteredItems.length > 1 && (
                   <p className="text-sm text-gray-400 mt-2">
                     {currentImageIndex + 1} of {filteredItems.length}
