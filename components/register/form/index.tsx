@@ -37,7 +37,7 @@ const RegistrationForm = () => {
   const [submitError, setSubmitError] = useState<string>("");
 
   // EmailJS configuration
-  const EMAILJS_SERVICE_ID = "service_zmcguyp";
+  const EMAILJS_SERVICE_ID = "service_ovcbz5c";
   const EMAILJS_TEMPLATE_ID = "template_0635406";
   const EMAILJS_PUBLIC_KEY = "EuPOodosn6vBQJ3kx";
 

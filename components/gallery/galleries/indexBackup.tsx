@@ -115,13 +115,11 @@ const GalleryPage: React.FC = () => {
   >({});
   const [imageErrorStates, setImageErrorStates] = useState<
     Record<number, boolean>
-  >({}); // Helper function to get category counts
+  >({});
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  // Helper function to get category counts
   const getCategoryCount = (category: string) => {
     if (category === "all") return galleryItems.length;
-    if (category === "photos")
-      return galleryItems.filter((item) => item.type === "image").length;
-    if (category === "videos")
-      return galleryItems.filter((item) => item.type === "video").length;
     return galleryItems.filter((item) => item.category === category).length;
   };
 
@@ -134,12 +132,16 @@ const GalleryPage: React.FC = () => {
     setImageErrorStates((prev) => ({ ...prev, [itemId]: true }));
     setImageLoadingStates((prev) => ({ ...prev, [itemId]: false }));
   };
-  const filteredItems = galleryItems.filter((item) => {
-    if (selectedCategory === "all") return true;
-    if (selectedCategory === "photos") return item.type === "image";
-    if (selectedCategory === "videos") return item.type === "video";
-    return item.category === selectedCategory;
-  });
+  const filteredItems = galleryItems
+    .filter(
+      (item) => selectedCategory === "all" || item.category === selectedCategory
+    )
+    .filter(
+      (item) =>
+        searchTerm === "" ||
+        item.alt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.category.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
   const openLightbox = (index: number) => {
     setCurrentImageIndex(index);
@@ -190,10 +192,58 @@ const GalleryPage: React.FC = () => {
           <h2 className="mb-4 leading-tight bg-gradient-to-r from-indigo-500 to-purple-600 bg-clip-text text-3xl font-bold text-transparent md:text-5xl drop-shadow-lg">
             Our Learning Center Gallery
           </h2>
-          <p className="mx-auto max-w-3xl text-lg text-indigo-700">
+          <p className="mx-auto max-w-3xl text-lg text-indigo-700 mb-8">
             Take a peek at our colorful classrooms, exciting activities, and
             happy learning moments!
           </p>
+
+          {/* Search Bar */}
+          <div className="max-w-md mx-auto">
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg
+                  className="h-5 w-5 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </div>
+              <input
+                type="text"
+                className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-full leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                placeholder="Search photos and videos..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm("")}
+                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                >
+                  <svg
+                    className="h-5 w-5 text-gray-400 hover:text-gray-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              )}
+            </div>
+          </div>
         </div>{" "}
         {/* Category Filter */}
         <div className="flex flex-wrap justify-center gap-3 mb-10">
@@ -205,11 +255,25 @@ const GalleryPage: React.FC = () => {
             All Content
           </CategoryButton>
           <CategoryButton
-            active={selectedCategory === "photos"}
-            onClick={() => setSelectedCategory("photos")}
-            count={getCategoryCount("photos")}
+            active={selectedCategory === "classroom"}
+            onClick={() => setSelectedCategory("classroom")}
+            count={getCategoryCount("classroom")}
           >
-            Photos
+            Classrooms
+          </CategoryButton>
+          <CategoryButton
+            active={selectedCategory === "activities"}
+            onClick={() => setSelectedCategory("activities")}
+            count={getCategoryCount("activities")}
+          >
+            Activities
+          </CategoryButton>
+          <CategoryButton
+            active={selectedCategory === "events"}
+            onClick={() => setSelectedCategory("events")}
+            count={getCategoryCount("events")}
+          >
+            Events
           </CategoryButton>
           <CategoryButton
             active={selectedCategory === "videos"}
@@ -220,12 +284,18 @@ const GalleryPage: React.FC = () => {
           </CategoryButton>
         </div>{" "}
         {/* Results Counter */}
-        {/* {filteredItems.length > 0 && (
+        {filteredItems.length > 0 && (
           <div className="text-center mb-6">
             <p className="text-gray-600">
               Showing{" "}
               <span className="font-semibold">{filteredItems.length}</span>{" "}
               {filteredItems.length === 1 ? "item" : "items"}
+              {searchTerm && (
+                <span>
+                  {" "}
+                  matching "<span className="font-semibold">{searchTerm}</span>"
+                </span>
+              )}
               {selectedCategory !== "all" && (
                 <span>
                   {" "}
@@ -237,7 +307,7 @@ const GalleryPage: React.FC = () => {
               )}
             </p>
           </div>
-        )} */}
+        )}
         {/* Gallery Grid */}
         {filteredItems.length === 0 ? (
           <motion.div
@@ -246,18 +316,37 @@ const GalleryPage: React.FC = () => {
             className="text-center py-20"
           >
             <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl p-12 mx-auto max-w-md shadow-lg">
-              <div className="text-6xl mb-4">📸</div>
+              <div className="text-6xl mb-4">{searchTerm ? "🔍" : "📸"}</div>
               <h3 className="text-2xl font-bold text-gray-600 mb-2">
-                Nothing Here Yet!
+                {searchTerm ? "No Results Found" : "Nothing Here Yet!"}
               </h3>
               <p className="text-gray-500 mb-4">
-                We haven't added any{" "}
-                {selectedCategory === "all" ? "content" : selectedCategory} to
-                our gallery yet.
+                {searchTerm ? (
+                  <>
+                    We couldn't find any content matching "
+                    <span className="font-semibold">{searchTerm}</span>"
+                  </>
+                ) : (
+                  <>
+                    We haven't added any{" "}
+                    {selectedCategory === "all" ? "content" : selectedCategory}{" "}
+                    to our gallery yet.
+                  </>
+                )}
               </p>
               <p className="text-sm text-gray-400">
-                Check back soon for amazing photos and videos!
+                {searchTerm
+                  ? "Try adjusting your search terms or browse all categories."
+                  : "Check back soon for amazing photos and videos!"}
               </p>
+              {searchTerm && (
+                <button
+                  onClick={() => setSearchTerm("")}
+                  className="mt-4 px-6 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700 transition-colors"
+                >
+                  Clear Search
+                </button>
+              )}
             </div>
           </motion.div>
         ) : (
