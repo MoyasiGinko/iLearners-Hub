@@ -132,11 +132,24 @@ const RegistrationForm = () => {
         emailPayload,
         EMAILJS_PUBLIC_KEY
       );
-
       if (result.status === 200) {
         console.log("Email sent successfully:", result);
         setIsSuccess(true);
         reset();
+
+        // Smooth scroll to success message container after a short delay
+        setTimeout(() => {
+          const successContainer = document.getElementById(
+            "success-message-container"
+          );
+          if (successContainer) {
+            successContainer.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+          }
+        }, 300); // Small delay to ensure the success message has rendered
+
         setTimeout(() => setIsSuccess(false), 5000);
       } else {
         throw new Error(`EmailJS error: ${result.text}`);
@@ -168,10 +181,10 @@ const RegistrationForm = () => {
             <p className="mx-auto max-w-3xl text-lg text-indigo-700">
               Fill out this form to register for a course or ask questions
             </p>
-          </div>
-
+          </div>{" "}
           {isSuccess ? (
             <motion.div
+              id="success-message-container"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               className="p-8 text-center"

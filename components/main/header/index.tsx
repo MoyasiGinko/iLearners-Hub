@@ -261,11 +261,16 @@ const MobileMenu = ({
     </AnimatePresence>
   );
 };
-
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname(); // Get the current pathname
+
+  // Check if we're on the home page
+  const isHomePage = pathname === "/" || pathname === "/home";
+
+  // Determine which logo to show
+  const shouldShowDarkLogo = isScrolled || isHomePage;
 
   // Navigation items
   const navItems = [
@@ -316,21 +321,26 @@ const Header = () => {
         }`}
       >
         <div className="container mx-auto px-4 flex justify-between items-center">
+          {" "}
           {/* Logo */}
           <a href="/" className="relative focus:outline-none rounded">
             <div className="flex items-center">
               <Image
-                src="/images/logo.png"
+                src={
+                  shouldShowDarkLogo
+                    ? "/ilearners-logo-dark.svg"
+                    : "/ilearners-logo-white.svg"
+                }
                 alt="iLearner's Hub Logo"
                 width={120}
                 height={40}
-                className={`transition-transform duration-300 ${
+                className={`transition-all duration-300 ease-in-out ${
                   isScrolled ? "scale-100" : "scale-105"
                 }`}
+                priority
               />
             </div>
           </a>
-
           {/* Desktop Navigation - Centered */}
           <nav className="hidden lg:flex items-center justify-center flex-1">
             <div className="flex items-center space-x-8">
@@ -447,7 +457,6 @@ const Header = () => {
               ))}
             </div>
           </nav>
-
           {/* Register Button - Right */}
           <div className="hidden h-[56px] lg:block">
             <CustomButton
@@ -460,7 +469,6 @@ const Header = () => {
               }`}
             />
           </div>
-
           {/* Mobile Menu Toggle Button */}
           <button
             className="lg:hidden z-40 text-2xl focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-offset-2 rounded-full p-1.5"
