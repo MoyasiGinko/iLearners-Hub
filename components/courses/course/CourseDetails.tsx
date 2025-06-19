@@ -100,11 +100,11 @@ const CourseDetailsPage = () => {
 
         <div className="bg-white rounded-3xl shadow-xl overflow-hidden border-4 border-indigo-100">
           {/* Course Header */}
-          <div className="relative h-64 md:h-80 bg-gray-200">
+          <div className="relative h-[400px] md:h-[600px] bg-gray-200">
             <img
               src={course.coverImage}
               alt={course.short_title}
-              className="object-cover w-full h-full"
+              className="object-fit cover w-full h-full"
             />
             <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-indigo-600/80 to-transparent p-6">
               <div className="flex items-center space-x-2 mb-2">
