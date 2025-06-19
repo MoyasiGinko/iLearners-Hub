@@ -187,6 +187,11 @@ const ContactSection: React.FC = () => {
     return emailRegex.test(email);
   };
 
+  // EmailJS configuration
+  const EMAILJS_SERVICE_ID = "service_ovcbz5c";
+  const EMAILJS_TEMPLATE_ID = "template_bm06l9f";
+  const EMAILJS_PUBLIC_KEY = "EuPOodosn6vBQJ3kx";
+
   // Reset status back to idle after timeout
   useEffect(() => {
     if (submitStatus === "success" || submitStatus === "error") {
@@ -248,7 +253,7 @@ const ContactSection: React.FC = () => {
 
     try {
       // Initialize EmailJS with your public key
-      emailjs.init("EuPOodosn6vBQJ3kx");
+      emailjs.init(EMAILJS_PUBLIC_KEY);
 
       // Prepare template parameters with only name and email
       const templateParams = {
@@ -258,8 +263,8 @@ const ContactSection: React.FC = () => {
 
       // Send email using EmailJS
       const response = await emailjs.send(
-        "service_zmcguyp", // service ID
-        "template_bm06l9f", // template ID
+        EMAILJS_SERVICE_ID, // service ID
+        EMAILJS_TEMPLATE_ID, // template ID
         templateParams
       );
 
