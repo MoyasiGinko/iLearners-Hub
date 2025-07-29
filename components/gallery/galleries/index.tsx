@@ -313,7 +313,7 @@ const GalleryPage: React.FC = () => {
                 <iframe
                   width="100%"
                   height="100%"
-                  src={`https://www.youtube.com/embed/${filteredItems[currentImageIndex].youtubeId}?autoplay=1&controls=1`}
+                  src={`https://www.youtube.com/embed/${filteredItems[currentImageIndex].youtubeId}?autoplay=0&loop=1&playlist=${filteredItems[currentImageIndex].youtubeId}&rel=0&modestbranding=1&controls=1&disablekb=1`}
                   title={filteredItems[currentImageIndex].alt}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
