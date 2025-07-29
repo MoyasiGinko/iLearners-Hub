@@ -3,107 +3,8 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { galleryItems } from "./galleryData";
 
-type GalleryItem = {
-  id: number;
-  src: string;
-  alt: string;
-  category: "classroom" | "activities" | "events" | "videos";
-  type: "image" | "video";
-  thumbnail?: string; // For video thumbnails
-};
-
-const galleryItems: GalleryItem[] = [
-  // Classroom Images
-  {
-    id: 1,
-    src: "/images/gallery/gp1.jpg",
-    alt: "Bright classroom with colorful learning materials",
-    category: "classroom",
-    type: "image",
-  },
-  {
-    id: 2,
-    src: "/images/gallery/gp2.jpg",
-    alt: "Clean and organized classroom",
-    category: "classroom",
-    type: "image",
-  },
-  {
-    id: 3,
-    src: "/images/gallery/gp3.jpg",
-    alt: "Chair and table setup in a classroom",
-    category: "classroom",
-    type: "image",
-  },
-
-  // Activities Images
-  {
-    id: 4,
-    src: "/images/gallery/gp4.jpg",
-    alt: "Students engaged in a group activity",
-    category: "activities",
-    type: "image",
-  },
-  {
-    id: 5,
-    src: "/images/gallery/gp5.jpg",
-    alt: "Teacher demonstrating a subject in class",
-    category: "activities",
-    type: "image",
-  },
-  {
-    id: 7,
-    src: "/images/gallery/gp7.jpg",
-    alt: "Students studying in a group setting",
-    category: "activities",
-    type: "image",
-  },
-  {
-    id: 8,
-    src: "/images/gallery/gp8.jpg",
-    alt: "Tutoring session with students",
-    category: "activities",
-    type: "image",
-  },
-
-  // Events Images
-  {
-    id: 6,
-    src: "/images/gallery/gp6.jpg",
-    alt: "Events booklet with colorful cover",
-    category: "events",
-    type: "image",
-  },
-
-  // Videos - Using existing sample video and creating placeholders
-  {
-    id: 9,
-    src: "/videos/sample2.webm",
-    alt: "Interactive learning session with students",
-    category: "videos",
-    type: "video",
-    thumbnail: "/images/gallery/gp1.jpg", // Using existing image as thumbnail
-  },
-
-  // Placeholder videos for demonstration
-  {
-    id: 10,
-    src: "/videos/sample2.webm",
-    alt: "Virtual tour of our modern classrooms",
-    category: "videos",
-    type: "video",
-    thumbnail: "/images/gallery/gp2.jpg",
-  },
-  {
-    id: 11,
-    src: "/videos/sample2.webm",
-    alt: "Exciting science experiments in action",
-    category: "videos",
-    type: "video",
-    thumbnail: "/images/gallery/gp3.jpg",
-  },
-];
 
 const GalleryPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
@@ -400,7 +301,7 @@ const GalleryPage: React.FC = () => {
             )}
 
             <div className="relative w-full max-w-4xl max-h-[80vh] h-[70vh]">
-              {filteredItems[currentImageIndex].type === "image" ? (
+            {filteredItems[currentImageIndex].type === "image" ? (
                 <Image
                   src={filteredItems[currentImageIndex].src}
                   alt={filteredItems[currentImageIndex].alt}
@@ -408,6 +309,17 @@ const GalleryPage: React.FC = () => {
                   sizes="100vw"
                   className="object-contain"
                 />
+              ) : filteredItems[currentImageIndex].youtubeId ? (
+                <iframe
+                  width="100%"
+                  height="100%"
+                  src={`https://www.youtube.com/embed/${filteredItems[currentImageIndex].youtubeId}?autoplay=1&controls=1`}
+                  title={filteredItems[currentImageIndex].alt}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="rounded-2xl"
+                ></iframe>
               ) : (
                 <video
                   src={filteredItems[currentImageIndex].src}
